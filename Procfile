@@ -1,1 +1,1 @@
-web: gunicorn caribou.wsgi
+web: gunicorn caribou.wsgi --log-file -
