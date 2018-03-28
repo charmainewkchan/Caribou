@@ -26,7 +26,7 @@ SECRET_KEY = 'j5u=sn#7+3ibdrhgom9++b+s25jbh8lg-l-*#d=y!_t)=egh%^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['97.107.132.241']
+ALLOWED_HOSTS = ['97.107.132.241', 'project-caribou.herokuapp.com']
 
 
 # Application definition
@@ -123,6 +123,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "frontend/build/static")
+]
 
 # activate django-heroku
 django_heroku.settings(locals())
