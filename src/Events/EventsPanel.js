@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-
-import Event from './Event'
-
+//import Event from './Event'
+import events_data from './events.json';
 import '../App.css';
 
 class EventsPanel extends Component {
@@ -9,34 +8,14 @@ class EventsPanel extends Component {
     return (
       <div className="Events-panel">
       	<ul className="Events-list">
-      		<li><Event /></li>
-      		<li><Event /></li>
-      		      		<li><Event /></li>
-      		<li><Event /></li>
-      		      		<li><Event /></li>
-      		<li><Event /></li>
-      		      		<li><Event /></li>
-      		<li><Event /></li>
-      		      		<li><Event /></li>
-      		<li><Event /></li>
-      		      		<li><Event /></li>
-      		<li><Event /></li>
-      		      		<li><Event /></li>
-      		<li><Event /></li>
-      		      		<li><Event /></li>
-      		<li><Event /></li>
-      		      		<li><Event /></li>
-      		<li><Event /></li>
-      		      		<li><Event /></li>
-      		<li><Event /></li>
-      		      		<li><Event /></li>
-      		<li><Event /></li>
-      		      		<li><Event /></li>
-      		<li><Event /></li>
-      		      		<li><Event /></li>
-      		<li><Event /></li>
-      		<li><Event /></li>
-      		<li><Event /></li>
+        {
+      		events_data.map(function(event){
+            return <li className="Events-event">
+              <h2>{event.title}</h2>
+              <p>{event.desc}</p>
+            </li>;
+          })
+        }
       	</ul>
       </div>
     );

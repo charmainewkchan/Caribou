@@ -1,10 +1,18 @@
-{
-	"events": [
-		{
- 		"title": "event 1!"
-		},
-		{
-			"title": "event 2!"
-		}
-	]
-}
+[
+	{
+		"title": "event 1!",
+		"desc": "description for event 1"
+	},
+	{
+		"title": "event 2!",
+		"desc": "description for event 2"
+	},
+	{
+		"title": "event 3!",
+		"desc": "description for event 3"
+	},
+	{
+		"title": "event 4!",
+		"desc": "description for event 4"
+	}
+]
