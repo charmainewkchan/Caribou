@@ -5,12 +5,17 @@ import './App.css';
 class Header extends Component {
   render() {
     return (
-      <div className="Header">
-	      <ul>
-	      	<li><Link to='/'>Home</Link></li>
-	      	<li><Link to='/about'>About</Link></li>
-	      </ul>
-      </div>
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div className="container-fluid">
+          <div className="navbar-header">
+            <Link to='/' className="navbar-brand">ProjectTitle</Link>
+          </div>
+          <ul className="navbar-nav">
+            <li className="nav-item"><Link to='/' className="nav-link">Home</Link></li>
+            <li className="nav-item"><Link to='/about' className="nav-link">About</Link></li>
+          </ul>
+        </div>
+      </nav>
     );
   }
 }
