@@ -1,0 +1,10 @@
+{
+	"events": [
+		{
+ 		"title": "event 1!"
+		},
+		{
+			"title": "event 2!"
+		}
+	]
+}

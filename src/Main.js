@@ -8,7 +8,7 @@ import Events from './Events/Events'
 class Main extends React.Component {
   render() {
     return(
-		  <main>
+		  <main className="container">
 			<Switch>
 				<Route exact path='/' component={Home}/>
 				<Route path='/events' component={Events}/>
