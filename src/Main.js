@@ -15,7 +15,6 @@ class Main extends React.Component {
 				<Route path='/events' component={Events}/>
 			  <Route path='/about' component={About}/>
 			  <Route path='/myprofile' component={MyProfile}/>
-        
 			</Switch>
 			</main>
 		);
