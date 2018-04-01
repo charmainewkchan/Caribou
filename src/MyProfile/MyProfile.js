@@ -8,9 +8,9 @@ class MyProfile extends Component {
       	<div className="row">
       		<div className="col-3">
       			<ul className="MyProfile-settings">
-      				<li>My Profile</li>
-      				<li>My Events</li>
-      				<li>Account Settings</li>
+      				<li><a href="#">My Profile</a></li>
+      				<li><a href="#">My Events</a></li>
+      				<li><a href="#">Account Settings</a></li>
       			</ul>
       		</div>
       		<div className="col">
