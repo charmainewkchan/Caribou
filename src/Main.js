@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 
-import Home from './Home'
-import About from './About'
-import Events from './Events'
+import Home from './Home/Home'
+import About from './About/About'
+import Events from './Events/Events'
 
 class Main extends React.Component {
   render() {
