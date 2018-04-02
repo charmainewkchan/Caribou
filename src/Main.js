@@ -9,7 +9,7 @@ import MyProfile from './MyProfile/MyProfile'
 class Main extends React.Component {
   render() {
     return(
-		  <main className="container">
+		  <main className="container-fluid">
 			<Switch>
 				<Route exact path='/' component={Home}/>
 				<Route path='/events' component={Events}/>
