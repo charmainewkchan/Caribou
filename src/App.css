@@ -78,6 +78,32 @@
     font-size: .8em;
 }
 
+.Home p {
+    font-size: .8em;
+    background: #f1f1f1;
+    margin: 18em auto;
+    width: 60%;
+
+    font-family: 'Roboto', sans-serif;
+}
+
+.Home h2 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 8em 0 1em 0;
+    font-size: 30px;
+    font-family: 'Fjalla One', sans-serif;
+}
+
+.Home b {
+  font-size: .8em;
+  background: #f1f1f1;
+  font-weight: bold;
+  margin: 3em 0em 8em 0;
+  width: 60%;
+  font-family: 'Roboto', sans-serif;
+}
+
 .MyProfile {
   background-color: #f1f1f1;
   margin-top: 2em;
