@@ -26,7 +26,7 @@ SECRET_KEY = '463hzk*onkb4h&+j@mof$wc(20t$$l17w#(v8-6ipzq7m=$a=j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['project-caribou.herokuapp.com']
+ALLOWED_HOSTS = ['project-caribou.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -80,13 +80,14 @@ WSGI_APPLICATION = 'reactdjango.wsgi.application'
 
 DATABASES = {
   'default': {
-    'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd78avmla7s04ta',
+        'USER': 'vsfcylxsaozgey',
+        'PASSWORD': '986f7eb04b9f3f31f6bea38b4bc199535b3aa17784f53c0f588f9b43e0057be9',
+        'HOST': 'ec2-54-221-207-184.compute-1.amazonaws.com',
+        'PORT': '5432',
   }
 }
-
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
