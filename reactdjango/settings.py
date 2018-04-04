@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import psycopg2
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -80,7 +81,7 @@ WSGI_APPLICATION = 'reactdjango.wsgi.application'
 
 DATABASES = {
   'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'd78avmla7s04ta',
         'USER': 'vsfcylxsaozgey',
         'PASSWORD': '986f7eb04b9f3f31f6bea38b4bc199535b3aa17784f53c0f588f9b43e0057be9',
@@ -88,6 +89,9 @@ DATABASES = {
         'PORT': '5432',
   }
 }
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
