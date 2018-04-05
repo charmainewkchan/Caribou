@@ -18,7 +18,7 @@ class MyProfile extends Component {
       			</ul>
       		</div>
       		<div className="col MyProfile-panel">
-            <Route exact path='/myprofile(|/profile)' component={Profile}/>  
+            <Route exact path='/myprofile(|/profile)' component={Profile}/>
             <Route path='/myprofile/account' component={Account}/>
       		</div>
       	</div>
