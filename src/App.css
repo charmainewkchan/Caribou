@@ -104,6 +104,28 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.Home-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+  width: auto;
+  padding: 0em 14em;
+  list-style: none;
+  flex-direction: row;
+  font-family: 'Roboto', sans-serif;
+}
+
+.push {
+    margin-left: 3em;
+}
+
+.Home-buttons div {
+  width: 100px;
+  height: 100px;
+}
+
 .MyProfile {
   background-color: #f1f1f1;
   margin-top: 2em;
