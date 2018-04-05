@@ -5,7 +5,8 @@ class Account extends Component {
   render() {
     return (
       <div>
-        <p>Account Settings</p>
+        <h2> Account </h2>
+        <button className="btn btn-danger"> Delete Account </button>
       </div>
     );
   }

@@ -137,14 +137,54 @@ margin: 1em 1em;
 
 .MyProfile {
   background-color: #f1f1f1;
-  margin-top: 2em;
+  margin-top: 1em;
+  padding: 1em;
+}
+
+.MyProfile h2 {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.MyProfile h3 {
+  font-size: 1em;
+  font-weight: bold;
+  color: #333;
 }
 
 .MyProfile-settings {
-  list-style: none;
   font-size: 0.8em;
-  margin: 1em 0em;
+  padding:0em;
+  margin: 0em;
+  background: #333;
+}
+
+.MyProfile-panel {
+  text-align: left;
+  padding: 1em 2.5em;
+}
+
+.active-settings {
+  color: black;
+  background-color: #ccc;
+  height: 100%;
+  margin: 0;
+  left: 1em;
+}
+
+.settings {
+  background-color: #999;
+  height: 100%;
+  margin: .1em;
+  height: 3em;
+  color: black;
+  text-decoration: none
+}
+
+.MyProfile-settings ul {
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 /* For mobile */
