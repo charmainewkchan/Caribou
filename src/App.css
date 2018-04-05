@@ -108,10 +108,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
+  text-align: center;
   align-content: center;
   align-self: center;
   width: auto;
-  padding: 0em 14em;
+  padding: 0em 18em 0em 18em;
   list-style: none;
   flex-direction: row;
   font-family: 'Roboto', sans-serif;

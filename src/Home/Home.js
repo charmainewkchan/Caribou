@@ -10,8 +10,8 @@ class Home extends Component {
         <div className="Home container">
         		<div className="col">
         			<ul className="Home-buttons">
-                <li><a href="#">Student Events</a></li>
-                <li><a href="#">Club Events</a></li>
+                <a href="#"><button>Student Events</button></a>
+                <a href="#"><button>Club Events</button></a>
         			</ul>
         	</div>
         </div>
