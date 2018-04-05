@@ -5,7 +5,11 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        <p>Profile Settings</p>
+        <h2>Profile Settings</h2>
+        <h3>Name: </h3>
+        <h3>Year: </h3>
+        <h3>College: </h3>
+
       </div>
     );
   }

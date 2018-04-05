@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route, NavLink } from 'react-router-dom'
+
 
 import Profile from './Profile';
 import Account from './Account'
@@ -10,14 +11,13 @@ class MyProfile extends Component {
     return (
       <div className="MyProfile container">
       	<div className="row">
-      		<div className="col-3">
-      			<ul className="MyProfile-settings">
-      				<li><Link to='/myprofile/profile'>My Profile</Link></li>
-      				<li><Link to='/myprofile/account'>Account Settings</Link></li>
+      		<div className="col-3 MyProfile-settings">
+      			<ul>
+      				<li className="settings" ><NavLink to='/myprofile/profile' activeClassName='active-settings' style={{display:'block',height:'100%'}}>My Profile</NavLink></li>
+      				<li className="settings"><NavLink to='/myprofile/account'  activeClassName='active-settings' style={{display:'block',height:'100%'}}>Account Settings</NavLink></li>
       			</ul>
       		</div>
-      		<div className="col">
-            <p>Corresponding settings panel would go here</p>
+      		<div className="col MyProfile-panel">
             <Route exact path='/myprofile(|/profile)' component={Profile}/>  
             <Route path='/myprofile/account' component={Account}/>
       		</div>
