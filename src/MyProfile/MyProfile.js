@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import '../App.css';
+import { Switch, Route, Link } from 'react-router-dom'
 
+import Profile from './Profile';
+import Account from './Account'
+
+import '../App.css';
 class MyProfile extends Component {
   render() {
     return (
@@ -8,13 +12,14 @@ class MyProfile extends Component {
       	<div className="row">
       		<div className="col-3">
       			<ul className="MyProfile-settings">
-      				<li><a href="#">My Profile</a></li>
-      				<li><a href="#">My Events</a></li>
-      				<li><a href="#">Account Settings</a></li>
+      				<li><Link to='/myprofile/profile'>My Profile</Link></li>
+      				<li><Link to='/myprofile/account'>Account Settings</Link></li>
       			</ul>
       		</div>
       		<div className="col">
-      			<p>Corresponding settings panel would go here</p>
+            <p>Corresponding settings panel would go here</p>
+            <Route exact path='/myprofile(|/profile)' component={Profile}/>  
+            <Route path='/myprofile/account' component={Account}/>
       		</div>
       	</div>
       </div>
