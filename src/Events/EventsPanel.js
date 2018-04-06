@@ -9,7 +9,6 @@ class EventsPanel extends Component {
 
   render() {
     return (
-
         <div className="Events-panel">
         	<ul className="Events-list">
           {

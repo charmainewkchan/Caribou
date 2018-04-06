@@ -8,7 +8,6 @@ class EventsFilter extends Component {
       <div className = "row">
         <div className = "Events-filter">
         <p> Search: </p>
-
         <p> Filter Options:</p>
         </div>
       </div>

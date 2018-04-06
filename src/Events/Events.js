@@ -11,8 +11,12 @@ class Events extends Component {
       <div>
 
       <div className="Events row">
+        <div className= "col-3">
         <EventsFilter />
-      	<EventsPanel events={events_data}/>
+        </div>
+        <div className= "col-9">
+      	<EventsPanel events = {events_data}/>
+        </div>
       </div>
       </div>
     );

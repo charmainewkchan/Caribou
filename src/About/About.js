@@ -5,7 +5,7 @@ class About extends Component {
   render() {
     return (
     <div className="About">
-			<h2> About Bixer </h2>      
+			<h2> About Us </h2>      
 			<p>Princeton can be a stressful place. Academics are one thing, but social life here can be stressful too, especially when it comes to bicker. Did you ever feel the need to impress someone? To make someone like you after one conversation? Did that stress you out? Bicker is meant to help people get to know each other, but a 10 minute conversation or game won’t really help you do that.
 			        </p>
 
