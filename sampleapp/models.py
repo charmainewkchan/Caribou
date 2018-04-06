@@ -28,7 +28,39 @@ class User(models.Model):
 		default = NONE,
 	)
 	year = models.CharField(max_length=4)
-	eating_club
+	# eating club
+	NONE = 'NN'
+	IVY = 'IV'
+	COTTAGE = 'CO'
+	TIGERINN = 'TI'
+	CAP = 'CA'
+	COLONIAL = 'CO'
+	CANNON = 'CA'
+	CHARTER = 'CH'
+	QUAD = 'QU'
+	TOWER = 'TO'
+	TERRACE = 'TE'
+	CLOISTER = 'CL'
+
+	EATING_CLUB_CHOICES = (
+		(NONE, 'None'),
+		(IVY, 'The Ivy Club'),
+		(COTTAGE, 'University Cottage Club'),
+		(TIGERINN, 'Tiger Inn'),
+		(CAP, 'Cap and Gown Club'),
+		(COLONIAL, 'Colonial Club'),
+		(CANNON, 'Cannon Club'),
+		(CHARTER, 'Princeton Charter Club'),
+		(QUAD, 'Quadrangle Club'),
+		(TOWER, ' Princeton Tower Club'),
+		(TERRACE, 'Terrace Club'),
+		(CLOISTER, 'Cloister Inn'),
+	)
+	eating_club = models.CharField(
+		max_length = 2,
+		choices = EATING_CLUB_CHOICES,
+		default = NONE,
+		)
 	clubs_bickering
 	picture
 	user_permission
