@@ -2,6 +2,7 @@ backports.shutil-get-terminal-size==1.0.0
 bitarray==0.8.1
 decorator==4.0.11
 dj-database-url==0.4.1
+django-cors-headers==2.2.0
 Django==2.0.3
 docutils==0.13.1
 numba==0.30.1
