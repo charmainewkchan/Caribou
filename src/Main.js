@@ -6,7 +6,7 @@ import About from './About/About'
 import Events from './Events/Events'
 import MyProfile from './MyProfile/MyProfile'
 
-class Main extends React.Component {
+class Main extends Component {
   render() {
     return(
 		  <main className="container-fluid">
