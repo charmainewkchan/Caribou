@@ -7,3 +7,11 @@ def test(request):
 		"test": "this is a message from django!"
 	}
 	return JsonResponse(response)
+
+def get_events(request):
+	# query database for events
+	# format as json
+	response = {
+		"test"
+	}
+	return JsonResponse(response)
