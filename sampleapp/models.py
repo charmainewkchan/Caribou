@@ -4,7 +4,7 @@ from django.db import models
 # eating club
 NONE = 'NN'
 IVY = 'IV'
-COTTAGE = 'CO'
+COTTAGE = 'CT'
 TIGERINN = 'TI'
 CAP = 'CA'
 COLONIAL = 'CO'
