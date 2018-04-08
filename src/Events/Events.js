@@ -10,7 +10,10 @@ class Events extends Component {
   constructor() {
   	super();
   	this.state = {
-  		data: {},
+  		filter: {
+  			location: ['Colonial', 'Tower']
+  		},
+  		events: []
   	}
   }
 
@@ -19,34 +22,39 @@ class Events extends Component {
 	.then(res=>{
 		return res.json();
 	}).then(res_data => {
+
+		// location filter
+		var filtered = events_data.filter(event => this.state.filter['location'].includes(event.location));
+
 		this.setState({
-			data: res_data
+			events: filtered
 		});
 	})
   }
 
-
+  onLocationFilterChange(event){
+  	alert("here");
+  }
 
   render() {
     return (
       <div>
-    	  <p>{this.state.data.test}</p>
 	      <div className="Events row">
 
 	        <div className= "col-3">
-	        <EventsFilter />
+	        <EventsFilter onLocationFilterChange={this.onLocationFilterChange}/>
 	        </div>
 
 	        <div className= "col-9">
-            <div className= "container" style= {{background:'red'}}>
-              <div className= "row">
-                <AddEvent />
-                </div>
+	            <div className= "container" style= {{background:'red'}}>
+	              <div className= "row">
+	                <AddEvent />
+	                </div>
 
-                <div className= "row">
-                <EventsPanel events = {events_data}/>
-                </div>
-            </div>
+	                <div className= "row">
+	                <EventsPanel events = {this.state.events}/>
+	                </div>
+	            </div>
 	        </div>
 
 	      </div>
