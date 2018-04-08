@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # eating club
 NONE = 'NN'
 IVY = 'IV'
