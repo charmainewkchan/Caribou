@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # eating club
 NONE = 'NN'
 IVY = 'IV'
@@ -59,7 +58,7 @@ class User(models.Model):
 		default = NONE,
 		)
 	year = models.CharField(max_length=4)
-	
+
 	eating_club = models.CharField(
 		max_length = 2,
 		choices = EATING_CLUB_CHOICES,

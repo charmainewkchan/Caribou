@@ -51,14 +51,23 @@
 
 
 .Events-panel {
+
 }
 
+.Events-AddEvents {
+  background-color:#480755;
+  width: 100%;
+  margin: auto;
+  padding: 0;
+
+}
 .Events-filter{
   background-color: #aeb4b7;
   text-align: left;
   height: 400px;
   width: 100%;
-  margin: 1em 4em;
+  margin: 1em;
+  padding-left: 1em;
 }
 
 .Events-filter p {
@@ -69,15 +78,21 @@
 
 .Events-list {
   list-style-type: none;
+  padding: 0;
   margin: auto;
 }
 
 .Events-event {
   margin: 1em ;
-  padding: .7em 1em 1em 1em;
-  width: auto;
+  padding: 1em 1em 1em 1em;
+  max-width: 100%;
   background: #f1f1f1;
   text-align: left;
+
+}
+
+.Events-descriptionBox {
+  font-size: 8px;
 
 }
 
