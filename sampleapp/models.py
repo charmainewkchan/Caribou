@@ -1,6 +1,5 @@
 from django.db import models
 
-<<<<<<< HEAD
 
 # eating club
 NONE = 'NN'
@@ -60,7 +59,7 @@ class User(models.Model):
 		default = NONE,
 		)
 	year = models.CharField(max_length=4)
-	
+
 	eating_club = models.CharField(
 		max_length = 2,
 		choices = EATING_CLUB_CHOICES,
@@ -113,6 +112,3 @@ class ClubEvent(models.Model):
 	# tags
 	def __str__(self):
 		return self.title
-=======
-# Create your models here
->>>>>>> filter_options

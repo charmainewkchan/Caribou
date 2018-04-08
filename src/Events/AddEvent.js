@@ -5,7 +5,6 @@ import '../App.css';
 class AddEvent extends Component {
   render() {
     return (
-      <div className= "Events-AddEvents">
       <div className= "Events-event">
       <div className="input-group mb-3">
 
@@ -20,7 +19,6 @@ class AddEvent extends Component {
         <p>Time:___</p>
         <p>Capacity: __</p>
         <button> Create </button>
-      </div>
       </div>
     );
   }

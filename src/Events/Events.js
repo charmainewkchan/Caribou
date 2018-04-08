@@ -46,7 +46,7 @@ class Events extends Component {
 	        </div>
 
 	        <div className= "col-9">
-	            <div className= "container" style= {{background:'red'}}>
+	            <div className= "container">
 	              <div className= "row">
 	                <AddEvent />
 	                </div>

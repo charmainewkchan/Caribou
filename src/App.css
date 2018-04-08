@@ -66,6 +66,7 @@
   text-align: left;
   height: 400px;
   width: 100%;
+  margin: 1em;
   padding-left: 1em;
 }
 
@@ -84,7 +85,7 @@
 .Events-event {
   margin: 1em ;
   padding: 1em 1em 1em 1em;
-  width: 100%;
+  max-width: 100%;
   background: #f1f1f1;
   text-align: left;
 
