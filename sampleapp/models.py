@@ -73,7 +73,10 @@ class User(models.Model):
 	# picture URL to the image file
 	picture = models.URLField('profile picture')
 
-	# user_permission not sure yet
+	# user_permission
+	#not sure yet
+	def __str__(self):
+		return self.netid
 
 class PersonalEvent(models.Model):
 	event_type = models.CharField(max_length=40)
@@ -90,6 +93,9 @@ class PersonalEvent(models.Model):
 		)
 	# tags unsure now
 
+	def __str__(self):
+		return self.title
+
 class ClubEvent(models.Model):
 	event_type = models.CharField(max_length=40)
 	date_posted = models.DateTimeField(auto_now=True)
@@ -104,3 +110,5 @@ class ClubEvent(models.Model):
 		default = NONE,
 		)
 	# tags
+	def __str__(self):
+		return self.title
