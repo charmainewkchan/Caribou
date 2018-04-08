@@ -18,7 +18,7 @@ class Events extends Component {
   }
 
   componentDidMount() {
-    fetch('https://project-caribou.herokuapp.com/api/')
+    fetch('https://bixr.herokuapp.com/api/')
 	.then(res=>{
 		return res.json();
 	}).then(res_data => {
