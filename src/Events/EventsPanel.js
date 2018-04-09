@@ -16,7 +16,7 @@ class EventsPanel extends Component {
               return <li className="Events-event">
                 <h2>{event.title}</h2>
                 <p>{event.desc}</p>
-                <p>Location: {event.location}</p>
+                <p>Club: {event.club}</p>
                 <p>Time: {event.time}</p>
                 <p>Capacity: {event.capacity}</p>
                 <button> Join </button>

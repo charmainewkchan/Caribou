@@ -5,14 +5,17 @@ import '../App.css';
 class EventsFilter extends Component {
   constructor(props) {
     super(props)
-    this.state={value: 'false'};
+    this.state={Tower: false};
 
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    this.props.onLocationFilterChange(event.target.value);
-    //this.setState({value: event.target.value});
+    this.props.onClubFilterChange(event);
+    console.log(event.target.checked);
+    this.setState({
+      [event.target.name]: event.target.checked
+    });
   }
 
   render() {
@@ -22,8 +25,8 @@ class EventsFilter extends Component {
             <h2>Filter Panel</h2>
             <div className="form-group">
               <div className="form-check">
-                <input className="form-check-input" type="checkbox" value="this.state.value" id="defaultCheck1" onChange={this.handleChange}/>
-                <label className="form-check-label" for="defaultCheck1">
+                <input className="form-check-input" type="checkbox" checked={this.state.tower} name="Tower" id="Tower" onChange={this.handleChange}/>
+                <label className="form-check-label" for="Tower">
                   Tower
                 </label>
               </div>

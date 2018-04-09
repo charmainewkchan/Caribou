@@ -2,7 +2,7 @@
 	{
 		"title": "Pool in Cap!",
 		"desc": "Come play pool with me and some friends",
-		"location": "Colonial",
+		"club": "Colonial",
 		"time": "8:30pm - 9pm",
 		"capacity": "0/10"
 
@@ -10,7 +10,7 @@
 	{
 		"title": "Meal at Tower",
 		"desc": "I've got an extra guest swipe, come eat dinner with me!",
-		"location": "Tower",
+		"club": "Tower",
 		"time": "6:00pm",
 		"capacity": "0/1"
 
@@ -18,7 +18,7 @@
 	{
 		"title": "Senior thesis art project help",
 		"desc": "Hey guys, I need a little help with my art project (painting walls and stuff), and would like to get to know some underclassmen too!",
-		"location": "Colonial",
+		"club": "Colonial",
 		"time": "3:00pm - 4pm",
 		"capacity": "0/5"
 
@@ -26,7 +26,7 @@
 	{
 		"title": "Karaoke night at Tower",
 		"desc": "Join me and some friends as we *try* to sing some song and pretend we're not tune deaf.",
-		"location": "Tower",
+		"club": "Tower",
 		"time": "9:00pm",
 		"capacity": "0/10"
 
