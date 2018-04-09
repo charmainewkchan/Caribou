@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # eating club
 NONE = 'NN'
@@ -84,7 +85,8 @@ class PersonalEvent(models.Model):
 	description = models.TextField('description')
 	title = models.CharField(max_length=100)
 	location = models.CharField(max_length=40)
-	time = models.TimeField('event time')
+	start_time = models.DateTimeField(default = datetime.now())
+	end_time = models.DateTimeField(default = datetime.now())
 	eating_club = models.CharField(
 		max_length = 2,
 		choices = EATING_CLUB_CHOICES,
@@ -102,7 +104,8 @@ class ClubEvent(models.Model):
 	description = models.CharField(max_length = 300)
 	title = models.CharField(max_length=100)
 	location = models.CharField(max_length=40)
-	time = models.TimeField('event time')
+	start_time = models.DateTimeField(default = datetime.now())
+	end_time = models.DateTimeField(default = datetime.now())
 	eating_club = models.CharField(
 		max_length = 2,
 		choices = EATING_CLUB_CHOICES,
