@@ -22,7 +22,7 @@ class EventsFilter extends Component {
     return (
         <div className = "Events-filter container">
           <form>
-            <h2>Filter Panel</h2>
+            <h2>Apply Filter</h2>
             <div className="form-group">
               <div className="form-check">
                 <input className="form-check-input" type="checkbox" checked={this.state.tower} name="Tower" id="Tower" onChange={this.handleChange}/>

@@ -20,20 +20,23 @@ class Events extends Component {
 
 
     this.onClubFilterChange = this.onClubFilterChange.bind(this);
+    this.onCreateEvent = this.onCreateEvent.bind(this);
   }
 
   componentDidMount() {
-    fetch('https://bixr.herokuapp.com/api/')
+    /*fetch('https://bixr.herokuapp.com/api/')
 	.then(res=>{
 		return res.json();
 	}).then(res_data => {
 		// get data from django
 
-		this.setState({
+		
+	});*/
+
+	this.setState({
 			events: events_data
 		})
 
-	});
   }
 
   filterEvents(){
@@ -66,29 +69,43 @@ class Events extends Component {
   	}, function() {this.filterEvents()});
   }
 
+  onCreateEvent(event){
+  	var new_event = 	{
+		"title": "NewEvent",
+		"desc": "Come check out this new event",
+		"club": "Tower",
+		"time": "2:00am",
+		"capacity": "0/2"
+	}
+
+	var mod = this.state.events
+	mod.unshift(new_event)
+	this.setState({
+		events: mod
+	})
+  }
+
   render() {
     return (
-      <div>
-	      <div className="Events row">
-
+    	<div className="Events container">
+	      <div className="row">
 	        <div className= "col-3">
 	        <EventsFilter onClubFilterChange={this.onClubFilterChange}/>
 	        </div>
 
 	        <div className= "col-9">
-	            <div className= "container">
+	           <div className= "container">
 	              <div className= "row">
-	                <AddEvent />
+	                <AddEvent onCreateEvent={this.onCreateEvent}/>
 	                </div>
 
 	                <div className= "row">
-	                <EventsPanel events = {this.state.events}/>
+	                	<EventsPanel events = {this.state.events}/>
 	                </div>
 	            </div>
 	        </div>
-
 	      </div>
-      </div>
+	    </div>
     );
   }
 }

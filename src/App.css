@@ -43,7 +43,6 @@
 }
 
 
-
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -51,15 +50,16 @@
 
 
 .Events-panel {
-
+  width: 100%;
 }
 
-.Events-AddEvents {
-  background-color:#480755;
+.Events-addEvent {
+  padding: 1em;
+  background-color: #f1f1f1;
+  margin-top: 1em;
   width: 100%;
-  margin: auto;
-  padding: 0;
-
+  border-radius: 5px;
+  text-align: left;
 }
 
 
@@ -75,18 +75,28 @@
 }
 
 .Events-filter{
-  background-color: #aeb4b7;
+  background-color: #f1f1f1;
   text-align: left;
   height: 400px;
   width: 100%;
   margin: 1em;
   padding-left: 1em;
+  border-color: #f1f1f1;
+  border-radius: 3px;
+  border-width: 2px;
+  border-style: solid;
 }
 
 .Events-filter p {
   text-align: left;
   font-size: 0.8em;
   margin: 1em 1em;
+}
+
+.Events-filter h2 {
+  font-size: 1.2em;
+  padding: 1em;
+  text-align: center;
 }
 
 .Events-list {
@@ -96,11 +106,12 @@
 }
 
 .Events-event {
-  margin: 1em ;
-  padding: 1em 1em 1em 1em;
-  max-width: 100%;
-  background: #f1f1f1;
+  margin: 1em 0;
+  width: 100%;
+  background: white;
   text-align: left;
+  box-shadow: 0px 2px 3px #c4c4c4;
+  border-radius: 5px;
 }
 
 .Events-descriptionBox {
@@ -112,15 +123,61 @@
 }
 
 .Events-event h2 {
-  color: black;
+  color: #322806;
   font-size: 1.2em;
   font-weight: bold;
   padding: 0;
   margin: 0 ;
 }
 
+.event-header {
+  background-color: #AEB4B7;
+  margin: 0;
+  padding: .5em;
+  width: 100%;
+  border-bottom: 1px solid #888;
+}
+
+.join-button {
+  margin: .5em;
+  border: 0;
+  background: #213f60;
+}
+
+.Events .btn {
+  width: 6em;
+}
+
+.event-header h2 {
+  color: black;
+  padding: 0;
+  margin: 0;
+  height: 1em;
+}
+
+.event-header p{
+  padding: 0;
+  margin: 0;
+  height: 1em;
+  font-size: .6em;
+  color: #333;
+}
+
 .Events-event p {
     font-size: .8em;
+    height: 1em;
+    margin: .5em;
+    padding: 0;
+}
+
+.Events-AddEvent {
+  margin: 1em ;
+  padding: 1em;
+  background: white;
+  text-align: left;
+  box-shadow: 0px 2px 3px #c4c4c4;
+  border-radius: 5px;
+  width: 100%;
 }
 
 .Home p {

@@ -9,7 +9,7 @@ import MyProfile from './MyProfile/MyProfile'
 class Main extends Component {
   render() {
     return(
-		  <main className="container-fluid">
+		  <main>
 			<Switch>
 				<Route exact path='/' component={Home}/>
 				<Route path='/events' component={Events}/>
