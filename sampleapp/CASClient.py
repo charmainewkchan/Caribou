@@ -1,5 +1,6 @@
-from app import CONFIG
 import sys, os, cgi, urllib, re
+from django.conf import settings
+from django.shortcuts import redirect
 
 class CASClient:
    def __init__(self, form):
@@ -13,7 +14,7 @@ class CASClient:
          if netid != None:
             return {"netid":netid}
          return {}
-         
+
       # No valid ticket; redirect the browser to the login page to get one
       login_url = self.cas_url + 'login' \
          + '?service=' + urllib.parse.quote(self.ServiceURL())
@@ -34,8 +35,8 @@ class CASClient:
          ret = re.sub(r'ticket=[^&]*&?', '', ret)
          ret = re.sub(r'\?&?$|&$', '', ret)
          return ret
-      elif CONFIG["DEBUG"]:
-         ret = "http://localhost:" + str(CONFIG["PORT"]) + "/login"
+      elif settings.DEBUG:
+         ret = "http://localhost:8000/login/"
          return ret
       return "something is badly wrong"
 
