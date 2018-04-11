@@ -21,7 +21,7 @@ def get_events(request):
 
 
 def login(request):
-	C = CASClient.CASClient(request.COOKIES)
+	C = CASClient.CASClient()
 	auth_attempt = C.Authenticate()
 	if "netid" in auth_attempt:  # Successfully authenticated.
 		print("successfully authenticted")
