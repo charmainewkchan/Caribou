@@ -28,24 +28,13 @@ class AddEvent extends Component {
       [event.target.name]: event.target.value
     });
   }
-  /*handleDesChange(event) {
-    this.setState({eventDes: event.target.value});
-  }
-  handleLocChange(event) {
-    this.setState({eventLoc: event.target.value});
-  }
-  handleSTimeChange(event) {
-    this.setState({eventStartTime: event.target.value});
-  }
-  handleETimeChange(event) {
-    this.setState({eventEndTime: event.target.value});
-  }
-  handleCapChange(event) {
-    this.setState({eventCap: event.target.value});
-  }*/
 
   handleCreateEvent(event) {
-    alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventLoc + " " + this.state.eventStartTime +"-" + " " + this.state.eventEndTime + " " + this.state.eventCap);
+    if (this.state.eventStartTime.match(/[a-z]/i) || this.state.eventEndTime.match(/[a-z]/i)){
+      alert('Invalid input for time. Please only enter numbers.')
+    }
+      /*alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventLoc + " " + this.state.eventStartTime +"-" + " " + this.state.eventEndTime + " " + this.state.eventCap);
+    */
     event.preventDefault();
   }
 
