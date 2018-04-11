@@ -1,6 +1,6 @@
 import sys, os, cgi, urllib, re
 from django.conf import settings
-from django.shortcuts import redirect
+
 
 class CASClient:
    def __init__(self, form):
