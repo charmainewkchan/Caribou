@@ -15,3 +15,14 @@ def get_events(request):
 		"test"
 	}
 	return JsonResponse(response)
+
+
+def login(request):
+	C = CASClient.CASClient(request.args)
+	auth_attempt = C.Authenticate()
+	if "netid" in auth_attempt:  # Successfully authenticated.
+		return redirect(...)
+	elif "location" in auth_attempt:  # Redirect to CAS.
+		return redirect(auth_attempt["location"])
+	else:  # This should never happen!
+		abort(500)
