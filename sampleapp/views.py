@@ -21,11 +21,12 @@ def get_events(request):
 
 
 def login(request):
-	C = CASClient.CASClient()
+	C = CASClient.CASClient(request)
+
 	auth_attempt = C.Authenticate()
 	if "netid" in auth_attempt:  # Successfully authenticated.
 		print("successfully authenticted")
-		return redirect("/")
+		return redirect("https://bixr.herokuapp.com")
 	elif "location" in auth_attempt:  # Redirect to CAS.
 		print("redirect to cas: %s" % auth_attempt["location"])
 		return redirect(auth_attempt["location"])

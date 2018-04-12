@@ -4,8 +4,9 @@ form = cgi.FieldStorage()
 
 class CASClient:
 
-   def __init__(self):
+   def __init__(self, request):
       self.cas_url = 'https://fed.princeton.edu/cas/'
+      self.request = request
 
    def Authenticate(self):
       # If the request contains a login ticket, try to validate it
@@ -13,13 +14,16 @@ class CASClient:
          netid = self.Validate(form['ticket'].value)
          if netid != None:
             return netid
+         return {}
       # No valid ticket; redirect the browser to the login page to get one
       login_url = self.cas_url + 'login' \
          + '?service=' + urllib.parse.quote(self.ServiceURL())
-      print ('Location: ' + login_url)
-      print ('Status-line: HTTP/1.1 307 Temporary Redirect')
-      print ("")
-      sys.exit(0)
+
+      return {"location": login_url}
+      # print ('Location: ' + login_url)
+      # print ('Status-line: HTTP/1.1 307 Temporary Redirect')
+      # print ("")
+      # sys.exit(0)
 
    def Validate(self, ticket):
       val_url = self.cas_url + "validate" + \
@@ -31,12 +35,11 @@ class CASClient:
       return None
 
    def ServiceURL(self):
-      if 'REQUEST_URI' in os.environ:
-         ret = 'http://' + os.environ['HTTP_HOST'] + os.environ['REQUEST_URI']
-         ret = re.sub(r'ticket=[^&]*&?', '', ret)
-         ret = re.sub(r'\?&?$|&$', '', ret)
-         return ret
-      return "something is badly wrong"
+      ret = 'http://' + self.request.META['HTTP_HOST'] + self.request.get_full_path()
+      ret = re.sub(r'ticket=[^&]*&?', '', ret) # delete ticket info
+      ret = re.sub(r'\?&?$|&$', '', ret) # delete
+      return ret
+      #return "something is badly wrong"
 
 def main():
   print ("CASClient does not run standalone")
