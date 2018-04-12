@@ -1,4 +1,5 @@
 import sys, os, cgi, urllib, re
+import urllib.request
 
 form = cgi.FieldStorage()
 
