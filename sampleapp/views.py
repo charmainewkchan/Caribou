@@ -1,5 +1,8 @@
 from django.http import JsonResponse
 #from django.http import HttpResponse
+from django.shortcuts import redirect
+
+from . import CASClient
 
 # Create your views here.
 def test(request):
@@ -11,7 +14,21 @@ def test(request):
 def get_events(request):
 	# query database for events
 	# format as json
-	response = {
-		"test"
-	}
-	return JsonResponse(response)
+	return JsonResponse({"test"})
+
+def netid(request):
+	return JsonResponse({'netid': request.session['netid']})
+
+
+def login(request):
+	C = CASClient.CASClient(request)
+
+	auth_attempt = C.Authenticate()
+	if "netid" in auth_attempt:  # Successfully authenticated.
+		print("successfully authenticted")
+		request.session['netid'] = auth_attempt['netid']
+		return redirect("https://bixr.herokuapp.com")
+	elif "location" in auth_attempt:  # Redirect to CAS.
+		return redirect(auth_attempt["location"])
+	else:  # This should never happen!
+		abort(500)
