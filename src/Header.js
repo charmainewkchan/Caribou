@@ -2,7 +2,22 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './App.css';
 
+import axios from 'axios';
+
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      username:''
+    }
+  }
+
+
+  componentDidMount() {
+    const url = "https://bixr.herokuapp.com/api/netid"
+    axios.get(url).then(res => console.log(res));
+  }
+
   render() {
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
