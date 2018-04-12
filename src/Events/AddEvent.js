@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import PropTypes from 'prop-types';
 import '../App.css';
 
 class AddEvent extends Component {
@@ -11,15 +12,11 @@ class AddEvent extends Component {
       eventLoc: '',
       eventStartTime: '',
       eventEndTime: '',
+      date:'',
       eventCap:''
     };
 
     this.handleChange = this.handleChange.bind(this);
-    /*this.handleDesChange = this.handleDesChange.bind(this);
-    this.handleLocChange = this.handleLocChange.bind(this);
-    this.handleSTimeChange = this.handleSTimeChange.bind(this);
-    this.handleETimeChange = this.handleETimeChange.bind(this);
-    this.handleCapChange = this.handleCapChange.bind(this);*/
     this.handleCreateEvent = this.handleCreateEvent.bind(this);
   }
 
@@ -31,11 +28,24 @@ class AddEvent extends Component {
   }
 
   handleCreateEvent(event) {
-    if (this.state.eventStartTime.match(/[a-z]/i) || this.state.eventEndTime.match(/[a-z]/i)){
+    if(!this.state.eventName){
+      alert('Please enter an event name.')
+    }
+    else if(!this.state.eventLoc){
+      alert('Please enter a location.')
+    }
+    else if (!this.state.date){
+      alert('Please select a date.')
+    }
+    else if (this.state.eventStartTime.match(/[a-z]/i) || this.state.eventEndTime.match(/[a-z]/i) || !this.state.eventStartTime|| !this.state.eventEndTime){
       alert('Invalid input for time. Please only enter numbers.')
     }
-      /*alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventLoc + " " + this.state.eventStartTime +"-" + " " + this.state.eventEndTime + " " + this.state.eventCap);
-    */
+    else if (this.state.capacity == '') {
+      alert('Please enter a maximum capacity.')
+    }
+
+    alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventLoc + " " + this.state.date + " " + this.state.eventStartTime +"-" + " " + this.state.eventEndTime + " " + this.state.eventCap);
+
     event.preventDefault();
   }
 
@@ -59,12 +69,20 @@ class AddEvent extends Component {
             <input type="text" className = "Events-inputSmall" name = "eventLoc" placeholder="" aria-label="Location" aria-describedby="location" value= {this.state.value} onChange={this.handleChange}>
             </input> </div>
 
-            Date: <SingleDatePicker
-            date={this.state.date} // momentPropTypes.momentObj or null
+            <div className= "Events-descriptionBox">
+            Date:
+            <SingleDatePicker
+            date={this.state.date}
+            name = "date"
+            placeholder= "Select"
+            small = {true}// momentPropTypes.momentObj or null
             onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
             focused={this.state.focused} // PropTypes.bool
             onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
             />
+
+            </div>
+
 
 
             <div className= "Events-descriptionBox"> Time:

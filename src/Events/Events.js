@@ -30,7 +30,7 @@ class Events extends Component {
 	}).then(res_data => {
 		// get data from django
 
-		
+
 	});*/
 
 	this.setState({
