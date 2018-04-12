@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import '../App.css';
 
 class AddEvent extends Component {
@@ -57,6 +58,14 @@ class AddEvent extends Component {
           <div className= "Events-descriptionBox"> Location:
             <input type="text" className = "Events-inputSmall" name = "eventLoc" placeholder="" aria-label="Location" aria-describedby="location" value= {this.state.value} onChange={this.handleChange}>
             </input> </div>
+
+            Date: <SingleDatePicker
+            date={this.state.date} // momentPropTypes.momentObj or null
+            onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+            focused={this.state.focused} // PropTypes.bool
+            onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+            />
+
 
             <div className= "Events-descriptionBox"> Time:
               <input type="text" className = "Events-inputSmall" name = "eventStartTime" placeholder="Start Time" aria-label="StartTime" aria-describedby="StartTime" value= {this.state.value} onChange={this.handleChange}>
