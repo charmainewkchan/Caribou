@@ -10,11 +10,14 @@ class CASClient:
 
    def Authenticate(self):
       # If the request contains a login ticket, try to validate it
-      if 'ticket' in form:
-         netid = self.Validate(form['ticket'].value)
+      if 'ticket' in self.request.GET:
+         print("ticket in form")
+         netid = self.Validate(self.request.GET['ticket'])
          if netid != None:
-            return netid
+            return {'netid':netid}
          return {}
+
+      print("ticket not in form")
       # No valid ticket; redirect the browser to the login page to get one
       login_url = self.cas_url + 'login' \
          + '?service=' + urllib.parse.quote(self.ServiceURL())
@@ -29,7 +32,7 @@ class CASClient:
       val_url = self.cas_url + "validate" + \
          '?service=' + urllib.parse.quote(self.ServiceURL()) + \
          '&ticket=' + urllib.parse.quote(ticket)
-      r = urllib.urlopen(val_url).readlines()   # returns 2 lines
+      r = [x.decode('UTF-8') for x in urllib.request.urlopen(val_url).readlines()]   # returns 2 lines
       if len(r) == 2 and re.match("yes", r[0]) != None:
          return r[1].strip()
       return None
