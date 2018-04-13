@@ -42,9 +42,13 @@ class AddEvent extends Component {
     }
     else if (this.state.capacity == '') {
       alert('Please enter a maximum capacity.')
+    } else {
+      alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventLoc + " " + this.state.date + " " + this.state.eventStartTime +"-" + " " + this.state.eventEndTime + " " + this.state.eventCap);
+      /* package data into json, axios.post(url + data) (in events.js), clear fields, get events/ wait for interval update.*/
+      this.props.onCreateEvent(
+        this.state
+      );
     }
-
-    alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventLoc + " " + this.state.date + " " + this.state.eventStartTime +"-" + " " + this.state.eventEndTime + " " + this.state.eventCap);
 
     event.preventDefault();
   }
