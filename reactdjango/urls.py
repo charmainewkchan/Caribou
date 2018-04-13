@@ -21,7 +21,7 @@ from sampleapp import views
 
 urlpatterns = [
   path('admin/', admin.site.urls),
-  path('api/', include('sampleapp.urls')),
+  path('api/', include('api.urls')),
   path('login/', views.login),
 
   re_path('.*', TemplateView.as_view(template_name='index.html')),

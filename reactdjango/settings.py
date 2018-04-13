@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ['bixr.herokuapp.com', '127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
-  'sampleapp',
+  'api',
   'corsheaders',
   'django.contrib.admin',
   'django.contrib.auth',
