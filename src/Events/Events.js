@@ -5,6 +5,7 @@ import AddEvent from './AddEvent.js';
 
 //import events_data from './events.json';
 import filter_data from './filters.json';
+import eating_club_map from './eating_club_map.json';
 
 import axios from 'axios'
 
@@ -36,7 +37,8 @@ class Events extends Component {
   }
 
   filterEvents(){
-	var filtered = this.state.events_data.filter(event => this.state.filter.clubs.includes(event.club));
+    console.log(this.state.events_data);
+	var filtered = this.state.events_data.filter(event => this.state.filter.clubs.includes(event.fields.eating_club));
 
 	this.setState({
 		events: filtered
