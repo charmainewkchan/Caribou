@@ -1,7 +1,9 @@
 
-from django.http import JsonResponse
+from django.core import serializers
+from django.http import JsonResponse, HttpResponse
 #from django.http import HttpResponse
 from django.shortcuts import redirect
+from api.models import User, PersonalEvent, ClubEvent
 
 from . import CASClient
 
