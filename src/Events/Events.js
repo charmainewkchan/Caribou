@@ -3,8 +3,10 @@ import EventsPanel from './EventsPanel';
 import EventsFilter from './EventsFilter';
 import AddEvent from './AddEvent.js';
 
-import events_data from './events.json';
+//import events_data from './events.json';
 import filter_data from './filters.json';
+
+import axios from 'axios'
 
 import '../App.css';
 
@@ -24,19 +26,11 @@ class Events extends Component {
   }
 
   componentDidMount() {
-    /*fetch('https://bixr.herokuapp.com/api/')
-	.then(res=>{
-		return res.json();
-	}).then(res_data => {
-		// get data from django
-
-
-	});*/
-
-	this.setState({
-			events: events_data
-		})
-
+    const url = "https://bixr.herokuapp.com/api/get_events";
+    axios.get(url).then(res => {
+      console.log(res.data);
+      this.setState({events: res.data});
+    });
   }
 
   filterEvents(){
