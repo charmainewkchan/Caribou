@@ -1,7 +1,9 @@
 
-from django.http import JsonResponse
+from django.core import serializers
+from django.http import JsonResponse, HttpResponse
 #from django.http import HttpResponse
 from django.shortcuts import redirect
+from api.models import User, PersonalEvent, ClubEvent
 
 from . import CASClient
 
@@ -13,9 +15,14 @@ def test(request):
 	return JsonResponse(response)
 
 def get_events(request):
-	# query database for events
-	# format as json
-	return JsonResponse({"test"})
+	data = PersonalEvent.objects.all()
+	data_json = serializers.serialize('json', data)
+	return HttpResponse(data_json, content_type='application/json')
+	
+def get_club_events(request):
+	data = ClubEvent.objects.all()
+	data_json = serializers.serialize('json', data)
+	return HttpResponse(data_json, content_type='application/json')
 
 def netid(request):
 	if 'netid' in request.session:
