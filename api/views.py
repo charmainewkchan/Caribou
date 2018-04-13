@@ -16,15 +16,24 @@ def test(request):
 	}
 	return JsonResponse(response)
 
+def get_user(request, netid):
+	user = User.objects.filter(netid=netid)
+	user_json = serializers.serialize('json', user)
+	return HttpResponse(user_json, content_type='application/json')
+
 def get_events(request):
 	data = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', data)
 	return HttpResponse(data_json, content_type='application/json')
 
 def get_event(request, event_id):
+	test = 'event_id is: ' + event_id
 	# event = get_object_or_404(PersonalEvent, pk=event_id)
 	# event_json = serializers.serialize('json', data)
-	return HttpResponse("hi! this works!")
+	# test = {}
+	# test['text'] = 'hi! this works!'
+	# data_json = serializers.serialize('json', test)
+	return HttpResponse(test)
 	# return HttpResponse(event_json, content_type='application/json')
 
 @csrf_exempt
