@@ -18,6 +18,7 @@ class EventsFilter extends Component {
       CL: false,
       TE: false,
       CH: false,
+      NN: false,
     };
 
     this.handleChange = this.handleChange.bind(this);

@@ -43,7 +43,7 @@ class AddEvent extends Component {
     else if (this.state.capacity == '') {
       alert('Please enter a maximum capacity.')
     } else {
-      alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventLoc + " " + this.state.date + " " + this.state.eventStartTime +"-" + " " + this.state.eventEndTime + " " + this.state.eventCap);
+    /*  alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventLoc + " " + this.state.date + " " + this.state.eventStartTime +"-" + " " + this.state.eventEndTime + " " + this.state.eventCap);*/
       /* package data into json, axios.post(url + data) (in events.js), clear fields, get events/ wait for interval update.*/
       var data = [{"author" : "cwkchan", "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "eating_club": "CA"}]
       this.props.onCreateEvent(
@@ -88,12 +88,10 @@ class AddEvent extends Component {
 
             </div>
 
-
-
             <div className= "Events-descriptionBox"> Time:
               <input type="text" className = "Events-inputSmall" name = "eventStartTime" placeholder="Start Time" aria-label="StartTime" aria-describedby="StartTime" value= {this.state.value} onChange={this.handleChange}>
               </input> -
-              <input type="text" className = "Events-inputSmall" name = "eventEndTime" nplaceholder="End Time" aria-label="EndTime" aria-describedby="EndTime" value= {this.state.value} onChange={this.handleChange}>
+              <input type="text" className = "Events-inputSmall" name = "eventEndTime" placeholder="End Time" aria-label="EndTime" aria-describedby="EndTime" value= {this.state.value} onChange={this.handleChange}>
               </input>
             </div>
 
