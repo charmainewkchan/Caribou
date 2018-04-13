@@ -79,7 +79,7 @@ class User(models.Model):
 		return self.netid
 
 class PersonalEvent(models.Model):
-	event_type = models.CharField(max_length=40)
+	event_type = models.CharField(max_length=40, default="")
 	date_posted = models.DateTimeField(auto_now=True)
 	author = models.ForeignKey('User', on_delete=models.CASCADE,)
 	description = models.TextField('description')
