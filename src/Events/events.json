@@ -2,7 +2,7 @@
 	{
 		"title": "Pool in Cap!",
 		"desc": "Come play pool with me and some friends",
-		"club": "Colonial",
+		"club": "Cap",
 		"time": "8:30pm - 9pm",
 		"capacity": "0/10"
 
@@ -17,7 +17,7 @@
 	},
 	{
 		"title": "Senior thesis art project help",
-		"desc": "Hey guys, I need a little help with my art project (painting walls and stuff), and would like to get to know some underclassmen too!",
+		"desc": "Hey guys, I need a little help with my art project (painting walls and stuff)!",
 		"club": "Colonial",
 		"time": "3:00pm - 4pm",
 		"capacity": "0/5"
@@ -29,5 +29,14 @@
 		"club": "Tower",
 		"time": "9:00pm",
 		"capacity": "0/10"
+	},
+
+	{
+		"title": "Dodgeball in TI",
+		"desc": "Come play dodgeball.",
+		"club": "TigerInn",
+		"time": "9:00pm",
+		"capacity": "0/10"
+
 	}
 ]
