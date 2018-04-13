@@ -14,8 +14,11 @@ class Header extends Component {
 
 
   componentDidMount() {
-    const url = "https://bixr.herokuapp.com/api/netid"
-    axios.get(url).then(res => this.setState({username: res.data.netid}))
+    const url = "https://bixr.herokuapp.com/api/netid";
+    axios.get(url).then(res => {
+      console.log(res.data);
+      this.setState({username: res.data.netid});
+    });
 
   }
 

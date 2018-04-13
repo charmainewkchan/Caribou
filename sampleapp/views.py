@@ -17,7 +17,7 @@ def get_events(request):
 	return JsonResponse({"test"})
 
 def netid(request):
-	if netid in request.session:
+	if 'netid' in request.session:
 		return JsonResponse({'netid': request.session['netid']})
 	else:
 		return JsonResponse({'netid': ''})
