@@ -20,8 +20,6 @@ class Events extends Component {
   		events: [],
       events_data: []
   	}
-
-
     this.onClubFilterChange = this.onClubFilterChange.bind(this);
     this.onCreateEvent = this.onCreateEvent.bind(this);
   }
@@ -45,7 +43,10 @@ class Events extends Component {
 	});
   }
 
+
+
   onClubFilterChange(event){
+    /* mod = new clubs in filter, deep copy */
   	var mod = this.state.filter.clubs.slice();
 
   	if (event.target.checked) { // add to filter
@@ -68,19 +69,8 @@ class Events extends Component {
   }
 
   onCreateEvent(event){
-  	var new_event = 	{
-		"title": "NewEvent",
-		"desc": "Come check out this new event",
-		"club": "Tower",
-		"time": "2:00am",
-		"capacity": "0/2"
-	}
-
-	var mod = this.state.events
-	mod.unshift(new_event)
-	this.setState({
-		events: mod
-	})
+    console.log(event)
+    /*axios post*/
   }
 
   render() {
