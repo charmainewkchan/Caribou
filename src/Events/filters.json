@@ -1,3 +1,16 @@
 {
-	"clubs": ["Tower", "Colonial", "Cap", "TigerInn", "Canon", "Ivy", "Cottage", "Quad", "Cloister", "Terrace", "Charter"]
+	"clubs": [
+		"NN",
+		"IV",
+		"CT",
+		"TI",
+		"CA",
+		"CO",
+		"CN",
+		"CH",
+		"QU",
+		"TO",
+		"TE",
+		"CL"
+	]
 }

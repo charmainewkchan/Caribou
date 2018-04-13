@@ -5,6 +5,7 @@ import AddEvent from './AddEvent.js';
 
 //import events_data from './events.json';
 import filter_data from './filters.json';
+import eating_club_map from './eating_club_map.json';
 
 import axios from 'axios'
 
@@ -38,7 +39,8 @@ class Events extends Component {
   }
 
   filterEvents(){
-	var filtered = this.state.events_data.filter(event => this.state.filter.clubs.includes(event.club));
+    console.log(this.state.events_data);
+	var filtered = this.state.events_data.filter(event => this.state.filter.clubs.includes(event.fields.eating_club));
 
 	this.setState({
 		events: filtered
@@ -46,6 +48,8 @@ class Events extends Component {
   }
 
   onClubFilterChange(event){
+    console.log(event.target.name);
+
   	var mod = this.state.filter.clubs.slice();
 
   	if (event.target.checked) { // add to filter
@@ -74,13 +78,13 @@ class Events extends Component {
 		"club": "Tower",
 		"time": "2:00am",
 		"capacity": "0/2"
-	}
+	  }
 
-	var mod = this.state.events
-	mod.unshift(new_event)
-	this.setState({
-		events: mod
-	})
+  	var mod = this.state.events
+  	mod.unshift(new_event)
+  	this.setState({
+  		events: mod
+  	})
   }
 
   render() {
