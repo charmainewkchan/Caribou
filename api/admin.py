@@ -1,7 +1,8 @@
 from django.contrib import admin
-from sampleapp.models import User
-from sampleapp.models import PersonalEvent
-from sampleapp.models import ClubEvent
+
+from api.models import User
+from api.models import PersonalEvent
+from api.models import ClubEvent
 
 # Register your models here.
 admin.site.register(User)
