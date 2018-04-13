@@ -70,6 +70,16 @@ class Events extends Component {
 
   onCreateEvent(event){
     console.log(event)
+    axios.post('https://bixr.herokuapp.com/api/post_event', event)
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+
+  /*  console.log(event)
+    fetch('https://jsonplaceholder.typicode.com/posts/1')
+    .then(response => response.json())
+    .then(json => console.log(json))*/
     /*axios post*/
   }
 
