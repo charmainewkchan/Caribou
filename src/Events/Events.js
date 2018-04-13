@@ -17,7 +17,8 @@ class Events extends Component {
   		filter: {
   			clubs: filter_data.clubs
   		},
-  		events: []
+  		events: [],
+      events_data: []
   	}
 
 
@@ -29,12 +30,15 @@ class Events extends Component {
     const url = "https://bixr.herokuapp.com/api/get_events";
     axios.get(url).then(res => {
       console.log(res.data);
-      this.setState({events: res.data});
+      this.setState({
+        events_data: res.data,
+        events: res.data
+      });
     });
   }
 
   filterEvents(){
-	var filtered = events_data.filter(event => this.state.filter.clubs.includes(event.club));
+	var filtered = this.state.events_data.filter(event => this.state.filter.clubs.includes(event.club));
 
 	this.setState({
 		events: filtered
