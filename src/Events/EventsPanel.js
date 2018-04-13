@@ -12,6 +12,8 @@ class EventsPanel extends Component {
         <div className="Events-panel">
         	<ul className="Events-list">
           {
+            
+            
         		this.props.events.map(function(event){
               return <li className="Events-event">
                 <div className="event-header">
