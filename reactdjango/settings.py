@@ -87,10 +87,10 @@ WSGI_APPLICATION = 'reactdjango.wsgi.application'
 DATABASES = {
   'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd78avmla7s04ta',
-        'USER': 'vsfcylxsaozgey',
-        'PASSWORD': '986f7eb04b9f3f31f6bea38b4bc199535b3aa17784f53c0f588f9b43e0057be9',
-        'HOST': 'ec2-54-221-207-184.compute-1.amazonaws.com',
+        'NAME': 'd34cjfeja57ntf',
+        'USER': 'vzcvnbupbtpkwf',
+        'PASSWORD': 'ea19215742dda0bcbc9f5fad9e79215a3f882d3e0b42d19bd130e59688ed0c0e',
+        'HOST': 'ec2-54-235-146-184.compute-1.amazonaws.com',
         'PORT': '5432',
   }
 }
