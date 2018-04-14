@@ -18,8 +18,7 @@ class Header extends Component {
     axios.get(url).then(res => {
       console.log(res.data);
       this.setState({username: res.data.netid});
-    });
-
+    }).catch(err => alert(err.response));
   }
 
   render() {
