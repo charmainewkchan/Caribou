@@ -16,10 +16,10 @@ class EventsPanel extends Component {
   }
 
   joinEvent(event_id) {
-    var data = {
+    var data = [{
       event: event_id,
       netid: "dsawicki"
-    }
+    }]
     alert(JSON.stringify(data));
 
     axios.post("https://bixr.herokuapp.com/api/join_event",  data)
