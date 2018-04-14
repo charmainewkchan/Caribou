@@ -117,3 +117,9 @@ class ClubEvent(models.Model):
 	# tags
 	def __str__(self):
 		return self.title
+
+class JoinedEvents(models.Model):
+	participant = models.ForeignKey('User', on_delete=models.CASCADE)
+	event = models.ForeignKey('PersonalEvent', on_delete=models.CASCADE)
+	def __str__(self):
+		s = participant.netid + ": " + event.id
