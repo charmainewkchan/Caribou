@@ -76,7 +76,8 @@ class Events extends Component {
     .then(res => {
         console.log(res);
         console.log(res.data);
-      });
+      })
+    .catch(err => alert(err.response));
 
   /*  console.log(event)
     fetch('https://jsonplaceholder.typicode.com/posts/1')

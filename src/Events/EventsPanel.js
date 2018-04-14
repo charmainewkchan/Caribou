@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
 //import Event from './Event'
 import eating_club_map from './eating_club_map.json';
+
+import axios from 'axios'
+
 import '../App.css';
 
 class EventsPanel extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+    };
+
+    this.joinEvent = this.joinEvent.bind(this)
   }
+
+  joinEvent(event_id) {
+    var data = {
+      event: event_id,
+      netid: "dsawicki"
+    }
+    alert(JSON.stringify(data));
+
+    axios.post("https://bixr.herokuapp.com/api/join_event",  data)
+    .then(res => console.log(res))
+    .catch(err => alert(err.response));
+}
 
   render() {
     return (
@@ -21,10 +40,10 @@ class EventsPanel extends Component {
                 </div>
                 <p>{event.fields.description}</p>
                 <p>Capacity: {event.fields.capacity}</p>
-                <button className="btn btn-secondary join-button"> Join </button>
+                <button className="btn btn-secondary join-button" onClick={() => this.joinEvent(event.pk)}> Join </button>
 
               </li>;
-            })
+            }, this)
           }
         	</ul>
         </div>

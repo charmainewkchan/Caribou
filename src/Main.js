@@ -9,6 +9,7 @@ import MyProfile from './MyProfile/MyProfile'
 class Main extends Component {
   render() {
     return(
+
 		  <main>
 			<Switch>
 				<Route exact path='/' component={Home}/>
