@@ -17,8 +17,7 @@ class EventsPanel extends Component {
 
   joinEvent(event_id) {
     var data = {
-      event: event_id,
-      netid: "dsawicki"
+      event: event_id
     }
     alert(JSON.stringify(data));
 
