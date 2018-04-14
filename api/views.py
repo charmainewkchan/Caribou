@@ -15,10 +15,18 @@ def test(request):
 #------------------------------------------------------------------------------#
 def get_user(request, netid):
 	user = User.objects.filter(netid=netid)
-	if (len(event) != 1):
+	if (len(user) != 1):
 		return HttpResponse("User Not Found", status=404)
 	user_json = serializers.serialize('json', user)
 	return HttpResponse(user_json, content_type='application/json')
+
+def get_events_for_user(request, netid):
+	user = User.objects.get(netid=netid)
+	joinedevents = JoinedEvents.objects.filter(participant=user)
+	if len(joinedevents) == 0:
+		return HttpResponse("No joined events", status=404)
+	joinedevents_json = serializers.serialize('json', joinedevents)
+	return HttpResponse(joinedevents_json, content_type='application/json')
 
 #------------------------------------------------------------------------------#
 def get_events(request):
@@ -82,6 +90,17 @@ def join_event(request):
 	j.save()
 	return HttpResponse(j)
 
+@csrf_exempt
+def delete_event(request, event_id):
+	event = PersonalEvent.objects.get(pk=event_id)
+	title = event.title
+	# check joined events for dependencies
+	dependencies = JoinedEvents.objects.filter(event=event)
+	if len(dependencies) > 0:
+		dependencies.delete()
+	# delete the event
+	event.delete()
+	return HttpResponse("deleted event " + str(event))
 #------------------------------------------------------------------------------#
 def get_club_events(request):
 	data = ClubEvent.objects.all()
