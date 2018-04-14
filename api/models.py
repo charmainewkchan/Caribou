@@ -86,8 +86,8 @@ class PersonalEvent(models.Model):
 	title = models.CharField(max_length=100)
 	location = models.CharField(max_length=40)
 	dt = datetime.now()
-	start_time = models.DateTimeField(dt)
-	end_time = models.DateTimeField(dt)
+	start_time = models.DateTimeField(default=dt)
+	end_time = models.DateTimeField(default=dt)
 	eating_club = models.CharField(
 		max_length = 2,
 		choices = EATING_CLUB_CHOICES,
@@ -107,8 +107,8 @@ class ClubEvent(models.Model):
 	title = models.CharField(max_length=100)
 	location = models.CharField(max_length=40)
 	dt = datetime.now()
-	start_time = models.DateTimeField(dt)
-	end_time = models.DateTimeField(dt)
+	start_time = models.DateTimeField(default=dt)
+	end_time = models.DateTimeField(default=dt)
 	eating_club = models.CharField(
 		max_length = 2,
 		choices = EATING_CLUB_CHOICES,
