@@ -39,9 +39,11 @@ def post_event(request):
 	data_json = json.loads(request.body)
 	data = data_json[0]
 	# author
-	if "netid" not in auth_attempt:
-		return HttpResponse("Not authenticated", status=403)
-	authornetid = request.session['netid']
+	# if "netid" not in auth_attempt:
+	# 	return HttpResponse("Not authenticated", status=403)
+	# authornetid = request.session['netid']
+	# author = User.objects.get(netid=authornetid)
+	authornetid = data["author"]
 	author = User.objects.get(netid=authornetid)
 	# description
 	description = data["description"]
