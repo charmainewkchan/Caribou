@@ -15,6 +15,8 @@ def test(request):
 #------------------------------------------------------------------------------#
 def get_user(request, netid):
 	user = User.objects.filter(netid=netid)
+	if (len(event) != 1):
+		return HttpResponse("User Not Found", status=404)
 	user_json = serializers.serialize('json', user)
 	return HttpResponse(user_json, content_type='application/json')
 
@@ -37,7 +39,9 @@ def post_event(request):
 	data_json = json.loads(request.body)
 	data = data_json[0]
 	# author
-	authornetid = data["author"]
+	if "netid" not in auth_attempt:
+		return HttpResponse("Not authenticated", status=403)
+	authornetid = request.session['netid']
 	author = User.objects.get(netid=authornetid)
 	# description
 	description = data["description"]
