@@ -53,17 +53,15 @@ def post_event(request):
 	# author = User.objects.get(netid=authornetid)
 	authornetid = data["author"]
 	author = User.objects.get(netid=authornetid)
-	# description
 	description = data["description"]
-	# title
 	title = data["title"]
-	# location
+	date = data["date"]
+	start = data["start"]
+	end = data["end"]
 	location = data["location"]
-	# eating club
 	eating_club = author.eating_club
-	# capacity
 	capacity = int(data["capacity"])
-	e = PersonalEvent(author = author, description = description, title = title, location = location, eating_club = eating_club, capacity = capacity)
+	e = PersonalEvent(author = author, description = description, title = title, date = date, start=start, end=end, location = location, eating_club = eating_club, capacity = capacity)
 	e.save()
 	# event_json = json.loads(request.body)
 	return HttpResponse(e)
@@ -73,6 +71,7 @@ def join_event(request):
 	data_json = json.loads(request.body)
 	data = data_json[0]
 	event_id = int(data["event"])
+	event_set = PersonalEvent.objects.filter(pk=event_id)
 	event = PersonalEvent.objects.get(pk=event_id)
 	# check if event full
 	if (event.attendance >= event.capacity):
@@ -84,11 +83,12 @@ def join_event(request):
 	if len(alreadyjoined) > 0:
 		return HttpResponse("Already Joined", status=400)
 	# increment attendance
-	event.attendance += 1
+	newatt = event.attendance + 1
+	event_set.update(attendance=newatt)
 	# add to table
 	j = JoinedEvents(participant=participant, event=event)
 	j.save()
-	return HttpResponse(j)
+	return HttpResponse(participant_netid + " joined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
 @csrf_exempt
 def delete_event(request, event_id):
