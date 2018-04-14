@@ -85,14 +85,16 @@ class PersonalEvent(models.Model):
 	description = models.TextField('description')
 	title = models.CharField(max_length=100)
 	location = models.CharField(max_length=40)
-	start_time = models.DateTimeField(default = datetime.now())
-	end_time = models.DateTimeField(default = datetime.now())
+	dt = datetime.now()
+	start_time = models.DateTimeField(dt)
+	end_time = models.DateTimeField(dt)
 	eating_club = models.CharField(
 		max_length = 2,
 		choices = EATING_CLUB_CHOICES,
 		default = NONE,
 		)
-	# tags unsure now
+	capacity = models.IntegerField(default=1)
+	attendance = models.IntegerField(default=0)
 
 	def __str__(self):
 		return self.title
@@ -104,8 +106,9 @@ class ClubEvent(models.Model):
 	description = models.CharField(max_length = 300)
 	title = models.CharField(max_length=100)
 	location = models.CharField(max_length=40)
-	start_time = models.DateTimeField(default = datetime.now())
-	end_time = models.DateTimeField(default = datetime.now())
+	dt = datetime.now()
+	start_time = models.DateTimeField(dt)
+	end_time = models.DateTimeField(dt)
 	eating_club = models.CharField(
 		max_length = 2,
 		choices = EATING_CLUB_CHOICES,

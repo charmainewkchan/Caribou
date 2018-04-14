@@ -50,9 +50,11 @@ def post_event(request):
 	title = data["title"]
 	# location
 	location = data["location"]
-	# eating_club
-	eating_club = data["eating_club"]
-	e = PersonalEvent(author = author, description = description, title = title, location = location, eating_club = eating_club)
+	# eating club
+	eating_club = author.eating_club
+	# capacity
+	capacity = data["capacity"]
+	e = PersonalEvent(author = author, description = description, title = title, location = location, eating_club = eating_club, capacity = capacity)
 	e.save()
 	# event_json = json.loads(request.body)
 	return HttpResponse(e)
