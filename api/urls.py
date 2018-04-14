@@ -10,4 +10,5 @@ urlpatterns = [
 	path('event/<event_id>/', views.get_event, name='get_event'),
 	re_path(r'^get_events', views.get_events, name='get_events'),
 	re_path(r'^get_club_events', views.get_club_events, name='get_club_events'),
+	re_path(r'^join_event', views.join_event, name='join_event'),
 ]

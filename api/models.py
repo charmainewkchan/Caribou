@@ -122,4 +122,5 @@ class JoinedEvents(models.Model):
 	participant = models.ForeignKey('User', on_delete=models.CASCADE)
 	event = models.ForeignKey('PersonalEvent', on_delete=models.CASCADE)
 	def __str__(self):
-		s = participant.netid + ": " + event.id
+		s = self.participant.netid + ": " + str(self.event.id)
+		return s

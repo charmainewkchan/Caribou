@@ -62,6 +62,8 @@ def post_event(request):
 
 @csrf_exempt
 def join_event(request):
+	data_json = json.loads(request.body)
+	data = data_json[0]
 	event_id = int(data["event"])
 	event = PersonalEvent.objects.get(pk=event_id)
 	# check if event full
