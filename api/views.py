@@ -68,12 +68,13 @@ def join_event(request):
 	event = PersonalEvent.objects.get(pk=event_id)
 	# check if event full
 	if (event.attendance >= event.capacity):
-		return HttpResponseBadRequest("EVENT FULL", status=400)
-	data_json = json.loads(request.body)
-	data = data_json[0]
+		return HttpResponse("EVENT FULL", status=400)
+
 	participant_netid = data["netid"]
 	participant = User.objects.get(netid=participant_netid)
-
+	alreadyjoined = JoinedEvents.objects.filter(participant=participant).filter(event=event)
+	if len(alreadyjoined) > 0:
+		return HttpResponse("Already Joined", status=400)
 	# increment attendance
 	event.attendance += 1
 	# add to table
