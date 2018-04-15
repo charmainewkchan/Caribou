@@ -16,7 +16,7 @@ from api.decorators import casauth
 
 @casauth
 def react(request):
-	return HttpResponseRedirect(reverse('login'))
+	return TemplateResponse(request, 'index.html', {})
 
 def test(request):
 	return HttpResponse("test", status=400)
