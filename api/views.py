@@ -12,6 +12,7 @@ from api.models import User, PersonalEvent, ClubEvent, JoinedEvents
 from django.views.generic import TemplateView
 import json
 from . import CASClient
+from api.decorators import casauth
 
 
 def react(request):
@@ -24,6 +25,7 @@ def react(request):
 def test(request):
 	return HttpResponse("test", status=400)
 #------------------------------------------------------------------------------#
+@casauth
 def get_user(request, netid):
 	user = User.objects.filter(netid=netid)
 	if (len(user) != 1):
@@ -31,6 +33,7 @@ def get_user(request, netid):
 	user_json = serializers.serialize('json', user)
 	return HttpResponse(user_json, content_type='application/json')
 
+@casauth
 def get_events_for_user(request, netid):
 	user = User.objects.get(netid=netid)
 	joinedevents = JoinedEvents.objects.filter(participant=user)
@@ -40,11 +43,13 @@ def get_events_for_user(request, netid):
 	return HttpResponse(joinedevents_json, content_type='application/json')
 
 #------------------------------------------------------------------------------#
+@casauth
 def get_events(request):
 	data = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', data)
 	return HttpResponse(data_json, content_type='application/json')
 
+@casauth
 def get_event(request, event_id):
 	event = PersonalEvent.objects.filter(pk=event_id)
 	if (len(event) != 1):
@@ -52,6 +57,7 @@ def get_event(request, event_id):
 	event_json = serializers.serialize('json', event)
 	return HttpResponse(event_json, content_type='application/json')
 
+@casauth
 @csrf_exempt
 def post_event(request):
 	# get the json data
@@ -77,6 +83,7 @@ def post_event(request):
 	# event_json = json.loads(request.body)
 	return HttpResponse(e)
 
+@casauth
 @csrf_exempt
 def join_event(request):
 	data_json = json.loads(request.body)
@@ -101,6 +108,7 @@ def join_event(request):
 	j.save()
 	return HttpResponse(participant_netid + " joined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
+@casauth
 @csrf_exempt
 def delete_event(request, event_id):
 	event = PersonalEvent.objects.get(pk=event_id)
@@ -113,12 +121,14 @@ def delete_event(request, event_id):
 	event.delete()
 	return HttpResponse("deleted event " + str(event))
 #------------------------------------------------------------------------------#
+@casauth
 def get_club_events(request):
 	data = ClubEvent.objects.all()
 	data_json = serializers.serialize('json', data)
 	return HttpResponse(data_json, content_type='application/json')
 
 #------------------------------------------------------------------------------#
+@casauth
 def netid(request):
 	if 'netid' in request.session:
 		return JsonResponse({'netid': request.session['netid']})
