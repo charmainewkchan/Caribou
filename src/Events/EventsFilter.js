@@ -37,7 +37,7 @@ class EventsFilter extends Component {
     return (
         <div className = "Events-filter container">
           <form>
-            <h2>Apply Filter</h2>
+            <h2>Eating Club</h2>
             <div className="form-group">
             {
               Object.keys(this.state).map(function(key, index) {

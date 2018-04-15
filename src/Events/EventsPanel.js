@@ -18,7 +18,7 @@ class EventsPanel extends Component {
   joinEvent(event_id) {
     var data = [{
       event: event_id,
-      netid: "dsawicki"
+      netid: localStorage.getItem('netid')
     }]
     alert(JSON.stringify(data));
 
@@ -38,9 +38,10 @@ class EventsPanel extends Component {
                   <h2>{event.fields.title}</h2>
                   <p>{eating_club_map[event.fields.eating_club]} &bull; {event.fields.time}</p>
                 </div>
+                
                 <p>{event.fields.description}</p>
-                <p>Capacity: {event.fields.capacity}</p>
-                <button className="btn btn-secondary join-button" onClick={() => this.joinEvent(event.pk)}> Join </button>
+                <p>{event.fields.attendance == 0 ? "Be the first to join!" : ""+event.fields.attendance+"/"+event.fields.capacity+" going!"}</p>
+                <button disabled={event.fields.attendance==event.fields.capacity} className="btn btn-secondary join-button" onClick={() => this.joinEvent(event.pk)}> Join </button>
 
               </li>;
             }, this)
