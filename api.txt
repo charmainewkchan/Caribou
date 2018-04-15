@@ -1,0 +1,57 @@
+===== users =====
+get_user : gets info for one user
+api/user/<netid>/
+returns 404 if user not found
+returns user info if found
+
+get_events_for_user : gets the events the specified user has signed up for
+api/get_events_for_user/<netid>/
+returns empty list if no joined events
+returns JoinedEvents list if found
+
+===== event =====
+get_events : gets info for all events
+api/get_events/
+returns empty list if no joined events
+returns list of events and event info if found
+
+get_event : gets info for the event specified by event_id
+api/event/<event_id>/
+returns 404 if event not found
+returns event info if found
+
+get_users_for_event : gets the signed up users for the specified event
+api/get_users_for_event/<event_id>/
+returns empty list if no users joined
+returns JoinedEvents list if found
+
+post_event : creates an event in the database
+api/post_event/
+takes in json input. must consist of fields:
+	"title"
+	"decscription"
+	"date" (yyyy-mm-dd)
+	"start" (hh:mm)
+	"end" (hh:mm)
+	"location"
+	"capacity"
+returns event title if successful
+
+delete_event : deletes the specified event
+api/delete_event/<event_id>/
+returns "deleted event " + event id and title if successful
+
+===== join =====
+join_event : joins the user to the event
+/api/join_event/
+takes in json input. must consist of fields:
+	"event" (event id pk)
+returns 404 if event not found
+returns 400 if event full
+returns 400 if already joined
+unjoin_event : unjoins the user from the event
+/api/unjoin_event/
+takes in json input. must consist of fields:
+	"event" (event id pk)
+
+===== login =====
