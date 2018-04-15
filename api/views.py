@@ -12,6 +12,7 @@ from api.models import User, PersonalEvent, ClubEvent, JoinedEvents
 from django.views.generic import TemplateView
 import json
 from . import CASClient
+from api.decorators import casauth
 
 
 def react(request):
@@ -40,6 +41,7 @@ def get_events_for_user(request, netid):
 	return HttpResponse(joinedevents_json, content_type='application/json')
 
 #------------------------------------------------------------------------------#
+@cas_auth
 def get_events(request):
 	data = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', data)
