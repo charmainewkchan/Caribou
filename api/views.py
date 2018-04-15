@@ -2,14 +2,25 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 # import datetime
+from django.template.response import TemplateResponse
+from django.shortcuts import redirect
 
 #from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 from api.models import User, PersonalEvent, ClubEvent, JoinedEvents
+from django.views.generic import TemplateView
 import json
 from . import CASClient
 
-# Create your views here.
+
+def react(request):
+	# if logged in
+	if 'netid' in request.session:
+		return TemplateResponse(request, 'index.html', {})
+	else:
+		return HttpResponseRedirect(reverse('login'))
+
 def test(request):
 	return HttpResponse("test", status=400)
 #------------------------------------------------------------------------------#
