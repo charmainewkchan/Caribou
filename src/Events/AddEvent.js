@@ -45,7 +45,7 @@ class AddEvent extends Component {
     } else {
     /*  alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventLoc + " " + this.state.date + " " + this.state.eventStartTime +"-" + " " + this.state.eventEndTime + " " + this.state.eventCap);*/
       /* package data into json, axios.post(url + data) (in events.js), clear fields, get events/ wait for interval update.*/
-      var data = [{"author" : "cwkchan", "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "eating_club": "CA"}]
+      var data = [{"author" : localStorage.getItem('netid'), "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "eating_club": "CA"}]
       this.props.onCreateEvent(
         data
       );
