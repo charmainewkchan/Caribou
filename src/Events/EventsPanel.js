@@ -38,6 +38,7 @@ class EventsPanel extends Component {
                   <h2>{event.fields.title}</h2>
                   <p>{eating_club_map[event.fields.eating_club]} &bull; {event.fields.time}</p>
                 </div>
+                
                 <p>{event.fields.description}</p>
                 <p>Capacity: {event.fields.capacity}</p>
                 <button className="btn btn-secondary join-button" onClick={() => this.joinEvent(event.pk)}> Join </button>

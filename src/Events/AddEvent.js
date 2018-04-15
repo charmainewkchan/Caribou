@@ -58,21 +58,27 @@ class AddEvent extends Component {
     return (
       <div className="Events-addEvent">
 
-        <div className="form-group row">
-          <label for="title" class="col-2 col-form-label">Event</label>
+        <div className="form-group">
+          <label for="title" class="col-2 col-form-label">Title</label>
           <div class="col-10">
             <input class="form-control" type="text" id="title" name = "eventName" value= {this.state.value} onChange={this.handleChange}/>
           </div>
         </div>
 
-        <div className="input-group mb-3">
-          <input type="text" className = "Events-inputSmall" name = "eventDes" placeholder="Description" aria-label="Description" aria-describedby="basic-addon2" value= {this.state.value} onChange={this.handleChange}>
-          </input>
+        <div className="form-group">
+          <label for="description" class="col-2 col-form-label">Description</label>
+          <div class="col-10">
+            <textarea class="form-control" type="text" id="description" name = "eventDes" value= {this.state.value} onChange={this.handleChange}/>
+          </div>
         </div>
 
-          <div className= "Events-descriptionBox"> Location:
-            <input type="text" className = "Events-inputSmall" name = "eventLoc" placeholder="" aria-label="Location" aria-describedby="location" value= {this.state.value} onChange={this.handleChange}>
-            </input> </div>
+        <div className="form-group">
+          <label for="location" class="col-2 col-form-label">Location</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="location" name = "eventLoc" value= {this.state.value} onChange={this.handleChange}/>
+          </div>
+        </div>
+
 
             <div className= "Events-descriptionBox">
             Date:
