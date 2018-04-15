@@ -8,6 +8,7 @@ import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 
 const format = 'HH:mm';
+
 const hourOptions = [
   '01', '02', '03','04','05', '06', '07','08','09', '10', '11','12','13', '14',
   '15','16','17', '18', '19','20','21', '22', '23','24'
@@ -15,7 +16,6 @@ const hourOptions = [
 const minOptions = [
   '00', '15', '30','45'
 ]
-const defaultOption = [0];
 
 
 class AddEvent extends Component {
@@ -25,16 +25,20 @@ class AddEvent extends Component {
       eventName: '',
       eventDes: '',
       eventLoc: '',
-      startHour: '',
-      startMin: '',
-      endHour: '',
-      endMin: '',
+      startHour: '00',
+      startMin: '00',
+      endHour: '00',
+      endMin: '00',
       date:'',
       eventCap:''
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this._onSelect = this._onSelect.bind(this);
+    this._onSelect1 = this._onSelect1.bind(this);
+    this._onSelect2 = this._onSelect2.bind(this);
+    this._onSelect3 = this._onSelect3.bind(this);
+    this._onSelect4 = this._onSelect4.bind(this);
+
     this.handleCreateEvent = this.handleCreateEvent.bind(this);
   }
 
@@ -45,14 +49,34 @@ class AddEvent extends Component {
     });
   }
 
-
-  _onSelect(option) {
-    console.log(this.state.startHour);
+  _onSelect1(event) {
+    console.log(event.value);
     this.setState({
-      [option.timeType]: option.value
+      startHour: event.value
     });
-
   }
+
+  _onSelect2(event) {
+    console.log(event.value);
+    this.setState({
+      startMin: event.value
+    });
+  }
+
+  _onSelect3(event) {
+    console.log(event.value);
+    this.setState({
+      endHour: event.value
+    });
+  }
+
+  _onSelect4(event) {
+    console.log(event.value);
+    this.setState({
+      endMin: event.value
+    });
+  }
+
 
   handleCreateEvent(event) {
     if(!this.state.eventName){
@@ -64,16 +88,20 @@ class AddEvent extends Component {
     else if (!this.state.date){
       alert('Please select a date.')
     }
-    /*else if (this.state.eventStartTime.match(/[a-z]/i) || this.state.eventEndTime.match(/[a-z]/i) || !this.state.eventStartTime|| !this.state.eventEndTime){
-      alert('Invalid input for time. Please only enter numbers.')
-    }*/
+    else if (this.state.startHour > this.state.endHour || (this.state.startHour == this.state.endHour) && (this.state.startMin > this.state.endMin)){
+      alert('Invalid input for time. Please make sure the range is correct.')
+    }
     else if (this.state.capacity == '') {
       alert('Please enter a maximum capacity.')
     } else {
-      alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventLoc + " " + this.state.date.format().substring(0,10) + " " + this.state.eventStartTime +"-" + " " + this.state.eventEndTime + " " + this.state.eventCap);
+      alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventLoc + " " + this.state.date.format().substring(0,10) + " " + this.state.startHour + ":" +
+      this.state.startMin +"-" + " " + this.state.endHour + ":" + this.state.endMin + " " + this.state.eventCap);
       /* package data into json, axios.post(url + data) (in events.js), clear fields, get events/ wait for interval update.*/
 
-      var data = [{"author" : localStorage.getItem('netid'), "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "eating_club": "CA"}]
+      var data = [{"author" : localStorage.getItem('netid'), "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "start": this.state.startHour + ":" + this.state.startMin,
+      "end": this.state.endHour + ":" + this.state.endMin}]
+      console.log(data)
+
       this.props.onCreateEvent(
         data
       );
@@ -124,15 +152,27 @@ class AddEvent extends Component {
 
         <div className = "form-group row">
           <div className= "Events-descriptionBox">
-          Select Time:
+          Start Time:
           </div>
 
           <div style = {{width: 100}}  >
-          <Dropdown options={hourOptions} label = "startHour" onChange={this._onSelect} value={defaultOption} placeholder="Hour" />
+          <Dropdown options={hourOptions} label = "startHour" onChange={this._onSelect1} value={this.state.startHour} placeholder="Hour" />
           </div>
           :
           <div style = {{width: 100}}  >
-          <Dropdown options={minOptions}  label = "startMin" onChange={this._onSelect} value={defaultOption} placeholder="Minute" />
+          <Dropdown options={minOptions}  label = "startMin" onChange={this._onSelect2} value={this.state.startMin} placeholder="Minute" />
+          </div>
+
+          <div className= "Events-descriptionBox">
+          End Time:
+          </div>
+
+          <div style = {{width: 100}}  >
+          <Dropdown options={hourOptions} label = "endHour" onChange={this._onSelect3} value={this.state.endHour} placeholder="Hour" />
+          </div>
+          :
+          <div style = {{width: 100}}  >
+          <Dropdown options={minOptions}  label = "endMin" onChange={this._onSelect4} value={this.state.endMin} placeholder="Minute" />
           </div>
 
         </div>
