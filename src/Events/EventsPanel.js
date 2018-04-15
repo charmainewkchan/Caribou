@@ -41,7 +41,7 @@ class EventsPanel extends Component {
                 
                 <p>{event.fields.description}</p>
                 <p>{event.fields.attendance == 0 ? "Be the first to join!" : ""+event.fields.attendance+"/"+event.fields.capacity+" going!"}</p>
-                <button className="btn btn-secondary join-button" onClick={() => this.joinEvent(event.pk)}> Join </button>
+                <button disabled={event.fields.attendance==event.fields.capacity} className="btn btn-secondary join-button" onClick={() => this.joinEvent(event.pk)}> Join </button>
 
               </li>;
             }, this)
