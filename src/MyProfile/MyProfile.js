@@ -1,12 +1,33 @@
 import React, { Component } from 'react';
-import { Switch, Route, NavLink } from 'react-router-dom'
+import { Switch, Route, NavLink } from 'react-router-dom';
 
+import axios from 'axios';
 
 import Profile from './Profile';
-import Account from './Account'
+import Account from './Account';
 
 import '../App.css';
 class MyProfile extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      profile_info: {}
+    }
+  }
+
+  componentDidMount() {
+    const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid');
+    axios.get(url)
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+    .catch(err => alert(err.response));
+  }
+
+
+
   render() {
     return (
       <div className="MyProfile container">

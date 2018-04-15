@@ -123,7 +123,7 @@ def netid(request):
 	if 'netid' in request.session:
 		return JsonResponse({'netid': request.session['netid']})
 	else:
-		return JsonResponse({'netid': ''})
+		return TemplateResponse(request, 'index.html', {})
 
 
 def login(request):
