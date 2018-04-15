@@ -16,15 +16,16 @@ class MyProfile extends Component {
     }
   }
 
-  componentDidMount() {
+  /*componentDidMount() {
     const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
     axios.get(url) 
     .then(res => {
-        console.log(res);
-        console.log(res.data);
+        this.setState({
+          profile_info: res.data[0].fields
+        })
       })
     .catch(err => alert(err.response));
-  }
+  }*/
 
 
 
@@ -39,7 +40,7 @@ class MyProfile extends Component {
       			</ul>
       		</div>
       		<div className="col MyProfile-panel">
-            <Route exact path='/myprofile(|/profile)' component={Profile}/>
+            <Route exact path='/myprofile(|/profile)' render={()=><Profile data={this.state.profile_info}/>} />
             <Route path='/myprofile/account' component={Account}/>
       		</div>
       	</div>
