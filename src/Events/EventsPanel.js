@@ -40,7 +40,7 @@ class EventsPanel extends Component {
                 </div>
                 
                 <p>{event.fields.description}</p>
-                <p>Capacity: {event.fields.capacity}</p>
+                <p>{event.fields.attendance == 0 ? "Be the first to join!" : ""+event.fields.attendance+"/"+event.fields.capacity+" going!"}</p>
                 <button className="btn btn-secondary join-button" onClick={() => this.joinEvent(event.pk)}> Join </button>
 
               </li>;
