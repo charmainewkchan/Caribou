@@ -25,6 +25,5 @@ urlpatterns = [
   path('login/', views.login, name='login'),
 
   re_path('.*', views.react, name='react')
-  #re_path('.*', TemplateView.as_view(template_name='index.html'), name='react')
 ]
 

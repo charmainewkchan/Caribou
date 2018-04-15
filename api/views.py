@@ -14,18 +14,14 @@ import json
 from . import CASClient
 from api.decorators import casauth
 
-# @casauth
+@casauth
 def react(request):
-	# if logged in
-	if 'netid' in request.session:
-		return TemplateResponse(request, 'index.html', {})
-	else:
-		return HttpResponseRedirect(reverse('login'))
+	return TemplateResponse(request, 'index.html', {})
 
 def test(request):
 	return HttpResponse("test", status=400)
 #------------------------------------------------------------------------------#
-# @casauth
+@casauth
 def get_user(request, netid):
 	user = User.objects.filter(netid=netid)
 	if (len(user) != 1):
@@ -33,7 +29,7 @@ def get_user(request, netid):
 	user_json = serializers.serialize('json', user)
 	return HttpResponse(user_json, content_type='application/json')
 
-# @casauth
+@casauth
 def get_events_for_user(request, netid):
 	user = User.objects.get(netid=netid)
 	joinedevents = JoinedEvents.objects.filter(participant=user)
@@ -41,13 +37,13 @@ def get_events_for_user(request, netid):
 	return HttpResponse(joinedevents_json, content_type='application/json')
 
 #------------------------------------------------------------------------------#
-# @casauth
+@casauth
 def get_events(request):
 	data = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', data)
 	return HttpResponse(data_json, content_type='application/json')
 
-# @casauth
+@casauth
 def get_event(request, event_id):
 	event = PersonalEvent.objects.filter(pk=event_id)
 	if (len(event) != 1):
@@ -55,14 +51,14 @@ def get_event(request, event_id):
 	event_json = serializers.serialize('json', event)
 	return HttpResponse(event_json, content_type='application/json')
 
-# @casauth
+@casauth
 def get_users_for_event(request, event_id):
 	event = PersonalEvent.objects.get(pk=int(event_id))
 	joinedusers = JoinedEvents.objects.filter(event=event)
 	joinedusers_json = serializers.serialize('json', joinedusers)
 	return HttpResponse(joinedusers_json, content_type='application/json')
 
-# @casauth
+@casauth
 # @csrf_exempt
 def post_event(request):
 	# get the json data
@@ -84,7 +80,7 @@ def post_event(request):
 	# event_json = json.loads(request.body)
 	return HttpResponse(e)
 
-# @casauth
+@casauth
 @csrf_exempt
 def delete_event(request, event_id):
 	authornetid = request.session['netid'] # @casauth ensures they are logged in
@@ -170,7 +166,7 @@ def netid(request):
 	if 'netid' in request.session:
 		return JsonResponse({'netid': request.session['netid']})
 	else:
-		return JsonResponse({'netid': ''})
+		return TemplateResponse(request, 'index.html', {})
 
 
 def login(request):

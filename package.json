@@ -3,12 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^3.4.1",
+    "antd-init": "^2.0.6",
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
+    "jquery": "^3.3.1",
     "moment": "^2.22.0",
+    "rc-time-picker": "^3.3.1",
     "react": "^16.3.1",
     "react-dates": "^16.6.0",
     "react-dom": "^16.3.1",
+    "react-dropdown": "^1.4.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17"
   },

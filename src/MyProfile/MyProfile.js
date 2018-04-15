@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
-import { Switch, Route, NavLink } from 'react-router-dom'
+import { Switch, Route, NavLink } from 'react-router-dom';
+
 
 
 import Profile from './Profile';
-import Account from './Account'
+import Account from './Account';
 
 import '../App.css';
 class MyProfile extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      profile_info: {}
+    }
+  }
+
+
+
+
+
   render() {
     return (
       <div className="MyProfile container">
@@ -18,7 +31,7 @@ class MyProfile extends Component {
       			</ul>
       		</div>
       		<div className="col MyProfile-panel">
-            <Route exact path='/myprofile(|/profile)' component={Profile}/>
+            <Route exact path='/myprofile(|/profile)' component={Profile} />
             <Route path='/myprofile/account' component={Account}/>
       		</div>
       	</div>
