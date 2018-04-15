@@ -41,7 +41,7 @@ def get_events_for_user(request, netid):
 	return HttpResponse(joinedevents_json, content_type='application/json')
 
 #------------------------------------------------------------------------------#
-@cas_auth
+@casauth
 def get_events(request):
 	data = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', data)
