@@ -17,8 +17,8 @@ class MyProfile extends Component {
   }
 
   componentDidMount() {
-    const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid');
-    axios.get(url)
+    const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
+    axios.get(url) 
     .then(res => {
         console.log(res);
         console.log(res.data);
