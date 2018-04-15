@@ -87,7 +87,7 @@ def post_event(request):
 # @casauth
 @csrf_exempt
 def delete_event(request, event_id):
-	authornetid = request.session['netid'] # @caseauth ensures they are logged in
+	authornetid = request.session['netid'] # @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
 	event_set = PersonalEvent.objects.filter(pk=event_id)
 	if len(event_set) != 1:
@@ -102,9 +102,8 @@ def delete_event(request, event_id):
 	if len(dependencies) > 0:
 		dependencies.delete()
 	# delete the event
-	s = str(event)
 	event.delete()
-	return HttpResponse("deleted event " + s)
+	return HttpResponse("deleted event " + title)
 
 #------------------------------------------------------------------------------#
 # @casauth
