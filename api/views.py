@@ -89,10 +89,13 @@ def post_event(request):
 def delete_event(request, event_id):
 	authornetid = request.session['netid'] # @caseauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
+	event_set = PersonalEvent.objects.filter(pk=event_id)
+	if len(event_set) != 1:
+		return HttpResponse("Event Not Found", status=404)
 	event = PersonalEvent.objects.get(pk=event_id)
 	# check if the author is correct
 	if (event.author != author):
-		return HttpResponse("Permission Denied", status=400)
+		return HttpResponse("Permission Denied", status=403)
 	title = event.title
 	# check joined events for dependencies
 	dependencies = JoinedEvents.objects.filter(event=event)
@@ -153,7 +156,7 @@ def unjoin_event(request):
 	event_set.update(attendance=newatt)
 	# remove from table
 	joined.delete()
-
+	return HttpResponse(participant_netid + " unjoined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
 #------------------------------------------------------------------------------#
 # @casauth

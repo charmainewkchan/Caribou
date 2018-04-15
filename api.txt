@@ -39,6 +39,8 @@ returns event title if successful
 
 delete_event : deletes the specified event
 api/delete_event/<event_id>/
+returns 404 if event not found
+returns 403 Forbidden if not the correct user
 returns "deleted event " + event id and title if successful
 
 ===== join =====
@@ -49,9 +51,14 @@ takes in json input. must consist of fields:
 returns 404 if event not found
 returns 400 if event full
 returns 400 if already joined
+returns netid + "joined" + event + newatt if successful
+
 unjoin_event : unjoins the user from the event
 /api/unjoin_event/
 takes in json input. must consist of fields:
 	"event" (event id pk)
+returns 404 if event not found
+returns 400 if event not joined
+returns netid + "unjoined" + event + newatt if successful
 
 ===== login =====
