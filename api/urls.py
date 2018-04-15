@@ -3,7 +3,7 @@ from django.conf.urls import re_path
 from . import views
 
 urlpatterns = [
-	re_path(r'^$', views.test, name='test'),
+	#re_path(r'^$', views.test, name='test'),
 	re_path(r'^netid', views.netid, name='netid'),
 	path('user/<netid>/', views.get_user, name='get_user'), # retrieve json data for user from netid
 	re_path(r'^post_event', views.post_event, name='post_event'),
