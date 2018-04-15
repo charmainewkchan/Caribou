@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, NavLink } from 'react-router-dom';
 
-import axios from 'axios';
+
 
 import Profile from './Profile';
 import Account from './Account';
@@ -16,16 +16,7 @@ class MyProfile extends Component {
     }
   }
 
-  componentDidMount() {
-    const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
-    axios.get(url) 
-    .then(res => {
-        this.setState({
-          profile_info: res.data[0].fields
-        })
-      })
-    .catch(err => alert(err.response));
-  }
+
 
 
 
@@ -40,7 +31,7 @@ class MyProfile extends Component {
       			</ul>
       		</div>
       		<div className="col MyProfile-panel">
-            <Route exact path='/myprofile(|/profile)' render={()=><Profile data={this.state.profile_info}/>} />
+            <Route exact path='/myprofile(|/profile)' component={Profile} />
             <Route path='/myprofile/account' component={Account}/>
       		</div>
       	</div>
