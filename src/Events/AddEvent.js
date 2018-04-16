@@ -153,7 +153,7 @@ class AddEvent extends Component {
         </div>
 
         <div className = "form-group ">
-          <div className = "row">
+          <div className = "row Events-whiteBackground1">
             <div className="col-6 ">
                 <label for="start" className = "col-form-label">Start Time</label>
             </div>
@@ -163,8 +163,8 @@ class AddEvent extends Component {
             </div>
           </div>
 
-          <div className = "row">
-          <div className = "col">
+          <div className = "row Events-whiteBackground2">
+          <div className = "col-6">
               <div className = "row">
                 <div style = {{width: 100}}>
                   <Dropdown options={hourOptions} label = "startHour" onChange={this._onSelect1} value={this.state.startHour} placeholder="Hour" />
@@ -176,7 +176,7 @@ class AddEvent extends Component {
               </div>
           </div>
 
-          <div className = "col">
+          <div className = "col-6">
               <div className = "row">
                 <div style = {{width: 100}}>
                   <Dropdown options={hourOptions} label = "endHour" onChange={this._onSelect3} value={this.state.endHour} placeholder="Hour" />
