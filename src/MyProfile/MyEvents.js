@@ -25,6 +25,7 @@ class MyEvents extends Component {
         myEvents: res.data
       });
     });
+  }
 
 
 
