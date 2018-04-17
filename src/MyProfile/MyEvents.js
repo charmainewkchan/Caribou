@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import eating_club_map from 'Events/eating_club_map.json';
+import eating_club_map from '../Events/eating_club_map.json';
 import '../App.css';
 
 class MyEvents extends Component {
