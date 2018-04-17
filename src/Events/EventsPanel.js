@@ -17,10 +17,10 @@ class EventsPanel extends Component {
   render() {
     return (
         <div className="Events-panel">
-        	<ul className="Events-list">
+        	<div className="row">
           {    
         		this.props.events.map(function(event){
-              return <li className="Events-event">
+              return <div className="col-md-6 event-row-buffer">
                 <EventCard title={event.fields.title} 
                             eating_club={event.fields.eating_club} 
                             time={event.fields.time} 
@@ -30,10 +30,10 @@ class EventsPanel extends Component {
                             pk={event.pk}
                             onJoinEvent={this.props.onJoinEvent}
                             isEditable={false}/>
-              </li>;
+              </div>;
             }, this)
           }
-        	</ul>
+        	</div>
         </div>
     );
   }
