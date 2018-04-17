@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 //import Event from './Event'
-import eating_club_map from './eating_club_map.json';
 
-import axios from 'axios'
+
+import axios from 'axios';
+import EventCard from './EventCard';
 
 import '../App.css';
 
@@ -11,21 +12,7 @@ class EventsPanel extends Component {
     super(props);
     this.state = {
     };
-
-    this.joinEvent = this.joinEvent.bind(this)
   }
-
-  joinEvent(event_id) {
-    var data = [{
-      event: event_id,
-      netid: localStorage.getItem('netid')
-    }]
-    alert(JSON.stringify(data));
-
-    axios.post("https://bixr.herokuapp.com/api/join_event",  data)
-    .then(res => console.log(res))
-    .catch(err => alert(err.response));
-}
 
   render() {
     return (
@@ -34,15 +21,14 @@ class EventsPanel extends Component {
           {    
         		this.props.events.map(function(event){
               return <li className="Events-event">
-                <div className="event-header">
-                  <h2>{event.fields.title}</h2>
-                  <p>{eating_club_map[event.fields.eating_club]} &bull; {event.fields.time}</p>
-                </div>
-                
-                <p>{event.fields.description}</p>
-                <p>{event.fields.attendance == 0 ? "Be the first to join!" : ""+event.fields.attendance+"/"+event.fields.capacity+" going!"}</p>
-                <button disabled={event.fields.attendance==event.fields.capacity} className="btn btn-secondary join-button" onClick={() => this.joinEvent(event.pk)}> Join </button>
-
+                <EventCard title={event.fields.title} 
+                            eating_club={event.fields.eating_club} 
+                            time={event.fields.time} 
+                            attendance={event.fields.attendance} 
+                            capacity={event.fields.capacity} 
+                            description={event.fields.description}
+                            pk={event.pk}
+                            onJoinEvent={this.props.onJoinEvent}/>
               </li>;
             }, this)
           }
