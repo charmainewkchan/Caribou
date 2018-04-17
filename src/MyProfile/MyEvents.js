@@ -7,7 +7,7 @@ class MyEvents extends Component {
   constructor(props) {
     super(props)
     this.state={
-      myEvents = []
+      myEvents: []
     };
 
     /*this.handleDelete = this.handleDelete.bind(this);*/

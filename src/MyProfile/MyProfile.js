@@ -11,7 +11,6 @@ import '../App.css';
 class MyProfile extends Component {
   constructor() {
     super();
-
     this.state = {
       profile_info: {}
     }
