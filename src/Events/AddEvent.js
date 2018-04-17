@@ -98,8 +98,8 @@ class AddEvent extends Component {
       this.state.startMin +"-" + " " + this.state.endHour + ":" + this.state.endMin + " ");
       /* package data into json, axios.post(url + data) (in events.js), clear fields, get events/ wait for interval update.*/
 
-      var data = [{"event_type": "", "capacity": this.state.eventCap, "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "start": this.state.startHour + ":" + this.state.startMin,
-      "end": this.state.endHour + ":" + this.state.endMin, "date" : this.state.date.format().substring(0,10), "Attendance": "0"}]
+      var data = [{"capacity": this.state.eventCap, "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "start": this.state.startHour + ":" + this.state.startMin,
+      "end": this.state.endHour + ":" + this.state.endMin, "date" : this.state.date.format().substring(0,10)}]
 
       console.log(this.state.eventCap);
 
