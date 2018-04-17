@@ -1,0 +1,30 @@
+*C = Container
+*P = Presentational
+
+
+EventsPanel(C)
+-gets events data from api
+-passes into EventsList component
+
+EventsList(P):
+-isEditable prop
+-takes events data as prop
+-has list of eventCards
+-takes care of formatting eventCards
+
+EventCard(C):
+-isEditable prop
+-takes event_data as a prop
+-handles join logic?
+-either renders an Event or EditEvent component, depending on isEditable flag
+
+Event(P):
+-formats event data
+-join button
+-if isEditable, shows edit and delete buttons
+
+EditEvent(P):
+-Form version of event
+-apply changes button
+
+
