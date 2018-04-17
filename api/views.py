@@ -59,13 +59,13 @@ def get_users_for_event(request, event_id):
 	return HttpResponse(joinedusers_json, content_type='application/json')
 
 @casauth
-# @csrf_exempt
+@csrf_exempt
 def post_event(request):
 	# get the json data
 	data_json = json.loads(request.body)
 	data = data_json[0]
 	# author
-	authornetid = request.session['netid'] # @caseauth ensures they are logged in
+	authornetid = request.session['netid'] @caseauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
 	description = data["description"]
 	title = data["title"]
@@ -83,7 +83,7 @@ def post_event(request):
 @casauth
 @csrf_exempt
 def delete_event(request, event_id):
-	authornetid = request.session['netid'] # @casauth ensures they are logged in
+	authornetid = request.session['netid'] @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
 	event_set = PersonalEvent.objects.filter(pk=event_id)
 	if len(event_set) != 1:
@@ -102,7 +102,7 @@ def delete_event(request, event_id):
 	return HttpResponse("deleted event " + title)
 
 #------------------------------------------------------------------------------#
-# @casauth
+@casauth
 @csrf_exempt
 def join_event(request):
 	data_json = json.loads(request.body)
@@ -130,7 +130,7 @@ def join_event(request):
 	j.save()
 	return HttpResponse(participant_netid + " joined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
-# @casauth
+@casauth
 def unjoin_event(request):
 	data_json = json.loads(request.body)
 	data = data_json[0]
@@ -154,14 +154,14 @@ def unjoin_event(request):
 	return HttpResponse(participant_netid + " unjoined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
 #------------------------------------------------------------------------------#
-# @casauth
+@casauth
 def get_club_events(request):
 	data = ClubEvent.objects.all()
 	data_json = serializers.serialize('json', data)
 	return HttpResponse(data_json, content_type='application/json')
 
 #------------------------------------------------------------------------------#
-# @casauth
+@casauth
 def netid(request):
 	if 'netid' in request.session:
 		return JsonResponse({'netid': request.session['netid']})

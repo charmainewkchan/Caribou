@@ -1,4 +1,11 @@
 
+
+@media (max-width: 767px) {
+  .navbar-toggleable-sm {
+    clear: both;
+  }
+}
+
 .App {
   text-align: center;
 }
