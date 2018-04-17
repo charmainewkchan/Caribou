@@ -5,6 +5,7 @@ import { Switch, Route, NavLink } from 'react-router-dom';
 
 import Profile from './Profile';
 import Account from './Account';
+import MyEvents from './MyEvents';
 
 import '../App.css';
 class MyProfile extends Component {
@@ -29,6 +30,8 @@ class MyProfile extends Component {
       		<div className="col MyProfile-panel">
             <Route exact path='/myprofile(|/profile)' component={Profile} />
             <Route path='/myprofile/account' component={Account}/>
+            <Route path='/myprofile/myevents' component={MyEvents}/>
+
       		</div>
       	</div>
       </div>
