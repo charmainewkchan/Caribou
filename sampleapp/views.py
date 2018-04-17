@@ -34,8 +34,4 @@ def login(request):
 	elif "location" in auth_attempt:  # Redirect to CAS.
 		return redirect(auth_attempt["location"])
 	else:  # This should never happen!
-<<<<<<< HEAD
 		abort(500)
-=======
-		abort(500)
->>>>>>> 5dbe82d919ce101724ed877a177246213babd412
