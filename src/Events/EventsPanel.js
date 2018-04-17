@@ -28,7 +28,8 @@ class EventsPanel extends Component {
                             capacity={event.fields.capacity} 
                             description={event.fields.description}
                             pk={event.pk}
-                            onJoinEvent={this.props.onJoinEvent}/>
+                            onJoinEvent={this.props.onJoinEvent}
+                            isEditable={false}/>
               </li>;
             }, this)
           }
