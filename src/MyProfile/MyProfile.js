@@ -32,7 +32,7 @@ class MyProfile extends Component {
             <Route path='/myprofile/myevents' component={MyEvents}/>
 
       		</div>
-      	</div>
+      	</div> 
       </div>
     );
   }
