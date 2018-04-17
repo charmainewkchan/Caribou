@@ -1,4 +1,11 @@
 
+
+@media (max-width: 767px) {
+  .navbar-toggleable-sm {
+    clear: both;
+  }
+}
+
 .App {
   text-align: center;
 }
@@ -116,13 +123,12 @@
   margin: auto;
 }
 
+.event-row-buffer{
+  margin-top: 1em;
+}
+
 .Events-event {
-  margin: 1em 0;
-  width: 100%;
-  background: white;
-  text-align: left;
-  border-bottom: 1px #555 solid;
-  font-family: 'Roboto', sans-serif;
+  height: 100%;
 }
 
 .Events-descriptionBox {
@@ -134,13 +140,43 @@
 
 .event-header {
   margin: 0;
-  padding-bottom: 1em;
-  width: 100%;
+  padding: 0.5em .3em;
 }
 
+.event-header h2 {
+  color: #322806;
+  font-size: 1.3em;
+  font-family: times new roman;
+  margin: 0;
+  padding:0 ;
+}
+
+.event-header p{
+  font-size: .6em;
+  font-weight:bold;
+  color: #373737;
+    margin: 0;
+  padding:0 ;
+}
+
+.event-body {
+    font-size: .8em;
+    padding: .5em;
+    margin: 0;
+    color: #555;
+    font-family:;
+    height: auto;
+}
+
+.event-footer{
+  padding: 0;
+  background: white;
+}
+
+
 .join-button {
-  margin: .5em;
   border: 0;
+  margin: .5em;
   background: #213f60;
 }
 
@@ -148,28 +184,8 @@
   width: 6em;
 }
 
-.event-header h2 {
-  color: #322806;
-  font-size: 1.4em;
-  font-family: times new roman;
-  padding: 0;
-  margin: 0 ;
-}
 
-.event-header p{
-  padding: 0;
-  margin: 0;
-  height: 1em;
-  font-size: .6em;
-  font-weight:bold;
-  color: #555;
-}
 
-.Events-event p {
-    font-size: .8em;
-    color: #555;
-    font-family:;
-}
 
 .Home p {
     font-size: .8em;

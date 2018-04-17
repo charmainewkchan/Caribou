@@ -23,6 +23,7 @@ class Events extends Component {
   	}
     this.onClubFilterChange = this.onClubFilterChange.bind(this);
     this.onCreateEvent = this.onCreateEvent.bind(this);
+    this.onJoinEvent = this.onJoinEvent.bind(this)
   }
 
   componentDidMount() {
@@ -77,31 +78,38 @@ class Events extends Component {
         console.log(res);
         console.log(res.data);
       })
-    .catch(err => alert(err.response));
+    .catch(err => alert(err));
+  }
 
-  /*  console.log(event)
-    fetch('https://jsonplaceholder.typicode.com/posts/1')
-    .then(response => response.json())
-    .then(json => console.log(json))*/
-    /*axios post*/
+
+  onJoinEvent(event_id) {
+    var data = [{
+      event: event_id,
+      netid: localStorage.getItem('netid')
+    }]
+    alert(JSON.stringify(data));
+
+    axios.post("https://bixr.herokuapp.com/api/join_event",  data)
+    .then(res => console.log(res))
+    .catch(err => alert(err));
   }
 
   render() {
     return (
     	<div className="Events container">
 	      <div className="row">
-	        <div className= "col-3">
+	        <div className= "col-3-md">
 	        <EventsFilter onClubFilterChange={this.onClubFilterChange}/>
 	        </div>
 
-	        <div className= "col-9">
+	        <div className= "col-9-md">
 	           <div className= "container">
 	              <div className= "row">
 	                <AddEvent onCreateEvent={this.onCreateEvent}/>
 	                </div>
 
 	                <div className= "row">
-	                	<EventsPanel events = {this.state.events}/>
+	                	<EventsPanel events = {this.state.events} onJoinEvent={this.onJoinEvent}/>
 	                </div>
 	            </div>
 	        </div>
