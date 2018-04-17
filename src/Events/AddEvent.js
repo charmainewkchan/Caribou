@@ -117,28 +117,29 @@ class AddEvent extends Component {
       <div className="Events-addEvent">
 
         <div className="form-group">
-          <label for="title" class="col-2 col-form-label">Title</label>
-          <div class="col-10">
-            <input class="form-control" type="text" id="title" name = "eventName" value= {this.state.value} onChange={this.handleChange}/>
+          <label for="title" className="col-2 col-form-label">Title</label>
+          <div className="col-10">
+            <input className="form-control" type="text" id="title" name = "eventName" value= {this.state.value} onChange={this.handleChange}/>
           </div>
         </div>
 
         <div className="form-group">
-          <label for="description" class="col-2 col-form-label">Description</label>
-          <div class="col-10">
-            <textarea class="form-control" type="text" id="description" name = "eventDes" value= {this.state.value} onChange={this.handleChange}/>
+          <label for="description" className="col-2 col-form-label">Description</label>
+          <div className="col-10">
+            <textarea className="form-control" type="text" id="description" name = "eventDes" value= {this.state.value} onChange={this.handleChange}/>
           </div>
         </div>
 
         <div className="form-group">
-          <label for="location" class="col-2 col-form-label">Location</label>
-          <div class="col-10">
-            <input class="form-control" type="text" id="location" name = "eventLoc" value= {this.state.value} onChange={this.handleChange}/>
+          <label for="location" className="col-2 col-form-label">Location</label>
+          <div className="col-10">
+            <input className="form-control" type="text" id="location" name = "eventLoc" value= {this.state.value} onChange={this.handleChange}/>
           </div>
         </div>
 
-        <div className= "Events-descriptionBox">
-            Date:
+        <div className= "form-group ">
+            <label for="date" className="col-2 col-form-label">Date</label>
+            <div className = "col-10">
             <SingleDatePicker
             date={this.state.date}
             name = "date"
@@ -148,39 +149,53 @@ class AddEvent extends Component {
             focused={this.state.focused} // PropTypes.bool
             onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
             />
+            </div>
         </div>
 
-        <div className = "form-group row">
-          <div className= "Events-descriptionBox">
-          Start Time:
+        <div className = "form-group ">
+          <div className = "row Events-whiteBackground1">
+            <div className="col-6 ">
+                <label for="start" className = "col-form-label">Start Time</label>
+            </div>
+
+            <div className="col-6 ">
+                <label for="end" className = "col-form-label">End Time</label>
+            </div>
           </div>
 
-          <div style = {{width: 100}}  >
-          <Dropdown options={hourOptions} label = "startHour" onChange={this._onSelect1} value={this.state.startHour} placeholder="Hour" />
-          </div>
-          :
-          <div style = {{width: 100}}  >
-          <Dropdown options={minOptions}  label = "startMin" onChange={this._onSelect2} value={this.state.startMin} placeholder="Minute" />
-          </div>
-
-          <div className= "Events-descriptionBox">
-          End Time:
-          </div>
-
-          <div style = {{width: 100}}  >
-          <Dropdown options={hourOptions} label = "endHour" onChange={this._onSelect3} value={this.state.endHour} placeholder="Hour" />
-          </div>
-          :
-          <div style = {{width: 100}}  >
-          <Dropdown options={minOptions}  label = "endMin" onChange={this._onSelect4} value={this.state.endMin} placeholder="Minute" />
-          </div>
-
-        </div>
-
-              <div className= "Events-descriptionBox"> Capacity:
-                <input type="text" className = "Events-inputSmall" name = "eventCap" placeholder="" aria-label="Description" aria-describedby="basic-addon2" value= {this.state.value} onChange={this.handleChange}>
-                </input>
+          <div className = "row Events-whiteBackground2">
+          <div className = "col-6">
+              <div className = "row">
+                <div style = {{width: 100}}>
+                  <Dropdown options={hourOptions} label = "startHour" onChange={this._onSelect1} value={this.state.startHour} placeholder="Hour" />
+                </div>
+                  :
+                <div style = {{width: 100}}  >
+                  <Dropdown options={minOptions}  label = "startMin" onChange={this._onSelect2} value={this.state.startMin} placeholder="Minute" />
+                </div>
               </div>
+          </div>
+
+          <div className = "col-6">
+              <div className = "row">
+                <div style = {{width: 100}}>
+                  <Dropdown options={hourOptions} label = "endHour" onChange={this._onSelect3} value={this.state.endHour} placeholder="Hour" />
+                </div>
+                  :
+                <div style = {{width: 100}}  >
+                  <Dropdown options={minOptions}  label = "endMin" onChange={this._onSelect4} value={this.state.endMin} placeholder="Minute" />
+                </div>
+              </div>
+          </div>
+          </div>
+          </div>
+
+          <div className="form-group">
+            <label for="capacity" className="col-2 col-form-label">Capacity</label>
+            <div className="col-10">
+              <input className="form-control" type="text" id="capacity" name = "eventCap" value= {this.state.value} onChange={this.handleChange}/>
+            </div>
+          </div>
 
           <button className="btn btn-success" onClick = {this.handleCreateEvent}> Create </button>
       </div>
