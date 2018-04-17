@@ -94,12 +94,13 @@ class AddEvent extends Component {
     else if (this.state.capacity == '') {
       alert('Please enter a maximum capacity.')
     } else {
-      alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventLoc + " " + this.state.date.format().substring(0,10) + " " + this.state.startHour + ":" +
-      this.state.startMin +"-" + " " + this.state.endHour + ":" + this.state.endMin + " " + this.state.eventCap);
+      alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventCap + " " + this.state.eventLoc + " " + this.state.date.format().substring(0,10) + " " + this.state.startHour + ":" +
+      this.state.startMin +"-" + " " + this.state.endHour + ":" + this.state.endMin + " ");
       /* package data into json, axios.post(url + data) (in events.js), clear fields, get events/ wait for interval update.*/
 
-      var data = [{"author" : localStorage.getItem('netid'), "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "start": this.state.startHour + ":" + this.state.startMin,
+      var data = [{"author" : localStorage.getItem('netid'),  "capacity": this.state.eventCap, "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "start": this.state.startHour + ":" + this.state.startMin,
       "end": this.state.endHour + ":" + this.state.endMin}]
+
       console.log(data)
 
       this.props.onCreateEvent(
