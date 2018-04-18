@@ -98,11 +98,11 @@ class Events extends Component {
     return (
     	<div className="Events container">
 	      <div className="row">
-	        <div className= "col-3-md">
+	        <div className= "col-3">
 	        <EventsFilter onClubFilterChange={this.onClubFilterChange}/>
 	        </div>
 
-	        <div className= "col-9-md">
+	        <div className= "col-9">
 	           <div className= "container">
 	              <div className= "row">
 	                <AddEvent onCreateEvent={this.onCreateEvent}/>
