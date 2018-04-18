@@ -41,6 +41,7 @@ class MyEvents extends Component {
                   <p>{eating_club_map[event.fields.eating_club]} &bull; {event.fields.time}</p>
                 </div>
                 <p>{event.fields.description}</p>
+                <button disabled={event.fields.attendance==event.fields.capacity} className="btn btn-secondary join-button" onClick={() => this.joinEvent(event.pk)}> Join </button>
 
               </li>;
             }, this)

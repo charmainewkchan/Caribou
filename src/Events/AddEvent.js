@@ -101,8 +101,6 @@ class AddEvent extends Component {
       var data = [{"capacity": this.state.eventCap, "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "start": this.state.startHour + ":" + this.state.startMin,
       "end": this.state.endHour + ":" + this.state.endMin, "date" : this.state.date.format().substring(0,10)}]
 
-      console.log(this.state.eventCap);
-
       this.props.onCreateEvent(
         data
       );
