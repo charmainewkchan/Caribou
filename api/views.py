@@ -58,14 +58,14 @@ def get_users_for_event(request, event_id):
 	joinedusers_json = serializers.serialize('json', joinedusers)
 	return HttpResponse(joinedusers_json, content_type='application/json')
 
-@casauth
 @csrf_exempt
+@casauth
 def post_event(request):
 	# get the json data
 	data_json = json.loads(request.body)
 	data = data_json[0]
 	# author
-	authornetid = request.session['netid']# @caseauth ensures they are logged in
+	authornetid = request.session['netid']# @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
 	description = data["description"]
 	title = data["title"]
@@ -77,11 +77,10 @@ def post_event(request):
 	capacity = int(data["capacity"])
 	e = PersonalEvent(author = author, description = description, title = title, date = date, start=start, end=end, location = location, eating_club = eating_club, capacity = capacity)
 	e.save()
-	# event_json = json.loads(request.body)
 	return HttpResponse(e)
 
-@casauth
 @csrf_exempt
+@casauth
 def delete_event(request, event_id):
 	authornetid = request.session['netid'] # @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
@@ -102,8 +101,8 @@ def delete_event(request, event_id):
 	return HttpResponse("deleted event " + title)
 
 #------------------------------------------------------------------------------#
-@casauth
 @csrf_exempt
+@casauth
 def join_event(request):
 	data_json = json.loads(request.body)
 	data = data_json[0]
