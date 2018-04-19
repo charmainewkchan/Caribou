@@ -29,7 +29,7 @@ class EventsPanel extends Component {
                             description={event.fields.description}
                             pk={event.pk}
                             onJoinEvent={this.props.onJoinEvent}
-                            isEditable={false}/>
+                            isEditable={this.props.isEditable}/>
               </div>;
             }, this)
           }
