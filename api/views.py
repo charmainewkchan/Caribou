@@ -20,7 +20,7 @@ def react(request):
 def test(request):
 	return HttpResponse("test", status=400)
 
-def login_test(request, netid);
+def login_test(request, netid):
 	request.session['netid'] = netid
 	return HttpResponse("logged in", status=200)
 
