@@ -13,5 +13,6 @@ urlpatterns = [
 	re_path(r'^get_events', views.get_events, name='get_events'),
 	re_path(r'^get_club_events', views.get_club_events, name='get_club_events'),
 	re_path(r'^join_event', views.join_event, name='join_event'),
+	re_path(r'^hosted_events', views.hosted_events),
 	path('delete_event/<event_id>/', views.delete_event, name='delete_event')
 ]
