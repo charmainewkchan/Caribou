@@ -188,6 +188,11 @@
   background: #213f60;
 }
 
+.leave-button {
+   border: 0;
+  margin: .5em; 
+}
+
 .Events .btn {
   width: 6em;
 }

@@ -22,6 +22,37 @@ def test(request):
 
 	
 #------------------------------------------------------------------------------#
+# HELPER FUNCTIONS #
+# returns list of event id's
+def joined_events_list():
+	user = User.objects.get(netid='dsawicki')
+
+	joined_events = JoinedEvents.objects.filter(participant=user)
+	joined_events_json = json.loads(serializers.serialize('json', joined_events, fields="event"))
+
+	# send values to a list
+	return [e["pk"] for e in joined_events_json]
+
+
+# appends isOwner and isAttending fields to list of events
+def append_data_to_events(data_json):
+	events_joined = joined_events_list()
+
+	data = json.loads(data_json)
+	# manipulate data to add owner field, 0 is not owner, 1 is owner
+	for e in data: # e is the outer dictionary for the event
+		userpk = int(e["fields"]["author"]) # get user pkid
+		author = User.objects.get(pk=userpk).netid # user netid
+
+		e["isOwner"] = 1 if author == netid else 0
+		e["isAttending"] = 1 if e["pk"] in events_joined else 0
+
+
+	return json.dumps(data)
+
+	return HttpResponse(data_json, content_type='application/json')
+
+#------------------------------------------------------------------------------#
 @casauth
 def get_user(request, netid):
 	user = User.objects.filter(netid=netid)
@@ -58,13 +89,13 @@ def delete_user(request):
 
 @casauth
 def get_events_for_user(request, netid):
-	user = User.objects.get(netid=netid)
-	joined_events = JoinedEvents.objects.filter(participant=user)
-	# make a list of the event ids
-	event_ids = [j.event.id for j in joined_events]
+	event_ids = joined_events_list()
 	events = PersonalEvent.objects.filter(id__in=event_ids)
 	events_json = serializers.serialize('json', events)
-	return HttpResponse(events_json, content_type='application/json')
+
+	data_json = append_data_to_events(events_json)
+
+	return HttpResponse(data_json, content_type='application/json')
 
 #------------------------------------------------------------------------------#
 @casauth
@@ -72,16 +103,9 @@ def get_events(request):
 	netid = 'dsawicki'
 	dataq = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', dataq)
-	data = json.loads(data_json)
-	# manipulate data to add owner field, 0 is not owner, 1 is owner
-	for e in data: # e is the outer dictionary for the event
-		userpk = int(e["fields"]["author"]) # get user pkid
-		author = User.objects.get(pk=userpk).netid # user netid
-		if author == netid:
-			e["owner"] = 1
-		else:
-			e["owner"] = 0
-	data_json = json.dumps(data)
+
+	data_json = append_data_to_events(data_json)
+
 	return HttpResponse(data_json, content_type='application/json')
 
 @casauth
@@ -196,6 +220,7 @@ def join_event(request):
 	data = data_json[0]
 	event_id = int(data["event"])
 	event_set = PersonalEvent.objects.filter(pk=event_id)
+
 	# event not found
 	if len(event_set) != 1:
 		return HttpResponse("Event Not Found", status=404)

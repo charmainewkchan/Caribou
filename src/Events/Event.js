@@ -6,6 +6,20 @@ import '../App.css';
 
 class Event extends Component {
 
+	constructor(props){
+		super(props)
+
+		this.buttons = this.buttons.bind(this)
+	}
+
+	buttons() {
+		if (this.props.isAttending) {
+			return <button className="btn btn-danger leave-button" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Leave </button>
+		} else {
+			return <button disabled={this.props.attendance==this.props.capacity} className="btn btn-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
+		}
+	}
+
   render() {
     return (
     <div className="card Events-event">
@@ -20,7 +34,7 @@ class Event extends Component {
 	    </div>
 
 	    <div className="card-footer event-footer">
-	    	<button disabled={this.props.attendance==this.props.capacity} className="btn btn-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
+	    	{this.buttons()}
 	    </div>
     </div>
     );
