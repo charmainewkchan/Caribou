@@ -29,14 +29,37 @@ def get_user(request, netid):
 	return HttpResponse(user_json, content_type='application/json')
 
 @casauth
+def delete_user(request):
+	netid = request.session['netid']
+	user_set = User.objects.filter(netid=netid)
+	user = User.objects.get(netid=netid)
+	if len(user_set) != 1:
+		return HttpResponse("User Not Found", status=404)
+	# check joined events for dependencies
+	dependencies_j = JoinedEvents.objects.filter(participant=user)
+	if len(dependencies_j) > 0:
+		# access the events they've joined 
+		event_ids = [j.event.id for j in joined_events]
+		events = PersonalEvent.objects.filter(id__in=event_ids)
+		for e in events: # decrement attendance
+			att = e.attendance - 1
+			e.attendance = att
+			e.save()
+	dependencies_j.delete() # remove the joinedevents entries
+	# check hosted events for dependencies
+	dependencies_e = PersonalEvent.objects.filter(author=user)
+	if len(dependencies_e) > 0:
+		dependencies_e.delete()
+	# delete the user
+	user.delete()
+	return HttpResponse("deleted user " + netid)
+
+@casauth
 def get_events_for_user(request, netid):
 	user = User.objects.get(netid=netid)
 	joined_events = JoinedEvents.objects.filter(participant=user)
 	# make a list of the event ids
-	event_ids = []
-	for j in joined_events:
-		event_id=j.event.id
-		event_ids.append(event_id)
+	event_ids = [j.event.id for j in joined_events]
 	events = PersonalEvent.objects.filter(id__in=event_ids)
 	events_json = serializers.serialize('json', events)
 	return HttpResponse(events_json, content_type='application/json')
@@ -44,8 +67,19 @@ def get_events_for_user(request, netid):
 #------------------------------------------------------------------------------#
 @casauth
 def get_events(request):
-	data = PersonalEvent.objects.all()
-	data_json = serializers.serialize('json', data)
+	netid = request.session['netid']
+	dataq = PersonalEvent.objects.all()
+	data_json = serializers.serialize('json', dataq)
+	data = json.loads(data_json)
+	# manipulate data to add owner field, 0 is not owner, 1 is owner
+	for e in data: # e is the outer dictionary for the event
+		userpk = int(e["fields"]["author"]) # get user pkid
+		author = User.objects.get(pk=userpk).netid # user netid
+		if author == netid:
+			e["owner"] = 1
+		else:
+			e["owner"] = 0
+	data_json = json.dumps(data)
 	return HttpResponse(data_json, content_type='application/json')
 
 @casauth
@@ -165,7 +199,7 @@ def unjoin_event(request):
 	if len(joined) != 1: # if not joined in this event
 		return HttpResponse("Event Not Joined", status=400)
 	# decrement attendance
-	newatt = event.attendant - 1
+	newatt = event.attendance - 1
 	event_set.update(attendance=newatt)
 	# remove from table
 	joined.delete()
