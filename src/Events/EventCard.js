@@ -8,6 +8,9 @@ import EditableEvent from './EditableEvent'
 
 class EventCard extends Component {
 
+onEdit
+
+
   render() {
     if (this.props.isEditable) {
         return (
