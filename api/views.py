@@ -29,6 +29,25 @@ def get_user(request, netid):
 	return HttpResponse(user_json, content_type='application/json')
 
 @casauth
+def delete_user(request):
+	netid = request.session['netid']
+	user_set = User.objects.filter(netid=netid)
+	user = User.objects.get(netid=netid)
+	if len(user_set) != 1:
+		return HttpResponse("User Not Found", status=404)
+	# check joined events for dependencies
+	dependencies_j = JoinedEvents.objects.filter(participant=user)
+	if len(dependencies_j) > 0:
+		dependencies_j.delete()
+	# check hosted events for dependencies
+	dependencies_e = PersonalEvent.objects.filter(author=user)
+	if len(dependencies_e) > 0:
+		dependencies_e.delete()
+	# delete the user
+	user.delete()
+	return HttpResponse("deleted user " + netid)
+
+@casauth
 def get_events_for_user(request, netid):
 	user = User.objects.get(netid=netid)
 	joined_events = JoinedEvents.objects.filter(participant=user)
