@@ -44,8 +44,19 @@ def get_events_for_user(request, netid):
 #------------------------------------------------------------------------------#
 @casauth
 def get_events(request):
-	data = PersonalEvent.objects.all()
-	data_json = serializers.serialize('json', data)
+	netid = request.session['netid']
+	dataq = PersonalEvent.objects.all()
+	data_json = serializers.serialize('json', dataq)
+	data = json.loads(data_json)
+	# manipulate data to add owner field, 0 is not owner, 1 is owner
+	for e in data: # e is the outer dictionary for the event
+		userpk = int(e["fields"]["author"]) # get user pkid
+		author = User.objects.get(pk=userpk).netid # user netid
+		if author == netid:
+			e["owner"] = 1
+		else:
+			e["owner"] = 0
+	data_json = json.dumps(data)
 	return HttpResponse(data_json, content_type='application/json')
 
 @casauth
