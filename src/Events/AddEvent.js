@@ -114,7 +114,6 @@ class AddEvent extends Component {
   render() {
     return (
       <div className="Events-addEvent">
-
         <div className="form-group">
           <label for="title" className="col-2 col-form-label">Title</label>
           <div className="col-10">

@@ -81,6 +81,10 @@ class Events extends Component {
     .catch(err => alert(err));
   }
 
+  onEditEvent(event){
+    // TODO:
+  }
+
 
   onJoinEvent(event_id) {
     var data = [{
