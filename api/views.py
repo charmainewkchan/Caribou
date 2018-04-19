@@ -76,10 +76,10 @@ def get_events(request):
 	user = User.objects.get(netid=netid)
 
 	joined_events = JoinedEvents.objects.filter(participant=user)
-	joined_events_json = serializers.serialize('json', joined_events, fields="event")
+	joined_events_json = json.loads(serializers.serialize('json', joined_events, fields="event"))
 
 	# send values to a list
-	events_joined = [e["fields"]["pk"] for e in joined_events_json]
+	events_joined = [e["pk"] for e in joined_events_json]
 
 	data = json.loads(data_json)
 	# manipulate data to add owner field, 0 is not owner, 1 is owner
