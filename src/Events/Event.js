@@ -14,9 +14,9 @@ class Event extends Component {
 
 	buttons() {
 		if (this.props.isAttending) {
-			return <button className="btn btn-danger join-button" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Leave </button>
+			return <button className="btn btn-danger leave-button" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Leave </button>
 		} else {
-			<button disabled={this.props.attendance==this.props.capacity} className="btn btn-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
+			return <button disabled={this.props.attendance==this.props.capacity} className="btn btn-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
 		}
 	}
 
