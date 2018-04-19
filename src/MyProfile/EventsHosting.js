@@ -15,7 +15,7 @@ class EventsHosting extends Component {
   }
 
   componentDidMount() {
-    updateData();
+    this.updateData();
   }
 
   updateData(){
