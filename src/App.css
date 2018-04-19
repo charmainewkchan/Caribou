@@ -151,6 +151,10 @@
   padding:0 ;
 }
 
+.btn-host {
+  margin-top: 1em;
+}
+
 .event-header p{
   font-size: .6em;
   font-weight:bold;

@@ -16,29 +16,26 @@ class EditableEvent extends Component {
 
   render() {
     return (
-    	<div>
-      <form>
-		 <div className="event-header">
-
-
+    <div className="card Events-event">
+     <div className="card-header event-header">
         <div className="form-group">
-          <label for="title" className="col-2 col-form-label">Title</label>
           <div className="col-10">
-            <input className="form-control" type="text" id="title" name = "eventName" value={this.state.value} defaultValue={this.props.title} onChange={this.handleChange}/>
+            <input className="form-control input-sm col-sm" type="text" id="title" name = "eventName" value={this.state.value} defaultValue={this.props.title} onChange={this.handleChange}/>
           </div>
         </div>
 
-		    <p>{eating_club_map[this.props.eating_club]} &bull; {this.props.time}</p>
-		 </div>
-                
-         <p>{this.props.description}</p>
-         <p>{this.props.attendance == 0 ? "Be the first to join!" : ""+this.props.attendance+"/"+this.props.capacity+" going!"}</p>
-         <button disabled={this.props.attendance==this.props.capacity} className="btn btn-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
-      </form>
+        <p>{eating_club_map[this.props.eating_club]} &bull; {this.props.time}</p>
+     </div>
 
+      <div className="card-body event-body">
+           <p>{this.props.description}</p>
+           <p>{this.props.attendance == 0 ? "Be the first to join!" : ""+this.props.attendance+"/"+this.props.capacity+" going!"}</p>
+      </div>
 
+      <div className="card-footer event-footer">
+        <button disabled={this.props.attendance==this.props.capacity} className="btn btn-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
+      </div>
     </div>
-
     );
   }
 }
