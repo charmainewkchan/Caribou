@@ -38,7 +38,14 @@ def delete_user(request):
 	# check joined events for dependencies
 	dependencies_j = JoinedEvents.objects.filter(participant=user)
 	if len(dependencies_j) > 0:
-		dependencies_j.delete()
+		# access the events they've joined 
+		event_ids = [j.event.id for j in joined_events]
+		events = PersonalEvent.objects.filter(id__in=event_ids)
+		for e in events: # decrement attendance
+			att = e.attendance - 1
+			e.attendance = att
+			e.save()
+	dependencies_j.delete() # remove the joinedevents entries
 	# check hosted events for dependencies
 	dependencies_e = PersonalEvent.objects.filter(author=user)
 	if len(dependencies_e) > 0:
@@ -52,10 +59,7 @@ def get_events_for_user(request, netid):
 	user = User.objects.get(netid=netid)
 	joined_events = JoinedEvents.objects.filter(participant=user)
 	# make a list of the event ids
-	event_ids = []
-	for j in joined_events:
-		event_id=j.event.id
-		event_ids.append(event_id)
+	event_ids = [j.event.id for j in joined_events]
 	events = PersonalEvent.objects.filter(id__in=event_ids)
 	events_json = serializers.serialize('json', events)
 	return HttpResponse(events_json, content_type='application/json')
@@ -195,7 +199,7 @@ def unjoin_event(request):
 	if len(joined) != 1: # if not joined in this event
 		return HttpResponse("Event Not Joined", status=400)
 	# decrement attendance
-	newatt = event.attendant - 1
+	newatt = event.attendance - 1
 	event_set.update(attendance=newatt)
 	# remove from table
 	joined.delete()
