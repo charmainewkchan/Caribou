@@ -15,6 +15,7 @@ class EventsPanel extends Component {
 
 
     this.onJoinEvent = this.onJoinEvent.bind(this);
+    this.onLeaveEvent = this.onLeaveEvent.bind(this);
   }
 
 
