@@ -12,7 +12,7 @@ class EventsAttending extends Component {
       eventsAttending: []
     };
 
-    this.updateData = this.updateData.bind(this);*/
+    this.updateData = this.updateData.bind(this);
   }
 
   componentDidMount() {
