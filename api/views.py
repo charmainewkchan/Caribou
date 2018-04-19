@@ -31,9 +31,15 @@ def get_user(request, netid):
 @casauth
 def get_events_for_user(request, netid):
 	user = User.objects.get(netid=netid)
-	joinedevents = JoinedEvents.objects.filter(participant=user)
-	joinedevents_json = serializers.serialize('json', joinedevents)
-	return HttpResponse(joinedevents_json, content_type='application/json')
+	joined_events = JoinedEvents.objects.filter(participant=user)
+	# make a list of the event ids
+	event_ids = []
+	for j in joined_events:
+		event_id=j.event.id
+		event_ids.append(event_id)
+	events = PersonalEvent.objects.filter(id__in=event_ids)
+	events_json = serializers.serialize('json', events)
+	return HttpResponse(events_json, content_type='application/json')
 
 #------------------------------------------------------------------------------#
 @casauth
