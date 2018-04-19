@@ -44,7 +44,7 @@ def append_data_to_events(data_json):
 		userpk = int(e["fields"]["author"]) # get user pkid
 		author = User.objects.get(pk=userpk).netid # user netid
 
-		e["isOwner"] = 1 if author == netid else 0
+		e["isOwner"] = 1 if author == 'dsawicki' else 0
 		e["isAttending"] = 1 if e["pk"] in events_joined else 0
 
 
