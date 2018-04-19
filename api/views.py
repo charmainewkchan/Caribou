@@ -59,9 +59,15 @@ def get_event(request, event_id):
 @casauth
 def get_users_for_event(request, event_id):
 	event = PersonalEvent.objects.get(pk=int(event_id))
-	joinedusers = JoinedEvents.objects.filter(event=event)
-	joinedusers_json = serializers.serialize('json', joinedusers)
-	return HttpResponse(joinedusers_json, content_type='application/json')
+	joined_users = JoinedEvents.objects.filter(event=event)
+	# make a list of the user ids
+	user_ids = []
+	for j in joined_users:
+		user_id = j.participant.id
+		user_ids.append(user_id)
+	users = User.objects.filter(id__in=user_ids)
+	users_json = serializers.serialize('json', users)
+	return HttpResponse(users_json, content_type='application/json')
 
 @csrf_exempt
 @casauth
