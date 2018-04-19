@@ -7,6 +7,7 @@ import EventsPanel from '../Events/EventsPanel';
 class EventsAttending extends Component {
   constructor(props) {
     super(props)
+
     this.state={
       eventsAttending: []
     };
@@ -16,15 +17,15 @@ class EventsAttending extends Component {
 
   componentDidMount() {
     const netid = localStorage.getItem('netid') + "/";
-    const url = "https://bixr.herokuapp.com/api/get_events";
+    const url = "https://bixr.herokuapp.com/api/get_events_for_user/" + netid + "/";
 
-    axios.get(url
-            ).then(res => {
+    axios.get(url).then(res => {
       console.log(res.data);
       this.setState({
         eventsAttending: res.data
       });
-    });
+    })
+    .catch(err => alert(err));
   }
 
 
@@ -33,7 +34,7 @@ class EventsAttending extends Component {
     return (
         <div>
           <h2>Events Attending</h2>
-          <EventsPanel events = {this.state.eventsAttending} onJoinEvent={null}/>
+          <EventsPanel events={this.state.eventsAttending} onJoinEvent={null} isEditable={false}/>
         </div>
     );
   }
