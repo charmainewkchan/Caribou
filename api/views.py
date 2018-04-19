@@ -23,7 +23,6 @@ def test(request):
 def login_test(request, netid):
 	request.session['netid'] = netid
 	return HttpResponse("logged in", status=200)
-
 	
 #------------------------------------------------------------------------------#
 @casauth
@@ -254,7 +253,6 @@ def netid(request):
 	else:
 		return TemplateResponse(request, 'index.html', {})
 
-
 def login(request):
 	C = CASClient.CASClient(request)
 
@@ -267,7 +265,3 @@ def login(request):
 		return redirect(auth_attempt["location"])
 	else:  # This should never happen!
 		abort(500)
-
-def login_test(request, netid):
-	request.session['netid'] = netid
-	return HttpResponse("logged in", status=200)
