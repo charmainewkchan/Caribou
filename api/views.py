@@ -20,10 +20,6 @@ def react(request):
 def test(request):
 	return HttpResponse("test", status=400)
 
-def login_test(request, netid):
-	request.session['netid'] = netid
-	return HttpResponse("logged in", status=200)
-
 	
 #------------------------------------------------------------------------------#
 @casauth
@@ -36,7 +32,7 @@ def get_user(request, netid):
 
 @casauth
 def delete_user(request):
-	netid = request.session['netid']
+	netid = 'dsawicki'
 	user_set = User.objects.filter(netid=netid)
 	user = User.objects.get(netid=netid)
 	if len(user_set) != 1:
@@ -73,7 +69,7 @@ def get_events_for_user(request, netid):
 #------------------------------------------------------------------------------#
 @casauth
 def get_events(request):
-	netid = request.session['netid']
+	netid = 'dsawicki'
 	dataq = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', dataq)
 
@@ -107,8 +103,8 @@ def get_event(request, event_id):
 	return HttpResponse(event_json, content_type='application/json')
 
 @casauth
-def hosted_events(request):
-	netid = request.session['netid']
+def hosted_events(request, netid):
+	netid1 = netid
 	user = User.objects.get(netid=netid1)
 	events = PersonalEvent.objects.filter(author=user)
 	events_json = serializers.serialize('json', events)
@@ -134,7 +130,7 @@ def post_event(request):
 	data_json = json.loads(request.body)
 	data = data_json[0]
 	# author
-	authornetid = request.session['netid']# @casauth ensures they are logged in
+	authornetid = 'dsawicki'# @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
 	description = data["description"]
 	title = data["title"]
@@ -151,7 +147,7 @@ def post_event(request):
 @csrf_exempt
 @casauth
 def delete_event(request, event_id):
-	authornetid = request.session['netid'] # @casauth ensures they are logged in
+	authornetid = 'dsawicki' # @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
 	event_set = PersonalEvent.objects.filter(pk=event_id)
 	if len(event_set) != 1:
@@ -168,6 +164,39 @@ def delete_event(request, event_id):
 	# delete the event
 	event.delete()
 	return HttpResponse("deleted event " + title)
+
+@csrf_exempt
+@casauth
+def edit_event(request, event_id):
+	e_set = PersonalEvent.objects.filter(pk=int(event_id))
+	if len(e_set) != 1:
+		return HttpResponse("Event Not Found", status=404)
+	e = PersonalEvent.objects.get(pk=int(event_id))
+	# check if correct author
+	authornetid = 'dsawicki'
+	author = Users.objects.get(netid=authornetid)
+	if (e.author != author):
+		return HttpResponse("Permission Denied", status=403)
+	data_json = json.loads(request.body)
+	data = data_json[0]
+	description = data["description"]
+	title = data["title"]
+	date = data["date"]
+	start = data["start"]
+	end = data["end"]
+	location = data["location"]
+	capacity = int(data["capacity"])
+	if capacity < e.attendance:
+		return HttpResponse("Capacity cannot be less than attendance", status=400)
+	e.description = description
+	e.title = title
+	e.date = date
+	e.start = start
+	e.end = end
+	e.location = location
+	e.capacity = capacity
+	e.save()
+	return HttpResponse("event " + str(event_id) + " updated")
 
 #------------------------------------------------------------------------------#
 @csrf_exempt
@@ -186,7 +215,7 @@ def join_event(request):
 	if (event.attendance >= event.capacity):
 		return HttpResponse("Event Full", status=400)
 
-	participant_netid = request.session['netid']
+	participant_netid = 'dsawicki'
 	participant = User.objects.get(netid=participant_netid)
 	alreadyjoined = JoinedEvents.objects.filter(participant=participant).filter(event=event)
 	if len(alreadyjoined) > 0:
@@ -210,7 +239,7 @@ def unjoin_event(request):
 		return HttpResponse("Event Not Found", status=404)
 	event = PersonalEvent.objects.get(pk=event_id)
 	# check if currently in event
-	participant_netid = request.session['netid']
+	participant_netid = 'dsawicki'
 	participant = User.objects.get(netid=participant_netid)
 	joined = JoinedEvents.objects.filter(participant=participant).filter(event=event)
 	if len(joined) != 1: # if not joined in this event
@@ -236,7 +265,6 @@ def netid(request):
 		return JsonResponse({'netid': request.session['netid']})
 	else:
 		return TemplateResponse(request, 'index.html', {})
-
 
 def login(request):
 	C = CASClient.CASClient(request)
