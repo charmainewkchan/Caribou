@@ -10,16 +10,22 @@ class EventsHosting extends Component {
     this.state={
       eventsHosting: []
     };
+
+    this.updateData = this.updateData.bind(this);
   }
 
   componentDidMount() {
+    updateData();
+  }
+
+  updateData(){
+    // reload the data
     const netid = localStorage.getItem('netid');
     const url = "https://bixr.herokuapp.com/api/hosted_events/" + netid + "/";
-
     axios.get(url).then(res => {
       console.log(res.data);
       this.setState({
-        eventsHosting: res.data
+        eventsHosting: res.data,
       });
     })
     .catch(err=>alert(err));
@@ -29,7 +35,7 @@ class EventsHosting extends Component {
     return (
         <div>
           <h2>Events Hosting</h2>
-          <EventsPanel events={this.state.eventsHosting} onJoinEvent={null} isEditable= {true}/>
+          <EventsPanel events={this.state.eventsHosting} updateData={this.updateData}/>
         </div>
     );
   }

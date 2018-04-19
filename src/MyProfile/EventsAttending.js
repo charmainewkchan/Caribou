@@ -12,29 +12,33 @@ class EventsAttending extends Component {
       eventsAttending: []
     };
 
-    /*this.handleDelete = this.handleDelete.bind(this);*/
+    this.updateData = this.updateData.bind(this);*/
   }
 
   componentDidMount() {
+    this.updateData();
+  }
+
+
+    updateData(){
+    // reload the data
     const netid = localStorage.getItem('netid');
     const url = "https://bixr.herokuapp.com/api/get_events_for_user/" + netid + "/";
-
     axios.get(url).then(res => {
       console.log(res.data);
       this.setState({
-        eventsAttending: res.data
+        eventsAttending: res.data,
       });
     })
-    .catch(err => alert(err));
+    .catch(err=>alert(err));
   }
-
 
 
   render() {
     return (
         <div>
           <h2>Events Attending</h2>
-          <EventsPanel events={this.state.eventsAttending} onJoinEvent={null} isEditable={false}/>
+          <EventsPanel events={this.state.eventsAttending} updateData={this.updateData}/>
         </div>
     );
   }
