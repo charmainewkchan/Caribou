@@ -153,6 +153,34 @@ def delete_event(request, event_id):
 	event.delete()
 	return HttpResponse("deleted event " + title)
 
+@csrf_exempt
+@casauth
+def edit_event(request, event_id):
+	e_set = PersonalEvent.objects.filter(pk=int(event_id))
+	if len(e_set) != 1:
+		return HttpResponse("Event Not Found", status=404)
+	e = PersonalEvent.objects.get(pk=int(event_id))
+	data_json = json.loads(request.body)
+	data = data_json[0]
+	description = data["description"]
+	title = data["title"]
+	date = data["date"]
+	start = data["start"]
+	end = data["end"]
+	location = data["location"]
+	capacity = int(data["capacity"])
+	if capacity < e.attendance:
+		return HttpResponse("Capacity cannot be less than attendance", status=400)
+	e.description = description
+	e.title = title
+	e.date = date
+	e.start = start
+	e.end = end
+	e.location = location
+	e.capacity = capacity
+	e.save()
+	return HttpResponse("event " + str(event_id) + " updated")
+
 #------------------------------------------------------------------------------#
 @csrf_exempt
 @casauth
