@@ -6,6 +6,7 @@ import AddEvent from './AddEvent.js';
 //import events_data from './events.json';
 import filter_data from './filters.json';
 import eating_club_map from './eating_club_map.json';
+import EventCard from './EventCard';
 
 import axios from 'axios'
 
@@ -19,11 +20,13 @@ class Events extends Component {
   			clubs: filter_data.clubs
   		},
   		events: [],
-      events_data: []
+      events_data: [],
+      showNewCard: false
   	}
     this.onClubFilterChange = this.onClubFilterChange.bind(this);
     this.onCreateEvent = this.onCreateEvent.bind(this);
-    this.onJoinEvent = this.onJoinEvent.bind(this)
+    this.onJoinEvent = this.onJoinEvent.bind(this);
+    this.onHostEvent = this.onHostEvent.bind(this);
   }
 
   componentDidMount() {
@@ -82,6 +85,12 @@ class Events extends Component {
   }
 
 
+  onHostEvent() {
+    this.setState({
+      showNewCard: true
+    })
+  }
+
   onJoinEvent(event_id) {
     var data = [{
       event: event_id,
@@ -92,6 +101,27 @@ class Events extends Component {
     axios.post("https://bixr.herokuapp.com/api/join_event",  data)
     .then(res => console.log(res))
     .catch(err => alert(err));
+  }
+   //<AddEvent onCreateEvent={this.onCreateEvent}/>
+
+  newCard() {
+    if (this.state.showNewCard) {
+      return (
+                    <EventCard title=""
+                              eating_club=""
+                              time=""
+                              attendance=""
+                              capacity=""
+                              description="description"
+                              pk=""
+                              onJoinEvent={this.props.onJoinEvent}
+                              isEditable={true}/>
+      );
+    } else {
+      return (
+        <button onClick={this.onHostEvent} className="btn btn-primary" style={{width:'100%'}}>Host an Event!</button>
+        );
+    }
   }
 
   render() {
@@ -105,12 +135,13 @@ class Events extends Component {
 	        <div className= "col-9">
 	           <div className= "container">
 	              <div className= "row">
-	                <AddEvent onCreateEvent={this.onCreateEvent}/>
-	                </div>
+                  <div className="col-md-6 event-row-buffer">
+                    {this.newCard()}
+                  </div>
 
-	                <div className= "row">
-	                	<EventsPanel events = {this.state.events} onJoinEvent={this.onJoinEvent}/>
-	                </div>
+  	               <EventsPanel events={this.state.events} onJoinEvent={this.onJoinEvent}/>
+
+                </div>
 	            </div>
 	        </div>
 	      </div>
