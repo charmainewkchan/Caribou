@@ -16,7 +16,7 @@ class EventsAttending extends Component {
   }
 
   componentDidMount() {
-    const netid = localStorage.getItem('netid') + "/";
+    const netid = localStorage.getItem('netid');
     const url = "https://bixr.herokuapp.com/api/get_events_for_user/" + netid + "/";
 
     axios.get(url).then(res => {

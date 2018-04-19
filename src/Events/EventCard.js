@@ -8,9 +8,6 @@ import EditableEvent from './EditableEvent'
 
 class EventCard extends Component {
 
-onEdit
-
-
   render() {
     if (this.props.isEditable) {
         return (
@@ -33,6 +30,7 @@ onEdit
                                 capacity={this.props.capacity} 
                                 description={this.props.description}
                                 pk={this.props.pk}
+                                isAttending={this.props.isAttending}
                                 onJoinEvent={this.props.onJoinEvent}/>
         )
     }

@@ -76,15 +76,24 @@ def get_events(request):
 	netid = request.session['netid']
 	dataq = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', dataq)
+
+	user = User.objects.get(netid=netid)
+	joined_events = JoinedEvents.objects.filter(participant=user)
+	joined_events_json = serializers.serialize('json', joined_events)
+
+	# send values to a list
+	events_joined = [joined_events_json[k]["fields"]["pk"] for k in joined_events_json]
+
 	data = json.loads(data_json)
 	# manipulate data to add owner field, 0 is not owner, 1 is owner
 	for e in data: # e is the outer dictionary for the event
 		userpk = int(e["fields"]["author"]) # get user pkid
 		author = User.objects.get(pk=userpk).netid # user netid
-		if author == netid:
-			e["owner"] = 1
-		else:
-			e["owner"] = 0
+
+		e["isOwner"] = 1 if author == netid else 0
+		e["isAttending"] = 1 if e["pk"] in events_joined else 0
+
+
 	data_json = json.dumps(data)
 	return HttpResponse(data_json, content_type='application/json')
 
@@ -167,6 +176,7 @@ def join_event(request):
 	data = data_json[0]
 	event_id = int(data["event"])
 	event_set = PersonalEvent.objects.filter(pk=event_id)
+
 	# event not found
 	if len(event_set) != 1:
 		return HttpResponse("Event Not Found", status=404)
