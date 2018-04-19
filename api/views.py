@@ -31,7 +31,7 @@ def joined_events_list():
 	joined_events_json = json.loads(serializers.serialize('json', joined_events, fields="event"))
 
 	# send values to a list
-	return [e["pk"] for e in joined_events_json]
+	return [e["fields"]["event"] for e in joined_events_json]
 
 
 # appends isOwner and isAttending fields to list of events
