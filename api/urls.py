@@ -16,6 +16,5 @@ urlpatterns = [
 	re_path(r'^join_event', views.join_event),
 	path('hosted_events/<netid>/', views.hosted_events),
 	path('delete_event/<event_id>/', views.delete_event,),
-	path('edit_event/<event_id>/', views.edit_event),
-	path('login_test/<netid>/', views.login_test, name='login_test'),
+	path('edit_event/<event_id>/', views.edit_event)
 ]
