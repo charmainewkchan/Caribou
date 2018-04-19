@@ -6,13 +6,15 @@ import EventsPanel from '../Events/EventsPanel';
 class EventsHosting extends Component {
   constructor(props) {
     super(props)
+
     this.state={
       eventsHosting: []
     };
   }
 
   componentDidMount() {
-    const url = "https://bixr.herokuapp.com/api/hosted_events/";
+    const netid = localStorage.getItem('netid');
+    const url = "https://bixr.herokuapp.com/api/hosted_events/" + netid + "/";
 
     axios.get(url).then(res => {
       console.log(res.data);
