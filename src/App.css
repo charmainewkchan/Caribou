@@ -91,6 +91,10 @@
   padding: 1em;
 }
 
+.Events-redBackground{
+  background-color: red;
+}
+
 .Events-filter{
   background-color: white;
   text-align: left;

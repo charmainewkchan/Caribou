@@ -1,11 +1,10 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
-# import datetime
+
 from django.template.response import TemplateResponse
 from django.shortcuts import redirect
 
-#from django.http import HttpResponse
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from api.models import User, PersonalEvent, ClubEvent, JoinedEvents
@@ -32,9 +31,15 @@ def get_user(request, netid):
 @casauth
 def get_events_for_user(request, netid):
 	user = User.objects.get(netid=netid)
-	joinedevents = JoinedEvents.objects.filter(participant=user)
-	joinedevents_json = serializers.serialize('json', joinedevents)
-	return HttpResponse(joinedevents_json, content_type='application/json')
+	joined_events = JoinedEvents.objects.filter(participant=user)
+	# make a list of the event ids
+	event_ids = []
+	for j in joined_events:
+		event_id=j.event.id
+		event_ids.append(event_id)
+	events = PersonalEvent.objects.filter(id__in=event_ids)
+	events_json = serializers.serialize('json', events)
+	return HttpResponse(events_json, content_type='application/json')
 
 #------------------------------------------------------------------------------#
 @casauth
@@ -52,20 +57,34 @@ def get_event(request, event_id):
 	return HttpResponse(event_json, content_type='application/json')
 
 @casauth
-def get_users_for_event(request, event_id):
-	event = PersonalEvent.objects.get(pk=int(event_id))
-	joinedusers = JoinedEvents.objects.filter(event=event)
-	joinedusers_json = serializers.serialize('json', joinedusers)
-	return HttpResponse(joinedusers_json, content_type='application/json')
+def hosted_events(request):
+	netid = request.session['netid']
+	user = User.objects.get(netid=netid1)
+	events = PersonalEvent.objects.filter(author=user)
+	events_json = serializers.serialize('json', events)
+	return HttpResponse(events_json, content_type='application/json')
 
 @casauth
+def get_users_for_event(request, event_id):
+	event = PersonalEvent.objects.get(pk=int(event_id))
+	joined_users = JoinedEvents.objects.filter(event=event)
+	# make a list of the user ids
+	user_ids = []
+	for j in joined_users:
+		user_id = j.participant.id
+		user_ids.append(user_id)
+	users = User.objects.filter(id__in=user_ids)
+	users_json = serializers.serialize('json', users)
+	return HttpResponse(users_json, content_type='application/json')
+
 @csrf_exempt
+@casauth
 def post_event(request):
 	# get the json data
 	data_json = json.loads(request.body)
 	data = data_json[0]
 	# author
-	authornetid = request.session['netid']# @caseauth ensures they are logged in
+	authornetid = request.session['netid']# @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
 	description = data["description"]
 	title = data["title"]
@@ -77,11 +96,10 @@ def post_event(request):
 	capacity = int(data["capacity"])
 	e = PersonalEvent(author = author, description = description, title = title, date = date, start=start, end=end, location = location, eating_club = eating_club, capacity = capacity)
 	e.save()
-	# event_json = json.loads(request.body)
 	return HttpResponse(e)
 
-@casauth
 @csrf_exempt
+@casauth
 def delete_event(request, event_id):
 	authornetid = request.session['netid'] # @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
@@ -102,8 +120,8 @@ def delete_event(request, event_id):
 	return HttpResponse("deleted event " + title)
 
 #------------------------------------------------------------------------------#
-@casauth
 @csrf_exempt
+@casauth
 def join_event(request):
 	data_json = json.loads(request.body)
 	data = data_json[0]

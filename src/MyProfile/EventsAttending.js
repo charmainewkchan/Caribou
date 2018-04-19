@@ -4,11 +4,11 @@ import '../App.css';
 import axios from 'axios'
 import EventsPanel from '../Events/EventsPanel';
 
-class MyEvents extends Component {
+class EventsAttending extends Component {
   constructor(props) {
     super(props)
     this.state={
-      myEvents: []
+      eventsAttending: []
     };
 
     /*this.handleDelete = this.handleDelete.bind(this);*/
@@ -22,7 +22,7 @@ class MyEvents extends Component {
             ).then(res => {
       console.log(res.data);
       this.setState({
-        myEvents: res.data
+        eventsAttending: res.data
       });
     });
   }
@@ -33,10 +33,10 @@ class MyEvents extends Component {
     return (
         <div>
           <h2>Events Attending</h2>
-          <EventsPanel events = {this.state.myEvents} onJoinEvent={null}/>
+          <EventsPanel events = {this.state.eventsAttending} onJoinEvent={null}/>
         </div>
     );
   }
 }
 
-export default MyEvents;
+export default EventsAttending;
