@@ -1,11 +1,10 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
-# import datetime
+
 from django.template.response import TemplateResponse
 from django.shortcuts import redirect
 
-#from django.http import HttpResponse
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from api.models import User, PersonalEvent, ClubEvent, JoinedEvents
