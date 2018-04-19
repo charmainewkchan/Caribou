@@ -4,26 +4,36 @@ api/user/<netid>/
 returns 404 if user not found
 returns user info if found
 
+delete_user : deletes the currently logged in user
+api/delete_user/
+returns 404 if user not found
+returns "deleted user <netid>" if successful
+
 get_events_for_user : gets the events the specified user has signed up for
 api/get_events_for_user/<netid>/
 returns empty list if no joined events
-returns JoinedEvents list if found
+returns list of events if found
 
 ===== event =====
 get_events : gets info for all events
 api/get_events/
 returns empty list if no joined events
-returns list of events and event info if found
+returns list of events and event info if found, with "owner" field
 
 get_event : gets info for the event specified by event_id
 api/event/<event_id>/
 returns 404 if event not found
 returns event info if found
 
+hosted_events : list of all events that the user <netid> has hosted
+api/hosted_events/netid/
+returns empty list if no events
+returns event info if found
+
 get_users_for_event : gets the signed up users for the specified event
 api/get_users_for_event/<event_id>/
 returns empty list if no users joined
-returns JoinedEvents list if found
+returns list of Users if found
 
 post_event : creates an event in the database
 api/post_event/
@@ -42,6 +52,12 @@ api/delete_event/<event_id>/
 returns 404 if event not found
 returns 403 Forbidden if not the correct user
 returns "deleted event " + event id and title if successful
+
+edit_event : edits a specified event
+api/edit_event/<event_id>/
+returns 404 if event not found
+returns 403 Forbidden if not the correct user
+returns "event <event_id> updated" if successful
 
 ===== join =====
 join_event : joins the user to the event

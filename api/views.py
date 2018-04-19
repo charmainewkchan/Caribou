@@ -96,8 +96,8 @@ def get_event(request, event_id):
 	return HttpResponse(event_json, content_type='application/json')
 
 @casauth
-def hosted_events(request):
-	netid = request.session['netid']
+def hosted_events(request, netid):
+	netid1 = netid
 	user = User.objects.get(netid=netid1)
 	events = PersonalEvent.objects.filter(author=user)
 	events_json = serializers.serialize('json', events)
@@ -165,6 +165,11 @@ def edit_event(request, event_id):
 	if len(e_set) != 1:
 		return HttpResponse("Event Not Found", status=404)
 	e = PersonalEvent.objects.get(pk=int(event_id))
+	# check if correct author
+	authornetid = request.session['netid']
+	author = Users.objects.get(netid=authornetid)
+	if (e.author != author):
+		return HttpResponse("Permission Denied", status=403)
 	data_json = json.loads(request.body)
 	data = data_json[0]
 	description = data["description"]
