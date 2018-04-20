@@ -33,7 +33,7 @@ class EditableEvent extends Component {
       </div>
 
       <div className="card-footer event-footer">
-        <button disabled={this.props.attendance==this.props.capacity} className="btn btn-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
+        <button disabled={this.props.attendance==this.props.capacity} className="btn btn-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Save </button>
       </div>
     </div>
     );
