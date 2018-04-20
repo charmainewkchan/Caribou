@@ -113,10 +113,12 @@ class Events extends Component {
                     <EventCard title=""
                               eating_club=""
                               time=""
-                              attendance=""
+                              attendance="0"
                               capacity=""
                               description="description"
                               pk=""
+                              start=""
+                              end=""
                               onDataChange={this.onDataChange}
                               isEditable={true}/>
       );

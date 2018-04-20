@@ -57,6 +57,8 @@ class EventsPanel extends Component {
                             capacity={event.fields.capacity}
                             description={event.fields.description}
                             pk={event.pk}
+                            start={event.fields.start}
+                            end={event.fields.end}
                             isAttending={event.isAttending}
                             isOwner={event.isOwner}
                             onJoinEvent={this.onJoinEvent}

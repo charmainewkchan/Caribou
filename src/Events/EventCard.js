@@ -11,13 +11,15 @@ class EventCard extends Component {
   render() {
     if (this.props.isEditable) {
         return (
-              <EditableEvent title={this.props.title} 
-                                eating_club={this.props.eating_club} 
-                                time={this.props.time} 
-                                attendance={this.props.attendance} 
-                                capacity={this.props.capacity} 
+              <EditableEvent title={this.props.title}
+                                eating_club={this.props.eating_club}
+                                time={this.props.time}
+                                attendance={this.props.attendance}
+                                capacity={this.props.capacity}
                                 description={this.props.description}
                                 pk={this.props.pk}
+                                start = {this.props.start}
+                                end = {this.props.end}
                                 isOwner={true}
                                 isAttending={false}
                                 onLeaveEvent={null}
@@ -28,13 +30,15 @@ class EventCard extends Component {
     }
     else {
         return  (
-        	  <Event title={this.props.title} 
-                                eating_club={this.props.eating_club} 
-                                time={this.props.time} 
-                                attendance={this.props.attendance} 
-                                capacity={this.props.capacity} 
+        	  <Event title={this.props.title}
+                                eating_club={this.props.eating_club}
+                                time={this.props.time}
+                                attendance={this.props.attendance}
+                                capacity={this.props.capacity}
                                 description={this.props.description}
                                 pk={this.props.pk}
+                                start = {this.props.start}
+                                end = {this.props.end}
                                 isAttending={this.props.isAttending}
                                 isOwner={this.props.isOwner}
                                 onLeaveEvent={this.props.onLeaveEvent}
