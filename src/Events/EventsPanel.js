@@ -34,10 +34,6 @@ class EventsPanel extends Component {
     this.props.updateData();
   }
 
-    this.props.updateData();
-
-    }
-
     onEditEvent(event_id) {
 
     }
