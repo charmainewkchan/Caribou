@@ -18,13 +18,13 @@ class Event extends Component {
 			return (
 				<div className="row">
 					<div className="col">
-						<button className="btn btn-primary leave-button" onClick={() => this.props.displayAttendees(this.props.pk)}> Attendees </button>
+						<button className="btn btn-primary btn-sm" onClick={() => this.props.displayAttendees(this.props.pk)}> @ </button>
 					</div>
 					<div className="col">
-						<button className="btn btn-default leave-button" onClick={() => this.props.toggleEditMode(this.props.toggleEditMode)}> Edit </button>
+						<button className="btn btn-outline-success btn-sm" onClick={() => this.props.toggleEditMode(this.props.toggleEditMode)}> * </button>
 					</div>
 					<div className="col">
-						<button className="btn btn-warning leave-button" onClick={() => this.props.onEditEvent(this.props.pk)}> Remove </button>
+						<button className="btn btn-warning btn-sm" onClick={() => this.props.onRemoveEvent(this.props.pk)}> X </button>
 					</div>
 				</div>
 				);

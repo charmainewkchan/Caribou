@@ -29,10 +29,8 @@ class EventCard extends Component {
 
 
   displayAttendees(event_pk) {
-    alert(event_pk);
-    const url = "https://bixr.herokuapps.com/api/get_users_for_event/" + event_pk + "/";
+    const url = "https://bixr.herokuapp.com/api/get_users_for_event/" + event_pk + "/";
     axios.get(url).then(res => {
-        alert(res.data);
         var netids = res.data.map(user => user.fields.netid);
         alert(netids);
     })
@@ -69,7 +67,8 @@ class EventCard extends Component {
                                 description={this.props.description}
                                 pk={this.props.pk}
                                 isAttending={this.props.isAttending}
-                                isOwner={true}
+                                onRemoveEvent={this.props.onRemoveEvent}
+                                isOwner={this.props.isOwner}
                                 onLeaveEvent={this.props.onLeaveEvent}
                                 toggleEditMode={this.toggleEditMode}
                                 displayAttendees={this.displayAttendees}
