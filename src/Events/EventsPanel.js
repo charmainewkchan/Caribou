@@ -16,6 +16,8 @@ class EventsPanel extends Component {
 
     this.onJoinEvent = this.onJoinEvent.bind(this);
     this.onLeaveEvent = this.onLeaveEvent.bind(this);
+    this.onRemoveEvent = this.onRemoveEvent.bind(this);
+
   }
 
 
@@ -31,6 +33,23 @@ class EventsPanel extends Component {
 
     this.props.updateData();
   }
+
+    this.props.updateData();
+
+    }
+
+    onEditEvent(event_id) {
+
+    }
+
+    onRemoveEvent(event_id) {
+      const url = "https://bixr.herokuapp.com/api/delete_event/" + event_id + "/";
+      axios.get(url)
+      .then(res => console.log(res))
+      .catch(err => alert(err));
+
+      this.props.updateData();
+    }
 
   onLeaveEvent(event_id) {
     var data = [{
@@ -63,6 +82,7 @@ class EventsPanel extends Component {
                             isOwner={event.isOwner}
                             onJoinEvent={this.onJoinEvent}
                             onEditEvent={this.props.onEditEvent}
+                            onRemoveEvent={this.onRemoveEvent}
                             onLeaveEvent={this.onLeaveEvent}
                             isEditable={this.props.isEditable}/>
               </div>)
