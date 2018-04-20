@@ -49,6 +49,7 @@ class EventCard extends Component {
                                 pk={this.props.pk}
                                 start = {this.props.start}
                                 end = {this.props.end}
+                                newCard= {false}
                                 isOwner={true}
                                 isAttending={false}
                                 onLeaveEvent={null}
