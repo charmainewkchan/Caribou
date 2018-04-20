@@ -1,5 +1,6 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
+from django.core.mail import send_mail
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 
 from django.template.response import TemplateResponse
@@ -50,7 +51,11 @@ def append_data_to_events(data_json):
 
 	return json.dumps(data)
 
-	return HttpResponse(data_json, content_type='application/json')
+	return HttpResponse(datxa_json, content_type='application/json')
+
+# sends an email with given specs
+def notify(subject, message, tolist):
+	send_mail(subject, message, "example@example.com", tolist, fail_silently=False)
 
 #------------------------------------------------------------------------------#
 @casauth
@@ -173,8 +178,20 @@ def delete_event(request, event_id):
 	title = event.title
 	# check joined events for dependencies
 	dependencies = JoinedEvents.objects.filter(event=event)
+	# find attendees
+	attendees_id = [j.participant.netid for j in dependencies]
+
 	if len(dependencies) > 0:
 		dependencies.delete()
+	# email the attendees
+	tolist = []
+	for netid in attendees_id:
+		mail = netid + "@princeton.edu"
+		tolist.append(mail)
+	subject = 'An event you joined was deleted'
+	message = "placeholderrrrrrr " + title + "."
+	notify(subject, message, tomail)
+
 	# delete the event
 	event.delete()
 	return HttpResponse("deleted event " + title)
@@ -210,6 +227,17 @@ def edit_event(request, event_id):
 	e.location = location
 	e.capacity = capacity
 	e.save()
+	# email attendees
+	# find attendees
+	joined = JoinedEvents.objects.filter(event=e)
+	attendees_id = [j.participant.netid for j in joined]
+	tolist = []
+	for netid in attendees_id:
+		mail = netid + "@princeton.edu"
+		tolist.append(mail)
+	subject = 'An event you joined was edited'
+	message = "PLACEHOLDER " + title + "."
+	notify(subject, message, tomail)
 	return HttpResponse("event " + str(event_id) + " updated")
 
 #------------------------------------------------------------------------------#
@@ -240,6 +268,13 @@ def join_event(request):
 	# add to table
 	j = JoinedEvents(participant=participant, event=event)
 	j.save()
+	# email event host
+	host = event.author.netid
+	tomail = host + "@princeton.edu"
+	tolist = [tomail]
+	subject = 'Someone joined your event!'
+	message = "Someone just joined your event " + event.title + ". Check who it is!"
+	notify(subject, message, tomail)
 	return HttpResponse(participant_netid + " joined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
 @csrf_exempt
@@ -254,7 +289,7 @@ def unjoin_event(request):
 		return HttpResponse("Event Not Found", status=404)
 	event = PersonalEvent.objects.get(pk=event_id)
 	# check if currently in event
-	participant_netid = 'dsawicki'
+	participant_netid = 'ljing'
 	participant = User.objects.get(netid=participant_netid)
 	joined = JoinedEvents.objects.filter(participant=participant).filter(event=event)
 	if len(joined) != 1: # if not joined in this event
@@ -264,6 +299,13 @@ def unjoin_event(request):
 	event_set.update(attendance=newatt)
 	# remove from table
 	joined.delete()
+	# email event host
+	host = event.author.netid
+	tomail = host + "@princeton.edu"
+	tolist = [tomail]
+	subject = 'Someone unjoined your event!'
+	message = "Someone just unjoined your event " + event.title + "."
+	notify(subject, message, tomail)
 	return HttpResponse(participant_netid + " unjoined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
 #------------------------------------------------------------------------------#
