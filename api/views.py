@@ -128,7 +128,7 @@ def hosted_events(request, netid):
 	events = PersonalEvent.objects.filter(author=user)
 	events_json = serializers.serialize('json', events)
 
-	data_json = append_data_to_events(events_json)
+	data_json = append_data_to_events(events_json, netid)
 
 	return HttpResponse(data_json, content_type='application/json')
 
