@@ -214,6 +214,7 @@ def edit_event(request, event_id):
 	data_json = json.loads(request.body)
 	data = data_json[0]
 	description = data["description"]
+	attendance = data["attendance"]
 	title = data["title"]
 	date = data["date"]
 	start = data["start"]

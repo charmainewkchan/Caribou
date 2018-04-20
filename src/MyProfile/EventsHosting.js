@@ -20,7 +20,7 @@ class EventsHosting extends Component {
 
   updateData(){
     // reload the data
-    const netid = 'dsawicki' //localStorage.getItem('netid');
+    const netid = localStorage.getItem('netid');
     const url = "https://bixr.herokuapp.com/api/hosted_events/" + netid + "/";
     axios.get(url).then(res => {
       console.log(res.data);
