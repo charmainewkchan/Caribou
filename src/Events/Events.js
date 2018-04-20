@@ -7,6 +7,8 @@ import AddEvent from './AddEvent.js';
 import filter_data from './filters.json';
 import eating_club_map from './eating_club_map.json';
 import EventCard from './EventCard';
+import EditableEvent from './EditableEvent';
+
 
 import axios from 'axios'
 
@@ -110,7 +112,7 @@ class Events extends Component {
   newCard() {
     if (this.state.showNewCard) {
       return (
-                    <EventCard title=""
+                    <EditableEvent title=""
                               eating_club=""
                               time=""
                               attendance="0"

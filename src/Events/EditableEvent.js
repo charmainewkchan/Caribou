@@ -112,8 +112,6 @@ class EditableEvent extends Component {
   		 <div className="card-header event-header">
   			  <input className = "form-control" type = "text" id = "title" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
   		    <p>{eating_club_map[this.props.eating_club]} &bull</p>
-          // TODO: editable date
-          // TODO: editable time
   		 </div>
 
   	    <div className="card-body event-body">
@@ -130,17 +128,20 @@ class EditableEvent extends Component {
 
              <div className = "container">
               <div className = "row">
-                <label for = "start" className = "col"> Start:</label>
-                  <div className = "col">
-                        <Dropdown options={options} label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" />
-                  </div>
-
-                <label for = "dash" className= "col btn"> - </label>
-                <label for = "end" className = "col"> End:</label>
                 <div className = "col">
-                    <div>
-                      <Dropdown options={options} label = "end" onChange={this._onSelectEnd} value={this.state.end} placeholder="00:00" />
-                    </div>
+                  <label for = "start" className = "btn">Start Time:</label>
+                </div>
+
+                <div className = "col">
+                    <Dropdown options={options} label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" />
+                </div>
+
+                <div className = "col">
+                  <label for = "end" className = "col btn"> End Time:</label>
+                </div>
+
+                <div className = "col">
+                    <Dropdown options={options} label = "end" onChange={this._onSelectEnd} value={this.state.end} placeholder="00:00" />
                 </div>
 
               </div>
@@ -154,8 +155,8 @@ class EditableEvent extends Component {
               <input className = "form-control" type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = "Capacity"/>
               </div>
              </div>
+          <button className="btn btn-success " onClick = {this.handleCreateEvent}> Save Changes </button>
         </div>
-        <button className="btn btn-success" onClick = {this.handleCreateEvent}> Save Changes </button>
       </div>
     );
   }
