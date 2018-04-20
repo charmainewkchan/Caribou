@@ -32,6 +32,10 @@ class EventsPanel extends Component {
     this.props.updateData();
   }
 
+  onEditEvent(event_id) {
+
+  }
+
   onLeaveEvent(event_id) {
     var data = [{
       event: event_id,
@@ -60,9 +64,8 @@ class EventsPanel extends Component {
                             isAttending={event.isAttending}
                             isOwner={event.isOwner}
                             onJoinEvent={this.onJoinEvent}
-                            onEditEvent={this.props.onEditEvent}
-                            onLeaveEvent={this.onLeaveEvent}
-                            isEditable={this.props.isEditable}/>
+                            onEditEvent={this.onEditEvent}
+                            onLeaveEvent={this.onLeaveEvent}/>
               </div>)
 
             }, this)

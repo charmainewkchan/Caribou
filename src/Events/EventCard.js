@@ -7,9 +7,26 @@ import Event from './Event'
 import EditableEvent from './EditableEvent'
 
 class EventCard extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      edit_mode : false
+    };
+
+
+    this.toggleEditMode = this.toggleEditMode.bind(this);
+  }
+
+
+  toggleEditMode() {
+    this.setState({
+      edit_mode: !this.state.edit_mode
+    });
+  }
 
   render() {
-    if (this.props.isEditable) {
+    if (this.state.edit_mode) {
         return (
               <EditableEvent title={this.props.title} 
                                 eating_club={this.props.eating_club} 
@@ -22,9 +39,10 @@ class EventCard extends Component {
                                 isAttending={false}
                                 onLeaveEvent={null}
                                 onSubmitEdit={null}
+                                toggleEditMode={this.toggleEditMode}
                                 onJoinEvent={this.props.onJoinEvent}/>
 
-        )
+        );
     }
     else {
         return  (
@@ -38,9 +56,9 @@ class EventCard extends Component {
                                 isAttending={this.props.isAttending}
                                 isOwner={this.props.isOwner}
                                 onLeaveEvent={this.props.onLeaveEvent}
-                                onEditEvent={this.props.onEditEvent}
+                                toggleEditMode={this.toggleEditMode}
                                 onJoinEvent={this.props.onJoinEvent}/>
-        )
+        );
     }
   }
 }

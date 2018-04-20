@@ -17,7 +17,7 @@ class Event extends Component {
 			return (
 				<div className="row">
 					<div className="col">
-						<button className="btn btn-info leave-button" onClick={() => this.props.onEditEvent(this.props.pk)}> Edit </button>
+						<button className="btn btn-info leave-button" onClick={() => this.props.toggleEditMode(this.props.toggleEditMode)}> Edit </button>
 					</div>
 					<div className="col">
 						<button className="btn btn-warning leave-button" onClick={() => this.props.onEditEvent(this.props.pk)}> Remove </button>
