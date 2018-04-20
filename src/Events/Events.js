@@ -113,7 +113,7 @@ class Events extends Component {
     if (this.state.showNewCard) {
       return (
                     <EditableEvent title=""
-                              eating_club=""
+                              eating_club="Eating Club"
                               time=""
                               attendance="0"
                               capacity=""

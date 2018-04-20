@@ -45,6 +45,7 @@ class EditableEvent extends Component {
       eventName: this.props.title,
       eventDes: this.props.description,
       eventLoc: this.props.location,
+      eating_club: this.props.eating_club,
       start:this.props.start,
       end: this.props.end,
       date:this.props.date,
@@ -111,20 +112,32 @@ class EditableEvent extends Component {
       <div className="card Events-event">
   		 <div className="card-header event-header">
   			  <input className = "form-control" type = "text" id = "title" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
-  		    <p>{eating_club_map[this.props.eating_club]} &bull</p>
+  		    <p>{this.state.eating_club} &bull; </p>
   		 </div>
 
   	    <div className="card-body event-body">
              <textarea className="form-control" type="text" id="description" name = "eventDes" value= {this.state.eventDes} onChange={this.handleChange}/>
-             <SingleDatePicker
-             date={this.state.date}
-             name = "date"
-             placeholder= "Select"
-             small = {true}// momentPropTypes.momentObj or null
-             onDateChange={date => this.setState({date})} // PropTypes.func.isRequired
-             focused={this.state.focused} // PropTypes.bool
-             onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-             />
+
+             <div className = "container">
+              <div className = "row">
+                <div className = "col">
+                  <label for = "date" className = "btn"> Date: </label>
+                </div>
+
+                <div className = "col">
+                   <SingleDatePicker
+                   date={this.state.date}
+                   name = "date"
+                   placeholder= "Select"
+                   small = {true}// momentPropTypes.momentObj or null
+                   onDateChange={date => this.setState({date})} // PropTypes.func.isRequired
+                   focused={this.state.focused} // PropTypes.bool
+                   onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+                   />
+                </div>
+
+              </div>
+             </div>
 
              <div className = "container">
               <div className = "row">
@@ -149,13 +162,13 @@ class EditableEvent extends Component {
 
              <div className = "row">
               <div className = "col">
-              <button className = "btn">{this.state.attendance+"/"}</button>
+              <label className = "btn">{this.state.attendance+"/"}</label>
               </div>
               <div className = "col">
               <input className = "form-control" type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = "Capacity"/>
               </div>
              </div>
-          <button className="btn btn-success " onClick = {this.handleCreateEvent}> Save Changes </button>
+          <button className="btn btn-success" style ={{width:150}} onClick = {this.handleCreateEvent}>Save Changes</button>
         </div>
       </div>
     );
