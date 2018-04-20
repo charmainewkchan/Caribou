@@ -50,6 +50,7 @@ class EditableEvent extends Component {
       end: this.props.end,
       date:this.props.date,
       eventCap:this.props.capacity,
+      newCard: this.props.newCard,
       attendance: this.props.attendance
     }
 

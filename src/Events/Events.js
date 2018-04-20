@@ -121,7 +121,9 @@ class Events extends Component {
                               pk=""
                               start=""
                               end=""
+                              newCard = {true}
                               onDataChange={this.onDataChange}
+                              onCreateEvent={this.onCreateEvent}
                               isEditable={true}/>
       );
     } else {
