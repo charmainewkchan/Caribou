@@ -45,6 +45,8 @@ class Events extends Component {
         console.log(res.data);
       })
     .catch(err => alert(err));
+
+    this.updateData();
   }
 
 

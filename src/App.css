@@ -76,6 +76,10 @@
   border-bottom: 1px solid #aaa;
 }
 
+.owner-btn {
+  width: 3em;
+  margin:.5em .25em;
+}
 
 .Events-inputBig{
   font-family: 'Roboto', sans-serif;
