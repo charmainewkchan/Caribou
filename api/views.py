@@ -55,7 +55,8 @@ def append_data_to_events(data_json, netid):
 
 # sends an email with given specs
 def notify(subject, message, tolist):
-	send_mail(subject, message, "example@example.com", tolist, fail_silently=False)
+	send_mail(subject, message, 'bixrnoreply@gmail.com', tolist, fail_silently=True)
+	return
 
 #------------------------------------------------------------------------------#
 @casauth
