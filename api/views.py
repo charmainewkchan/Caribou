@@ -292,7 +292,7 @@ def unjoin_event(request):
 		return HttpResponse("Event Not Found", status=404)
 	event = PersonalEvent.objects.get(pk=event_id)
 	# check if currently in event
-	participant_netid = 'ljing'
+	participant_netid = request.session['netid']
 	participant = User.objects.get(netid=participant_netid)
 	joined = JoinedEvents.objects.filter(participant=participant).filter(event=event)
 	if len(joined) != 1: # if not joined in this event
