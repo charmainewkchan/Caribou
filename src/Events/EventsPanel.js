@@ -12,6 +12,37 @@ class EventsPanel extends Component {
     super(props);
     this.state = {
     };
+
+
+    this.onJoinEvent = this.onJoinEvent.bind(this);
+    this.onLeaveEvent = this.onLeaveEvent.bind(this);
+  }
+
+
+
+
+  onJoinEvent(event_id) {
+    var data = [{
+      event: event_id,
+    }]
+    axios.post("https://bixr.herokuapp.com/api/join_event/",  data)
+    .then(res => console.log(res))
+    .catch(err => alert(err));
+
+    this.props.updateData();
+  }
+
+  onLeaveEvent(event_id) {
+    var data = [{
+      event: event_id,
+    }]
+    alert(JSON.stringify(data));
+
+    axios.post("https://bixr.herokuapp.com/api/unjoin_event/",  data)
+    .then(res => console.log(res))
+    .catch(err => alert(err));
+
+    this.props.updateData();
   }
 
   render() {
@@ -26,8 +57,11 @@ class EventsPanel extends Component {
                             capacity={event.fields.capacity}
                             description={event.fields.description}
                             pk={event.pk}
-                            onJoinEvent={this.props.onJoinEvent}
                             isAttending={event.isAttending}
+                            isOwner={event.isOwner}
+                            onJoinEvent={this.onJoinEvent}
+                            onEditEvent={this.props.onEditEvent}
+                            onLeaveEvent={this.onLeaveEvent}
                             isEditable={this.props.isEditable}/>
               </div>)
 

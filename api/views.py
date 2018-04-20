@@ -31,7 +31,7 @@ def joined_events_list():
 	joined_events_json = json.loads(serializers.serialize('json', joined_events, fields="event"))
 
 	# send values to a list
-	return [e["pk"] for e in joined_events_json]
+	return [e["fields"]["event"] for e in joined_events_json]
 
 
 # appends isOwner and isAttending fields to list of events
@@ -44,7 +44,7 @@ def append_data_to_events(data_json):
 		userpk = int(e["fields"]["author"]) # get user pkid
 		author = User.objects.get(pk=userpk).netid # user netid
 
-		e["isOwner"] = 1 if author == netid else 0
+		e["isOwner"] = 1 if author == 'dsawicki' else 0
 		e["isAttending"] = 1 if e["pk"] in events_joined else 0
 
 
@@ -242,6 +242,7 @@ def join_event(request):
 	j.save()
 	return HttpResponse(participant_netid + " joined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
+@csrf_exempt
 @casauth
 def unjoin_event(request):
 	data_json = json.loads(request.body)

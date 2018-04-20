@@ -13,11 +13,23 @@ class Event extends Component {
 	}
 
 	buttons() {
-		if (this.props.isAttending) {
+		if (this.props.isOwner) {
+			return (
+				<div className="row">
+					<div className="col">
+						<button className="btn btn-info leave-button" onClick={() => this.props.onEditEvent(this.props.pk)}> Edit </button>
+					</div>
+					<div className="col">
+						<button className="btn btn-warning leave-button" onClick={() => this.props.onEditEvent(this.props.pk)}> Remove </button>
+					</div>
+				</div>
+				);
+		} 
+		else if (this.props.isAttending) {
 			return <button className="btn btn-danger leave-button" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Leave </button>
 		} else {
 			return <button disabled={this.props.attendance==this.props.capacity} className="btn btn-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
-		}
+		} 
 	}
 
   render() {

@@ -24,24 +24,30 @@ class Events extends Component {
       showNewCard: false
   	}
     this.onClubFilterChange = this.onClubFilterChange.bind(this);
+
     this.onCreateEvent = this.onCreateEvent.bind(this);
-    this.onJoinEvent = this.onJoinEvent.bind(this);
     this.onHostEvent = this.onHostEvent.bind(this);
+    this.updateData = this.updateData.bind(this);
   }
 
   componentDidMount() {
-    const url = "https://bixr.herokuapp.com/api/get_events";
-    axios.get(url).then(res => {
-      console.log(res.data);
-      this.setState({
-        events_data: res.data,
-        events: res.data
-      });
-    });
+    this.updateData();
   }
 
+
+  onCreateEvent(event){
+    console.log(event)
+    axios.post('https://bixr.herokuapp.com/api/post_event', event)
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+    .catch(err => alert(err));
+  }
+
+
   filterEvents(){
-    console.log(this.state.events_data);
+  console.log(this.state.events_data);
 	var filtered = this.state.events_data.filter(event => this.state.filter.clubs.includes(event.fields.eating_club));
 
 	this.setState({
@@ -74,14 +80,17 @@ class Events extends Component {
   	}, function() {this.filterEvents()});
   }
 
-  onCreateEvent(event){
-    console.log(event)
-    axios.post('https://bixr.herokuapp.com/api/post_event', event)
-    .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-    .catch(err => alert(err));
+
+
+  updateData(){
+    // reload the data
+    const url = "https://bixr.herokuapp.com/api/get_events";
+    axios.get(url).then(res => {
+      console.log(res.data);
+      this.setState({
+        events_data: res.data,
+      }, function() {this.filterEvents()});
+    });
   }
 
   onEditEvent(event){
@@ -95,17 +104,7 @@ class Events extends Component {
     })
   }
 
-  onJoinEvent(event_id) {
-    var data = [{
-      event: event_id,
-      netid: localStorage.getItem('netid')
-    }]
-    alert(JSON.stringify(data));
 
-    axios.post("https://bixr.herokuapp.com/api/join_event",  data)
-    .then(res => console.log(res))
-    .catch(err => alert(err));
-  }
    //<AddEvent onCreateEvent={this.onCreateEvent}/>
 
   newCard() {
@@ -118,7 +117,7 @@ class Events extends Component {
                               capacity=""
                               description="description"
                               pk=""
-                              onJoinEvent={this.props.onJoinEvent}
+                              onDataChange={this.onDataChange}
                               isEditable={true}/>
       );
     } else {
@@ -143,7 +142,7 @@ class Events extends Component {
                     {this.newCard()}
                   </div>
 
-  	               <EventsPanel events={this.state.events} onJoinEvent={this.onJoinEvent}/>
+  	               <EventsPanel events={this.state.events} updateData={this.updateData}/>
 
                 </div>
 	            </div>

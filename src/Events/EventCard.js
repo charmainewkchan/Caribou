@@ -18,7 +18,10 @@ class EventCard extends Component {
                                 capacity={this.props.capacity} 
                                 description={this.props.description}
                                 pk={this.props.pk}
+                                isOwner={true}
+                                isAttending={false}
                                 onLeaveEvent={null}
+                                onSubmitEdit={null}
                                 onJoinEvent={this.props.onJoinEvent}/>
 
         )
@@ -33,7 +36,9 @@ class EventCard extends Component {
                                 description={this.props.description}
                                 pk={this.props.pk}
                                 isAttending={this.props.isAttending}
-                                onLeaveEvent={null}
+                                isOwner={this.props.isOwner}
+                                onLeaveEvent={this.props.onLeaveEvent}
+                                onEditEvent={this.props.onEditEvent}
                                 onJoinEvent={this.props.onJoinEvent}/>
         )
     }
