@@ -187,13 +187,10 @@ def delete_event(request, event_id):
 	if len(dependencies) > 0:
 		dependencies.delete()
 	# email the attendees
-	tolist = []
-	for netid in attendees_id:
-		mail = netid + "@princeton.edu"
-		tolist.append(mail)
+	tolist = [n+"@princeton.edu" for n in attendees_id]
 	subject = 'An event you joined was deleted'
 	message = "placeholderrrrrrr " + title + "."
-	notify(subject, message, tomail)
+	notify(subject, message, tolist)
 
 	# delete the event
 	event.delete()
@@ -240,7 +237,7 @@ def edit_event(request, event_id):
 		tolist.append(mail)
 	subject = 'An event you joined was edited'
 	message = "PLACEHOLDER " + title + "."
-	notify(subject, message, tomail)
+	notify(subject, message, tolist)
 	return HttpResponse("event " + str(event_id) + " updated")
 
 #------------------------------------------------------------------------------#
@@ -277,7 +274,7 @@ def join_event(request):
 	tolist = [tomail]
 	subject = 'Someone joined your event!'
 	message = "Someone just joined your event " + event.title + ". Check who it is!"
-	notify(subject, message, tomail)
+	notify(subject, message, tolist)
 	return HttpResponse(participant_netid + " joined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
 @csrf_exempt
@@ -308,7 +305,7 @@ def unjoin_event(request):
 	tolist = [tomail]
 	subject = 'Someone unjoined your event!'
 	message = "Someone just unjoined your event " + event.title + "."
-	notify(subject, message, tomail)
+	notify(subject, message, tolist)
 	return HttpResponse(participant_netid + " unjoined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
 #------------------------------------------------------------------------------#
