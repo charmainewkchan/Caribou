@@ -160,16 +160,29 @@ class EditableEvent extends Component {
               </div>
              </div>
 
+             <div className= "container">
+              <div className = "row">
+                <div className = "col">
+                  <label className = "btn">{this.state.attendance+"/"}</label>
+                </div>
+                <div className = "col">
+                  <input className = "form-control" type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = "Capacity"/>
+                </div>
+              </div>
+            </div>
+
+            <div className = "container">
+             <div className = "row">
+                <input className = "form-control" type = "text" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = "Location"/>
+             </div>
+
              <div className = "row">
               <div className = "col">
-              <label className = "btn">{this.state.attendance+"/"}</label>
-              </div>
-              <div className = "col">
-              <input className = "form-control" type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = "Capacity"/>
+                <button className="btn btn-success" style ={{width:150}} onClick = {this.handleCreateEvent}>Save Changes</button>
               </div>
              </div>
-          <button className="btn btn-success" style ={{width:150}} onClick = {this.handleCreateEvent}>Save Changes</button>
-        </div>
+            </div>
+          </div>
       </div>
     );
   }
