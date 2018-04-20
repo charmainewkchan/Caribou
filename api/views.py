@@ -21,7 +21,7 @@ def react(request):
 def test(request):
 	return HttpResponse("test", status=400)
 
-	
+
 #------------------------------------------------------------------------------#
 # HELPER FUNCTIONS #
 # returns list of event id's
@@ -128,7 +128,7 @@ def hosted_events(request, netid):
 	events = PersonalEvent.objects.filter(author=user)
 	events_json = serializers.serialize('json', events)
 
-	data_json = append_data_to_events(events_json)
+	data_json = append_data_to_events(events_json, netid)
 
 	return HttpResponse(data_json, content_type='application/json')
 
@@ -299,7 +299,8 @@ def unjoin_event(request):
 		return HttpResponse("Event Not Joined", status=400)
 	# decrement attendance
 	newatt = event.attendance - 1
-	event_set.update(attendance=newatt)
+	event.attendance = newatt
+	event.save()
 	# remove from table
 	joined.delete()
 	# email event host
