@@ -26,7 +26,7 @@ def test(request):
 # HELPER FUNCTIONS #
 # returns list of event id's
 def joined_events_list():
-	user = User.objects.get(netid='dsawicki')
+	user = User.objects.get(netid=request.session['netid'])
 
 	joined_events = JoinedEvents.objects.filter(participant=user)
 	joined_events_json = json.loads(serializers.serialize('json', joined_events, fields="event"))
@@ -45,7 +45,7 @@ def append_data_to_events(data_json):
 		userpk = int(e["fields"]["author"]) # get user pkid
 		author = User.objects.get(pk=userpk).netid # user netid
 
-		e["isOwner"] = 1 if author == 'dsawicki' else 0
+		e["isOwner"] = 1 if author == request.session['netid'] else 0
 		e["isAttending"] = 1 if e["pk"] in events_joined else 0
 
 
@@ -68,7 +68,7 @@ def get_user(request, netid):
 
 @casauth
 def delete_user(request):
-	netid = 'dsawicki'
+	netid = request.session['netid']
 	user_set = User.objects.filter(netid=netid)
 	user = User.objects.get(netid=netid)
 	if len(user_set) != 1:
@@ -105,7 +105,7 @@ def get_events_for_user(request, netid):
 #------------------------------------------------------------------------------#
 @casauth
 def get_events(request):
-	netid = 'dsawicki'
+	netid = request.session['netid']
 	dataq = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', dataq)
 
@@ -152,7 +152,7 @@ def post_event(request):
 	data_json = json.loads(request.body)
 	data = data_json[0]
 	# author
-	authornetid = 'dsawicki'# @casauth ensures they are logged in
+	authornetid = request.session['netid']# @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
 	description = data["description"]
 	title = data["title"]
@@ -169,7 +169,7 @@ def post_event(request):
 @csrf_exempt
 @casauth
 def delete_event(request, event_id):
-	authornetid = 'dsawicki' # @casauth ensures they are logged in
+	authornetid = request.session['netid'] # @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
 	event_set = PersonalEvent.objects.filter(pk=event_id)
 	if len(event_set) != 1:
@@ -207,7 +207,7 @@ def edit_event(request, event_id):
 		return HttpResponse("Event Not Found", status=404)
 	e = PersonalEvent.objects.get(pk=int(event_id))
 	# check if correct author
-	authornetid = 'dsawicki'
+	authornetid = request.session['netid']
 	author = Users.objects.get(netid=authornetid)
 	if (e.author != author):
 		return HttpResponse("Permission Denied", status=403)
@@ -260,7 +260,7 @@ def join_event(request):
 	if (event.attendance >= event.capacity):
 		return HttpResponse("Event Full", status=400)
 
-	participant_netid = 'dsawicki'
+	participant_netid = request.session['netid']
 	participant = User.objects.get(netid=participant_netid)
 	alreadyjoined = JoinedEvents.objects.filter(participant=participant).filter(event=event)
 	if len(alreadyjoined) > 0:
@@ -338,3 +338,7 @@ def login(request):
 		return redirect(auth_attempt["location"])
 	else:  # This should never happen!
 		abort(500)
+
+def login_2(request, netid):
+	request.session['netid'] = netid
+	return TemplateResponse(request, 'index.html', {})
