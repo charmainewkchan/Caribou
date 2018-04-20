@@ -25,8 +25,8 @@ def test(request):
 #------------------------------------------------------------------------------#
 # HELPER FUNCTIONS #
 # returns list of event id's
-def joined_events_list():
-	user = User.objects.get(netid=request.session['netid'])
+def joined_events_list(netid):
+	user = User.objects.get(netid=netid)
 
 	joined_events = JoinedEvents.objects.filter(participant=user)
 	joined_events_json = json.loads(serializers.serialize('json', joined_events, fields="event"))
@@ -36,8 +36,8 @@ def joined_events_list():
 
 
 # appends isOwner and isAttending fields to list of events
-def append_data_to_events(data_json):
-	events_joined = joined_events_list()
+def append_data_to_events(data_json, netid):
+	events_joined = joined_events_list(netid)
 
 	data = json.loads(data_json)
 	# manipulate data to add owner field, 0 is not owner, 1 is owner
@@ -45,7 +45,7 @@ def append_data_to_events(data_json):
 		userpk = int(e["fields"]["author"]) # get user pkid
 		author = User.objects.get(pk=userpk).netid # user netid
 
-		e["isOwner"] = 1 if author == request.session['netid'] else 0
+		e["isOwner"] = 1 if author == netid else 0
 		e["isAttending"] = 1 if e["pk"] in events_joined else 0
 
 
@@ -94,11 +94,11 @@ def delete_user(request):
 
 @casauth
 def get_events_for_user(request, netid):
-	event_ids = joined_events_list()
+	event_ids = joined_events_list(netid)
 	events = PersonalEvent.objects.filter(id__in=event_ids)
 	events_json = serializers.serialize('json', events)
 
-	data_json = append_data_to_events(events_json)
+	data_json = append_data_to_events(events_json, netid)
 
 	return HttpResponse(data_json, content_type='application/json')
 
@@ -109,7 +109,7 @@ def get_events(request):
 	dataq = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', dataq)
 
-	data_json = append_data_to_events(data_json)
+	data_json = append_data_to_events(data_json, netid)
 
 	return HttpResponse(data_json, content_type='application/json')
 
