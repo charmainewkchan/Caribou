@@ -62,6 +62,11 @@
   color: white;
 }
 
+.host-btn:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
 
 .Events-panel {
   width: 100%;
@@ -81,6 +86,8 @@
   margin:.5em .25em;
   padding: 0;
 }
+
+
 
 .Events-inputBig{
   font-family: 'Roboto', sans-serif;
