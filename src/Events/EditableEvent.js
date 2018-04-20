@@ -111,12 +111,12 @@ class EditableEvent extends Component {
     return (
       <div className="card Events-event">
   		 <div className="card-header event-header">
-  			  <input className = "form-control" type = "text" id = "title" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
+  			  <input className = "form-control" type = "text" id = "title" placeholder = "Event Name" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
   		    <p>{this.state.eating_club} &bull; </p>
   		 </div>
 
   	    <div className="card-body event-body">
-             <textarea className="form-control" type="text" id="description" name = "eventDes" value= {this.state.eventDes} onChange={this.handleChange}/>
+             <textarea className="form-control" type="text" id="description" placeholder = "Description" name = "eventDes" value= {this.state.eventDes} onChange={this.handleChange}/>
 
              <div className = "container">
               <div className = "row">

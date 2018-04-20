@@ -117,7 +117,7 @@ class Events extends Component {
                               time=""
                               attendance="0"
                               capacity=""
-                              description="description"
+                              description=""
                               pk=""
                               start=""
                               end=""
