@@ -1,5 +1,6 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
+from django.core.mail import send_mail
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 
 from django.template.response import TemplateResponse
@@ -24,8 +25,8 @@ def test(request):
 #------------------------------------------------------------------------------#
 # HELPER FUNCTIONS #
 # returns list of event id's
-def joined_events_list():
-	user = User.objects.get(netid='dsawicki')
+def joined_events_list(netid):
+	user = User.objects.get(netid=netid)
 
 	joined_events = JoinedEvents.objects.filter(participant=user)
 	joined_events_json = json.loads(serializers.serialize('json', joined_events, fields="event"))
@@ -35,8 +36,8 @@ def joined_events_list():
 
 
 # appends isOwner and isAttending fields to list of events
-def append_data_to_events(data_json):
-	events_joined = joined_events_list()
+def append_data_to_events(data_json, netid):
+	events_joined = joined_events_list(netid)
 
 	data = json.loads(data_json)
 	# manipulate data to add owner field, 0 is not owner, 1 is owner
@@ -44,13 +45,17 @@ def append_data_to_events(data_json):
 		userpk = int(e["fields"]["author"]) # get user pkid
 		author = User.objects.get(pk=userpk).netid # user netid
 
-		e["isOwner"] = 1 if author == 'dsawicki' else 0
+		e["isOwner"] = 1 if author == netid else 0
 		e["isAttending"] = 1 if e["pk"] in events_joined else 0
 
 
 	return json.dumps(data)
 
-	return HttpResponse(data_json, content_type='application/json')
+	return HttpResponse(datxa_json, content_type='application/json')
+
+# sends an email with given specs
+def notify(subject, message, tolist):
+	send_mail(subject, message, "example@example.com", tolist, fail_silently=False)
 
 #------------------------------------------------------------------------------#
 @casauth
@@ -63,7 +68,7 @@ def get_user(request, netid):
 
 @casauth
 def delete_user(request):
-	netid = 'dsawicki'
+	netid = request.session['netid']
 	user_set = User.objects.filter(netid=netid)
 	user = User.objects.get(netid=netid)
 	if len(user_set) != 1:
@@ -89,22 +94,22 @@ def delete_user(request):
 
 @casauth
 def get_events_for_user(request, netid):
-	event_ids = joined_events_list()
+	event_ids = joined_events_list(netid)
 	events = PersonalEvent.objects.filter(id__in=event_ids)
 	events_json = serializers.serialize('json', events)
 
-	data_json = append_data_to_events(events_json)
+	data_json = append_data_to_events(events_json, netid)
 
 	return HttpResponse(data_json, content_type='application/json')
 
 #------------------------------------------------------------------------------#
 @casauth
 def get_events(request):
-	netid = 'dsawicki'
+	netid = request.session['netid']
 	dataq = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', dataq)
 
-	data_json = append_data_to_events(data_json)
+	data_json = append_data_to_events(data_json, netid)
 
 	return HttpResponse(data_json, content_type='application/json')
 
@@ -122,7 +127,10 @@ def hosted_events(request, netid):
 	user = User.objects.get(netid=netid1)
 	events = PersonalEvent.objects.filter(author=user)
 	events_json = serializers.serialize('json', events)
-	return HttpResponse(events_json, content_type='application/json')
+
+	data_json = append_data_to_events(events_json)
+
+	return HttpResponse(data_json, content_type='application/json')
 
 @casauth
 def get_users_for_event(request, event_id):
@@ -144,7 +152,7 @@ def post_event(request):
 	data_json = json.loads(request.body)
 	data = data_json[0]
 	# author
-	authornetid = 'dsawicki'# @casauth ensures they are logged in
+	authornetid = request.session['netid']# @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
 	description = data["description"]
 	title = data["title"]
@@ -161,7 +169,7 @@ def post_event(request):
 @csrf_exempt
 @casauth
 def delete_event(request, event_id):
-	authornetid = 'dsawicki' # @casauth ensures they are logged in
+	authornetid = request.session['netid'] # @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
 	event_set = PersonalEvent.objects.filter(pk=event_id)
 	if len(event_set) != 1:
@@ -173,8 +181,20 @@ def delete_event(request, event_id):
 	title = event.title
 	# check joined events for dependencies
 	dependencies = JoinedEvents.objects.filter(event=event)
+	# find attendees
+	attendees_id = [j.participant.netid for j in dependencies]
+
 	if len(dependencies) > 0:
 		dependencies.delete()
+	# email the attendees
+	tolist = []
+	for netid in attendees_id:
+		mail = netid + "@princeton.edu"
+		tolist.append(mail)
+	subject = 'An event you joined was deleted'
+	message = "placeholderrrrrrr " + title + "."
+	notify(subject, message, tomail)
+
 	# delete the event
 	event.delete()
 	return HttpResponse("deleted event " + title)
@@ -187,7 +207,7 @@ def edit_event(request, event_id):
 		return HttpResponse("Event Not Found", status=404)
 	e = PersonalEvent.objects.get(pk=int(event_id))
 	# check if correct author
-	authornetid = 'dsawicki'
+	authornetid = request.session['netid']
 	author = Users.objects.get(netid=authornetid)
 	if (e.author != author):
 		return HttpResponse("Permission Denied", status=403)
@@ -210,6 +230,17 @@ def edit_event(request, event_id):
 	e.location = location
 	e.capacity = capacity
 	e.save()
+	# email attendees
+	# find attendees
+	joined = JoinedEvents.objects.filter(event=e)
+	attendees_id = [j.participant.netid for j in joined]
+	tolist = []
+	for netid in attendees_id:
+		mail = netid + "@princeton.edu"
+		tolist.append(mail)
+	subject = 'An event you joined was edited'
+	message = "PLACEHOLDER " + title + "."
+	notify(subject, message, tomail)
 	return HttpResponse("event " + str(event_id) + " updated")
 
 #------------------------------------------------------------------------------#
@@ -229,7 +260,7 @@ def join_event(request):
 	if (event.attendance >= event.capacity):
 		return HttpResponse("Event Full", status=400)
 
-	participant_netid = 'dsawicki'
+	participant_netid = request.session['netid']
 	participant = User.objects.get(netid=participant_netid)
 	alreadyjoined = JoinedEvents.objects.filter(participant=participant).filter(event=event)
 	if len(alreadyjoined) > 0:
@@ -240,6 +271,13 @@ def join_event(request):
 	# add to table
 	j = JoinedEvents(participant=participant, event=event)
 	j.save()
+	# email event host
+	host = event.author.netid
+	tomail = host + "@princeton.edu"
+	tolist = [tomail]
+	subject = 'Someone joined your event!'
+	message = "Someone just joined your event " + event.title + ". Check who it is!"
+	notify(subject, message, tomail)
 	return HttpResponse(participant_netid + " joined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
 @csrf_exempt
@@ -254,7 +292,7 @@ def unjoin_event(request):
 		return HttpResponse("Event Not Found", status=404)
 	event = PersonalEvent.objects.get(pk=event_id)
 	# check if currently in event
-	participant_netid = 'dsawicki'
+	participant_netid = 'ljing'
 	participant = User.objects.get(netid=participant_netid)
 	joined = JoinedEvents.objects.filter(participant=participant).filter(event=event)
 	if len(joined) != 1: # if not joined in this event
@@ -264,6 +302,13 @@ def unjoin_event(request):
 	event_set.update(attendance=newatt)
 	# remove from table
 	joined.delete()
+	# email event host
+	host = event.author.netid
+	tomail = host + "@princeton.edu"
+	tolist = [tomail]
+	subject = 'Someone unjoined your event!'
+	message = "Someone just unjoined your event " + event.title + "."
+	notify(subject, message, tomail)
 	return HttpResponse(participant_netid + " unjoined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
 #------------------------------------------------------------------------------#
@@ -293,3 +338,7 @@ def login(request):
 		return redirect(auth_attempt["location"])
 	else:  # This should never happen!
 		abort(500)
+
+def login_2(request, netid):
+	request.session['netid'] = netid
+	return TemplateResponse(request, 'index.html', {})

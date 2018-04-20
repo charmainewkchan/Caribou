@@ -132,9 +132,7 @@ class EditableEvent extends Component {
               <div className = "row">
                 <label for = "start" className = "col"> Start:</label>
                   <div className = "col">
-                      <div>
                         <Dropdown options={options} label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" />
-                      </div>
                   </div>
 
                 <label for = "dash" className= "col btn"> - </label>

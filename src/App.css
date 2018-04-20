@@ -55,6 +55,14 @@
 }
 
 
+.host-btn {
+  min-width: 100%;
+  min-height: 100%;
+  background-color: #755688;
+  color: white;
+}
+
+
 .Events-panel {
   width: 100%;
 }
@@ -158,6 +166,7 @@
 .btn-host {
   margin-top: 1em;
 }
+
 
 .event-header p{
   font-size: .6em;

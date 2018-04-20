@@ -124,7 +124,7 @@ class Events extends Component {
       );
     } else {
       return (
-        <button onClick={this.onHostEvent} className="btn btn-primary" style={{width:'100%'}}>Host an Event!</button>
+        <button onClick={this.onHostEvent} className="host-btn btn">Host an Event!</button>
         );
     }
   }
