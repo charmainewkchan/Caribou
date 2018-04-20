@@ -12,12 +12,16 @@ class Event extends Component {
 		this.buttons = this.buttons.bind(this)
 	}
 
+
 	buttons() {
 		if (this.props.isOwner) {
 			return (
 				<div className="row">
 					<div className="col">
-						<button className="btn btn-info leave-button" onClick={() => this.props.toggleEditMode(this.props.toggleEditMode)}> Edit </button>
+						<button className="btn btn-primary leave-button" onClick={() => this.props.displayAttendees(this.props.pk)}> Attendees </button>
+					</div>
+					<div className="col">
+						<button className="btn btn-default leave-button" onClick={() => this.props.toggleEditMode(this.props.toggleEditMode)}> Edit </button>
 					</div>
 					<div className="col">
 						<button className="btn btn-warning leave-button" onClick={() => this.props.onEditEvent(this.props.pk)}> Remove </button>

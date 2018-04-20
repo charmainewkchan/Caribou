@@ -122,7 +122,10 @@ def hosted_events(request, netid):
 	user = User.objects.get(netid=netid1)
 	events = PersonalEvent.objects.filter(author=user)
 	events_json = serializers.serialize('json', events)
-	return HttpResponse(events_json, content_type='application/json')
+
+	data_json = append_data_to_events(events_json)
+
+	return HttpResponse(data_json, content_type='application/json')
 
 @casauth
 def get_users_for_event(request, event_id):
