@@ -23,7 +23,7 @@ urlpatterns = [
   path('admin/', admin.site.urls),
   path('api/', include('api.urls')),
   path('login/', views.login, name='login'),
-  path('set_netid/<netid>/', views.set_netid),
+  path('set_netid/<netID>/', views.set_netid),
 
   re_path('.*', views.react, name='react')
 ]
