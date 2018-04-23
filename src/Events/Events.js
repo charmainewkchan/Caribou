@@ -59,8 +59,6 @@ class Events extends Component {
 	});
   }
 
-
-
   onClubFilterChange(event){
     /* mod = new clubs in filter, deep copy */
   	var mod = this.state.filter.clubs.slice();

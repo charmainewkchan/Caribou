@@ -1,5 +1,7 @@
 
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
+
 //import Event from './Event'
 import eating_club_map from './eating_club_map.json';
 import '../App.css';
@@ -10,6 +12,7 @@ class Event extends Component {
 		super(props)
 
 		this.buttons = this.buttons.bind(this)
+		this.getAllEventInfo = this.getAllEventInfo.bind(this)
 	}
 
 
@@ -36,9 +39,13 @@ class Event extends Component {
 		}
 	}
 
+	getAllEventInfo(pk){
+		this.props.history.push('/events/'+ pk);
+	}
+
   render() {
     return (
-    <div className="card Events-event">
+    <div className="card Events-event"  onClick = {this.getAllEventInfo(this.props.pk)}>
 		 <div className="card-header event-header">
 			  <h2>{this.props.title}</h2>
 		    <p>{eating_club_map[this.props.eating_club]} &bull; {this.props.time}</p>
