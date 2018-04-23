@@ -16,7 +16,7 @@ class MyProfile extends Component {
 
   render() {
     return (
-      <div className="MyProfile container">
+      <div className="MyProfile container-fluid">
       	<div className="row">
       		<div className="col-3 MyProfile-settings">
       			<ul>
@@ -26,7 +26,7 @@ class MyProfile extends Component {
               <li className="settings"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' style={{display:'block',height:'100%'}}>Events Hosting</NavLink></li>
           	</ul>
       		</div>
-      		<div className="col MyProfile-panel">
+      		<div className="col-9 MyProfile-panel">
             <Route exact path='/myprofile(|/profile)' component={Profile} />
             <Route path='/myprofile/account' component={Account}/>
             <Route path='/myprofile/eventsattending' component={EventsAttending}/>

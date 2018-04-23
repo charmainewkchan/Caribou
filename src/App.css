@@ -82,8 +82,9 @@
 }
 
 .owner-btn {
-  width: 3em;
-  margin:.5em .25em;
+  width: 1.3em;
+  margin:0em .2em;
+  margin-top: -.2em;
   padding: 0;
 }
 
@@ -164,7 +165,7 @@
 
 .event-header {
   margin: 0;
-  padding: 0.5em .3em;
+  padding: 0.3em;
 }
 
 .event-header h2 {
@@ -177,6 +178,7 @@
 
 .btn-host {
   margin-top: 1em;
+  width: 3em;
 }
 
 
@@ -184,7 +186,7 @@
   font-size: .6em;
   font-weight:bold;
   color: #373737;
-    margin: 0;
+  margin: 0;
   padding:0 ;
 }
 
@@ -216,6 +218,13 @@
 
 .Events .btn {
   width: 6em;
+}
+
+
+@media (max-width: 767px) {
+  .Events {
+    clear: both;
+  }
 }
 
 

@@ -105,7 +105,8 @@ def get_events_for_user(request, netid):
 #------------------------------------------------------------------------------#
 @casauth
 def get_events(request):
-	netid = request.session['netid']
+	#netid = request.session['netid']
+	netid = "dsawicki"
 	dataq = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', dataq)
 
@@ -338,5 +339,6 @@ def login(request):
 		abort(500)
 
 def login_2(request, netid):
+	print("logging in netid: %s" % netid)
 	request.session['netid'] = netid
 	return TemplateResponse(request, 'index.html', {})

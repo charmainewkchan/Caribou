@@ -13,23 +13,22 @@ class Event extends Component {
 	}
 
 
-	buttons() {
+	owner_buttons() {
 		if (this.props.isOwner) {
 			return (
-				<div className="row">
-					<div className="col">
+				<div className="d-inline float-right">
 						<button className="btn btn-outline-secondary owner-btn " style={{margin:''}}onClick={() => this.props.displayAttendees(this.props.pk)}> @ </button>
-					</div>
-					<div className="col">
 						<button className="btn btn-outline-secondary owner-btn " onClick={() => this.props.toggleEditMode(this.props.toggleEditMode)}> * </button>
-					</div>
-					<div className="col">
 						<button className="btn btn-outline-secondary owner-btn" onClick={() => this.props.onRemoveEvent(this.props.pk)}> X </button>
-					</div>
 				</div>
 				);
 		}
-		else if (this.props.isAttending) {
+	}
+
+
+	buttons() {
+
+		if (this.props.isAttending) {
 			return <button className="btn btn-danger leave-button" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Leave </button>
 		} else {
 			return <button disabled={this.props.attendance==this.props.capacity} className="btn btn-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
@@ -40,8 +39,19 @@ class Event extends Component {
     return (
     <div className="card Events-event">
 		 <div className="card-header event-header">
-			  <h2>{this.props.title}</h2>
-		    <p>{eating_club_map[this.props.eating_club]} &bull; {this.props.time}</p>
+		 		<div className="container-fluid">
+		 		<div className="row">
+			  	<div className="col float-left">
+			  		<h2>{this.props.title}</h2>
+			  	</div>
+			  	<div className="col">
+			  		{this.owner_buttons()}
+			  	</div>
+			  </div>
+			  <div className="row">
+		    	<p>{eating_club_map[this.props.eating_club]} &bull; {this.props.start} - {this.props.end}</p>
+		    </div>
+		    </div>
 		 </div>
 
 	    <div className="card-body event-body">
