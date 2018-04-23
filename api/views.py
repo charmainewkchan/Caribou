@@ -334,10 +334,8 @@ def get_club_events(request):
 #------------------------------------------------------------------------------#
 @casauth
 def netid(request):
-	if 'netid' in request.session:
-		return JsonResponse({'netid': request.session['netid']})
-	else:
-		return TemplateResponse(request, 'index.html', {})
+	return get_netid(request);
+	
 
 def login(request):
 	C = CASClient.CASClient(request)
