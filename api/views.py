@@ -334,8 +334,7 @@ def get_club_events(request):
 #------------------------------------------------------------------------------#
 @casauth
 def netid(request):
-	return get_netid(request);
-	
+	return JsonResponse({'netid': get_netid(request)})
 
 def login(request):
 	C = CASClient.CASClient(request)
