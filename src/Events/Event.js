@@ -45,7 +45,8 @@ class Event extends Component {
 
   render() {
     return (
-    <div className="card Events-event"  onClick = {this.getAllEventInfo(this.props.pk)}>
+	 <button onClick = {this.getAllEventInfo(this.props.pk)}>
+    <div className="card Events-event" >
 		 <div className="card-header event-header">
 			  <h2>{this.props.title}</h2>
 		    <p>{eating_club_map[this.props.eating_club]} &bull; {this.props.time}</p>
@@ -60,6 +61,7 @@ class Event extends Component {
 	    	{this.buttons()}
 	    </div>
     </div>
+	</button>
     );
   }
 }
