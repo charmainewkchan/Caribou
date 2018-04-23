@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom'
 
 //import Event from './Event'
 import eating_club_map from './eating_club_map.json';
