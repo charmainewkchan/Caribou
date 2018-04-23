@@ -64,7 +64,7 @@ def notify(subject, message, tolist):
 	send_mail(subject, message, "example@example.com", tolist, fail_silently=False)
 
 
-def get_netid():
+def get_netid(request):
 	global g_netid
 	if 'netid' in request.session:
 		return request.session['netid']
@@ -82,7 +82,7 @@ def get_user(request, netid):
 
 @casauth
 def delete_user(request):
-	netid = get_netid()
+	netid = get_netid(request)
 	user_set = User.objects.filter(netid=netid)
 	user = User.objects.get(netid=netid)
 	if len(user_set) != 1:
@@ -120,7 +120,7 @@ def get_events_for_user(request, netid):
 @casauth
 def get_events(request):
 	#netid = request.session['netid']
-	netid = get_netid()
+	netid = get_netid(request)
 	dataq = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', dataq)
 
@@ -167,7 +167,7 @@ def post_event(request):
 	data_json = json.loads(request.body)
 	data = data_json[0]
 	# author
-	authornetid = get_netid()# @casauth ensures they are logged in
+	authornetid = get_netid(request)# @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
 	description = data["description"]
 	title = data["title"]
@@ -184,7 +184,7 @@ def post_event(request):
 @csrf_exempt
 @casauth
 def delete_event(request, event_id):
-	authornetid = get_netid() # @casauth ensures they are logged in
+	authornetid = get_netid(request) # @casauth ensures they are logged in
 	author = User.objects.get(netid=authornetid)
 	event_set = PersonalEvent.objects.filter(pk=event_id)
 	if len(event_set) != 1:
@@ -219,7 +219,7 @@ def edit_event(request, event_id):
 		return HttpResponse("Event Not Found", status=404)
 	e = PersonalEvent.objects.get(pk=int(event_id))
 	# check if correct author
-	authornetid = get_netid()
+	authornetid = get_netid(request)
 	author = Users.objects.get(netid=authornetid)
 	if (e.author != author):
 		return HttpResponse("Permission Denied", status=403)
@@ -273,7 +273,7 @@ def join_event(request):
 	if (event.attendance >= event.capacity):
 		return HttpResponse("Event Full", status=400)
 
-	participant_netid = get_netid()
+	participant_netid = get_netid(request)
 	participant = User.objects.get(netid=participant_netid)
 	alreadyjoined = JoinedEvents.objects.filter(participant=participant).filter(event=event)
 	if len(alreadyjoined) > 0:
@@ -305,7 +305,7 @@ def unjoin_event(request):
 		return HttpResponse("Event Not Found", status=404)
 	event = PersonalEvent.objects.get(pk=event_id)
 	# check if currently in event
-	participant_netid = get_netid()
+	participant_netid = get_netid(request)
 	participant = User.objects.get(netid=participant_netid)
 	joined = JoinedEvents.objects.filter(participant=participant).filter(event=event)
 	if len(joined) != 1: # if not joined in this event
