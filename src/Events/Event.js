@@ -1,6 +1,6 @@
-
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router';
+import {Link} from 'react-router-dom';
 
 //import Event from './Event'
 import eating_club_map from './eating_club_map.json';
@@ -12,7 +12,7 @@ class Event extends Component {
 		super(props)
 
 		this.buttons = this.buttons.bind(this)
-		this.getAllEventInfo = this.getAllEventInfo.bind(this)
+	/*	this.getAllEventInfo = this.getAllEventInfo.bind(this)*/
 	}
 
 
@@ -39,18 +39,19 @@ class Event extends Component {
 		}
 	}
 
-	getAllEventInfo(pk){
+	/*getAllEventInfo(pk){
 		this.props.history.push('/events/'+ pk);
-	}
+	}*/
 
   render() {
     return (
-	 <button onClick = {this.getAllEventInfo(this.props.pk)}> // CHANGE THIS TO CLICK ON TITLE AS LINK 
     <div className="card Events-event" >
+		<Link to='/events/this.state.pk' className="navbar-brand">
 		 <div className="card-header event-header">
 			  <h2>{this.props.title}</h2>
 		    <p>{eating_club_map[this.props.eating_club]} &bull; {this.props.time}</p>
 		 </div>
+		</Link>
 
 	    <div className="card-body event-body">
 	         <p>{this.props.description}</p>
@@ -61,7 +62,6 @@ class Event extends Component {
 	    	{this.buttons()}
 	    </div>
     </div>
-	</button>
     );
   }
 }
