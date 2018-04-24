@@ -24,7 +24,7 @@ class SingleEvent extends Component {
 
   componentDidMount(){
     // reload the data
-    const url = "https://bixr.herokuapp.com/api/event/" + this.state.pk;
+    const url = "https://bixr.herokuapp.com/api/event/" + this.state.pk + "/";
     axios.get(url).then(res => {
       console.log(res.data);
       this.setState({
