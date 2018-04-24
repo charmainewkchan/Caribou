@@ -46,7 +46,7 @@ class Event extends Component {
   render() {
     return (
     <div className="card Events-event" >
-		<Link to={'/events/'+this.state.pk} className="navbar-brand">
+		<Link to={'/events/'+this.props.pk} className="navbar-brand">
 		 <div className="card-header event-header">
 			  <h2>{this.props.title}</h2>
 		    <p>{eating_club_map[this.props.eating_club]} &bull; {this.props.time}</p>
