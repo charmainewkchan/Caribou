@@ -48,6 +48,7 @@ class SingleEvent extends Component {
 
   render() {
     return (
+			<div className= "container">
       <div className="card Events-event">
   		 <div className="card-header event-header">
   			  <h2>{this.state.title}</h2>
@@ -58,11 +59,8 @@ class SingleEvent extends Component {
   	         <p>{this.state.eventDes}</p>
   	         <p>{this.state.attendance == 0 ? "Be the first to join!" : ""+this.state.attendance+"/"+this.state.capacity+" going!"}</p>
   	    </div>
-
-  	    <div className="card-footer event-footer">
-  	    	{this.buttons()}
-  	    </div>
       </div>
+		</div>
     )
   }
 }
