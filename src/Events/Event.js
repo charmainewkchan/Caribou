@@ -45,7 +45,7 @@ class Event extends Component {
 
   render() {
     return (
-	 <button onClick = {this.getAllEventInfo(this.props.pk)}>
+	 <button onClick = {this.getAllEventInfo(this.props.pk)}> // CHANGE THIS TO CLICK ON TITLE AS LINK 
     <div className="card Events-event" >
 		 <div className="card-header event-header">
 			  <h2>{this.props.title}</h2>
