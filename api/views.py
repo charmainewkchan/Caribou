@@ -151,7 +151,6 @@ def post_event(request):
 	# get the json data
 	data_json = json.loads(request.body)
 	data = data_json[0]
-	# author
 	# if no existing event create new event
 	if data['pk'] == "":
 		authornetid = request.session['netid']# @casauth ensures they are logged in
