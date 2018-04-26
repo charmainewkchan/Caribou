@@ -43,8 +43,6 @@ class SingleEvent extends Component {
 	      attendance:res.data[0].fields.attendance,
       });
     });
-
-
   }
 
 
@@ -60,7 +58,10 @@ class SingleEvent extends Component {
 
   	    <div className="card-body event-body">
   	         <p>{this.state.eventDes}</p>
-  	         <p>{this.state.attendance == 0 ? "Be the first to join!" : ""+this.state.attendance+"/"+this.state.eventCap+" going!"}</p>
+						 <p>{this.state.date}</p>
+						 <p>{this.state.eventLoc}</p>
+						 <p>{this.state.start} - {this.state.end}</p>
+  	         <p>{this.state.attendance+"/"+this.state.eventCap+" going!"}</p>
   	    </div>
       </div>
 		</div>

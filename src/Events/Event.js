@@ -47,12 +47,10 @@ class Event extends Component {
     return (
     <div className="card Events-event" >
 		 <Link to={'/events/'+this.props.pk + "/"}>
-		 	<div>
-		 		<div className="card-header event-header">
+		 		<button className="card-header event-header Events-panel" disabled = {true}>
 			  	<h2>{this.props.title}</h2>
 		    	<p>{eating_club_map[this.props.eating_club]} &bull; {this.props.time}</p>
-				</div>
-			</div>
+				</button>
 		 </Link>
 
 	    <div className="card-body event-body">
