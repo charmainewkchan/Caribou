@@ -13,6 +13,8 @@ class Profile extends Component {
       edit_mode: false
     }
     this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.updateData = this.updateData.bind(this);
+
   }
 
 
@@ -23,6 +25,10 @@ class Profile extends Component {
     }
 
   componentDidMount() {
+    this.updateData();
+  }
+
+  updateData() {
     const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
     axios.get(url)
     .then(res => {
@@ -32,6 +38,8 @@ class Profile extends Component {
       })
     .catch(err => alert(err.response));
   }
+
+
 
   render() {
     if (!this.state.edit_mode) {
@@ -61,6 +69,9 @@ class Profile extends Component {
           res_college={this.state.profile_info.res_college}
           eating_club= {this.state.profile_info.eating_club}
           edit_mode= {this.state.edit_mode}
+          toggleEditMode={this.toggleEditMode}
+          updateData = {this.updateData}
+
       />
     );
   }

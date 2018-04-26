@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import '../App.css';
 import user_profile from './profile.json'
 import Dropdown from 'react-dropdown'
+import eating_club_map from '../Events/eating_club_map.json';
 import 'react-dropdown/style.css'
 import axios from 'axios';
 
 const years = [2019,2020,2021,2022];
+const eatingclubs = ["Cloister","Tower","none","Colonial","Cannon","Cap","Ivy","TigerInn","Quad","Terrace","Cottage","Charter"]
+const rescollege = ["Butler", "Wilson", "Mathey", "Rocky", "Whitman","Forbes"]
 
 class EditableProfile extends Component {
   constructor(props){
@@ -23,6 +26,17 @@ class EditableProfile extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.onSelectYear = this.onSelectYear.bind(this);
     this.onSelectEatingClub = this.onSelectEatingClub.bind(this);
+    this.onSelectResCollege = this.onSelectResCollege.bind(this);
+    this.save = this.save.bind(this);
+  }
+
+  save(event) {
+
+    //* post data to url *//
+
+    this.props.toggleEditMode();
+    this.props.updateData();
+
   }
 
   handleChange(event) {
@@ -33,11 +47,19 @@ class EditableProfile extends Component {
   }
 
   onSelectYear(event) {
-
+      year: event.value
   }
 
   onSelectEatingClub(event) {
+    this.setState({
+      eating_club: event.value
+    });
+  }
 
+  onSelectResCollege(event){
+    this.setState({
+      res_college: event.value
+    });
   }
 
 
@@ -69,9 +91,12 @@ class EditableProfile extends Component {
         <Dropdown options = {years} label = "years" onChange = {this.onSelectYear} value = {this.state.year}/>
         </div>
 
-        <h3>College: </h3><p>{this.state.res_college}</p>
-        <h3>Eating Club: </h3><p>{this.state.eating_club}</p>
-        <button onClick={this.props.toggleEditMode}> Save</button>
+        <h3>College: </h3>
+        <Dropdown options = {rescollege} label = "rescollege" name = "res_college" onChange = {this.onSelectResCollege} value = {this.state.res_college}/>
+
+        <h3>Eating Club: </h3>
+          <Dropdown options = {eatingclubs} label = "eatingclubs" onChange = {this.onSelectEatingClub} value = {this.state.eating_club}/>
+        <button onClick={this.save}> Save</button>
       </div>
     );
   }
