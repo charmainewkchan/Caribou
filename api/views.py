@@ -186,16 +186,15 @@ def post_event(request):
 		e_set = PersonalEvent.objects.filter(pk=pk)
 		if len(e_set) != 1:
 			return HttpResponse("Event Not Found", status=404)
-		e = PersonalEvent.objects.get(pk=int(event_id))
+		e = PersonalEvent.objects.get(pk=pk)
 		# check if correct author
 		authornetid = get_netid(request)
-		author = Users.objects.get(netid=authornetid)
+		author = User.objects.get(netid=authornetid)
 		if (e.author != author):
 			return HttpResponse("Permission Denied", status=403)
 		data_json = json.loads(request.body)
 		data = data_json[0]
 		description = data["description"]
-		attendance = data["attendance"]
 		title = data["title"]
 		date = data["date"]
 		start = data["start"]
@@ -223,7 +222,7 @@ def post_event(request):
 		subject = 'An event you joined was edited'
 		message = "PLACEHOLDER " + title + "."
 		notify(subject, message, tolist)
-		return HttpResponse("event " + str(event_id) + " updated")
+		return HttpResponse("event " + str(pk) + " updated")
 
 @csrf_exempt
 @casauth
@@ -254,50 +253,6 @@ def delete_event(request, event_id):
 	# delete the event
 	event.delete()
 	return HttpResponse("deleted event " + title)
-
-# @csrf_exempt
-# @casauth
-# def edit_event(request, event_id):
-# 	e_set = PersonalEvent.objects.filter(pk=int(event_id))
-# 	if len(e_set) != 1:
-# 		return HttpResponse("Event Not Found", status=404)
-# 	e = PersonalEvent.objects.get(pk=int(event_id))
-# 	# check if correct author
-# 	authornetid = request.session['netid']
-# 	author = Users.objects.get(netid=authornetid)
-# 	if (e.author != author):
-# 		return HttpResponse("Permission Denied", status=403)
-# 	data_json = json.loads(request.body)
-# 	data = data_json[0]
-# 	description = data["description"]
-# 	attendance = data["attendance"]
-# 	title = data["title"]
-# 	date = data["date"]
-# 	start = data["start"]
-# 	end = data["end"]
-# 	location = data["location"]
-# 	capacity = int(data["capacity"])
-# 	if capacity < e.attendance:
-# 		return HttpResponse("Capacity cannot be less than attendance", status=400)
-# 	e.description = description
-# 	e.title = title
-# 	e.date = date
-# 	e.start = start
-# 	e.end = end
-# 	e.location = location
-# 	e.capacity = capacity
-# 	e.save()
-# 	# email attendees
-# 	# find attendees
-# 	joined = JoinedEvents.objects.filter(event=e)
-# 	attendees_id = [j.participant.netid for j in joined]
-# 	tolist = []
-# 	for netid in attendees_id:
-# 		mail = netid + "@princeton.edu"
-# 		tolist.append(mail)
-# 	subject = 'An event you joined was edited'
-# 	message = "PLACEHOLDER " + title + "."
-# 	notify(subject, message, tolist)
 
 #------------------------------------------------------------------------------#
 @csrf_exempt
