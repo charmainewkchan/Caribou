@@ -64,6 +64,7 @@ def notify(subject, message, tolist):
 	send_mail(subject, message, "example@example.com", tolist, fail_silently=False)
 
 
+def get_netid(request):
 	global g_netid
 	if 'netid' in request.session:
 		return request.session['netid']
@@ -167,7 +168,7 @@ def post_event(request):
 	data = data_json[0]
 	# if no existing event create new event
 	if data['pk'] == "":
-		authornetid = request.session['netid']# @casauth ensures they are logged in
+		authornetid = get_netid(request)# @casauth ensures they are logged in
 		author = User.objects.get(netid=authornetid)
 		description = data["description"]
 		title = data["title"]
@@ -187,7 +188,7 @@ def post_event(request):
 			return HttpResponse("Event Not Found", status=404)
 		e = PersonalEvent.objects.get(pk=int(event_id))
 		# check if correct author
-		authornetid = request.session['netid']
+		authornetid = get_netid(request)
 		author = Users.objects.get(netid=authornetid)
 		if (e.author != author):
 			return HttpResponse("Permission Denied", status=403)
