@@ -12,16 +12,10 @@ class EventsPanel extends Component {
     super(props);
     this.state = {
     };
-
-
     this.onJoinEvent = this.onJoinEvent.bind(this);
     this.onLeaveEvent = this.onLeaveEvent.bind(this);
     this.onRemoveEvent = this.onRemoveEvent.bind(this);
-
   }
-
-
-
 
   onJoinEvent(event_id) {
     var data = [{

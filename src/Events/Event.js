@@ -1,5 +1,7 @@
-
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
+import {Link} from 'react-router-dom';
+
 //import Event from './Event'
 import eating_club_map from './eating_club_map.json';
 import '../App.css';
@@ -10,6 +12,7 @@ class Event extends Component {
 		super(props)
 
 		this.buttons = this.buttons.bind(this)
+	/*	this.getAllEventInfo = this.getAllEventInfo.bind(this)*/
 	}
 
 
@@ -36,13 +39,19 @@ class Event extends Component {
 		}
 	}
 
+	/*getAllEventInfo(pk){
+		this.props.history.push('/events/'+ pk);
+	}*/
+
   render() {
     return (
-    <div className="card Events-event">
-		 <div className="card-header event-header">
-			  <h2>{this.props.title}</h2>
-		    <p>{eating_club_map[this.props.eating_club]} &bull; {this.props.time}</p>
-		 </div>
+    <div className="card Events-event" >
+		 <Link to={'/events/'+this.props.pk + "/"}>
+		 		<button className="card-header event-header Events-panel" disabled = {true}>
+			  	<h2>{this.props.title}</h2>
+		    	<p>{eating_club_map[this.props.eating_club]} &bull; {this.props.time}</p>
+				</button>
+		 </Link>
 
 	    <div className="card-body event-body">
 	         <p>{this.props.description}</p>
