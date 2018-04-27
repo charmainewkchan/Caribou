@@ -133,7 +133,7 @@ class EditableProfile extends Component {
         </div>
 
         <h3>College: </h3>
-        <Dropdown options = {rescollege} label = "rescollege" name = "res_college" onChange = {this.onSelectResCollege} value = {this.state.res_college}/>
+        <Dropdown options = {rescollege} label = "rescollege" name = "res_college" onChange = {this.onSelectResCollege} value = {eatingClubAbr[this.state.res_college]}/>
 
         <h3>Eating Club: </h3>
           <Dropdown options = {eatingclubs} label = "eatingclubs" onChange = {this.onSelectEatingClub} value = {this.state.eating_club}/>
