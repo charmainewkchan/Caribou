@@ -45,6 +45,9 @@ class Events extends Component {
         //console.log(res);
         //console.log(res.data);
         this.updateData();
+        this.setState({
+          showNewCard: false
+        })
       })
     .catch(err => alert(err));
   }
@@ -104,6 +107,7 @@ class Events extends Component {
       console.log(res.data);
       this.setState({
         events_data: res.data,
+
       }, function() {this.filterEvents()});
     });
   }
