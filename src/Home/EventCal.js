@@ -1,34 +1,40 @@
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import '../App.css';
-
+import Calendar from "react-big-calendar";
+import moment from 'moment';
 import axios from 'axios'
 
-const EventCalendar = require('react-event-calendar');
+import "react-big-calendar/lib/css/react-big-calendar.css";
+Calendar.setLocalizer(Calendar.momentLocalizer(moment));
+
+
 
 
 const events = [
     {
-        start: '2015-07-20',
-        end: '2015-07-02',
-        eventClasses: 'optionalEvent'
-        title: 'test event',
+        start: '2018-04-20',
+        end: '2018-04-28',
+        eventClasses: 'optionalEvent',
+        title: 'Colonial Tours',
         description: 'This is a test description of an event',
     },
     {
-        start: '2015-07-19',
-        end: '2015-07-25',
-        title: 'test event',
+        start: '2018-04-19',
+        end: '2018-04-19',
+        title: 'Cap Sophomore Meal night',
         description: 'This is a test description of an event',
         data: 'you can add what ever random data you may want to use later',
     },
 ];
 
 class EventCal extends Component {
-  constructor(props) {
+  constructor() {
+    super()
 
     this.state = {
-      events : []
+      myEvents : events
     };
 
 
@@ -37,13 +43,12 @@ class EventCal extends Component {
 
   render() {
         return (
-          <EventCalendar
-          month={7}
-          year={2015}
-          events={events}
-          onEventClick={(target, eventData, day) => console.log(eventData)
-            />
-        );
+          <Calendar
+          className = "Home-cal"
+          style={{height: '1000px'}}
+          events={this.state.myEvents}
+        />
+      )
     }
 }
 

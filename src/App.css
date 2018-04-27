@@ -34,7 +34,7 @@ body {
   font-size: large;
 }
 
-.About { 
+.About {
   background: white;
  }
 
@@ -362,7 +362,7 @@ body {
 
 .leave-button {
    border: 0;
-  margin: .5em; 
+  margin: .5em;
 }
 
 .Events .btn {
@@ -404,6 +404,11 @@ body {
   list-style: none;
   flex-direction: row;
   font-family: 'Roboto', sans-serif;
+}
+
+.Home-cal{
+  margin: 4em;
+  background-color: white;
 }
 
 .push {

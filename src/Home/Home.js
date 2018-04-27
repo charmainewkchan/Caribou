@@ -1,8 +1,14 @@
+import '../App.css';
+
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import EventCal from './EventCal'
+import Calendar from "react-big-calendar";
+import EventCal from './EventCal';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import "react-big-calendar/lib/css/react-big-calendar.css";
+Calendar.setLocalizer(Calendar.momentLocalizer(moment));
 
-import '../App.css';
 
 
 class Home extends Component {
@@ -27,7 +33,7 @@ class Home extends Component {
           </div>
         </div>
         <p>Here to help you meet people.</p>
-        <EventCal />
+      <EventCal/>
       </div>
     );
   }

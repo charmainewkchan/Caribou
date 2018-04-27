@@ -11,7 +11,6 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
     "jquery": "^3.3.1",
-    "moment": "^2.22.0",
     "rc-time-picker": "^3.3.1",
     "react": "^16.3.1",
     "react-dates": "^16.6.0",
@@ -31,5 +30,11 @@
   "engines": {
     "node": "8.9.4",
     "npm": "5.6.0"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.11",
+    "moment": "^2.22.1",
+    "react-big-calendar": "^0.19.0",
+    "style-loader": "^0.21.0"
   }
 }
