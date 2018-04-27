@@ -21,10 +21,10 @@ class MyProfile extends Component {
   settingsList() {
     return (
                 <ul className="navbar-nav ml-sm-auto">
-                  <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' ><FontAwesomeIcon icon="user" />My Profile</NavLink></li>
-                  <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' ><FontAwesomeIcon icon="cog" />Account Settings</NavLink></li>
-                  <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'><FontAwesomeIcon icon="calendar-art" />Events Attending</NavLink></li>
-                  <li className="nav-item"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' ><FontAwesomeIcon icon="address-book" />Events Hosting</NavLink></li>
+                  <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' ><FontAwesomeIcon icon="user" className="mr-3"/>My Profile</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' ><FontAwesomeIcon icon="cog" className="mr-3"/>Account Settings</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'><FontAwesomeIcon icon="calendar-art" className="mr-3" />Events Attending</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' ><FontAwesomeIcon icon="address-book" className="mr-3"/>Events Hosting</NavLink></li>
                 </ul>
       )
   }
@@ -42,10 +42,10 @@ class MyProfile extends Component {
       		<nav className="col-md-2 d-none d-md-block bg-light sidebar">
             <div className="sidebar-sticky">
         			<ul className="nav flex-column text-left pl-2">
-   <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' ><FontAwesomeIcon icon="user" />My Profile</NavLink></li>
-                  <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' ><FontAwesomeIcon icon="cog" />Account Settings</NavLink></li>
-                  <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'><FontAwesomeIcon icon="calendar-alt" />Events Attending</NavLink></li>
-                  <li className="nav-item"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' ><FontAwesomeIcon icon="address-book" />Events Hosting</NavLink></li>
+   <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' ><FontAwesomeIcon icon="user" className="mr-3"/>My Profile</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' ><FontAwesomeIcon icon="cog" className="mr-3" />Account Settings</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'><FontAwesomeIcon icon="calendar-alt" className="mr-3"/>Events Attending</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' ><FontAwesomeIcon icon="address-book" className="mr-3"/>Events Hosting</NavLink></li>
             	</ul>
             </div>
       		</nav>

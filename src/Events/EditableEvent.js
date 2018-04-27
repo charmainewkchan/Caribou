@@ -44,7 +44,7 @@ class EditableEvent extends Component {
     this.state = {
       eventName: this.props.title,
       eventDes: this.props.description,
-      eventLoc: this.props.location,
+      eventLoc: this.props.loc,
       eating_club: this.props.eating_club,
       start:this.props.start,
       end: this.props.end,
