@@ -224,21 +224,15 @@ def post_event(request):
 			return HttpResponse("Permission Denied", status=403)
 		data_json = json.loads(request.body)
 		data = data_json[0]
-		description = data["description"]
-		title = data["title"]
-		date = data["date"]
-		start = data["start"]
-		end = data["end"]
-		location = data["location"]
 		capacity = int(data["capacity"])
 		if capacity < e.attendance:
 			return HttpResponse("Capacity cannot be less than attendance", status=400)
-		e.description = description
-		e.title = title
-		e.date = date
-		e.start = start
-		e.end = end
-		e.location = location
+		e.description = data["description"]
+		e.title = data["title"]
+		e.date = data["date"]
+		e.start = data["start"]
+		e.end = data["end"]
+		e.location = data["location"]
 		e.capacity = capacity
 		e.save()
 		# email attendees
@@ -277,7 +271,7 @@ def delete_event(request, event_id):
 	# email the attendees
 	tolist = [n+"@princeton.edu" for n in attendees_id]
 	subject = 'An event you joined was deleted'
-	message = "placeholderrrrrrr " + title + "."
+	message = "The event " + title + " that you joined was deleted."
 	notify(subject, message, tolist)
 
 	# delete the event
@@ -300,9 +294,11 @@ def join_event(request):
 	# check if event full
 	if (event.attendance >= event.capacity):
 		return HttpResponse("Event Full", status=400)
-
 	participant_netid = get_netid(request)
 	participant = User.objects.get(netid=participant_netid)
+	# check if host
+	if participant == event.author:
+		return HttpResponse("Cannot Join Your Own Event", status=400)
 	alreadyjoined = JoinedEvents.objects.filter(participant=participant).filter(event=event)
 	if len(alreadyjoined) > 0:
 		return HttpResponse("Already Joined", status=400)
