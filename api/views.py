@@ -136,6 +136,11 @@ def get_event(request, event_id):
 	if (len(event) != 1):
 		return HttpResponse("Event Not Found", status=404)
 	event_json = serializers.serialize('json', event)
+
+	netid = get_netid(request)
+
+	event_json = append_data_to_events(event_json, netid)
+
 	return HttpResponse(event_json, content_type='application/json')
 
 @casauth

@@ -190,10 +190,7 @@ body {
 
 
 .Events {
-
-}
-
-.Events-panel {
+  margin-bottom: 4em;
 }
 
 .Events-addEvent {
@@ -340,11 +337,9 @@ body {
   background: #f7f7f7;
   border-radius: 5px;
   text-align: center;
-  flex: 0 0 200px;
+  flex: 0 0 240px;
   height: 15em;
   padding-top: 2em;
-  position: relative;
-  right: 0;
 }
 
 .event-page-info p {
@@ -355,6 +350,7 @@ body {
 .event-page-info {
     min-height: auto;
     flex: none;
+    margin: none;
     margin-top: -1em;
     margin-bottom: 2em;
   }

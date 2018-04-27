@@ -7,6 +7,7 @@ import Events from './Events/Events'
 import SingleEvent from './Events/SingleEvent'
 
 import MyProfile from './MyProfile/MyProfile'
+import User from './User'
 
 class Main extends Component {
   render() {
@@ -16,9 +17,10 @@ class Main extends Component {
 			<Switch>
 				<Route exact path='/' component={Home}/>
 				<Route exact path='/events' component={Events}/>
-        <Route path='/events/:event_id/' component={SingleEvent}/>
-			  <Route path='/about' component={About}/>
-			  <Route path='/myprofile' component={MyProfile}/>
+        		<Route path='/events/:event_id/' component={SingleEvent}/>
+        		<Route path='/user/:netid/' component={User}/>
+			  	<Route path='/about' component={About}/>
+			  	<Route path='/myprofile' component={MyProfile}/>
 			</Switch>
 			</main>
 		);
