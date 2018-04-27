@@ -10,6 +10,36 @@ const years = [2019,2020,2021,2022];
 const eatingclubs = ["Cloister","Tower","none","Colonial","Cannon","Cap","Ivy","TigerInn","Quad","Terrace","Cottage","Charter"]
 const rescollege = ["Butler", "Wilson", "Mathey", "Rocky", "Whitman","Forbes"]
 
+var eatingClubAbr = {
+  "CL":"Cloister",
+  "TO":"Tower",
+  "NN":"none",
+  "CO":"Colonial",
+  "CN":"Cannon",
+  "CA":"Cap",
+  "IV":"Ivy",
+  "TI":"TigerInn",
+  "QD":"Quad",
+  "TE":"Terrace",
+  "CT":"Cottage",
+  "CH":"Charter"
+}
+
+var eatingClubAbrReverse = {
+  "Cloister":"CL",
+  "Tower":"TO",
+  "none":"NN",
+  "Colonial":"CO",
+  "Cannon":"CN",
+  "Cap":"CA",
+  "Ivy":"IV",
+  "TigerInn":"TI",
+  "Quad":"QD",
+  "Terrace":"TE",
+  "Cottage":"CT",
+  "Charter":"CH"
+}
+
 class EditableProfile extends Component {
   constructor(props){
     super(props);
@@ -19,7 +49,7 @@ class EditableProfile extends Component {
       last_name: this.props.last_name,
       year: this.props.year,
       res_college:this.props.res_college,
-      eating_club: this.props.eating_club,
+      eating_club: eatingClubAbr[this.props.eating_club],
       edit_mode:this.props.edit_mode
     }
 
@@ -33,6 +63,17 @@ class EditableProfile extends Component {
   save(event) {
 
     //* post data to url *//
+    var data = []
+
+
+
+    console.log(event)
+    axios.post('https://bixr.herokuapp.com/api/post_event', data)
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+    .catch(err => alert(err));
 
     this.props.toggleEditMode();
     this.props.updateData();
@@ -92,7 +133,7 @@ class EditableProfile extends Component {
         </div>
 
         <h3>College: </h3>
-        <Dropdown options = {rescollege} label = "rescollege" name = "res_college" onChange = {this.onSelectResCollege} value = {this.state.res_college}/>
+        <Dropdown options = {rescollege} label = "rescollege" name = "res_college" onChange = {this.onSelectResCollege} value = {eatingClubAbr[this.state.res_college]}/>
 
         <h3>Eating Club: </h3>
           <Dropdown options = {eatingclubs} label = "eatingclubs" onChange = {this.onSelectEatingClub} value = {this.state.eating_club}/>
