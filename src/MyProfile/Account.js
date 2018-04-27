@@ -7,6 +7,7 @@ class Account extends Component {
     return (
       <div>
         <h2> Account </h2>
+        <hr/>
         <button className="btn btn-danger"> Delete Account </button>
       </div>
     );

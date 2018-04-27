@@ -14,17 +14,14 @@ class Event extends Component {
 
 
 	owner_buttons() {
-		if (this.props.isOwner) {
 			return (
 				<div className="d-inline float-right">
-						<button className="btn btn-outline-secondary owner-btn " style={{margin:''}}onClick={() => this.props.displayAttendees(this.props.pk)}> @ </button>
+						<button className="btn btn-outline-secondary owner-btn " onClick={() => this.props.displayAttendees(this.props.pk)}> @ </button>
 						<button className="btn btn-outline-secondary owner-btn " onClick={() => this.props.toggleEditMode(this.props.toggleEditMode)}> * </button>
 						<button className="btn btn-outline-secondary owner-btn" onClick={() => this.props.onRemoveEvent(this.props.pk)}> X </button>
 				</div>
 				);
-		}
 	}
-
 
 	buttons() {
 
@@ -39,20 +36,24 @@ class Event extends Component {
     return (
     <div className="card Events-event">
 		 <div className="card-header event-header">
-		 		<div className="container-fluid">
-		 		<div className="row">
-			  	<div className="col float-left">
-			  		<h2>{this.props.title}</h2>
-			  	</div>
-			  	<div className="col">
-			  		{this.owner_buttons()}
-			  	</div>
-			  </div>
-			  <div className="row">
-		    	<p>{eating_club_map[this.props.eating_club]} &bull; {this.props.start} - {this.props.end}</p>
+
+
+			 		<div className="row">
+			 			<div className="col">
+				  		<h2>{this.props.title}</h2>
+				  	</div>
+				  	{!!this.props.isOwner && 
+				  		<div className="col">
+				  		  {this.owner_buttons()}
+				  	 </div>
+				     }
+
+				  </div>
+
+				  <div className="row">
+			    	<p>{eating_club_map[this.props.eating_club]} &bull; {this.props.start} - {this.props.end}</p>
+			    </div>
 		    </div>
-		    </div>
-		 </div>
 
 	    <div className="card-body event-body">
 	         <p>{this.props.description}</p>

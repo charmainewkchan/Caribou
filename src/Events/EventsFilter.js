@@ -37,7 +37,9 @@ class EventsFilter extends Component {
   handleSort(event) {
     this.setState({
       sort_by : event.target.name
-    })
+    });
+
+
   }
 
 

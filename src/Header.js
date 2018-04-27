@@ -16,13 +16,8 @@ class Header extends Component {
       localStorage.setItem('netid', 'dsawicki');
       this.setState({username: 'dsawicki'});
 
+      const url = "https://bixr.herokuapp.com/api/netid/";
 
-<<<<<<< HEAD
-            const url = "https://bixr.herokuapp.com/api/netid/";
-=======
-  getNetID() {
-        const url = "https://bixr.herokuapp.com/api/netid";
->>>>>>> master
     axios.get(url).then(res => {
       console.log(res.data);
       localStorage.setItem('netid', res.data.netid);

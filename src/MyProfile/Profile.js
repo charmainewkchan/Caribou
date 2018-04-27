@@ -27,6 +27,7 @@ class Profile extends Component {
     return (
       <div>
         <h2>Profile Information</h2>
+        <hr/>
         <h3>Name: </h3><p>{this.state.profile_info.first_name} {this.state.profile_info.last_name}</p>
         <h3>Year: </h3><p>{this.state.profile_info.year}</p>
         <h3>College: </h3><p>{this.state.profile_info.res_college}</p>

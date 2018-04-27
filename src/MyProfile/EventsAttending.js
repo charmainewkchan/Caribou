@@ -38,6 +38,7 @@ class EventsAttending extends Component {
     return (
         <div>
           <h2>Events Attending</h2>
+          <hr/>
           <EventsPanel events={this.state.eventsAttending} updateData={this.updateData}/>
         </div>
     );
