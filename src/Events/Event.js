@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import {Link} from 'react-router-dom';
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+
+
 //import Event from './Event'
 import eating_club_map from './eating_club_map.json';
 import '../App.css';
@@ -19,9 +22,9 @@ class Event extends Component {
 	owner_buttons() {
 			return (
 				<div className="owner-buttons">
-						<button className="btn btn-outline-secondary owner-btn " onClick={() => this.props.displayAttendees(this.props.pk)}> @ </button>
-						<button className="btn btn-outline-secondary owner-btn " onClick={() => this.props.toggleEditMode(this.props.toggleEditMode)}> * </button>
-						<button className="btn btn-outline-secondary owner-btn" onClick={() => this.props.onRemoveEvent(this.props.pk)}> X </button>
+						<button className="btn btn-outline-secondary owner-btn " onClick={() => this.props.displayAttendees(this.props.pk)}><FontAwesomeIcon icon="user" /></button>
+						<button className="btn btn-outline-secondary owner-btn " onClick={() => this.props.toggleEditMode(this.props.toggleEditMode)}><FontAwesomeIcon icon="pencil-alt" /></button>
+						<button className="btn btn-outline-secondary owner-btn" onClick={() => this.props.onRemoveEvent(this.props.pk)}><FontAwesomeIcon icon="trash-alt" /></button>
 				</div>
 				);
 	}

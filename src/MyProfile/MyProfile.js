@@ -5,6 +5,9 @@ import Account from './Account';
 import EventsAttending from './EventsAttending';
 import EventsHosting from './EventsHosting';
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+
+
 import '../App.css';
 class MyProfile extends Component {
   constructor() {
@@ -24,10 +27,10 @@ class MyProfile extends Component {
             </button>
             <div className="collapse navbar-collapse" id="dashboard">
                 <ul className="navbar-nav ml-auto">
-                  <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' >My Profile</NavLink></li>
-                  <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' >Account Settings</NavLink></li>
-                  <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'>Events Attending</NavLink></li>
-                  <li className="nav-item"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' >Events Hosting</NavLink></li>
+                  <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' ><FontAwesomeIcon icon="user" />My Profile</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' ><FontAwesomeIcon icon="cog" />Account Settings</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'><FontAwesomeIcon icon="calendar-art" />Events Attending</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' ><FontAwesomeIcon icon="address-book" />Events Hosting</NavLink></li>
                 </ul>
             </div>
           </nav>
@@ -40,10 +43,10 @@ class MyProfile extends Component {
       		<nav className="col-md-2 d-none d-md-block bg-light sidebar">
             <div className="sidebar-sticky">
         			<ul className="nav flex-column">
-        				<li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' >My Profile</NavLink></li>
-        				<li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' >Account Settings</NavLink></li>
-                <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'>Events Attending</NavLink></li>
-                <li className="nav-item"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' >Events Hosting</NavLink></li>
+   <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' ><FontAwesomeIcon icon="user" />My Profile</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' ><FontAwesomeIcon icon="cog" />Account Settings</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'><FontAwesomeIcon icon="calendar-alt" />Events Attending</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' ><FontAwesomeIcon icon="address-book" />Events Hosting</NavLink></li>
             	</ul>
             </div>
       		</nav>

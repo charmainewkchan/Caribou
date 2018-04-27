@@ -207,6 +207,7 @@ body {
   margin:0em .2em;
   margin-top: -.2em;
   padding: 0;
+  border: none;
 }
 
 .owner-buttons {
