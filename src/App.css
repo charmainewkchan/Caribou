@@ -35,11 +35,13 @@ body {
 }
 
 .About { 
-  background: white;
- }
+  background: #f7f7f7; 
+  border-radius: 5px;
+  padding: 2em 0em;
+  margin-top: 2em;
+}
 
 .About h2{
-    background-color: white;
     text-align: center;
     color: black;
     margin: 1em 0;
@@ -48,7 +50,6 @@ body {
 }
 
 .About p{
-    background-color: white;
     text-align: center;
     color: black;
     width: 70%;
