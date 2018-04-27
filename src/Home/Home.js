@@ -32,7 +32,9 @@ class Home extends Component {
 
           </div>
         </div>
-        <p>Here to help you meet people.</p>
+        <p>Here to mix up the people you meet.</p>
+
+      <h2> Official Club Events</h2>
       <EventCal/>
       </div>
     );

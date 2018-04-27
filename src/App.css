@@ -445,16 +445,15 @@ body {
 
 
 .Home p {
-    font-size: .8em;
-    background: #f1f1f1;
-    margin: 18em auto;
+    font-size: 2.5em;
+    margin: 3em auto 5em auto;
     width: 60%;
 
     font-family: 'Roboto', sans-serif;
 }
 
 .Home h2 {
-    font-size: 1.2em;
+    font-size: 3em;
     font-weight: bold;
     margin: 8em 0 1em 0;
     font-size: 30px;
