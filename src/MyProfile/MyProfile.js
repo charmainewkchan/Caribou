@@ -20,7 +20,7 @@ class MyProfile extends Component {
 
   settingsList() {
     return (
-                <ul className="navbar-nav ml-auto">
+                <ul className="navbar-nav ml-sm-auto">
                   <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' ><FontAwesomeIcon icon="user" />My Profile</NavLink></li>
                   <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' ><FontAwesomeIcon icon="cog" />Account Settings</NavLink></li>
                   <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'><FontAwesomeIcon icon="calendar-art" />Events Attending</NavLink></li>
@@ -41,7 +41,7 @@ class MyProfile extends Component {
 
       		<nav className="col-md-2 d-none d-md-block bg-light sidebar">
             <div className="sidebar-sticky">
-        			<ul className="nav flex-column">
+        			<ul className="nav flex-column text-left pl-2">
    <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' ><FontAwesomeIcon icon="user" />My Profile</NavLink></li>
                   <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' ><FontAwesomeIcon icon="cog" />Account Settings</NavLink></li>
                   <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'><FontAwesomeIcon icon="calendar-alt" />Events Attending</NavLink></li>

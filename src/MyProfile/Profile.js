@@ -5,6 +5,8 @@ import EditableProfile from './EditableProfile'
 
 import axios from 'axios';
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+
 class Profile extends Component {
   constructor(props){
     super(props);
@@ -46,13 +48,7 @@ class Profile extends Component {
     return (
       <div>
         <div className = 'row'>
-          <div className = 'col-6'>
-            <h2>My Profile</h2>
-          </div>
-
-          <div className = 'col-6'>
-            <button onClick={this.toggleEditMode}> Edit Profile </button>
-          </div>
+            <h2 className="mr-5">My Profile</h2> <button  onClick={this.toggleEditMode}><FontAwesomeIcon icon="pencil-alt"/></button>
         </div>
         <hr/>
 

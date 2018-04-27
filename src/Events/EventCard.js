@@ -21,14 +21,18 @@ class EventCard extends Component {
   }
 
 
-  toggleEditMode() {
+  toggleEditMode(event) {
+    event.stopPropagation();
+
     this.setState({
       edit_mode: !this.state.edit_mode
     });
   }
 
 
-  displayAttendees(event_pk) {
+  displayAttendees(event, event_pk) {
+    event.stopPropagation();
+    console.log(event);
     const url = "https://bixr.herokuapp.com/api/get_users_for_event/" + event_pk + "/";
     axios.get(url).then(res => {
         var netids = res.data.map(user => user.fields.netid);

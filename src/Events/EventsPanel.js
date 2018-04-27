@@ -32,7 +32,9 @@ class EventsPanel extends Component {
 
     }
 
-    onRemoveEvent(event_id) {
+    onRemoveEvent(event, event_id) {
+      event.stopPropagation();
+      
       const url = "https://bixr.herokuapp.com/api/delete_event/" + event_id + "/";
       axios.get(url)
       .then(res => console.log(res))
