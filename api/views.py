@@ -121,6 +121,7 @@ def get_events_for_user(request, netid):
 def get_events(request):
 	#netid = request.session['netid']
 	netid = get_netid(request)
+
 	dataq = PersonalEvent.objects.all()
 	data_json = serializers.serialize('json', dataq)
 

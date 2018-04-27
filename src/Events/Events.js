@@ -41,12 +41,11 @@ class Events extends Component {
     console.log(event)
     axios.post('https://bixr.herokuapp.com/api/post_event', event)
     .then(res => {
-        console.log(res);
-        console.log(res.data);
+        //console.log(res);
+        //console.log(res.data);
+        this.updateData();
       })
     .catch(err => alert(err));
-
-    this.updateData();
   }
 
 
@@ -138,7 +137,7 @@ class Events extends Component {
     	<div className="Events container">
 	      <div className="row">
 	        <div className= "col-3">
-	        <EventsFilter onClubFilterChange={this.onClubFilterChange}/>
+	         <EventsFilter onClubFilterChange={this.onClubFilterChange}/>
 	        </div>
 
 	        <div className= "col-9">

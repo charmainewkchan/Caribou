@@ -16,23 +16,19 @@ class Event extends Component {
 	}
 
 
-	buttons() {
-		if (this.props.isOwner) {
+	owner_buttons() {
 			return (
-				<div className="row">
-					<div className="col">
-						<button className="btn btn-outline-secondary owner-btn " style={{margin:''}}onClick={() => this.props.displayAttendees(this.props.pk)}> @ </button>
-					</div>
-					<div className="col">
+				<div className="owner-buttons">
+						<button className="btn btn-outline-secondary owner-btn " onClick={() => this.props.displayAttendees(this.props.pk)}> @ </button>
 						<button className="btn btn-outline-secondary owner-btn " onClick={() => this.props.toggleEditMode(this.props.toggleEditMode)}> * </button>
-					</div>
-					<div className="col">
 						<button className="btn btn-outline-secondary owner-btn" onClick={() => this.props.onRemoveEvent(this.props.pk)}> X </button>
-					</div>
 				</div>
 				);
-		}
-		else if (this.props.isAttending) {
+	}
+
+	buttons() {
+
+		if (this.props.isAttending) {
 			return <button className="btn btn-danger leave-button" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Leave </button>
 		} else {
 			return <button disabled={this.props.attendance==this.props.capacity} className="btn btn-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
@@ -47,11 +43,25 @@ class Event extends Component {
     return (
     <div className="card Events-event" >
 		 <Link to={'/events/'+this.props.pk + "/"}>
-		 		<button className="card-header event-header Events-panel" disabled = {true}>
-			  	<h2>{this.props.title}</h2>
-		    	<p>{eating_club_map[this.props.eating_club]} &bull; {this.props.time}</p>
-				</button>
+		 		<div className="card-header event-header Events-panel" disabled = {true}>
+			 		<div className="row">
+			 			<div className="col">
+				  		<h2>{this.props.title}</h2>
+				  	</div>
+				  	{!!this.props.isOwner && 
+				  		<div className="col">
+				  		  {this.owner_buttons()}
+				  	 </div>
+				     }
+
+				  </div>
+
+				  <div className="row">
+			    	<p>{eating_club_map[this.props.eating_club]} &bull; {this.props.start} - {this.props.end}</p>
+			    </div>
+				</div>
 		 </Link>
+
 
 	    <div className="card-body event-body">
 	         <p>{this.props.description}</p>

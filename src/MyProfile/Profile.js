@@ -54,6 +54,8 @@ class Profile extends Component {
             <button onClick={this.toggleEditMode}> Edit Profile </button>
           </div>
         </div>
+        <hr/>
+
         <h3>Name: </h3><p>{this.state.profile_info.first_name} {this.state.profile_info.last_name}</p>
         <h3>Year: </h3><p>{this.state.profile_info.year}</p>
         <h3>College: </h3><p>{this.state.profile_info.res_college}</p>
