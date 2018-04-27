@@ -11,7 +11,7 @@
 }
 
 body {
-  background: #dfdfe0;
+  background: #e7e7e9;
 }
 
 .App-logo {
@@ -290,6 +290,77 @@ body {
   }
 }
 
+/* SINGLE EVENT PAGE */
+
+.event-page-header {
+  background: #f7f7f7;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+  padding: 1em;
+  width: 100%;
+}
+
+.event-img {
+  border-radius: 5px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1em;
+}
+
+.event-page-header h2 {
+  font-weight: bold;
+  font-family: roboto;
+}
+
+.event-page-header h3 {
+  color: #bbb;
+  font-family: roboto;
+}
+
+.event-page-author {
+
+}
+.event-page-author p{
+  margin: 0;
+  color: #bbb;
+}
+
+
+.event-page-body {
+  margin-top: 3em;
+}
+
+
+.event-page-details {
+  text-align: left;
+  margin-bottom: 4em;
+}
+
+.event-page-info {
+  background: #f7f7f7;
+  border-radius: 5px;
+  text-align: center;
+  flex: 0 0 200px;
+  height: 15em;
+  padding-top: 2em;
+  position: relative;
+  right: 0;
+}
+
+.event-page-info p {
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+.event-page-info {
+    min-height: auto;
+    flex: none;
+    margin-top: -1em;
+    margin-bottom: 2em;
+  }
+}
+
+/* END SINGLE EVENT PAGE */
 
 .Events-list {
   list-style-type: none;
@@ -323,6 +394,7 @@ body {
   font-family: times new roman;
   margin: 0;
   padding:0 ;
+  text-align: left;
 }
 
 .btn-host {
@@ -330,12 +402,12 @@ body {
   width: 3em;
 }
 
-
 .event-header p{
   font-size: .6em;
   font-weight:bold;
-  color: #373737;
+  color: #555;
   margin: 0;
+  margin-left: 2em;
   padding:0 ;
 }
 

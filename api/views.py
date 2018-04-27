@@ -53,6 +53,7 @@ def append_data_to_events(data_json, netid):
 
 		e["isOwner"] = 1 if author == netid else 0
 		e["isAttending"] = 1 if e["pk"] in events_joined else 0
+		e["author"] = author
 
 
 	return json.dumps(data)

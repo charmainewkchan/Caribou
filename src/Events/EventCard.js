@@ -49,17 +49,18 @@ class EventCard extends Component {
                                 attendance={this.props.attendance}
                                 capacity={this.props.capacity}
                                 description={this.props.description}
+                                loc={this.props.location}
                                 pk={this.props.pk}
                                 start = {this.props.start}
                                 end = {this.props.end}
                                 newCard= {false}
 
-                                onDataChange={this.onDataChange}
-                                onPostEvent={this.props.onPostEvent}
                                 isEditable={true}
-
                                 isOwner={true}
                                 isAttending={false}
+
+                                onDataChange={this.onDataChange}
+                                onPostEvent={this.props.onPostEvent}
                                 onLeaveEvent={null}
                                 onSubmitEdit={null}
                                 toggleEditMode={this.toggleEditMode}
@@ -76,12 +77,15 @@ class EventCard extends Component {
                                 attendance={this.props.attendance}
                                 capacity={this.props.capacity}
                                 description={this.props.description}
+                                loc={this.props.location}
                                 pk={this.props.pk}
                                 start = {this.props.start}
                                 end = {this.props.end}
+
                                 isAttending={this.props.isAttending}
-                                onRemoveEvent={this.props.onRemoveEvent}
                                 isOwner={this.props.isOwner}
+
+                                onRemoveEvent={this.props.onRemoveEvent}
                                 onLeaveEvent={this.props.onLeaveEvent}
                                 toggleEditMode={this.toggleEditMode}
                                 displayAttendees={this.displayAttendees}

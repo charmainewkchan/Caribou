@@ -19,7 +19,9 @@ class Event extends Component {
 	/*	this.getAllEventInfo = this.getAllEventInfo.bind(this)*/
 	}
 
-
+	componentDidMount(){
+		console.log(this.props.loc)
+	}
 
 	owner_buttons() {
 			return (
@@ -67,6 +69,7 @@ class Event extends Component {
 
 	    <div className="card-body event-body">
 	         <p>{this.props.description}</p>
+	         <p style={{fontStyle:'italic'}}>{"Location: "+ this.props.loc}</p>
 	         <p>{this.props.attendance == 0 ? "Be the first to join!" : ""+this.props.attendance+"/"+this.props.capacity+" going!"}</p>
 	    </div>
 

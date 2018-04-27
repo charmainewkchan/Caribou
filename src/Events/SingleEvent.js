@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import eating_club_map from './eating_club_map.json';
 import '../App.css';
 import axios from 'axios'
+import princeton_img from '../Resources/princeton1.jpg'
 
 
 class SingleEvent extends Component {
@@ -34,7 +35,7 @@ class SingleEvent extends Component {
         eventName: res.data[0].fields.title,
 				eventDes: res.data[0].fields.description,
 	      eventLoc: res.data[0].fields.location,
-	      eating_club: res.data[0].fields.eating_club_map,
+	      eating_club: res.data[0].fields.eating_club,
 	      start:res.data[0].fields.start,
 	      end:res.data[0].fields.end,
 	      date:res.data[0].fields.date,
@@ -49,22 +50,38 @@ class SingleEvent extends Component {
 
   render() {
     return (
-			<div className= "container">
-      <div className="card Events-event">
-  		 <div className="card-header event-header">
-  			  <h2>{this.state.eventName}</h2>
-  		    <p>{eating_club_map[this.state.eating_club]} &bull; </p>
-  		 </div>
+      <div>
+        <div className="event-page-header">
+          <h3>{this.state.date}</h3>
+          <h2>{this.state.eventName}</h2>
+          <div className="event-page-author">
+            <p>Hosted by author</p>
+            <p>Of {eating_club_map[this.state.eating_club]}</p>
+          </div>
+        </div>
 
-  	    <div className="card-body event-body">
-  	         <p>{this.state.eventDes}</p>
-						 <p>{this.state.date}</p>
-						 <p>{this.state.eventLoc}</p>
-						 <p>{this.state.start} - {this.state.end}</p>
-  	         <p>{this.state.attendance+"/"+this.state.eventCap+" going!"}</p>
-  	    </div>
+    	  <div className="container-fluid event-page-body">
+        <div className="row">
+
+              <div className="col-md-9 order-sm-2 order-xs-2 order-md-1 event-page-details">
+                <img className="event-img" src={princeton_img} alt="img"/>
+                <h3> Details </h3>
+                <hr/>
+                <p>{this.state.eventDes}</p>
+              </div>
+
+                          
+              <div className="col-md-3 order-sm-1 order-xs-1 order-md-2 event-page-info ml-3">
+                  <p>{this.state.date}</p>
+                 <p>{this.state.eventLoc}</p>
+                 <p>{this.state.start} - {this.state.end}</p>
+                 <p>{this.state.attendance+"/"+this.state.eventCap+" going!"}</p>
+              </div>
+
+            </div>
+          </div>
       </div>
-		</div>
+
     )
   }
 }

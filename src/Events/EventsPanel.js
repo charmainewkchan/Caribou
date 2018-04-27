@@ -12,6 +12,7 @@ class EventsPanel extends Component {
     super(props);
     this.state = {
     };
+
     this.onJoinEvent = this.onJoinEvent.bind(this);
     this.onLeaveEvent = this.onLeaveEvent.bind(this);
     this.onRemoveEvent = this.onRemoveEvent.bind(this);
@@ -71,6 +72,7 @@ class EventsPanel extends Component {
                               attendance={event.fields.attendance}
                               capacity={event.fields.capacity}
                               description={event.fields.description}
+                              location={event.fields.location}
                               pk={event.pk}
                               start={event.fields.start}
                               end={event.fields.end}
