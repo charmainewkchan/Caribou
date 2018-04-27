@@ -18,6 +18,8 @@ class EventCard extends Component {
 
 
     this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.updateData= this.updateData.bind(this);
+    this.onCreateEvent=this.onCreateEvent.bind(this);
   }
 
 
@@ -25,6 +27,28 @@ class EventCard extends Component {
     this.setState({
       edit_mode: !this.state.edit_mode
     });
+  }
+
+  updateData(){
+    // reload the data
+    const url = "https://bixr.herokuapp.com/api/get_events";
+    axios.get(url).then(res => {
+      console.log(res.data);
+      this.setState({
+        events_data: res.data,
+      }, function() {this.filterEvents()});
+    });
+  }
+
+  onCreateEvent(event){
+    console.log(event)
+    axios.post('https://bixr.herokuapp.com/api/post_event', event)
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+    .catch(err => alert(err));
+
   }
 
 
@@ -50,6 +74,11 @@ class EventCard extends Component {
                                 start = {this.props.start}
                                 end = {this.props.end}
                                 newCard= {false}
+
+                                onDataChange={this.onDataChange}
+                                onCreateEvent={this.onCreateEvent}
+                                isEditable={true}
+
                                 isOwner={true}
                                 isAttending={false}
                                 onLeaveEvent={null}

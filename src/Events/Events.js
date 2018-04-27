@@ -96,7 +96,15 @@ class Events extends Component {
   }
 
   onEditEvent(event){
-    // TODO:
+    console.log(event)
+    axios.post('https://bixr.herokuapp.com/api/post_event', event)
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+    .catch(err => alert(err));
+
+    this.updateData();
   }
 
 
