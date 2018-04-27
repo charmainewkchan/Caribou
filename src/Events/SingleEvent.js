@@ -42,7 +42,7 @@ class SingleEvent extends Component {
 	      pk:res.data[0].pk,
 	      eventCap:res.data[0].fields.capacity,
 	      attendance:res.data[0].fields.attendance,
-        author:res.data[0].fields.author
+        author:res.data[0].author
       });
     });
   }

@@ -114,6 +114,7 @@ body {
 .MyProfile-panel h2 {
   font-size: 1.4em;
   font-weight: bold;
+  margin-left: 1em;
 }
 
 .MyProfile-panel h3 {
