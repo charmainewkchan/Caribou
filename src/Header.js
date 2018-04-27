@@ -10,13 +10,14 @@ class Header extends Component {
     this.state={
       username:''
     }
-
-    this.getNetID = this.getNetID.bind(this);
   }
-
 
   componentDidMount() {
-            const url = "https://bixr.herokuapp.com/api/netid";
+      localStorage.setItem('netid', 'dsawicki');
+      this.setState({username: 'dsawicki'});
+
+      const url = "https://bixr.herokuapp.com/api/netid/";
+
     axios.get(url).then(res => {
       console.log(res.data);
       localStorage.setItem('netid', res.data.netid);
@@ -24,14 +25,6 @@ class Header extends Component {
     }).catch(err => alert(err));
   }
 
-  getNetID() {
-        const url = "https://bixr.herokuapp.com/api/netid";
-    axios.get(url).then(res => {
-      console.log(res.data);
-      localStorage.setItem('netid', res.data.netid);
-      this.setState({username: res.data.netid});
-    }).catch(err => alert(err));
-  }
 
   render() {
     return (
@@ -40,9 +33,6 @@ class Header extends Component {
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
-
-          <button onClick={()=>this.getNetID()}>get netid</button>
-
          <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item"><Link to='/' className="nav-link">Home</Link></li>

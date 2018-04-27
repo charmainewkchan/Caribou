@@ -6,6 +6,19 @@ import 'react-dates/lib/css/_datepicker.css';
 
 import './App.css';
 
+
+import fontawesome from '@fortawesome/fontawesome'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+
+import faUser from '@fortawesome/fontawesome-free-solid/faUser'
+import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt'
+import faPencilAlt from '@fortawesome/fontawesome-free-solid/faPencilAlt'
+import faCog from '@fortawesome/fontawesome-free-solid/faCog'
+import faAddressBook from '@fortawesome/fontawesome-free-solid/faAddressBook'
+import faCalendarAlt from '@fortawesome/fontawesome-free-solid/faCalendarAlt'
+
+fontawesome.library.add(faUser, faPencilAlt, faTrashAlt, faAddressBook, faCog, faCalendarAlt)
+
 class App extends Component {
   render() {
     return (

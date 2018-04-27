@@ -59,22 +59,22 @@ class EventsPanel extends Component {
         		this.props.events.map(function(event){
               return (
                 <div className="col-md-6 event-row-buffer">
-                <EventCard title={event.fields.title}
-                            eating_club={event.fields.eating_club}
-                            time={event.fields.time}
-                            attendance={event.fields.attendance}
-                            capacity={event.fields.capacity}
-                            description={event.fields.description}
-                            pk={event.pk}
-                            start={event.fields.start}
-                            end={event.fields.end}
-                            isAttending={event.isAttending}
-                            isOwner={event.isOwner}
-                            onJoinEvent={this.onJoinEvent}
-                            onEditEvent={this.props.onEditEvent}
-                            onRemoveEvent={this.onRemoveEvent}
-                            onLeaveEvent={this.onLeaveEvent}
-                            isEditable={this.props.isEditable}/>
+                  <EventCard title={event.fields.title}
+                              eating_club={event.fields.eating_club}
+                              time={event.fields.time}
+                              attendance={event.fields.attendance}
+                              capacity={event.fields.capacity}
+                              description={event.fields.description}
+                              pk={event.pk}
+                              start={event.fields.start}
+                              end={event.fields.end}
+                              isAttending={event.isAttending}
+                              isOwner={event.isOwner}
+                              onJoinEvent={this.onJoinEvent}
+                              onEditEvent={this.props.onEditEvent}
+                              onRemoveEvent={this.onRemoveEvent}
+                              onLeaveEvent={this.onLeaveEvent}
+                              isEditable={this.props.isEditable}/>
               </div>)
 
             }, this)

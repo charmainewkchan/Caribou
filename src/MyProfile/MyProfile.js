@@ -5,6 +5,10 @@ import Account from './Account';
 import EventsAttending from './EventsAttending';
 import EventsHosting from './EventsHosting';
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+
+import DropDownBar from '../DropDownBar'
+
 import '../App.css';
 class MyProfile extends Component {
   constructor() {
@@ -14,24 +18,49 @@ class MyProfile extends Component {
     }
   }
 
+  settingsList() {
+    return (
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' ><FontAwesomeIcon icon="user" />My Profile</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' ><FontAwesomeIcon icon="cog" />Account Settings</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'><FontAwesomeIcon icon="calendar-art" />Events Attending</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' ><FontAwesomeIcon icon="address-book" />Events Hosting</NavLink></li>
+                </ul>
+      )
+  }
+
   render() {
     return (
-      <div className="MyProfile container">
-      	<div className="row">
-      		<div className="col-3 MyProfile-settings">
-      			<ul>
-      				<li className="settings" ><NavLink to='/myprofile/profile' activeClassName='active-settings' style={{display:'block',height:'100%'}}>My Profile</NavLink></li>
-      				<li className="settings"><NavLink to='/myprofile/account'  activeClassName='active-settings' style={{display:'block',height:'100%'}}>Account Settings</NavLink></li>
-              <li className="settings"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings' style={{display:'block',height:'100%'}}>Events Attending</NavLink></li>
-              <li className="settings"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' style={{display:'block',height:'100%'}}>Events Hosting</NavLink></li>
-          	</ul>
+      <div className="container-fluid">
+        <div className="row d-block d-md-none">
+      	  <DropDownBar id="dashboard">{this.settingsList()}</DropDownBar>
+        </div>
+
+
+        <div className="row">
+
+      		<nav className="col-md-2 d-none d-md-block bg-light sidebar">
+            <div className="sidebar-sticky">
+        			<ul className="nav flex-column">
+   <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' ><FontAwesomeIcon icon="user" />My Profile</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' ><FontAwesomeIcon icon="cog" />Account Settings</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'><FontAwesomeIcon icon="calendar-alt" />Events Attending</NavLink></li>
+                  <li className="nav-item"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' ><FontAwesomeIcon icon="address-book" />Events Hosting</NavLink></li>
+            	</ul>
+            </div>
+      		</nav>
+
+
+      		<div className="col-md-9 ml-sm-auto col-lg-10 ">
+            <div className="MyProfile-panel">
+              <Route exact path='/myprofile(|/profile)' component={Profile} />
+              <Route path='/myprofile/account' component={Account}/>
+              <Route path='/myprofile/eventsattending' component={EventsAttending}/>
+              <Route path='/myprofile/eventshosting' component={EventsHosting}/>
+            </div>
       		</div>
-      		<div className="col MyProfile-panel">
-            <Route exact path='/myprofile(|/profile)' component={Profile} />
-            <Route path='/myprofile/account' component={Account}/>
-            <Route path='/myprofile/eventsattending' component={EventsAttending}/>
-            <Route path='/myprofile/eventshosting' component={EventsHosting}/>
-      		</div>
+
+
       	</div>
       </div>
     );

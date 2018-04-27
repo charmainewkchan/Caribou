@@ -10,6 +10,10 @@
   text-align: center;
 }
 
+body {
+  background: #dfdfe0;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -30,6 +34,10 @@
   font-size: large;
 }
 
+.About { 
+  background: white;
+ }
+
 .About h2{
     background-color: white;
     text-align: center;
@@ -47,6 +55,119 @@
     margin: 3em auto;
     font-family: 'Roboto', sans-serif;
 }
+
+
+/* PROFILE DASHBOARD */
+
+
+.sidebar {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 48px 0 0; /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #999;
+}
+
+.sidebar .nav-link.active {
+  color: #007bff;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
+
+.MyProfile-panel h2 {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.MyProfile-panel h3 {
+  font-size: 1em;
+  font-weight: bold;
+  color: #333;
+}
+
+.MyProfile-settings {
+  font-size: 0.8em;
+  padding:0em;
+  margin: 0em;
+}
+
+.MyProfile-panel {
+  text-align: left;
+  min-height: 24em;
+  width: auto;
+  margin-top: 1em;
+}
+
+@media (max-width: 767px) {
+  .MyProfile-panel {
+  }
+}
+
+
+
+.active-settings {
+  color: black;
+  background-color: #cdf;
+  font-weight: bold;
+  height: 100%;
+  margin: 0;
+  left: 1em;
+}
+
+.settings {
+  height: 100%;
+  margin: .1em;
+  padding-top: .2em;
+  height: 2em;
+  color: black;
+  text-decoration: none;;
+}
+
+.MyProfile-settings ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+/* END PROFILE DASHBOARD */
 
 
 @keyframes App-logo-spin {
@@ -68,8 +189,11 @@
 }
 
 
+.Events {
+
+}
+
 .Events-panel {
-  width: 100%;
 }
 
 .Events-addEvent {
@@ -82,10 +206,28 @@
 }
 
 .owner-btn {
-  width: 3em;
-  margin:.5em .25em;
+  width: 1.3em !important;
+  height:1.3em;
+  margin:0em .2em;
+  margin-top: -.2em;
   padding: 0;
+  border: none;
 }
+
+.owner-buttons {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display:inline-block;
+}
+
+
+@media (min-width: 900px) {
+  .Events{
+    width: 80%;
+  }
+}
+
 
 
 
@@ -116,18 +258,20 @@
 }
 
 .Events-filter{
-  background-color: white;
   text-align: left;
   height: 400px;
   width: 100%;
   margin: 1em;
   padding-right: 1em;
   margin-top: 6em;
+  text-shadow: 0px 0px 5px white;
 }
+
+
 
 .Events-filter label {
   font-size: 0.9em;
-  color:#666;
+  color:#444;
 }
 
 
@@ -135,10 +279,16 @@
   font-size: 1em;
   text-align: left;
   font-weight:bold;
-  color: #555;
+  color: #333;
   font-family: roboto;
 }
 
+@media (max-width: 767px) {
+  .Events-filter{
+    margin-top: 0;
+    height: auto;
+  }
+}
 
 
 .Events-list {
@@ -148,11 +298,12 @@
 }
 
 .event-row-buffer{
-  margin-top: 1em;
+  margin-top: 1.7em;
 }
 
 .Events-event {
   height: 100%;
+  box-shadow: 0px 2px 12px #ccc !important;
 }
 
 .Events-descriptionBox {
@@ -163,8 +314,7 @@
 }
 
 .event-header {
-  margin: 0;
-  padding: 0.5em .3em;
+
 }
 
 .event-header h2 {
@@ -177,6 +327,7 @@
 
 .btn-host {
   margin-top: 1em;
+  width: 3em;
 }
 
 
@@ -184,7 +335,7 @@
   font-size: .6em;
   font-weight:bold;
   color: #373737;
-    margin: 0;
+  margin: 0;
   padding:0 ;
 }
 
@@ -217,6 +368,7 @@
 .Events .btn {
   width: 6em;
 }
+
 
 
 
@@ -264,57 +416,7 @@
   margin: auto;
 }
 
-.MyProfile {
-  margin-top: -1em;
-  padding: 1em;
-}
 
-.MyProfile h2 {
-  font-size: 1.4em;
-  font-weight: bold;
-}
-
-.MyProfile h3 {
-  font-size: 1em;
-  font-weight: bold;
-  color: #333;
-}
-
-.MyProfile-settings {
-  font-size: 0.8em;
-  padding:0em;
-  margin: 0em;
-}
-
-.MyProfile-panel {
-  text-align: left;
-  padding: 1em 2.5em;
-  min-height: 24em;
-}
-
-.active-settings {
-  color: black;
-  background-color: #cdf;
-  font-weight: bold;
-  height: 100%;
-  margin: 0;
-  left: 1em;
-}
-
-.settings {
-  height: 100%;
-  margin: .1em;
-  padding-top: .2em;
-  height: 2em;
-  color: black;
-  text-decoration: none;;
-}
-
-.MyProfile-settings ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 
 
 /* For mobile */

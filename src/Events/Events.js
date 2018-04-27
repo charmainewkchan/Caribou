@@ -9,6 +9,7 @@ import eating_club_map from './eating_club_map.json';
 import EventCard from './EventCard';
 import EditableEvent from './EditableEvent';
 
+import DropDownBar from '../DropDownBar';
 
 import axios from 'axios'
 
@@ -41,12 +42,11 @@ class Events extends Component {
     console.log(event)
     axios.post('https://bixr.herokuapp.com/api/post_event', event)
     .then(res => {
-        console.log(res);
-        console.log(res.data);
+        //console.log(res);
+        //console.log(res.data);
+        this.updateData();
       })
     .catch(err => alert(err));
-
-    this.updateData();
   }
 
 
@@ -96,6 +96,7 @@ class Events extends Component {
   }
 
   onEditEvent(event){
+    event.stopPropagation()
     console.log(event)
     axios.post('https://bixr.herokuapp.com/api/post_event', event)
     .then(res => {
@@ -136,20 +137,25 @@ class Events extends Component {
       );
     } else {
       return (
-        <button onClick={this.onHostEvent} className="host-btn btn">Host an Event!</button>
+        <button onClick={this.onHostEvent} className="host-btn btn Events-event">Host an Event!</button>
         );
     }
   }
 
   render() {
     return (
-    	<div className="Events container">
+    	<div className="Events container-fluid">
+
+        <div className="row d-block d-md-none">
+          <DropDownBar id="filter"><EventsFilter onClubFilterChange={this.onClubFilterChange}/></DropDownBar>
+        </div>
+
 	      <div className="row">
-	        <div className= "col-3">
-	        <EventsFilter onClubFilterChange={this.onClubFilterChange}/>
+	        <div className= "col-3 d-none d-md-block">
+	         <EventsFilter onClubFilterChange={this.onClubFilterChange}/>
 	        </div>
 
-	        <div className= "col-9">
+	        <div className= "col-md-9">
 	           <div className= "container">
 	              <div className= "row">
                   <div className="col-md-6 event-row-buffer">
