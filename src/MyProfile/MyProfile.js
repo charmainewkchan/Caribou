@@ -7,6 +7,7 @@ import EventsHosting from './EventsHosting';
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
+import DropDownBar from '../DropDownBar'
 
 import '../App.css';
 class MyProfile extends Component {
@@ -17,24 +18,22 @@ class MyProfile extends Component {
     }
   }
 
-  render() {
+  settingsList() {
     return (
-      <div className="container-fluid">
-        <div className="row d-block d-md-none">
-      	  <nav className="navbar navbar-light bg-light ">
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#dashboard" aria-controls="dashboard" aria-expanded="false" aria-label="Toggle dashboard">
-                  <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="dashboard">
                 <ul className="navbar-nav ml-auto">
                   <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' ><FontAwesomeIcon icon="user" />My Profile</NavLink></li>
                   <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' ><FontAwesomeIcon icon="cog" />Account Settings</NavLink></li>
                   <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'><FontAwesomeIcon icon="calendar-art" />Events Attending</NavLink></li>
                   <li className="nav-item"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' ><FontAwesomeIcon icon="address-book" />Events Hosting</NavLink></li>
                 </ul>
-            </div>
-          </nav>
+      )
+  }
 
+  render() {
+    return (
+      <div className="container-fluid">
+        <div className="row d-block d-md-none">
+      	  <DropDownBar id="dashboard">{this.settingsList()}</DropDownBar>
         </div>
 
 

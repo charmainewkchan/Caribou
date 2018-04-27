@@ -37,7 +37,7 @@ class EventsHosting extends Component {
           <h2>Events Hosting</h2>
           <hr/>
           <div className="row">
-          <EventsPanel events={this.state.eventsHosting} updateData={this.updateData}/>
+            <EventsPanel events={this.state.eventsHosting} updateData={this.updateData}/>
           </div>
         </div>
     );

@@ -42,11 +42,8 @@ class EventsFilter extends Component {
 
   }
 
-
   render() {
-    return (
-        <div className = "Events-filter container">
-          <form>
+         return( <form className="Events-filter">
             <h2>Eating Club</h2>
             <div className="form-group">
             {
@@ -79,9 +76,7 @@ class EventsFilter extends Component {
 
 
             </div>
-          </form>
-        </div>
-    );
+          </form>)
   }
 }
 
