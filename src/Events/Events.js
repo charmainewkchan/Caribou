@@ -28,7 +28,7 @@ class Events extends Component {
   	}
     this.onClubFilterChange = this.onClubFilterChange.bind(this);
 
-    this.onCreateEvent = this.onCreateEvent.bind(this);
+    this.onPostEvent = this.onPostEvent.bind(this);
     this.onHostEvent = this.onHostEvent.bind(this);
     this.updateData = this.updateData.bind(this);
   }
@@ -38,7 +38,7 @@ class Events extends Component {
   }
 
 
-  onCreateEvent(event){
+  onPostEvent(event){
     console.log(event)
     axios.post('https://bixr.herokuapp.com/api/post_event', event)
     .then(res => {
@@ -53,6 +53,19 @@ class Events extends Component {
   filterEvents(){
   console.log(this.state.events_data);
 	var filtered = this.state.events_data.filter(event => this.state.filter.clubs.includes(event.fields.eating_club));
+
+  console.log(filtered);
+  filtered.sort(function(a,b) {
+     var a_item = a.pk
+     var b_item = b.pk
+
+     if (a_item > b_item)
+      return -1;
+     if (a_item < b_item)
+      return 1;
+     return 0;
+  })
+  console.log(filtered);
 
 	this.setState({
 		events: filtered
@@ -95,20 +108,6 @@ class Events extends Component {
     });
   }
 
-  onEditEvent(event){
-    event.stopPropagation()
-    console.log(event)
-    axios.post('https://bixr.herokuapp.com/api/post_event', event)
-    .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-    .catch(err => alert(err));
-
-    this.updateData();
-  }
-
-
   onHostEvent() {
     this.setState({
       showNewCard: true
@@ -132,7 +131,8 @@ class Events extends Component {
                               end=""
                               newCard = {true}
                               onDataChange={this.onDataChange}
-                              onCreateEvent={this.onCreateEvent}
+                              onPostEvent={this.onPostEvent}
+                              toggleEditMode={(e)=>console.log(e)}
                               isEditable={true}/>
       );
     } else {

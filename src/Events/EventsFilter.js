@@ -37,9 +37,7 @@ class EventsFilter extends Component {
   handleSort(event) {
     this.setState({
       sort_by : event.target.name
-    });
-
-
+    })
   }
 
   render() {
@@ -51,7 +49,7 @@ class EventsFilter extends Component {
                 return (
                   <div className="form-check">
                      <input className="form-check-input" type="checkbox" checked={this.state[key]} name={key} id={key} onChange={this.handleChange}/>
-                     <label className="form-check-label" for={key}>
+                     <label className="form-check-label" htmlFor={key}>
                         {eating_club_map[key]}
                      </label>
                   </div>
@@ -59,6 +57,7 @@ class EventsFilter extends Component {
               }, this)
             }
             <br/>
+            <hr/>
             <h2>Sort By</h2>
 
             <div className="form-check">

@@ -103,9 +103,11 @@ class EditableEvent extends Component {
       var data = [{"capacity": this.state.eventCap, "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "start": this.state.start,
       "end": this.state.end, "date" : this.state.date.format().substring(0,10), "pk": this.props.pk}]
 
-      this.props.onCreateEvent(
+      this.props.onPostEvent(
         data
       );
+
+      this.props.toggleEditMode(event);
     }
   }
 
@@ -181,6 +183,9 @@ class EditableEvent extends Component {
              <div className = "row">
               <div className = "col">
                 <button className="btn btn-success" style ={{width:150}} onClick = {this.handleCreateEvent}>Save Changes</button>
+              </div>
+              <div className = "col">
+                <button className="btn btn-warning" style ={{width:150}} onClick = {(e)=>this.props.toggleEditMode(e)}>Cancel</button>
               </div>
              </div>
             </div>
