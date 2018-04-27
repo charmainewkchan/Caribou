@@ -122,12 +122,16 @@ def post_user(request):
 		user.res_college = data["res_college"]
 		user.year = data["year"]
 		user.eating_club = data["eating_club"]
-		user.clubs_bickering = data["clubs_bickering"]
-		user.picture = data["picture"]
 		user.save()
 		return HttpResponse("User created " + netid)
-	else:
-		return
+	else: # create a new user
+		u = User(netid=netid, first_name=data["first_name"],last_name=data["last_name"],res_college=data["res_college"],year=data["year"],eating_club=data["eating_club"])
+		mail = netid + "@princeton.edu"
+		tolist = [mail]
+		subject = 'Welcome to Bixr'
+		message = "Hi, " + data["first_name"] + ",\nThanks for joining Bixr and setting up your profile! If you'd like to opt out of email notifications, click here!"
+		notify(subject, message, tolist)
+		return HttpResponse("User edited " + netid)
 
 
 @casauth
@@ -208,7 +212,7 @@ def post_event(request):
 		location = data["location"]
 		eating_club = author.eating_club
 		capacity = int(data["capacity"])
-		e = PersonalEvent(author = author, description = description, title = title, date = date, start=start, end=end, location = location, eating_club = eating_club, capacity = capacity)
+		e = PersonalEvent(author=author, description=description, title=title, date=date, start=start, end=end, location=location, eating_club=eating_club, capacity=capacity)
 		e.save()
 		return HttpResponse(e)
 	else: # edit existing event

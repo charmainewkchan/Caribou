@@ -8,6 +8,7 @@ urlpatterns = [
 	path('user/<netid>/', views.get_user), # retrieve json data for user from netid
 	re_path(r'^delete_user', views.delete_user),
 	re_path(r'^post_event', views.post_event),
+	re_path(r'^post_user', views.post_user),
 	path('get_users_for_event/<event_id>/', views.get_users_for_event),
 	path('event/<event_id>/', views.get_event),
 	path('get_events_for_user/<netid>/',views.get_events_for_user),

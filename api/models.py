@@ -71,7 +71,7 @@ class User(models.Model):
 		default = NONE,
 		)
 	# picture URL to the image file
-	picture = models.URLField('profile picture')
+	picture = models.URLField('profile picture', default='placeholder')
 
 	# user_permission
 	#not sure yet
