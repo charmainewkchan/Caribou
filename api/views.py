@@ -108,6 +108,29 @@ def delete_user(request):
 	return HttpResponse("deleted user " + netid)
 
 @casauth
+@csrf_exempt
+def post_user(request): 
+	netid = get_netid(request)
+	data_json = json.loads(request.body)
+	data = data_json[0]
+	# check if user exists
+	user_set = User.objects.filter(netid=netid)
+	if len(user_set) == 1: # if found, edit the user info
+		user = User.objects.get(netid=netid)
+		user.first_name = data["first_name"]
+		user.last_name = data["last_name"]
+		user.res_college = data["res_college"]
+		user.year = data["year"]
+		user.eating_club = data["eating_club"]
+		user.clubs_bickering = data["clubs_bickering"]
+		user.picture = data["picture"]
+		user.save()
+		return HttpResponse("User created " + netid)
+	else:
+		return
+
+
+@casauth
 def get_events_for_user(request, netid):
 	event_ids = joined_events_list(netid)
 	events = PersonalEvent.objects.filter(id__in=event_ids)
