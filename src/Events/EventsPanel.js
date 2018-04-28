@@ -65,7 +65,7 @@ class EventsPanel extends Component {
     return (
         		this.props.events.map(function(event){
               return (
-                <div className="col-md-6 event-row-buffer">
+                <div className="row event-row-buffer">
                   <EventCard title={event.fields.title}
                               eating_club={event.fields.eating_club}
                               time={event.fields.time}

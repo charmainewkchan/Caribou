@@ -373,6 +373,8 @@ body {
 
 .Events-event {
   height: 100%;
+  padding: 1em;
+  width: 100%;
   box-shadow: 0px 2px 12px #ccc !important;
 }
 
@@ -384,15 +386,16 @@ body {
 }
 
 .event-header {
-
+  
 }
 
 .event-header h2 {
   color: #322806;
-  font-size: 1.3em;
-  font-family: times new roman;
+  font-size: 1.4em;
+  font-family: Roboto;
   margin: 0;
   padding:0 ;
+  font-weight: bold;
   text-align: left;
 }
 
@@ -402,38 +405,49 @@ body {
 }
 
 .event-header p{
-  font-size: .6em;
+  font-size: .8em;
   font-weight:bold;
-  color: #555;
+  color: #999;
   margin: 0;
-  margin-left: 2em;
   padding:0 ;
+  text-align: left;
 }
 
 .event-body {
     font-size: .8em;
     padding: .5em;
     margin: 0;
+    margin-top: 1em;
     color: #555;
     font-family:;
     height: auto;
+    text-align: left;
+    font-family: Roboto;
+}
+.event-body p {
+  padding: 0;
+  margin: 0;
 }
 
 .event-footer{
   padding: 0;
   background: white;
+  text-align: left;
 }
 
 
 .join-button {
-  border: 0;
   margin: .5em;
-  background: #213f60;
+  border: 0;
+  padding: 0;
+  text-align: left;
 }
 
 .leave-button {
-   border: 0;
-  margin: .5em;
+  margin: .5em; 
+    border: 0;
+  padding: 0;
+  text-align: left;
 }
 
 .Events .btn {

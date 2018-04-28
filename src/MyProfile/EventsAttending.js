@@ -39,8 +39,10 @@ class EventsAttending extends Component {
         <div>
           <h2>Events Attending</h2>
           <hr/>
-          <div className="row">
+          <div className="container">
+            <div className="col-md-6">
             <EventsPanel events={this.state.eventsAttending} updateData={this.updateData}/>
+            </div>
           </div>
         </div>
     );
