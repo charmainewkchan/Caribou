@@ -122,16 +122,17 @@ def post_user(request):
 	# check if user exists
 	user_set = User.objects.filter(netid=netid)
 	if len(user_set) == 1: # if found, edit the user info
-		user = User.objects.get(netid=netid)
-		user.first_name = data["first_name"]
-		user.last_name = data["last_name"]
-		user.res_college = data["res_college"]
-		user.year = data["year"]
-		user.eating_club = data["eating_club"]
-		user.save()
+		u = User.objects.get(netid=netid)
+		u.first_name = data["first_name"]
+		u.last_name = data["last_name"]
+		u.res_college = data["res_college"]
+		u.year = data["year"]
+		u.eating_club = data["eating_club"]
+		u.save()
 		return HttpResponse("User edited " + netid)
 	else: # create a new user
 		u = User(netid=netid, first_name=data["first_name"],last_name=data["last_name"],res_college=data["res_college"],year=data["year"],eating_club=data["eating_club"])
+		u.save()
 		mail = netid + "@princeton.edu"
 		tolist = [mail]
 		subject = 'Welcome to Bixr'
