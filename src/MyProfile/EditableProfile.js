@@ -7,13 +7,13 @@ import 'react-dropdown/style.css'
 import axios from 'axios';
 
 const years = [2019,2020,2021,2022];
-const eatingclubs = ["Cloister","Tower","none","Colonial","Cannon","Cap","Ivy","TigerInn","Quad","Terrace","Cottage","Charter"]
+const eatingclubs = ["Cloister","Tower","None","Colonial","Cannon","Cap","Ivy","TigerInn","Quad","Terrace","Cottage","Charter"]
 const rescollege = ["Butler", "Wilson", "Mathey", "Rocky", "Whitman","Forbes"]
 
 var eatingClubAbr = {
   "CL":"Cloister",
   "TO":"Tower",
-  "NN":"none",
+  "NN":"None",
   "CO":"Colonial",
   "CN":"Cannon",
   "CA":"Cap",
@@ -28,7 +28,7 @@ var eatingClubAbr = {
 var eatingClubAbrReverse = {
   "Cloister":"CL",
   "Tower":"TO",
-  "none":"NN",
+  "None":"NN",
   "Colonial":"CO",
   "Cannon":"CN",
   "Cap":"CA",
@@ -41,7 +41,7 @@ var eatingClubAbrReverse = {
 }
 
 var rescollegeAbr = {
-  'NN' : "none",
+  'NN' : "None",
   'MA' : "Mathey",
   'RO' : "Rocky",
   'BU' : "Butler",
@@ -52,7 +52,7 @@ var rescollegeAbr = {
 }
 
 var rescollegeAbrReverse = {
-  "none" : 'NN',
+  "None" : 'NN',
 	"Mathey" : 'MA',
 	"Rocky" : 'RO',
 	"Butler" : 'BU',
