@@ -24,13 +24,19 @@ class Events extends Component {
   		},
   		events: [],
       events_data: [],
-      showNewCard: false
+      showNewCard: false,
+      sort: {
+        ascending: true,
+        field: "date"
+      }
   	}
     this.onClubFilterChange = this.onClubFilterChange.bind(this);
 
     this.onPostEvent = this.onPostEvent.bind(this);
     this.onHostEvent = this.onHostEvent.bind(this);
     this.updateData = this.updateData.bind(this);
+    this.setSort = this.setSort.bind(this);
+    this.filterEvents = this.filterEvents.bind(this);
   }
 
   componentDidMount() {
@@ -54,25 +60,25 @@ class Events extends Component {
 
 
   filterEvents(){
-  console.log(this.state.events_data);
-	var filtered = this.state.events_data.filter(event => this.state.filter.clubs.includes(event.fields.eating_club));
+    console.log(this.state.events_data);
+  	var filtered = this.state.events_data.filter(event => this.state.filter.clubs.includes(event.fields.eating_club));
 
-  console.log(filtered);
-  filtered.sort(function(a,b) {
-     var a_item = a.pk
-     var b_item = b.pk
+    console.log(filtered);
+    filtered.sort(function(a,b) {
+       var a_item = a.fields[this.state.sort.field]
+       var b_item = b.fields[this.state.sort.field]
 
-     if (a_item > b_item)
-      return -1;
-     if (a_item < b_item)
-      return 1;
-     return 0;
-  })
-  console.log(filtered);
+       if (a_item > b_item)
+        return this.state.sort.ascending ? 1 : -1;
+       if (a_item < b_item)
+        return this.state.sort.ascending? -1 : 1;
+       return 0;
+    }.bind(this))
+    console.log(filtered);
 
-	this.setState({
-		events: filtered
-	});
+  	this.setState({
+  		events: filtered
+  	});
   }
 
   onClubFilterChange(event){
@@ -86,6 +92,7 @@ class Events extends Component {
   	} else { // remove from filter
   		// if filter empty, filter should be full..?
   		mod.splice(mod.indexOf(event.target.name), 1)
+      console.log(mod.length)
   		if (mod.length == 0) {
   			mod = filter_data.clubs;
   		}
@@ -98,7 +105,17 @@ class Events extends Component {
   	}, function() {this.filterEvents()});
   }
 
-
+  setSort(ascending, field) {
+    console.log("SET SORT");
+    console.log(ascending);
+    console.log(field);
+    this.setState({
+      sort: {
+        ascending: (ascending==1?true:false),
+        field: field
+      }
+    }, this.updateData())
+  }
 
   updateData(){
     // reload the data
@@ -151,24 +168,22 @@ class Events extends Component {
     	<div className="Events container-fluid">
 
         <div className="row d-block d-md-none">
-          <DropDownBar id="filter"><EventsFilter onClubFilterChange={this.onClubFilterChange}/></DropDownBar>
+          <DropDownBar id="filter"><EventsFilter sort_by={this.state.sort.field+"-"+(this.state.sort.ascending?"1":"0")} setSort={this.setSort} onClubFilterChange={this.onClubFilterChange}/></DropDownBar>
         </div>
 
-	      <div className="row">
+	      <div className="row mt-2">
 	        <div className= "col-3 d-none d-md-block">
-	         <EventsFilter onClubFilterChange={this.onClubFilterChange}/>
+	         <EventsFilter setSort={this.setSort} sort_by={this.state.sort.field+"-"+(this.state.sort.ascending?"1":"0")}  onClubFilterChange={this.onClubFilterChange}/>
 	        </div>
 
-	        <div className= "col-md-9">
+	        <div className= "col-md-6">
 	           <div className= "container">
 	              <div className= "row">
-                  <div className="col-md-6 event-row-buffer">
                     {this.newCard()}
-                  </div>
-
-  	               <EventsPanel events={this.state.events} updateData={this.updateData}/>
-
                 </div>
+
+  	             <EventsPanel events={this.state.events} updateData={this.updateData}/>
+
 	            </div>
 	        </div>
 	      </div>

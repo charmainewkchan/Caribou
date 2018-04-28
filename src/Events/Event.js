@@ -35,9 +35,9 @@ class Event extends Component {
 
 	buttons() {
 		if (this.props.isAttending) {
-			return <button className="btn btn-danger leave-button" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Leave </button>
+			return <button className="btn btn-outline-danger leave-button" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Leave </button>
 		} else {
-			return <button disabled={this.props.attendance==this.props.capacity || this.props.isOwner} className="btn btn-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
+			return <button disabled={this.props.attendance==this.props.capacity || this.props.isOwner} className="btn btn-outline-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
 		}
 	}
 
@@ -48,7 +48,7 @@ class Event extends Component {
     <div className="card Events-event" >
 
 		 <div onClick={()=> this.props.history.push('/events/'+this.props.pk + "/")}>
-		 		<div className="card-header event-header Events-panel" disabled = {true}>
+		 		<div className="event-header Events-panel" disabled = {true}>
 			 		<div className="row">
 			 			<div className="col">
 				  		<h2>{this.props.title}</h2>
@@ -61,9 +61,9 @@ class Event extends Component {
 
 				  </div>
 
-				  <div className="row">
+				  <div className="row"><div className="col">
 			    	<p>{eating_club_map[this.props.eating_club]} &bull; {this.props.start} - {this.props.end}</p>
-			    </div>
+			    </div></div>
 				</div>
 		 </div>
 
@@ -73,7 +73,7 @@ class Event extends Component {
 	         <p>{this.props.attendance == 0 ? "Be the first to join!" : ""+this.props.attendance+"/"+this.props.capacity+" going!"}</p>
 	    </div>
 
-	    <div className="card-footer event-footer">
+	    <div className="event-footer">
 	    	{this.buttons()}
 	    </div>
     </div>

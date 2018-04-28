@@ -36,8 +36,10 @@ class EventsHosting extends Component {
         <div>
           <h2>Events Hosting</h2>
           <hr/>
-          <div className="row">
+          <div className="container">
+            <div className="col-md-6">
             <EventsPanel events={this.state.eventsHosting} updateData={this.updateData}/>
+          </div>
           </div>
         </div>
     );

@@ -7,37 +7,44 @@ class EventsFilter extends Component {
   constructor(props) {
     super(props)
     this.state={
-      TO: false,
-      CA: false,
-      TI: false,
-      CN: false,
-      IV: false,
-      CT: false,
-      QD: false,
-      CO: false,
-      CL: false,
-      TE: false,
-      CH: false,
-      NN: false,
-      sort_by: "date_asc"
+        TO: false,
+        CA: false,
+        TI: false,
+        CN: false,
+        IV: false,
+        CT: false,
+        QD: false,
+        CO: false,
+        CL: false,
+        TE: false,
+        CH: false,
+        NN: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSort = this.handleSort.bind(this);
   }
 
+  componentDidMount() {
+    console.log("tt")
+        console.log(this.props.sort_by);
+    console.log(this.props.sort_by=="pk-1");
+  }
+
   handleChange(event) {
     this.props.onClubFilterChange(event);
-    console.log(event.target.checked);
+    console.log(event.target.name);
+
     this.setState({
-      [event.target.name]: event.target.checked
+        [event.target.name]: event.target.checked
     });
   }
 
   handleSort(event) {
-    this.setState({
-      sort_by : event.target.name
-    })
+    var mode = event.target.name.split("-");
+    var field = mode[0];
+    var asc = mode[1];
+    this.props.setSort(asc, field)
   }
 
   render() {
@@ -48,8 +55,8 @@ class EventsFilter extends Component {
               Object.keys(this.state).map(function(key, index) {
                 return (
                   <div className="form-check">
-                     <input className="form-check-input" type="checkbox" checked={this.state[key]} name={key} id={key} onChange={this.handleChange}/>
-                     <label className="form-check-label" htmlFor={key}>
+                     <input type="checkbox" checked={this.state[key]} name={key} id={key} value={this.state[key]} onChange={this.handleChange}/>
+                     <label  htmlFor={key}>
                         {eating_club_map[key]}
                      </label>
                   </div>
@@ -61,15 +68,30 @@ class EventsFilter extends Component {
             <h2>Sort By</h2>
 
             <div className="form-check">
-              <input className="form-check-input" type="radio" name="date_asc" id="date_asc" value="date_asc" checked={this.state.sort_by=="date_asc"} onChange={this.handleSort}/>
-              <label className="form-check-label" for="date_asc">
-                Date ascending
+              <input className="form-check-input" type="radio" name="date-1" id="date-1" value="date-1" checked={this.props.sort_by==="date-1"} onChange={this.handleSort}/>
+              <label className="form-check-label" htmlFor="date-1">
+                Date (ascending)
               </label>
             </div>
+
             <div className="form-check">
-              <input className="form-check-input" type="radio" name="date_des" id="date_des" value="date_des" checked={this.state.sort_by=="date_des"} onChange={this.handleSort}/>
-              <label className="form-check-label" for="date_des">
-                Date descending
+              <input className="form-check-input" type="radio" name="date-0" id="pk-0" value="date-0" checked={this.props.sort_by==="date-0"} onChange={this.handleSort}/>
+              <label className="form-check-label" htmlFor="date-0">
+                Date (descending)
+              </label>
+            </div>
+
+             <div className="form-check">
+              <input className="form-check-input" type="radio" name="eating_club-1" id="eating_club-1" value="eating_club-1" checked={this.props.sort_by==="eating_club-1"} onChange={this.handleSort}/>
+              <label className="form-check-label" htmlFor="eating_club-1">
+                Eating club (ascending)
+              </label>
+            </div>
+
+            <div className="form-check">
+              <input className="form-check-input" type="radio" name="eating_club-0" id="eating_club-0" value="eating_club-0" checked={this.props.sort_by==="eating_club-0"} onChange={this.handleSort}/>
+              <label className="form-check-label" htmlFor="eating_club-0">
+                Eating club (descending)
               </label>
             </div>
 
