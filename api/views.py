@@ -1,6 +1,7 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 from django.core.mail import send_mail
+from django.core.mail.message import EmailMultiAlternatives
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 
 from django.template.response import TemplateResponse
@@ -13,6 +14,8 @@ from django.views.generic import TemplateView
 import json
 from . import CASClient
 from api.decorators import casauth
+
+WEBSITE = "https://bixr.herokuapp.com/events/"
 
 @casauth
 def react(request):
@@ -61,8 +64,18 @@ def append_data_to_events(data_json, netid):
 	return HttpResponse(datxa_json, content_type='application/json')
 
 # sends an email with given specs
-def notify(subject, message, tolist):
-	send_mail(subject, message, "example@example.com", tolist, fail_silently=False)
+def notify(subject, message, tolist, event_id):
+	connection =  None
+	#if event_id != 0:
+	#	html_content = render_to_string('./email.html', {'pk':event_id})
+	for recipient in tolist:
+		tomail = [recipient]
+		mail = EmailMultiAlternatives(subject,message,"bixrnoreply@gmail.com", tomail, connection=connection)
+		# if event_id != 0:
+			# mail = EmailMultiAlternatives(subject,str(event_id),"bixrnoreply@gmail.com", tomail, connection=connection)
+			# mail.attach_alternative(html, "text/html")
+		mail.send()
+
 
 
 def get_netid(request):
@@ -130,7 +143,7 @@ def post_user(request):
 		tolist = [mail]
 		subject = 'Welcome to Bixr'
 		message = "Hi, " + data["first_name"] + ",\nThanks for joining Bixr and setting up your profile! If you'd like to opt out of email notifications, click here!"
-		notify(subject, message, tolist)
+		notify(subject, message, tolist, 0)
 		return HttpResponse("User edited " + netid)
 
 
@@ -247,9 +260,9 @@ def post_event(request):
 		for netid in attendees_id:
 			mail = netid + "@princeton.edu"
 			tolist.append(mail)
-		subject = 'An event you joined was edited'
-		message = "PLACEHOLDER " + title + "."
-		notify(subject, message, tolist)
+		subject = 'An event you joined was updated'
+		message = "An event you joined \"" + title + "\" was updated. Visit https"
+		notify(subject, message, tolist, 0)
 		return HttpResponse("event " + str(pk) + " updated")
 
 @csrf_exempt
@@ -276,7 +289,7 @@ def delete_event(request, event_id):
 	tolist = [n+"@princeton.edu" for n in attendees_id]
 	subject = 'An event you joined was deleted'
 	message = "The event " + title + " that you joined was deleted."
-	notify(subject, message, tolist)
+	notify(subject, message, tolist, 0)
 
 	# delete the event
 	event.delete()
@@ -318,7 +331,7 @@ def join_event(request):
 	tolist = [tomail]
 	subject = 'Someone joined your event!'
 	message = "Someone just joined your event " + event.title + ". Check who it is!"
-	notify(subject, message, tolist)
+	notify(subject, message, tolist, int(data["event"]))
 	return HttpResponse(participant_netid + " joined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
 @csrf_exempt
@@ -349,7 +362,7 @@ def unjoin_event(request):
 	tolist = [tomail]
 	subject = 'Someone unjoined your event!'
 	message = "Someone just unjoined your event " + event.title + "."
-	notify(subject, message, tolist)
+	notify(subject, message, tolist, 0)
 	return HttpResponse(participant_netid + " unjoined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
 #------------------------------------------------------------------------------#
