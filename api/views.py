@@ -142,7 +142,7 @@ def post_user(request):
 		mail = netid + "@princeton.edu"
 		tolist = [mail]
 		subject = 'Welcome to Bixr'
-		message = "Hi, " + data["first_name"] + ",\nThanks for joining Bixr and setting up your profile! If you'd like to opt out of email notifications, click here!"
+		message = "Hi, " + data["first_name"] + ",\nThanks for joining Bixr and setting up your profile! To opt out of email notifications, visit your Account Settings"
 		notify(subject, message, tolist, 0)
 		return HttpResponse("User edited " + netid)
 
@@ -261,7 +261,7 @@ def post_event(request):
 			mail = netid + "@princeton.edu"
 			tolist.append(mail)
 		subject = 'An event you joined was updated'
-		message = "An event you joined \"" + title + "\" was updated. Visit https"
+		message = "The event \"" + title + "\" was updated. See the updates at " + WEBSITE + str(event_id)
 		notify(subject, message, tolist, 0)
 		return HttpResponse("event " + str(pk) + " updated")
 
@@ -288,7 +288,7 @@ def delete_event(request, event_id):
 	# email the attendees
 	tolist = [n+"@princeton.edu" for n in attendees_id]
 	subject = 'An event you joined was deleted'
-	message = "The event " + title + " that you joined was deleted."
+	message = "The event \"" + title + "\" that you joined was deleted."
 	notify(subject, message, tolist, 0)
 
 	# delete the event
@@ -330,7 +330,7 @@ def join_event(request):
 	tomail = host + "@princeton.edu"
 	tolist = [tomail]
 	subject = 'Someone joined your event!'
-	message = "Someone just joined your event " + event.title + ". Check who it is!"
+	message = "Someone just joined your event \"" + event.title + "\". Check your current guest list at " + WEBSITE + str(event_id)
 	notify(subject, message, tolist, int(data["event"]))
 	return HttpResponse(participant_netid + " joined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
@@ -360,8 +360,8 @@ def unjoin_event(request):
 	host = event.author.netid
 	tomail = host + "@princeton.edu"
 	tolist = [tomail]
-	subject = 'Someone unjoined your event!'
-	message = "Someone just unjoined your event " + event.title + "."
+	subject = 'Someone left your event!'
+	message = "Someone just left your event \"" + event.title + "\". Check your current guest list at " + WEBSITE + str(event_id)
 	notify(subject, message, tolist, 0)
 	return HttpResponse(participant_netid + " unjoined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
