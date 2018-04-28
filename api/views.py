@@ -77,7 +77,7 @@ def get_netid(request):
 		return request.session['netid']
 	if g_netid:
 		return g_netid
-	return "testnetid"
+	return "dsawicki"
 #------------------------------------------------------------------------------#
 @casauth
 def get_user(request, netid):
