@@ -2,12 +2,12 @@ import '../App.css';
 
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import Calendar from "react-big-calendar";
+import BigCalendar from "react-big-calendar";
 import EventCal from './EventCal';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import "react-big-calendar/lib/css/react-big-calendar.css";
-Calendar.setLocalizer(Calendar.momentLocalizer(moment));
+BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 
 
