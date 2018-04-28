@@ -13,7 +13,7 @@ const rescollege = ["Butler", "Wilson", "Mathey", "Rocky", "Whitman","Forbes"]
 var eatingClubAbr = {
   "CL":"Cloister",
   "TO":"Tower",
-  "NN":"None",
+  "NN":"none",
   "CO":"Colonial",
   "CN":"Cannon",
   "CA":"Cap",
@@ -28,7 +28,7 @@ var eatingClubAbr = {
 var eatingClubAbrReverse = {
   "Cloister":"CL",
   "Tower":"TO",
-  "None":"NN",
+  "none":"NN",
   "Colonial":"CO",
   "Cannon":"CN",
   "Cap":"CA",
@@ -41,7 +41,7 @@ var eatingClubAbrReverse = {
 }
 
 var rescollegeAbr = {
-  'NN' : "None",
+  'NN' : "none",
   'MA' : "Mathey",
   'RO' : "Rocky",
   'BU' : "Butler",
@@ -52,7 +52,7 @@ var rescollegeAbr = {
 }
 
 var rescollegeAbrReverse = {
-  "None" : 'NN',
+  "none" : 'NN',
 	"Mathey" : 'MA',
 	"Rocky" : 'RO',
 	"Butler" : 'BU',
