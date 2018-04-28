@@ -64,16 +64,11 @@ def append_data_to_events(data_json, netid):
 	return HttpResponse(datxa_json, content_type='application/json')
 
 # sends an email with given specs
-def notify(subject, message, tolist, event_id):
+def notify(subject, message, tolist):
 	connection =  None
-	#if event_id != 0:
-	#	html_content = render_to_string('./email.html', {'pk':event_id})
 	for recipient in tolist:
 		tomail = [recipient]
 		mail = EmailMultiAlternatives(subject,message,"bixrnoreply@gmail.com", tomail, connection=connection)
-		# if event_id != 0:
-			# mail = EmailMultiAlternatives(subject,str(event_id),"bixrnoreply@gmail.com", tomail, connection=connection)
-			# mail.attach_alternative(html, "text/html")
 		mail.send()
 
 
@@ -143,7 +138,7 @@ def post_user(request):
 		tolist = [mail]
 		subject = 'Welcome to Bixr'
 		message = "Hi, " + data["first_name"] + ",\nThanks for joining Bixr and setting up your profile! To opt out of email notifications, visit your Account Settings"
-		notify(subject, message, tolist, 0)
+		notify(subject, message, tolist)
 		return HttpResponse("User edited " + netid)
 
 
@@ -261,8 +256,8 @@ def post_event(request):
 			mail = netid + "@princeton.edu"
 			tolist.append(mail)
 		subject = 'An event you joined was updated'
-		message = "The event \"" + title + "\" was updated. See the updates at " + WEBSITE + str(event_id)
-		notify(subject, message, tolist, 0)
+		message = "The event \"" + title + "\" was updated. See the updates at " + WEBSITE + str(event_id) +"/"
+		notify(subject, message, tolist)
 		return HttpResponse("event " + str(pk) + " updated")
 
 @csrf_exempt
@@ -289,7 +284,7 @@ def delete_event(request, event_id):
 	tolist = [n+"@princeton.edu" for n in attendees_id]
 	subject = 'An event you joined was deleted'
 	message = "The event \"" + title + "\" that you joined was deleted."
-	notify(subject, message, tolist, 0)
+	notify(subject, message, tolist)
 
 	# delete the event
 	event.delete()
@@ -330,8 +325,8 @@ def join_event(request):
 	tomail = host + "@princeton.edu"
 	tolist = [tomail]
 	subject = 'Someone joined your event!'
-	message = "Someone just joined your event \"" + event.title + "\". Check your current guest list at " + WEBSITE + str(event_id)
-	notify(subject, message, tolist, int(data["event"]))
+	message = "Someone just joined your event \"" + event.title + "\". Check your current guest list at " + WEBSITE + str(event_id) +"/"
+	notify(subject, message, tolist)
 	return HttpResponse(participant_netid + " joined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
 @csrf_exempt
@@ -361,8 +356,8 @@ def unjoin_event(request):
 	tomail = host + "@princeton.edu"
 	tolist = [tomail]
 	subject = 'Someone left your event!'
-	message = "Someone just left your event \"" + event.title + "\". Check your current guest list at " + WEBSITE + str(event_id)
-	notify(subject, message, tolist, 0)
+	message = "Someone just left your event \"" + event.title + "\". Check your current guest list at " + WEBSITE + str(event_id) +"/"
+	notify(subject, message, tolist)
 	return HttpResponse(participant_netid + " unjoined " + str(event_id) + " " + str(event) + " attendance now " + str(newatt))
 
 #------------------------------------------------------------------------------#
