@@ -30,6 +30,7 @@ def set_netid(request, netID):
 	g_netid = netID
 	return HttpResponse("good", status=200)
 
+
 #------------------------------------------------------------------------------#
 # HELPER FUNCTIONS #
 # returns list of event id's
@@ -65,11 +66,8 @@ def append_data_to_events(data_json, netid):
 # sends an email with given specs
 def notify(subject, message, tolist):
 	connection =  None
-	for netid in tolist:
-		u = User.objects.get(netid=netid)
-		if len(DoNotMail.objects.filter(user=u)) > 0:
-			continue
-		tomail = [netid+"@princeton.edu"]
+	for recipient in tolist:
+		tomail = [recipient]
 		mail = EmailMultiAlternatives(subject,message,"bixrnoreply@gmail.com", tomail, connection=connection)
 		mail.send()
 
@@ -88,20 +86,6 @@ def get_user(request, netid):
 		return HttpResponse("User Not Found", status=404)
 	user_json = serializers.serialize('json', user)
 	return HttpResponse(user_json, content_type='application/json')
-
-@csrf_exempt
-@casauth
-def toggle_mail(request):
-	netid = get_netid(request)
-	user_set = User.objects.filter(netid=netid)
-	if len(user_set) == 1:
-		user_set.delete()
-		return HttpResponse(netid + " turned on email notifications")
-	else:
-		u = User.objects.get(netid=netid)
-		entry = DoNotMail(user=u)
-		entry.save()
-		return HttpResponse(netod + " removed from mailing list")
 
 @casauth
 def delete_user(request):
@@ -149,9 +133,10 @@ def post_user(request):
 	else: # create a new user
 		u = User(netid=netid, first_name=data["first_name"],last_name=data["last_name"],res_college=data["res_college"],year=data["year"],eating_club=data["eating_club"])
 		u.save()
-		tolist = [netid]
+		mail = netid + "@princeton.edu"
+		tolist = [mail]
 		subject = 'Welcome to Bixr'
-		message = "Hi " + data["first_name"] + ",\n\nThanks for joining Bixr and setting up your profile! To opt out of email notifications, visit your Account Settings at https://bixr.herokuapp.com/myprofile/account/ \n\n Sincerely,\n The Bixr Team"
+		message = "Hi, " + data["first_name"] + ",\nThanks for joining Bixr and setting up your profile! To opt out of email notifications, visit your Account Settings"
 		notify(subject, message, tolist)
 		return HttpResponse("User created " + netid)
 
@@ -267,7 +252,8 @@ def post_event(request):
 		attendees_id = [j.participant.netid for j in joined]
 		tolist = []
 		for netid in attendees_id:
-			tolist.append(netid)
+			mail = netid + "@princeton.edu"
+			tolist.append(mail)
 		subject = 'An event you joined was updated'
 		message = "The event \"" + title + "\" was updated. See the updates at " + WEBSITE + str(event_id) +"/"
 		notify(subject, message, tolist)
@@ -294,7 +280,7 @@ def delete_event(request, event_id):
 	if len(dependencies) > 0:
 		dependencies.delete()
 	# email the attendees
-	tolist = [n for n in attendees_id]
+	tolist = [n+"@princeton.edu" for n in attendees_id]
 	subject = 'An event you joined was deleted'
 	message = "The event \"" + title + "\" that you joined was deleted."
 	notify(subject, message, tolist)
@@ -335,7 +321,8 @@ def join_event(request):
 	j.save()
 	# email event host
 	host = event.author.netid
-	tolist = [host]
+	tomail = host + "@princeton.edu"
+	tolist = [tomail]
 	subject = 'Someone joined your event!'
 	message = "Someone just joined your event \"" + event.title + "\". Check your current guest list at " + WEBSITE + str(event_id) +"/"
 	notify(subject, message, tolist)
@@ -365,7 +352,8 @@ def unjoin_event(request):
 	joined.delete()
 	# email event host
 	host = event.author.netid
-	tolist = [host]
+	tomail = host + "@princeton.edu"
+	tolist = [tomail]
 	subject = 'Someone left your event!'
 	message = "Someone just left your event \"" + event.title + "\". Check your current guest list at " + WEBSITE + str(event_id) +"/"
 	notify(subject, message, tolist)

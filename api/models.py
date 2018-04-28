@@ -128,6 +128,3 @@ class JoinedEvents(models.Model):
 	def __str__(self):
 		s = self.participant.netid + ": " + str(self.event.id) + " " + self.event.title
 		return s
-
-class DoNotMail(models.Model):
-	user = models.ForeignKey('User', on_delete=models.CASCADE,)
