@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from api.models import User, PersonalEvent, ClubEvent, JoinedEvents
+from api.models import User, PersonalEvent, ClubEvent, JoinedEvents, DoNotMail
 from django.views.generic import TemplateView
 import json
 from . import CASClient
