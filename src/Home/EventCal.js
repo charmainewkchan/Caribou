@@ -1,18 +1,18 @@
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../App.css';
-import Calendar from "react-big-calendar";
+import { render } from 'react-dom'
+import BigCalendar from "react-big-calendar";
 import moment from 'moment';
 import axios from 'axios'
+import { getEvents } from './gcal'
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
-Calendar.setLocalizer(Calendar.momentLocalizer(moment));
+BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 
 
-
-const events = [
+const eventstemp = [
     {
         start: '2018-04-20',
         end: '2018-04-28',
@@ -34,19 +34,27 @@ class EventCal extends Component {
     super()
 
     this.state = {
-      myEvents : events
+      events : []
     };
 
-
   }
+
+  componentDidMount () {
+  getEvents((events) => {
+    this.setState({events})
+  })
+}
 
 
   render() {
         return (
-          <Calendar
+          <BigCalendar
           className = "Home-cal"
           style={{height: '1000px'}}
-          events={this.state.myEvents}
+          step={60}
+          showMultiDayTimes
+          events={this.state.events}
+          defaultDate={new Date()}
         />
       )
     }
