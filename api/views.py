@@ -71,15 +71,13 @@ def notify(subject, message, tolist):
 		mail = EmailMultiAlternatives(subject,message,"bixrnoreply@gmail.com", tomail, connection=connection)
 		mail.send()
 
-
-
 def get_netid(request):
 	global g_netid
 	if 'netid' in request.session:
 		return request.session['netid']
 	if g_netid:
 		return g_netid
-	return "dsawicki"
+	return "testnetid"
 #------------------------------------------------------------------------------#
 @casauth
 def get_user(request, netid):
@@ -115,8 +113,8 @@ def delete_user(request):
 	user.delete()
 	return HttpResponse("deleted user " + netid)
 
-@casauth
 @csrf_exempt
+@casauth
 def post_user(request): 
 	netid = get_netid(request)
 	data_json = json.loads(request.body)
@@ -131,7 +129,7 @@ def post_user(request):
 		user.year = data["year"]
 		user.eating_club = data["eating_club"]
 		user.save()
-		return HttpResponse("User created " + netid)
+		return HttpResponse("User edited " + netid)
 	else: # create a new user
 		u = User(netid=netid, first_name=data["first_name"],last_name=data["last_name"],res_college=data["res_college"],year=data["year"],eating_club=data["eating_club"])
 		mail = netid + "@princeton.edu"
@@ -139,7 +137,7 @@ def post_user(request):
 		subject = 'Welcome to Bixr'
 		message = "Hi, " + data["first_name"] + ",\nThanks for joining Bixr and setting up your profile! To opt out of email notifications, visit your Account Settings"
 		notify(subject, message, tolist)
-		return HttpResponse("User edited " + netid)
+		return HttpResponse("User created " + netid)
 
 
 @casauth
