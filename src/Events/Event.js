@@ -16,6 +16,7 @@ class Event extends Component {
 		super(props)
 
 		this.buttons = this.buttons.bind(this)
+		this.descriptionString = this.descriptionString.bind(this)
 	/*	this.getAllEventInfo = this.getAllEventInfo.bind(this)*/
 	}
 
@@ -40,6 +41,15 @@ class Event extends Component {
 			return <button disabled={this.props.attendance==this.props.capacity || this.props.isOwner} className="btn btn-outline-secondary join-button" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
 		}
 	}
+
+	descriptionString() {
+		var cutOff = 200;
+		if (this.props.description.length > cutOff) {
+				return this.props.description.substring(0, cutOff) + "...";
+		}
+		return this.props.description;
+	}
+
 
 
   render() {
@@ -68,7 +78,7 @@ class Event extends Component {
 		 </div>
 
 	    <div className="card-body event-body">
-	         <p>{this.props.description}</p>
+	         <p>{this.descriptionString()}</p>
 	         <p style={{fontStyle:'italic'}}>{"Location: "+ this.props.loc}</p>
 	         <p>{this.props.attendance == 0 ? "Be the first to join!" : ""+this.props.attendance+"/"+this.props.capacity+" going!"}</p>
 	    </div>
