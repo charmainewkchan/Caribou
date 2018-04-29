@@ -7,6 +7,7 @@ import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import eating_club_map from './eating_club_map.json';
 import '../App.css';
+import axios from 'axios'
 
 // Constants for time
 const format = 'HH:mm';
@@ -37,22 +38,20 @@ const options = [
   '24:00'
 ]
 
-class EditableEvent extends Component {
+class ManageEvent extends Component {
   constructor(props){
     super(props)
 
     this.state = {
-      eventName: this.props.title,
-      eventDes: this.props.description,
-      eventLoc: this.props.loc,
-      eating_club: this.props.eating_club,
-      start:this.props.start,
-      end: this.props.end,
-      date:this.props.date,
-      pk: this.props.pk,
-      eventCap:this.props.capacity,
-      newCard: this.props.newCard,
-      attendance: this.props.attendance
+      eventName: '',
+      eventDes: '',
+      eventLoc: '',
+      eating_club: 'NN',
+      start:0,
+      end: 0,
+      date:moment('2017-01-01'),
+      eventCap:0,
+      attendance: 0
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -60,6 +59,31 @@ class EditableEvent extends Component {
     this._onSelectStart = this._onSelectStart.bind(this);
     this._onSelectEnd = this._onSelectEnd.bind(this);
 
+  }
+
+  componentDidMount() {
+      if ('event_id' in this.props.match.params) {
+        const event_id = this.props.match.params.event_id;
+        const url = "https://bixr.herokuapp.com/api/event/" + event_id + "/";
+        console.log(url);
+
+        axios.get(url).then(res => {
+          console.log(res.data);
+          this.setState({
+              eventName: res.data[0].fields.title,
+              eventDes: res.data[0].fields.description,
+              eventLoc: res.data[0].fields.location,
+              eating_club: res.data[0].fields.eating_club,
+              start:res.data[0].fields.start,
+              end:res.data[0].fields.end,
+              date: moment(res.data[0].fields.date),
+              pk:res.data[0].pk,
+              eventCap:res.data[0].fields.capacity,
+              attendance:res.data[0].fields.attendance,
+              author:res.data[0].author
+          });
+        });
+      }
   }
 
   _onSelectStart(event) {
@@ -114,12 +138,12 @@ class EditableEvent extends Component {
   render() {
     return (
       <div className="card Events-event">
-  		 <div className="card-header event-header">
-  			  <input className = "form-control" type = "text" id = "title" placeholder = "Event Name" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
-  		    <p>{this.state.eating_club} &bull; </p>
-  		 </div>
+       <div className="card-header event-header">
+          <input className = "form-control" type = "text" id = "title" placeholder = "Event Name" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
+          <p>{this.state.eating_club} &bull; </p>
+       </div>
 
-  	    <div className="card-body event-body">
+        <div className="card-body event-body">
              <textarea className="form-control" type="text" id="description" placeholder = "Description" name = "eventDes" value= {this.state.eventDes} onChange={this.handleChange}/>
 
              <div className = "container">
@@ -194,4 +218,4 @@ class EditableEvent extends Component {
 
 //
 
-export default EditableEvent;
+export default ManageEvent;

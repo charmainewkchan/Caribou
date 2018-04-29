@@ -17,8 +17,10 @@ import faCog from '@fortawesome/fontawesome-free-solid/faCog'
 import faAddressBook from '@fortawesome/fontawesome-free-solid/faAddressBook'
 import faCalendarAlt from '@fortawesome/fontawesome-free-solid/faCalendarAlt'
 import faBars from '@fortawesome/fontawesome-free-solid/faBars'
+import faPlus from '@fortawesome/fontawesome-free-solid/faPlus'
+import faCaretDown from '@fortawesome/fontawesome-free-solid/faCaretDown'
 
-fontawesome.library.add(faUser, faPencilAlt, faTrashAlt, faAddressBook, faCog, faCalendarAlt, faBars)
+fontawesome.library.add(faUser, faPencilAlt, faTrashAlt, faAddressBook, faCog, faCalendarAlt, faBars,faCaretDown,faPlus)
 
 class App extends Component {
   render() {

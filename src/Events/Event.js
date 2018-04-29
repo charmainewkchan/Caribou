@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 //import { withRouter } from 'react-router';
 import {Link, withRouter } from 'react-router-dom';
-
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import moment from 'moment';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 
 
 
@@ -28,8 +28,8 @@ class Event extends Component {
 			return (
 				<div className="owner-buttons">
 						<button className="btn btn-outline-secondary owner-btn " onClick={(e) => this.props.displayAttendees(e,this.props.pk)}><FontAwesomeIcon icon="user" /></button>
-						<button className="btn btn-outline-secondary owner-btn " onClick={(e) => this.props.toggleEditMode(e)}><FontAwesomeIcon icon="pencil-alt" /></button>
-						<button className="btn btn-outline-secondary owner-btn" onClick={(e) => this.props.onRemoveEvent(e,this.props.pk)}><FontAwesomeIcon icon="trash-alt" /></button>
+						<button className="btn btn-outline-secondary owner-btn " onClick={(e) => {this.props.history.push('/events/manage/'+this.props.pk + "/"); e.stopPropagation();
+}}><FontAwesomeIcon icon="pencil-alt" /></button>
 				</div>
 				);
 	}
@@ -72,7 +72,7 @@ class Event extends Component {
 				  </div>
 
 				  <div className="row"><div className="col">
-			    	<p>{eating_club_map[this.props.eating_club]} &bull; {this.props.start} - {this.props.end}</p>
+			    	<p>{eating_club_map[this.props.eating_club]} &bull; {moment(this.props.date, "YYYY-MM-DD").format('MMM D')}, {this.props.start} - {this.props.end}</p>
 			    </div></div>
 				</div>
 		 </div>

@@ -13,21 +13,11 @@ class EventCard extends Component {
     super(props);
 
     this.state = {
-      edit_mode : false
     };
 
-
-    this.toggleEditMode = this.toggleEditMode.bind(this);
   }
 
 
-  toggleEditMode(event) {
-    event.stopPropagation();
-
-    this.setState({
-      edit_mode: !this.state.edit_mode
-    });
-  }
 
   displayAttendees(event, event_pk) {
     event.stopPropagation();
@@ -41,35 +31,6 @@ class EventCard extends Component {
   }
 
   render() {
-    if (this.state.edit_mode) {
-        return (
-              <EditableEvent title={this.props.title}
-                                eating_club={this.props.eating_club}
-                                time={this.props.time}
-                                attendance={this.props.attendance}
-                                capacity={this.props.capacity}
-                                description={this.props.description}
-                                loc={this.props.location}
-                                pk={this.props.pk}
-                                start = {this.props.start}
-                                end = {this.props.end}
-                                newCard= {false}
-
-                                isEditable={true}
-                                isOwner={true}
-                                isAttending={false}
-
-                                onDataChange={this.onDataChange}
-                                onPostEvent={this.props.onPostEvent}
-                                onLeaveEvent={null}
-                                onSubmitEdit={null}
-                                toggleEditMode={this.toggleEditMode}
-                                displayAttendees={this.displayAttendees}
-                                onJoinEvent={this.props.onJoinEvent}/>
-
-        );
-    }
-    else {
         return  (
         	  <Event title={this.props.title}
                                 eating_club={this.props.eating_club}
@@ -78,6 +39,7 @@ class EventCard extends Component {
                                 capacity={this.props.capacity}
                                 description={this.props.description}
                                 loc={this.props.location}
+                                date={this.props.date}
                                 pk={this.props.pk}
                                 start = {this.props.start}
                                 end = {this.props.end}
@@ -87,12 +49,11 @@ class EventCard extends Component {
 
                                 onRemoveEvent={this.props.onRemoveEvent}
                                 onLeaveEvent={this.props.onLeaveEvent}
-                                toggleEditMode={this.toggleEditMode}
+
                                 displayAttendees={this.displayAttendees}
                                 onJoinEvent={this.props.onJoinEvent}/>
         );
     }
-  }
 }
 
 export default EventCard;

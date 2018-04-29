@@ -24,7 +24,7 @@ class MyProfile extends Component {
                   <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' ><FontAwesomeIcon icon="user" className="mr-3"/>My Profile</NavLink></li>
                   <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' ><FontAwesomeIcon icon="cog" className="mr-3"/>Account Settings</NavLink></li>
                   <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'><FontAwesomeIcon icon="calendar-art" className="mr-3" />Events Attending</NavLink></li>
-                  <li className="nav-item"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' ><FontAwesomeIcon icon="address-book" className="mr-3"/>Events Hosting</NavLink></li>
+                
                 </ul>
       )
   }
@@ -45,7 +45,7 @@ class MyProfile extends Component {
    <li className="nav-item" ><NavLink to='/myprofile/profile' activeClassName='active-settings' ><FontAwesomeIcon icon="user" className="mr-3"/>My Profile</NavLink></li>
                   <li className="nav-item"><NavLink to='/myprofile/account'  activeClassName='active-settings' ><FontAwesomeIcon icon="cog" className="mr-3" />Account Settings</NavLink></li>
                   <li className="nav-item"><NavLink to='/myprofile/eventsattending'  activeClassName='active-settings'><FontAwesomeIcon icon="calendar-alt" className="mr-3"/>Events Attending</NavLink></li>
-                  <li className="nav-item"><NavLink to='/myprofile/eventshosting'  activeClassName='active-settings' ><FontAwesomeIcon icon="address-book" className="mr-3"/>Events Hosting</NavLink></li>
+                
             	</ul>
             </div>
       		</nav>

@@ -47,24 +47,33 @@ class EventsFilter extends Component {
     this.props.setSort(asc, field)
   }
 
+
   render() {
          return( <form className="Events-filter">
             <h2>Eating Club</h2>
-            <div className="form-group">
+            <div className="form-group row">
             {
+  
               Object.keys(this.state).map(function(key, index) {
                 return (
-                  <div className="form-check">
-                     <input type="checkbox" checked={this.state[key]} name={key} id={key} value={this.state[key]} onChange={this.handleChange}/>
-                     <label  htmlFor={key}>
+                  <div className="form-check col-6">
+                     <input className="d-inline" type="checkbox" checked={this.state[key]} name={key} id={key} value={this.state[key]} onChange={this.handleChange}/>
+                     <label className="d-inline" htmlFor={key}>
                         {eating_club_map[key]}
                      </label>
                   </div>
                 );
               }, this)
             }
-            <br/>
-            <hr/>
+            </div>
+          </form>)
+  }
+}
+
+export default EventsFilter;
+
+
+/*
             <h2>Sort By</h2>
 
             <div className="form-check">
@@ -95,10 +104,4 @@ class EventsFilter extends Component {
               </label>
             </div>
 
-
-            </div>
-          </form>)
-  }
-}
-
-export default EventsFilter;
+            */

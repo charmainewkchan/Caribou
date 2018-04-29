@@ -235,13 +235,34 @@ body {
   margin-bottom: 4em;
 }
 
+.eventsPanel{
+  min-width: 300px;
+}
+
+.eventsPanel-ul{
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  margin-top: 2em;
+}
+
+
+@media (min-width: 767px) {
+  .eventsPanel{
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+
 .Events-addEvent {
   padding: 1em;
   margin-top: 1em;
   font-size: 1em;
   width: 100%;
   text-align: left;
-  border-bottom: 1px solid #aaa;
+  background: white;
+  border-radius: 5px;
 }
 
 .owner-btn {
@@ -300,9 +321,7 @@ body {
   text-align: left;
   height: 400px;
   width: 100%;
-  margin: 1em;
   padding-right: 1em;
-  margin-top: 6em;
   text-shadow: 0px 0px 5px white;
 }
 
@@ -331,11 +350,17 @@ body {
 
 /* SINGLE EVENT PAGE */
 
+.event-page{
+  background: white;
+  border-radius: 5px;
+}
+
 .event-page-header {
   background: #f7f7f7;
   border-bottom: 1px solid #ccc;
   text-align: left;
   padding: 1em;
+  font-family: roboto;
   width: 100%;
 }
 
@@ -404,7 +429,35 @@ body {
   list-style-type: none;
   padding: 0;
   margin: auto;
+
+
 }
+
+.events-Panel-links {
+  text-align: left;
+  padding: 0;
+  width: auto;
+}
+
+.events-list {
+  width: 75%;
+}
+
+@media (max-width: 767px) {
+.events-list {
+    width: 100%;
+  }
+.events-Panel-links{
+  text-align: center;
+}
+}
+
+@media (min-width: 1200px) {
+.events-list {
+    width: 60%;
+  }
+}
+
 
 .event-row-buffer{
   margin-top: 1.7em;
@@ -544,7 +597,9 @@ body {
 }
 
 
-
+.event-header:hover{
+  cursor: pointer;
+} 
 
 /* For mobile */
 @media screen and (max-width: 540px) {
@@ -552,3 +607,70 @@ body {
         width: 100%;
     }
 }
+
+
+/*
+ * Keyframes
+ */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
+ * CSS Page Transitions
+ * Don't forget to add vendor prefixes!
+ */
+.scene_element {
+    animation-duration: 0.25s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both;
+
+}
+  /** Basic styles for an animated element */
+  
+
+  /** An element that fades in */
+.scene_element--fadein {
+    animation-name: fadeIn;
+  }
+
+  /** An element that fades in and slides up */
+.scene_element--fadeinup {
+    animation-name: fadeInUp;
+  }
+
+  /** An element that fades in and slides from the right */
+.scene_element--fadeinright {
+    animation-name: fadeInRight;
+  }

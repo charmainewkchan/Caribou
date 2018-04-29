@@ -16,8 +16,7 @@ class Main extends Component {
 		  <main>
 			<Switch>
 				<Route exact path='/' component={Home}/>
-				<Route exact path='/events' component={Events}/>
-        		<Route path='/events/:event_id/' component={SingleEvent}/>
+				<Route path='/events' component={Events}/>
         		<Route path='/user/:netid/' component={User}/>
 			  	<Route path='/about' component={About}/>
 			  	<Route path='/myprofile' component={MyProfile}/>

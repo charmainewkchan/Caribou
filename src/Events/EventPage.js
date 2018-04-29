@@ -4,11 +4,11 @@ import '../App.css';
 import axios from 'axios'
 import princeton_img from '../Resources/princeton1.jpg'
 import {Link} from 'react-router-dom';
+import moment from 'moment';
 
-class SingleEvent extends Component {
-
-	constructor(){
-		super()
+class EventPage extends Component {
+  constructor(props) {
+        super()
     this.state = {
       eventName: "",
       eventDes: "",
@@ -19,49 +19,47 @@ class SingleEvent extends Component {
       date:"",
       pk:"",
       eventCap:"",
-			capacity:""
+            capacity:""
     }
-	}
+}
 
   componentDidMount(){
     // reload the data
-		const event_id = this.props.match.params.event_id;
-    const url = "https://bixr.herokuapp.com/api/event/" + event_id + "/";
-		console.log(url);
+        const event_id = this.props.match.params.event_id;
+        const url = "https://bixr.herokuapp.com/api/event/" + event_id + "/";
+        console.log(url);
 
-		axios.get(url).then(res => {
+        axios.get(url).then(res => {
       console.log(res.data);
       this.setState({
         eventName: res.data[0].fields.title,
-				eventDes: res.data[0].fields.description,
-	      eventLoc: res.data[0].fields.location,
-	      eating_club: res.data[0].fields.eating_club,
-	      start:res.data[0].fields.start,
-	      end:res.data[0].fields.end,
-	      date:res.data[0].fields.date,
-	      pk:res.data[0].pk,
-	      eventCap:res.data[0].fields.capacity,
-	      attendance:res.data[0].fields.attendance,
+                eventDes: res.data[0].fields.description,
+          eventLoc: res.data[0].fields.location,
+          eating_club: res.data[0].fields.eating_club,
+          start:res.data[0].fields.start,
+          end:res.data[0].fields.end,
+          date:res.data[0].fields.date,
+          pk:res.data[0].pk,
+          eventCap:res.data[0].fields.capacity,
+          attendance:res.data[0].fields.attendance,
         author:res.data[0].author
       });
     });
   }
 
-
-
   render() {
-    return (
-      <div>
+    return(
+    <div className="event-page">
         <div className="event-page-header">
-          <h3>{this.state.date}</h3>
+          <h3>{moment(this.state.date).format("ddd, hA") }</h3>
           <h2>{this.state.eventName}</h2>
           <div className="event-page-author">
-            <p>Hosted by <Link to={"/user/"+this.state.author+"/"}>{this.state.author}</Link>({eating_club_map[this.state.eating_club]})</p>
+            <p>Hosted by <Link className="mr-1"to={"/user/"+this.state.author+"/"}>{this.state.author}</Link>({eating_club_map[this.state.eating_club]})</p>
           </div>
         </div>
 
-    	  <div className="container event-page-body">
-        <div className="row">
+        <div className="container event-page-body">
+          <div className="row">
 
               <div className="col-md-9 order-xs-2 order-sm-2  order-md-1 event-page-details">
                 <img className="event-img" src={princeton_img} alt="img"/>
@@ -76,14 +74,14 @@ class SingleEvent extends Component {
                  <p>{this.state.eventLoc}</p>
                  <p>{this.state.start} - {this.state.end}</p>
                  <p>{this.state.attendance+"/"+this.state.eventCap+" going!"}</p>
+                 <hr/>
+                 <button className="btn btn-outline-secondary"> Join </button>
               </div>
 
             </div>
           </div>
-      </div>
-
-    )
+      </div>);
   }
 }
 
-export default SingleEvent;
+export default EventPage;
