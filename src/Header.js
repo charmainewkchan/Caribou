@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './App.css';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
 import axios from 'axios';
 
@@ -28,16 +29,16 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <Link to='/' className="navbar-brand">Bixr - Welcome {this.state.username}</Link>
+      <nav className="navbar navbar-expand-lg navbar-dark navbar-custom">
+          <Link to='/' className="navbar-brand">Bixr</Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
+              <FontAwesomeIcon icon="bars"/>
             </button>
-         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item"><Link to='/' className="nav-link">Home</Link></li>
-              <li className="nav-item"><Link to='/events' className="nav-link">Events</Link></li>
-              <li className="nav-item"><Link to='/myprofile' className="nav-link">MyProfile</Link></li>
+         <div className="collapse navbar-collapse navbar-collapse-custom"  id="navbarSupportedContent">
+            <ul className="navbar-nav ml-auto navbar-collapse">
+              <li className="nav-item"><Link to='/' className="nav-link">HOME</Link></li>
+              <li className="nav-item"><Link to='/events' className="nav-link">EVENTS</Link></li>
+              <li className="nav-item"><Link to='/myprofile' className="nav-link">PROFILE (dsawicki)</Link></li>
             </ul>
           </div>
       </nav>

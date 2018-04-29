@@ -37,6 +37,7 @@ class Events extends Component {
     this.updateData = this.updateData.bind(this);
     this.setSort = this.setSort.bind(this);
     this.filterEvents = this.filterEvents.bind(this);
+    this.toggleEditMode = this.toggleEditMode.bind(this);
   }
 
   componentDidMount() {
@@ -58,6 +59,12 @@ class Events extends Component {
     .catch(err => alert(err));
   }
 
+
+  toggleEditMode(){
+    this.setState({
+      showNewCard: false
+    })
+  }
 
   filterEvents(){
     console.log(this.state.events_data);
@@ -153,7 +160,7 @@ class Events extends Component {
                               newCard = {true}
                               onDataChange={this.onDataChange}
                               onPostEvent={this.onPostEvent}
-                              toggleEditMode={(e)=>console.log(e)}
+                              toggleEditMode={this.toggleEditMode}
                               isEditable={true}/>
       );
     } else {

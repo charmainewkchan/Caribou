@@ -10,6 +10,45 @@
   text-align: center;
 }
 
+.navbar-custom { 
+  background: #131418;
+ }
+
+.navbar-collapse-custom {
+  font-size: 0.73em;
+  background: #131418;
+  font-family: roboto;
+
+}
+
+.navbar-nav > li{
+  margin-left:30px;
+  margin-right:30px;
+}
+
+.navbar-toggler{
+  border-radius: 0;
+}
+
+
+  .navbar-ul{
+     margin: auto;
+  }
+
+
+@media (min-width: 992px) {
+  .navbar-collapse{
+    position: absolute;
+    right: 0;
+  }
+}
+
+
+.navbar-brand{
+  color: #fff;
+  font-family: 'Fjalla One', sans-serif;
+}
+
 body {
   background: #e7e7e9;
 }
@@ -453,7 +492,6 @@ body {
 .Events .btn {
   width: 6em;
 }
-
 
 
 
