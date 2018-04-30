@@ -80,6 +80,26 @@ def get_netid(request):
 	if g_netid:
 		return g_netid
 	return "dsawicki"
+
+
+def is_profile_complete(request):
+	netid = get_netid(request)
+	user = (User.objects.get(netid=netid).exclude(first_name__isnull=True)
+										.exclude(last_name__isnull=True)
+										.exclude(netid__isnull=True)
+										.exclude(res_college__isnull=True)
+										.exclude(year__isnull=True)
+										.exclude(eating_club__isnull=True)
+										.first())
+
+	# is user in the database?
+	if user is None:
+		return False
+
+	# is user missing fields?
+
+	return True
+
 #------------------------------------------------------------------------------#
 @casauth
 def get_user(request, netid):
@@ -219,6 +239,9 @@ def get_users_for_event(request, event_id):
 @csrf_exempt
 @casauth
 def post_event(request):
+	if not is_profile_complete(request):
+		return HttpResponse("Profile incomplete", status=401)
+
 	# get the json data
 	data_json = json.loads(request.body)
 	data = data_json[0]
@@ -307,6 +330,11 @@ def delete_event(request, event_id):
 @csrf_exempt
 @casauth
 def join_event(request):
+
+	if not is_profile_complete(request):
+		return HttpResponse("Profile incomplete", status=401)
+
+
 	data_json = json.loads(request.body)
 	data = data_json[0]
 	event_id = int(data["event"])
