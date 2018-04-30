@@ -19,7 +19,7 @@ class Account extends Component {
          <br/>
 
 
-        <button className="btn btn-danger"> Delete Account </button>
+        <button className="btn"> Delete Account </button>
       </div>
     );
   }

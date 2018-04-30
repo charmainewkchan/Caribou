@@ -17,7 +17,7 @@ class Home extends Component {
     return (
       <div className="Home">
       	<h2>Welcome to Bixr!</h2>
-
+        <p>Here to mix up the people you meet.</p>
         <div className="Home container">
           <div className = "homeButton row">
 
@@ -32,7 +32,6 @@ class Home extends Component {
 
           </div>
         </div>
-        <p>Here to mix up the people you meet.</p>
 
       <h2> Official Club Events</h2>
       <EventCal/>

@@ -11,16 +11,44 @@
 }
 
 .navbar-custom { 
-  background: #131418;
+  background: #FF5B32;
  }
 
 .navbar-collapse-custom {
   font-size: 0.73em;
-  background: #131418;
+  background: #FF5B32;
   font-family: roboto;
 
 }
 
+
+.btn-primary {
+  background-color: #14B7A4;
+  border-color: #14B7A4 ;
+  border-bottom: 1px solid #049784;
+}
+
+.btn-primary:disabled{
+    background-color: #BEE2DE;
+    border-color: #BEE2DE;
+    color: #4D5B5A;
+}
+
+.btn-danger {
+  background-color: #FFCC4C;
+  border-color: #FFCC4C;
+  border-bottom: 1px solid #DFAC2C;
+  color: #8F5C0C;
+}
+
+.btn-secondary {
+  background-color: #20576D;
+  border-color: #20576D;
+  border-bottom: 1px solid #00374D;
+}
+
+.btn-success { 
+ }
 .navbar-nav > li{
   margin-left:30px;
   margin-right:30px;
@@ -49,8 +77,9 @@
   font-family: 'Fjalla One', sans-serif;
 }
 
+
 body {
-  background: #e7e7e9;
+  background: #FFF4EC;
 }
 
 .App-logo {
@@ -305,8 +334,6 @@ body {
 
 .Events-filter{
   text-align: left;
-  width: 100%;
-  padding-right: 1em;
   display:inline;
   height: auto;
   max-height: 500px;
@@ -325,7 +352,7 @@ body {
   font-size: 1em;
   text-align: left;
   font-weight:bold;
-  color: #333;
+  color: #FF5B32;
   font-family: roboto;
 }
 
@@ -365,6 +392,7 @@ body {
 .event-page-header h2 {
   font-weight: bold;
   font-family: roboto;
+
 }
 
 .event-page-header h3 {
@@ -449,7 +477,7 @@ body {
   height: 100%;
   padding: 1em;
   width: 100%;
-  box-shadow: 0px 2px 12px #ccc !important;
+  border: 1px solid #ddd;
 }
 
 .Events-descriptionBox {
@@ -533,20 +561,25 @@ body {
 }
 
 
+.Home{
+  background: #FF5B32;
+  padding-top: 8em;
+
+}
 
 .Home p {
     font-size: 2.5em;
-    margin: 3em auto 5em auto;
+    margin: 0em auto 0em auto;
     width: 60%;
-
-    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-family: 'Fjalla One', sans-serif;
 }
 
 .Home h2 {
-    font-size: 3em;
+    font-size: 4em;
     font-weight: bold;
-    margin: 8em 0 1em 0;
-    font-size: 30px;
+    color: white;
+      display:none;
     font-family: 'Fjalla One', sans-serif;
 }
 
@@ -623,9 +656,9 @@ body {
 .events-wrapper {
   background: white;
   border-radius: 5px;
+  border: 1px solid #ddd;
   height: auto;
   margin-bottom: 1em;
-  box-shadow: 0px 2px 12px #ccc !important;
   padding: .5em;
 }
 

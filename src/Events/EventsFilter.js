@@ -53,20 +53,22 @@ class EventsFilter extends Component {
           <div className="Events-filter">
             <h2>Eating Club Filter</h2>
             <hr/>
+            <div className="container-fluid">
             <div className="form-group row">
             {
   
               Object.keys(this.state).map(function(key, index) {
                 return (
                   <div className="form-check col-6">
-                     <input className="d-inline" type="checkbox" checked={this.state[key]} name={key} id={key} value={this.state[key]} onChange={this.handleChange}/>
-                     <label className="d-inline" htmlFor={key}>
+                    <input className="form-check-input d-inline" type="checkbox" checked={this.state[key]} name={key} id={key} value={this.state[key]} onChange={this.handleChange}/>
+                     <label className="form-check-label d-inline" htmlFor={key}>
                         {eating_club_map[key]}
                      </label>
                   </div>
                 );
               }, this)
             }
+            </div>
             </div>
           </div>)
   }

@@ -47,11 +47,12 @@ class ManageEvent extends Component {
       eventDes: '',
       eventLoc: '',
       eating_club: 'NN',
-      start:0,
-      end: 0,
+      start:"00:00",
+      end: "00:00",
       date:moment('2017-01-01'),
       eventCap:0,
-      attendance: 0
+      attendance: 0,
+      pk: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -62,8 +63,8 @@ class ManageEvent extends Component {
   }
 
   componentDidMount() {
-      if ('event_id' in this.props.match.params) {
-        const event_id = this.props.match.params.event_id;
+      if ('event_id' in this.props) {
+        const event_id = this.props.event_id;
         const url = "https://bixr.herokuapp.com/api/event/" + event_id + "/";
         console.log(url);
 
@@ -121,17 +122,15 @@ class ManageEvent extends Component {
     else if (this.state.capacity == '') {
       alert('Please enter a maximum capacity.')
     } else {
-      alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventCap + " " + this.state.eventLoc + " " + this.state.date.format().substring(0,10) + " " + this.state.startHour + ":" +
-      this.state.startMin +"-" + " " + this.state.endHour + ":" + this.state.endMin + " ");
+      alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventCap + " " + this.state.eventLoc + " " + this.state.date.format().substring(0,10) + " " + this.state.start + " " + this.state.end);
 
       var data = [{"capacity": this.state.eventCap, "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "start": this.state.start,
-      "end": this.state.end, "date" : this.state.date.format().substring(0,10), "pk": this.props.pk}]
+      "end": this.state.end, "date" : this.state.date.format().substring(0,10), "pk": this.state.pk}]
 
+      console.log(data)
       this.props.onPostEvent(
         data
       );
-
-      this.props.toggleEditMode(event);
     }
   }
 

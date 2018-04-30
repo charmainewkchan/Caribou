@@ -85,9 +85,9 @@ class Events extends Component {
        var a_item = a.pk
        var b_item = b.pk
 
-       if (a_item > b_item)
-        return this.state.sort.ascending ? 1 : -1;
        if (a_item < b_item)
+        return this.state.sort.ascending ? 1 : -1;
+       if (a_item > b_item)
         return this.state.sort.ascending? -1 : 1;
        return 0;
     }.bind(this))
@@ -164,7 +164,7 @@ class Events extends Component {
             <div className="row events-wrapper">
                 <h2>Hosting</h2>
                 <hr/>
-                <button className="btn btn-primary w-100" onClick={(e) => {this.props.history.push('/events/manage/')}}><FontAwesomeIcon icon="plus" className="mr-3"/>Create an Event</button>
+                <button className="btn btn-secondary w-100" onClick={(e) => {this.props.history.push('/events/manage/')}}><FontAwesomeIcon icon="plus" className="mr-3"/>Create an Event</button>
                 
                   <HostingList setEventPage={this.setEventPage}/>
 
@@ -198,7 +198,7 @@ class Events extends Component {
           </div>
 	        <div className="col m-scene">
              <Switch>
-                <Route path='/events/manage/:event_id(\d+)?' component={ManageEvent}/>
+                <Route path='/events/manage/:event_id(\d+)?' render={({ match }) => <ManageEvent event_id={match.params.event_id} onPostEvent={this.onPostEvent}/>}/>
                 <Route exact path='/events/(list/)?' component={()=><EventsList events={this.state.events} updateData={this.updateData}/>}/>
                 <Route exact path='/events/:event_id(\d+)/' component={EventPage}/>
               </Switch>
