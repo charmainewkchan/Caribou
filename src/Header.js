@@ -38,7 +38,7 @@ class Header extends Component {
             <ul className="navbar-nav ml-auto navbar-collapse">
               <li className="nav-item"><Link to='/' className="nav-link">HOME</Link></li>
               <li className="nav-item"><Link to='/events' className="nav-link">EVENTS</Link></li>
-              <li className="nav-item"><Link to='/myprofile' className="nav-link">PROFILE (dsawicki)</Link></li>
+              <li className="nav-item"><Link to='/myprofile' className="nav-link">PROFILE</Link></li>
             </ul>
           </div>
       </nav>

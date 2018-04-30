@@ -106,6 +106,22 @@ class EditableProfile extends Component {
 
   }
 
+  componentDidMount(){
+       const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
+    axios.get(url)
+    .then(res => {
+      console.log(res.data[0].fields)
+        this.setState({
+           "first_name": res.data[0].fields.first_name,
+            "last_name": res.data[0].fields.last_name,
+            "year": res.data[0].fields.year,
+            "res_college":rescollegeAbrReverse[res.data[0].fields.res_college],
+            "eating_club": eatingClubAbrReverse[res.data[0].fields.eating_club]
+        })
+      })
+    .catch(err => alert(err.response));
+  }
+
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -129,29 +145,17 @@ class EditableProfile extends Component {
     });
   }
 
-
-  componentDidMount() {
-    const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
-    axios.get(url)
-    .then(res => {
-        this.setState({
-          profile_info: res.data[0].fields
-        })
-      })
-    .catch(err => alert(err.response));
-  }
-
   render() {
     return (
       <div>
-        <div className = 'row'>
-            <h2>My Profile</h2>
-        </div>
+            <h2>Profile Details</h2>
+            <hr/>
 
+        
         <h3>First name: </h3>
-        <input className = "form-control" type = "text" id = "first_name" name = "first_name" placeholder = "" value = {this.state.first_name} onChange = {this.handleChange}/>
+        <input className = "form-control" type = "text" id = "first_name" name = "first_name" value = {this.state.first_name} onChange = {this.handleChange}/>
         <h3>Last name: </h3>
-        <input className = "form-control" type = "text" id = "last name" name = "last_name" placeholder = "" value = {this.state.last_name} onChange = {this.handleChange}/>
+        <input className = "form-control" type = "text" id = "last name" name = "last_name"  value = {this.state.last_name} onChange = {this.handleChange}/>
 
         <div>
         <h3>Year: </h3>
@@ -163,7 +167,7 @@ class EditableProfile extends Component {
 
         <h3>Eating Club: </h3>
           <Dropdown options = {eatingclubs} label = "eatingclubs" onChange = {this.onSelectEatingClub} value = {this.state.eating_club}/>
-        <button onClick={this.save}> Save</button>
+        <button className="btn btn-success mt-2" onClick={this.save}> Save</button>
       </div>
     );
   }

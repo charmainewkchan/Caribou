@@ -3,7 +3,7 @@ import Header from './Header'
 import Main from './Main'
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-
+import { withRouter } from 'react-router-dom';
 import './App.css';
 
 
@@ -33,4 +33,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

@@ -5,7 +5,7 @@ class Account extends Component {
   
   render() {
     return (
-      <div>
+      <div className="mt-4">
         <h2> Account </h2>
         <hr/>
 

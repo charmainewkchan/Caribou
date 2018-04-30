@@ -63,9 +63,10 @@ class EventsPanel extends Component {
 
   render() {
     return (
-            this.props.events.map(function(event){
+           <div className="container-fluid events-list m-scene scene_element scene-element--fadein">
+            {this.props.events.map(function(event){
               return (
-              <div className="container events-list m-scene scene_element scene-element--fadein">
+
                 <div className="row event-row-buffer">
                   <EventCard title={event.fields.title}
                               eating_club={event.fields.eating_club}
@@ -85,12 +86,12 @@ class EventsPanel extends Component {
                               onRemoveEvent={this.onRemoveEvent}
                               onLeaveEvent={this.onLeaveEvent}
                               isEditable={this.props.isEditable}/>
-                              </div>
-              </div>)
-
-            }, this)
-    );
-  }
+                </div>);
+              },this)
+            }
+          </div>
+          )
+    }
 }
 
 export default EventsPanel;

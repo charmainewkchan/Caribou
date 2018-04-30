@@ -101,88 +101,44 @@ body {
 /* PROFILE DASHBOARD */
 
 
-.sidebar {
-  position: relative;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100; /* Behind the navbar */
-  padding: 48px 0 0; /* Height of navbar */
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+.MyProfile {
+  margin-top: 2em;
+  padding: 2em;
+  padding-bottom: 4em;
+  font-size:.9em;
 }
 
-.sidebar-sticky {
-  position: relative;
-  top: 0;
-  height: calc(100vh - 48px);
-  padding-top: .5rem;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+.MyProfile-width{
+  width: 40%;
+  margin-top:2em;
 }
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
+
+@media (max-width: 969px) {
+  .MyProfile-width{
+    width: 100%
   }
 }
 
-.sidebar .nav-link {
-  font-weight: 500;
-  color: #333;
-}
-
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
-}
-
-.sidebar .nav-link.active {
-  color: #007bff;
-}
-
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-  color: inherit;
-}
-
-.sidebar-heading {
-  font-size: .75rem;
-  text-transform: uppercase;
-}
-
-
-.MyProfile-panel h2 {
+.MyProfile h2 {
   font-size: 1.4em;
   font-weight: bold;
-  margin-left: 1em;
 }
 
-.MyProfile-panel h3 {
+.MyProfile h3 {
   font-size: 1em;
   font-weight: bold;
   color: #333;
 }
 
-.MyProfile-settings {
-  font-size: 0.8em;
-  padding:0em;
-  margin: 0em;
-}
 
-.MyProfile-panel {
+.MyProfile {
   text-align: left;
-  min-height: 24em;
-  width: auto;
+  min-height: 20em;
   margin-top: 1em;
+  font-family: roboto;
+
 }
-
-@media (max-width: 767px) {
-  .MyProfile-panel {
-  }
-}
-
-
 
 .active-settings {
   color: black;
@@ -193,19 +149,10 @@ body {
   left: 1em;
 }
 
-.settings {
-  height: 100%;
-  margin: .1em;
-  padding-top: .2em;
-  height: 2em;
-  color: black;
-  text-decoration: none;;
-}
 
-.MyProfile-settings ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+@media (min-width: 1200px) {
+    
+
 }
 
 
@@ -233,24 +180,18 @@ body {
 
 .Events {
   margin-bottom: 4em;
-}
-
-.eventsPanel{
-  min-width: 300px;
-}
-
-.eventsPanel-ul{
-  list-style: none;
-  padding: 0;
-  text-align: left;
   margin-top: 2em;
 }
 
+.eventsPanel{
+  min-width:300px;
+}
 
-@media (min-width: 767px) {
+
+@media (max-width: 767px) {
   .eventsPanel{
-    width: 100%;
     margin-top: 0;
+    min-width: 100%;
   }
 }
 
@@ -288,7 +229,52 @@ body {
   }
 }
 
+/* EVENT COMPACT */
+.event-compact {
+  margin-bottom: .5em;
+  font-size: .7em;
+  font-family: roboto;
+  padding: 0;
+  border-radius:5px;
+}
+.event-compact:hover {
+  cursor:pointer;
+  background: #f3f3f3;
+}
 
+.event-compact p {
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  line-height: 1.1em
+}
+
+.event-compact-list {
+  max-height: 10em;
+  margin-top: 1em;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}
+
+.compact-date{
+  text-align: left;
+}
+.compact-date h1 {
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
+}
+.compact-date h2 {
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+  font-weight:  normal;
+}
+
+/* END EVENT COMPACT*/
 
 
 .Events-inputBig{
@@ -319,9 +305,11 @@ body {
 
 .Events-filter{
   text-align: left;
-  height: 400px;
   width: 100%;
   padding-right: 1em;
+  display:inline;
+  height: auto;
+  max-height: 500px;
   text-shadow: 0px 0px 5px white;
 }
 
@@ -345,6 +333,9 @@ body {
   .Events-filter{
     margin-top: 0;
     height: auto;
+  }
+  .compact-date{
+    font-size:.8em;
   }
 }
 
@@ -428,9 +419,7 @@ body {
 .Events-list {
   list-style-type: none;
   padding: 0;
-  margin: auto;
-
-
+  margin:0;
 }
 
 .events-Panel-links {
@@ -439,17 +428,10 @@ body {
   width: auto;
 }
 
-.events-list {
-  width: 75%;
-}
-
-@media (max-width: 767px) {
-.events-list {
-    width: 100%;
+@media (min-width: 960px) {
+  .events-list {
+    width: 75%;
   }
-.events-Panel-links{
-  text-align: center;
-}
 }
 
 @media (min-width: 1200px) {
@@ -460,7 +442,7 @@ body {
 
 
 .event-row-buffer{
-  margin-top: 1.7em;
+  margin-bottom: 1em;
 }
 
 .Events-event {
@@ -530,9 +512,11 @@ body {
 
 .join-button {
   margin: .5em;
-  border: 0;
-  padding: 0;
-  text-align: left;
+  font-size: .9em;
+  padding: .5em 2em;
+  min-width: 8em;
+  border-radius:5px;
+  font-family: roboto;
 }
 
 .leave-button {
@@ -543,9 +527,10 @@ body {
 }
 
 .Events .btn {
-  width: 6em;
+  width: 8em;
+  font-size:.85em;
+  font-family: 'roboto';
 }
-
 
 
 
@@ -633,6 +618,23 @@ body {
     opacity: 1;
     transform: none;
   }
+}
+
+.events-wrapper {
+  background: white;
+  border-radius: 5px;
+  height: auto;
+  margin-bottom: 1em;
+  box-shadow: 0px 2px 12px #ccc !important;
+  padding: .5em;
+}
+
+.events-wrapper h2{
+    font-size: 1em;
+  text-align: left;
+  font-weight:bold;
+  color: #333;
+  font-family: roboto;
 }
 
 @keyframes fadeInRight {

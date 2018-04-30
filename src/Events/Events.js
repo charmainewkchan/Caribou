@@ -3,7 +3,7 @@ import EventsList from './EventsList';
 import EventsFilter from './EventsFilter';
 import AddEvent from './AddEvent.js';
 
-import { Link, Switch, Route, NavLink } from 'react-router-dom';
+import { Link, Switch, withRouter, Route, Router, NavLink } from 'react-router-dom';
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 //import events_data from './events.json';
@@ -11,11 +11,13 @@ import filter_data from './filters.json';
 import eating_club_map from './eating_club_map.json';
 import EventCard from './EventCard';
 import EditableEvent from './EditableEvent';
-import EventsPanel from './EventsPanel';
+
 import EventPage from './EventPage';
 import ManageEvent from './ManageEvent';
-import EventsHosting from'./EventsHosting';
+import HostingList from './HostingList';
+import AttendingList from './AttendingList';
 import DropDownBar from '../DropDownBar';
+import EventsCompactList from './EventsCompactList'
 
 import axios from 'axios'
 
@@ -45,6 +47,7 @@ class Events extends Component {
     this.filterEvents = this.filterEvents.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.eventsPanel = this.eventsPanel.bind(this);
+    this.setEventPage = this.setEventPage.bind(this);
   }
 
   componentDidMount() {
@@ -150,24 +153,32 @@ class Events extends Component {
   }
 
 
+  setEventPage(pk) {
+    this.props.history.push('/events/'+pk + "/");
+    this.forceUpdate();
+  }
+
   eventsPanel() {
     return (
           <div className="container-fluid">
-            <div className="row">
-                <button className="d-none d-md-block btn btn-primary w-100" onClick={(e) => {this.props.history.push('/events/manage/')}}><FontAwesomeIcon icon="plus" className="mr-3"/>Create an Event</button>
+            <div className="row events-wrapper">
+                <h2>Hosting</h2>
+                <hr/>
+                <button className="btn btn-primary w-100" onClick={(e) => {this.props.history.push('/events/manage/')}}><FontAwesomeIcon icon="plus" className="mr-3"/>Create an Event</button>
+                
+                  <HostingList setEventPage={this.setEventPage}/>
+
+
             </div>
 
-            <div className="row mt-2">
-              <div className="col col-md-12">
-                  <div className='events-Panel-links'><NavLink to='/events/list/'>Events</NavLink></div>
-              </div>
-              <div className="col col-md-12">
-                <div className='events-Panel-links'><NavLink to='/events/hosting/'>Hosting</NavLink></div>
-              </div>
+            <div className="row events-wrapper">
+                <h2>Attending</h2>
+                <hr/>
+                <AttendingList/>
+
             </div>
 
-            <hr/>
-            <div className="row">
+            <div className="row events-wrapper">
               <EventsFilter setSort={this.setSort} sort_by={this.state.sort.field+"-"+(this.state.sort.ascending?"1":"0")}  onClubFilterChange={this.onClubFilterChange}/>
             </div>
         </div>)
@@ -180,22 +191,22 @@ class Events extends Component {
   render() {
     return (
     	<div className="Events container-fluid">
-        <div className="row mt-2">
+        <div className="row">
           <div className="col-md-3 eventsPanel">
             {this.eventsPanel()}
+
           </div>
-	        <div className= "col m-scene">
+	        <div className="col m-scene">
              <Switch>
                 <Route path='/events/manage/:event_id(\d+)?' component={ManageEvent}/>
                 <Route exact path='/events/(list/)?' component={()=><EventsList events={this.state.events} updateData={this.updateData}/>}/>
-                <Route exact path='/events/hosting/' component={EventsHosting}/>
                 <Route exact path='/events/:event_id(\d+)/' component={EventPage}/>
-                </Switch>
-	            </div>
+              </Switch>
+	         </div>
         </div>
 	    </div>
     );
   }
 }
 
-export default Events;
+export default withRouter(Events);

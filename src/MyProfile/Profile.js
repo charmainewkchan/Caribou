@@ -14,26 +14,27 @@ class Profile extends Component {
       profile_info: {},
       edit_mode: false
     }
-    this.toggleEditMode = this.toggleEditMode.bind(this);
     this.updateData = this.updateData.bind(this);
 
   }
 
-
-    toggleEditMode() {
-      this.setState({
-        edit_mode: !this.state.edit_mode
-      });
-    }
-
   componentDidMount() {
-    this.updateData();
+       const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
+    axios.get(url)
+    .then(res => {
+      console.log(res.data[0].fields)
+        this.setState({
+          profile_info: res.data[0].fields
+        })
+      })
+    .catch(err => alert(err.response));
   }
 
   updateData() {
     const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
     axios.get(url)
     .then(res => {
+      console.log(res.data[0].fields)
         this.setState({
           profile_info: res.data[0].fields
         })
@@ -44,35 +45,15 @@ class Profile extends Component {
 
 
   render() {
-    if (!this.state.edit_mode) {
     return (
-      <div>
-        <div className = 'row'>
-            <h2 className="mr-5">My Profile</h2> <button  onClick={this.toggleEditMode}><FontAwesomeIcon icon="pencil-alt"/></button>
-        </div>
-        <hr/>
-
-        <h3>Name: </h3><p>{this.state.profile_info.first_name} {this.state.profile_info.last_name}</p>
-        <h3>Year: </h3><p>{this.state.profile_info.year}</p>
-        <h3>College: </h3><p>{this.state.profile_info.res_college}</p>
-        <h3>Eating Club: </h3><p>{this.state.profile_info.eating_club}</p>
-      </div>
-    );
-  } else {
-    return (
-      <EditableProfile
-          first_name = {this.state.profile_info.first_name}
+      <EditableProfile first_name = {this.state.profile_info.first_name}
           last_name= {this.state.profile_info.last_name}
           year= {this.state.profile_info.year}
           res_college={this.state.profile_info.res_college}
           eating_club= {this.state.profile_info.eating_club}
-          edit_mode= {this.state.edit_mode}
-          toggleEditMode={this.toggleEditMode}
           updateData = {this.updateData}
-
       />
     );
-  }
   }
 }
 

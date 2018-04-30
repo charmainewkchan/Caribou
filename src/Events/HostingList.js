@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios'
-import EventsList from './EventsList';
-
-class EventsHosting extends Component {
+import EventsCompactList from './EventsCompactList';
+import { withRouter } from 'react-router-dom';
+class HostingList extends Component {
   constructor(props) {
     super(props)
 
@@ -33,9 +33,10 @@ class EventsHosting extends Component {
 
   render() {
     return (
-            <EventsList events={this.state.eventsHosting} updateData={this.updateData}/>
+          <EventsCompactList setEventPage={this.props.setEventPage} location={this.props.location} events={this.state.eventsHosting}/>
     );
   }
 }
 
-export default EventsHosting;
+export default withRouter(HostingList);
+//

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios'
-import EventsPanel from '../Events/EventsPanel';
+import EventsList from '../Events/EventsList';
 
 class EventsHosting extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class EventsHosting extends Component {
           <hr/>
           <div className="container">
             <div className="col-md-6">
-            <EventsPanel events={this.state.eventsHosting} updateData={this.updateData}/>
+            <EventsList events={this.state.eventsHosting} updateData={this.updateData}/>
           </div>
           </div>
         </div>

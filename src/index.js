@@ -9,6 +9,8 @@ import 'react-dates/lib/css/_datepicker.css';
 import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.render((
+
+	
 	<BrowserRouter>
 		<App />
 	</BrowserRouter>
