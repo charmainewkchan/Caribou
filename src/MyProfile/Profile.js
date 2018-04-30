@@ -52,6 +52,7 @@ class Profile extends Component {
           res_college={this.state.profile_info.res_college}
           eating_club= {this.state.profile_info.eating_club}
           updateData = {this.updateData}
+          toggle
       />
     );
   }
