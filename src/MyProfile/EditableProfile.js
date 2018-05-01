@@ -13,7 +13,7 @@ const rescollege = ["Butler", "Wilson", "Mathey", "Rocky", "Whitman","Forbes"]
 var eatingClubAbr = {
   "CL":"Cloister",
   "TO":"Tower",
-  "NN":"none",
+  "NN":"None",
   "CO":"Colonial",
   "CN":"Cannon",
   "CA":"Cap",
@@ -26,22 +26,22 @@ var eatingClubAbr = {
 }
 
 var eatingClubAbrReverse = {
-  "Cloister":"CL",
-  "Tower":"TO",
-  "none":"NN",
-  "Colonial":"CO",
-  "Cannon":"CN",
-  "Cap":"CA",
-  "Ivy":"IV",
-  "TigerInn":"TI",
-  "Quad":"QD",
-  "Terrace":"TE",
-  "Cottage":"CT",
-  "Charter":"CH"
+  "Cloister": 'CL',
+  "Tower":'TO',
+  "None":'NN',
+  "Colonial":'CO',
+  "Cannon":'CN',
+  "Cap":'CA',
+  "Ivy":'IV',
+  "TigerInn":'TI',
+  "Quad":'QD',
+  "Terrace":'TE',
+  "Cottage":'CT',
+  "Charter":'CH'
 }
 
 var rescollegeAbr = {
-  'NN' : "none",
+  'NN' : "None",
   'MA' : "Mathey",
   'RO' : "Rocky",
   'BU' : "Butler",
@@ -52,7 +52,7 @@ var rescollegeAbr = {
 }
 
 var rescollegeAbrReverse = {
-  "none" : 'NN',
+  "None" : 'NN',
 	"Mathey" : 'MA',
 	"Rocky" : 'RO',
 	"Butler" : 'BU',
@@ -73,7 +73,11 @@ class EditableProfile extends Component {
       year: this.props.year,
       res_college:rescollegeAbr[this.props.res_college],
       eating_club: eatingClubAbr[this.props.eating_club],
-      edit_mode:this.props.edit_mode
+      edit_mode:this.props.edit_mode,
+      toggleEditMode: this.props.toggleEditMode,
+      updateDate: this.props.updateData
+
+
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -91,9 +95,10 @@ class EditableProfile extends Component {
     "last_name": this.state.last_name,
     "year": this.state.year,
     "res_college":rescollegeAbrReverse[this.state.res_college],
-    "eating_club": eatingClubAbrReverse[this.props.eating_club]}]
+    "eating_club": eatingClubAbrReverse[this.state.eating_club]}]
 
-    console.log(event)
+
+    console.log(data)
     axios.post('https://bixr.herokuapp.com/api/post_user', data)
     .then(res => {
         console.log(res);
@@ -101,8 +106,8 @@ class EditableProfile extends Component {
       })
     .catch(err => alert(err));
 
-    this.props.toggleEditMode();
     this.props.updateData();
+    this.props.toggleEditMode();
 
   }
 
@@ -151,7 +156,7 @@ class EditableProfile extends Component {
             <h2>Profile Details</h2>
             <hr/>
 
-        
+
         <h3>First name: </h3>
         <input className = "form-control" type = "text" id = "first_name" name = "first_name" value = {this.state.first_name} onChange = {this.handleChange}/>
         <h3>Last name: </h3>
@@ -163,10 +168,10 @@ class EditableProfile extends Component {
         </div>
 
         <h3>College: </h3>
-        <Dropdown options = {rescollege} label = "rescollege" name = "res_college" onChange = {this.onSelectResCollege} value = {this.state.res_college}/>
+        <Dropdown options = {rescollege} label = "rescollege" name = "res_college" onChange = {this.onSelectResCollege} value = {this.state.res_college} defaultValue = {this.state.res_college}/>
 
         <h3>Eating Club: </h3>
-          <Dropdown options = {eatingclubs} label = "eatingclubs" onChange = {this.onSelectEatingClub} value = {this.state.eating_club}/>
+          <Dropdown options = {eatingclubs} label = "eatingclubs" onChange = {this.onSelectEatingClub} value = {this.state.eating_club} defaultValue = {this.state.eating_club}/>
         <button className="btn btn-success mt-2" onClick={this.save}> Save</button>
       </div>
     );
