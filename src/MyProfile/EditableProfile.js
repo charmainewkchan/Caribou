@@ -88,6 +88,23 @@ class EditableProfile extends Component {
 
   save(event) {
 
+    if(!this.state.first_name) {
+      alert('Please enter your first name.')
+    }
+    else if(!this.state.last_name) {
+      alert('Please enter you last name.')
+    }
+    else if (!this.state.year) {
+      alert('Please enter your year.')
+    }
+    else if (!this.state.res_college){
+      alert('Please enter your residential college.')
+
+    }
+    else if (!this.state.eating_club) {
+      alert('Please enter your eating club.')
+    }
+
     //* post data to url *//
     var data = [{
     "first_name": this.state.first_name,
