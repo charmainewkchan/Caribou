@@ -55,13 +55,16 @@ class Events extends Component {
 
   componentDidMount() {
     this.updateData();
+    this.setState({
+      currentPage:0
+    })
   }
 
 
   changePage(pageNum){
     this.setState({
       currentPage: pageNum
-    }, this.updateData());
+    }, ()=>{this.updateData()});
   }
 
   onPostEvent(event){
@@ -140,16 +143,19 @@ class Events extends Component {
         ascending: (ascending==1?true:false),
         field: field
       }
-    }, this.updateData())
+    }, ()=>{this.updateData()})
   }
 
   updateData(){
     // reload the data
     const url = "https://bixr.herokuapp.com/api/get_events";
+
     var data = [{
-      page_num: this.state.pageNum,
+      page_num: this.state.currentPage,
       page_size: 10
     }]
+    console.log(data)
+
     axios.post(url, data).then(res => {
       console.log(res.data);
       this.setState({
