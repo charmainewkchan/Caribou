@@ -173,7 +173,7 @@ def get_events(request):
 	#netid = request.session['netid']
 	netid = get_netid(request)
 
-	request_data = json.loads(request.body)[0]
+	request_data = (json.loads(request.body))[0]
 	page_size = request_data['page_size']
 	page_num  = request_data['page_num']
 

@@ -146,10 +146,10 @@ class Events extends Component {
   updateData(){
     // reload the data
     const url = "https://bixr.herokuapp.com/api/get_events";
-    var data = {
+    var data = [{
       page_num: this.state.pageNum,
       page_size: 10
-    }
+    }]
     axios.post(url, data).then(res => {
       console.log(res.data);
       this.setState({
