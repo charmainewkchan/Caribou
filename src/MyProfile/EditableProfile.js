@@ -73,7 +73,11 @@ class EditableProfile extends Component {
       year: this.props.year,
       res_college:rescollegeAbr[this.props.res_college],
       eating_club: eatingClubAbr[this.props.eating_club],
-      edit_mode:this.props.edit_mode
+      edit_mode:this.props.edit_mode,
+      toggleEditMode: this.props.toggleEditMode,
+      updateDate: this.props.updateData
+
+
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -151,7 +155,7 @@ class EditableProfile extends Component {
             <h2>Profile Details</h2>
             <hr/>
 
-        
+
         <h3>First name: </h3>
         <input className = "form-control" type = "text" id = "first_name" name = "first_name" value = {this.state.first_name} onChange = {this.handleChange}/>
         <h3>Last name: </h3>

@@ -15,8 +15,14 @@ class Profile extends Component {
       edit_mode: false
     }
     this.updateData = this.updateData.bind(this);
-
+    this.toggleEditMode = this.toggleEditMode.bind(this);
   }
+
+ toggleEditMode() {
+      this.setState({
+        edit_mode: !this.state.edit_mode
+      });
+    }
 
   componentDidMount() {
        const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
@@ -45,6 +51,25 @@ class Profile extends Component {
 
 
   render() {
+        if (!this.state.edit_mode) {
+    return (
+      <div>
+        <div className = 'row'>
+          <div className = 'col-6'>
+            <h2>My Profile</h2>
+          </div>
+
+          <div className = 'col-6'>
+            <button onClick={this.toggleEditMode}> Edit Profile </button>
+          </div>
+        </div>
+        <h3>Name: </h3><p>{this.state.profile_info.first_name} {this.state.profile_info.last_name}</p>
+        <h3>Year: </h3><p>{this.state.profile_info.year}</p>
+        <h3>College: </h3><p>{this.state.profile_info.res_college}</p>
+        <h3>Eating Club: </h3><p>{this.state.profile_info.eating_club}</p>
+      </div>
+    );
+  } else {
     return (
       <EditableProfile first_name = {this.state.profile_info.first_name}
           last_name= {this.state.profile_info.last_name}
@@ -52,9 +77,10 @@ class Profile extends Component {
           res_college={this.state.profile_info.res_college}
           eating_club= {this.state.profile_info.eating_club}
           updateData = {this.updateData}
-          toggle
+          toggleEditMode = {this.toggleEditMode}
       />
     );
+  }
   }
 }
 
