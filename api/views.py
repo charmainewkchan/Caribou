@@ -83,22 +83,13 @@ def get_netid(request):
 
 
 def is_profile_complete(request):
-	netid = get_netid(request)
-	user = (User.objects.get(netid=netid).exclude(first_name__isnull=True)
-										.exclude(last_name__isnull=True)
-										.exclude(netid__isnull=True)
-										.exclude(res_college__isnull=True)
-										.exclude(year__isnull=True)
-										.exclude(eating_club__isnull=True)
-										.first())
-
-	# is user in the database?
-	if user is None:
-		return False
-
-	# is user missing fields?
-
-	return True
+	# netid = get_netid(request)
+	# user = User.objects.filter(netid=netid).exclude(first_name__isnull=True).exclude(first_name='').exclude(last_name__isnull=True).exclude(last_name='').exclude(netid__isnull=True).exclude(netid='').exclude(res_college__isnull=True).exclude(res_college='').exclude(year__isnull=True).exclude(year='').exclude(eating_club__isnull=True).exclude(eating_club='')
+	# # if user is not found, then incomplete
+	# if len(user)==0:
+	# 	return False
+	# return True
+	return False
 
 #------------------------------------------------------------------------------#
 @casauth
