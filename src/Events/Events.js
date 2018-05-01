@@ -38,7 +38,8 @@ class Events extends Component {
         field: "date"
       },
       currentPage: 0,
-      numPages:0
+      numPages:0,
+      eating_club_filter: []
   	}
     this.onClubFilterChange = this.onClubFilterChange.bind(this);
 
@@ -46,11 +47,11 @@ class Events extends Component {
     this.onHostEvent = this.onHostEvent.bind(this);
     this.updateData = this.updateData.bind(this);
     this.setSort = this.setSort.bind(this);
-    this.filterEvents = this.filterEvents.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.eventsPanel = this.eventsPanel.bind(this);
     this.setEventPage = this.setEventPage.bind(this);
     this.changePage = this.changePage.bind(this);
+    this.applyFilter = this.applyFilter.bind(this);
   }
 
   componentDidMount() {
@@ -81,33 +82,17 @@ class Events extends Component {
     .catch(err => alert(err));
   }
 
+  applyFilter(filter){
+      var filterAsList = Object.values(filter).filter(val=>val==true);
+      this.setState({
+        eating_club_filter: filterAsList
+      }, ()=>this.updateData())
+  }
 
   toggleEditMode(){
     this.setState({
       showNewCard: false
     })
-  }
-
-  filterEvents(){
-    console.log(this.state.events_data);
-  	var filtered = this.state.events_data.filter(event => this.state.filter.clubs.includes(event.fields.eating_club));
-
-    console.log(filtered);
-    filtered.sort(function(a,b) {
-       var a_item = a.pk
-       var b_item = b.pk
-
-       if (a_item < b_item)
-        return this.state.sort.ascending ? 1 : -1;
-       if (a_item > b_item)
-        return this.state.sort.ascending? -1 : 1;
-       return 0;
-    }.bind(this))
-    console.log(filtered);
-
-  	this.setState({
-  		events: filtered
-  	});
   }
 
   onClubFilterChange(event){
@@ -152,7 +137,8 @@ class Events extends Component {
 
     var data = [{
       page_num: this.state.currentPage,
-      page_size: 10
+      page_size: 10,
+      eating_club_filter: this.state.eating_club_filter
     }]
     console.log(data)
 
@@ -160,8 +146,7 @@ class Events extends Component {
       console.log(res.data);
       this.setState({
         events_data: res.data,
-
-      }, function() {this.filterEvents()});
+      });
     });
   }
 
@@ -198,7 +183,7 @@ class Events extends Component {
             </div>
 
             <div className="row events-wrapper">
-              <EventsFilter setSort={this.setSort} sort_by={this.state.sort.field+"-"+(this.state.sort.ascending?"1":"0")}  onClubFilterChange={this.onClubFilterChange}/>
+              <EventsFilter applyFilter={this.applyFilter} setSort={this.setSort} sort_by={this.state.sort.field+"-"+(this.state.sort.ascending?"1":"0")}  onClubFilterChange={this.onClubFilterChange}/>
             </div>
         </div>)
   }

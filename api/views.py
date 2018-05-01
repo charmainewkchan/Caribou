@@ -187,10 +187,11 @@ def get_events(request):
 	request_data = (json.loads(request.body))[0]
 	page_size = request_data['page_size']
 	page_num  = request_data['page_num']
+	eating_club_filter = request_data['eating_club_filter']
 
 	offset = page_num*page_size
 
-	dataq = PersonalEvent.objects.all().order_by('pk')[offset:(offset+page_size)]
+	dataq = PersonalEvent.objects.all().order_by('pk').filter(eating_club__in=eating_club_filter)[offset:(offset+page_size)]
 	data_json = serializers.serialize('json', dataq)
 
 	data_json = append_data_to_events(data_json, netid)

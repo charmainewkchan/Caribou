@@ -34,6 +34,10 @@
     color: #4D5B5A;
 }
 
+.btn-outline-primary{
+  border-color: #14B7A4;
+}
+
 .btn-danger {
   background-color: #FFCC4C;
   border-color: #FFCC4C;
