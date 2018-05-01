@@ -167,6 +167,7 @@ def get_events_for_user(request, netid):
 	return HttpResponse(data_json, content_type='application/json')
 
 #------------------------------------------------------------------------------#
+@csrf_exempt
 @casauth
 def get_events(request):
 	#netid = request.session['netid']
@@ -175,7 +176,7 @@ def get_events(request):
 	request_data = json.loads(request.body)[0]
 	page_size = request_data['page_size']
 	page_num  = request_data['page_num']
-	
+
 	offset = page_num*page_size
 
 	dataq = PersonalEvent.objects.all().order_by('pk')[offset:(offset+page_size)]
