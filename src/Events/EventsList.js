@@ -34,7 +34,7 @@ class EventsPanel extends Component {
       .then(res => {
           //console.log(res);
           //console.log(res.data);
-          
+
           this.props.updateData()
         })
       .catch(err => alert(err));
@@ -53,11 +53,13 @@ class EventsPanel extends Component {
     var data = [{
       event: event_id,
     }]
-    alert(JSON.stringify(data));
+    //alert(JSON.stringify(data));
+    if (window.confirm('Are you sure you want to leave this event?')) {
 
     axios.post("https://bixr.herokuapp.com/api/unjoin_event/",  data)
     .then(res => this.props.updateData())
     .catch(err => alert(err));
+  }
 
   }
 
