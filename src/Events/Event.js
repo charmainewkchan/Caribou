@@ -63,7 +63,7 @@ class Event extends Component {
 			 			<div className="col">
 				  		<h2>{this.props.title}</h2>
 				  	</div>
-				  	{!!this.props.isOwner && 
+				  	{!!this.props.isOwner &&
 				  		<div className="col">
 				  		  {this.owner_buttons()}
 				  	 </div>

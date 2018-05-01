@@ -54,8 +54,7 @@ class EventCal extends Component {
           step={60}
           showMultiDayTimes
           events={this.state.events}
-          defaultDate={new Date()}
-        />
+          defaultDate={new Date(2018, 4, 27)}        />
       )
     }
 }
