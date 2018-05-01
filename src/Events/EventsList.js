@@ -5,6 +5,8 @@ import eating_club_map from './eating_club_map.json';
 import axios from 'axios';
 import EventCard from './EventCard';
 
+import Pagination from '../Pagination';
+
 import '../App.css';
 
 class EventsPanel extends Component {
@@ -89,6 +91,7 @@ class EventsPanel extends Component {
                 </div>);
               },this)
             }
+          <Pagination changePage={this.props.changePage} currentPage={this.props.currentPage} numPages={0}/>
           </div>
           )
     }

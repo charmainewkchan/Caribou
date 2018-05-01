@@ -36,7 +36,9 @@ class Events extends Component {
       sort: {
         ascending: true,
         field: "date"
-      }
+      },
+      currentPage: 0,
+      numPages:0
   	}
     this.onClubFilterChange = this.onClubFilterChange.bind(this);
 
@@ -48,12 +50,19 @@ class Events extends Component {
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.eventsPanel = this.eventsPanel.bind(this);
     this.setEventPage = this.setEventPage.bind(this);
+    this.changePage = this.changePage.bind(this);
   }
 
   componentDidMount() {
     this.updateData();
   }
 
+
+  changePage(pageNum){
+    this.setState({
+      currentPage: pageNum
+    }, this.updateData());
+  }
 
   onPostEvent(event){
     console.log(event)
@@ -137,7 +146,11 @@ class Events extends Component {
   updateData(){
     // reload the data
     const url = "https://bixr.herokuapp.com/api/get_events";
-    axios.get(url).then(res => {
+    var data = {
+      page_num: this.state.pageNum,
+      page_size: 10
+    }
+    axios.post(url, data).then(res => {
       console.log(res.data);
       this.setState({
         events_data: res.data,
@@ -199,7 +212,7 @@ class Events extends Component {
 	        <div className="col m-scene">
              <Switch>
                 <Route path='/events/manage/:event_id(\d+)?' render={({ match }) => <ManageEvent event_id={match.params.event_id} onPostEvent={this.onPostEvent}/>}/>
-                <Route exact path='/events/(list/)?' component={()=><EventsList events={this.state.events} updateData={this.updateData}/>}/>
+                <Route exact path='/events/(list/)?' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.events} updateData={this.updateData}/>}/>
                 <Route exact path='/events/:event_id(\d+)/' component={EventPage}/>
               </Switch>
 	         </div>
