@@ -97,7 +97,7 @@ class EditableProfile extends Component {
     "res_college":rescollegeAbrReverse[this.state.res_college],
     "eating_club": eatingClubAbrReverse[this.props.eating_club]}]
 
-    console.log(event)
+    console.log(data)
     axios.post('https://bixr.herokuapp.com/api/post_user', data)
     .then(res => {
         console.log(res);
@@ -106,7 +106,6 @@ class EditableProfile extends Component {
     .catch(err => alert(err));
 
     this.props.toggleEditMode();
-    this.props.updateData();
 
   }
 
