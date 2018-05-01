@@ -48,7 +48,6 @@ var rescollegeAbr = {
   'WI' : "Wilson",
   'WH' : "Whitman",
   'FO' : "Forbes"
-
 }
 
 var rescollegeAbrReverse = {

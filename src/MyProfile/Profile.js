@@ -7,6 +7,31 @@ import axios from 'axios';
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
+var eatingClubAbr = {
+  "CL":"Cloister",
+  "TO":"Tower",
+  "NN":"None",
+  "CO":"Colonial",
+  "CN":"Cannon",
+  "CA":"Cap",
+  "IV":"Ivy",
+  "TI":"TigerInn",
+  "QD":"Quad",
+  "TE":"Terrace",
+  "CT":"Cottage",
+  "CH":"Charter"
+}
+
+var rescollegeAbr = {
+  'NN' : "None",
+  'MA' : "Mathey",
+  'RO' : "Rocky",
+  'BU' : "Butler",
+  'WI' : "Wilson",
+  'WH' : "Whitman",
+  'FO' : "Forbes"
+}
+
 class Profile extends Component {
   constructor(props){
     super(props);
@@ -65,8 +90,8 @@ class Profile extends Component {
         </div>
         <h3>Name: </h3><p>{this.state.profile_info.first_name} {this.state.profile_info.last_name}</p>
         <h3>Year: </h3><p>{this.state.profile_info.year}</p>
-        <h3>College: </h3><p>{this.state.profile_info.res_college}</p>
-        <h3>Eating Club: </h3><p>{this.state.profile_info.eating_club}</p>
+        <h3>College: </h3><p>{rescollegeAbr[this.state.profile_info.res_college]}</p>
+        <h3>Eating Club: </h3><p>{eatingClubAbr[this.state.profile_info.eating_club]}</p>
       </div>
     );
   } else {
