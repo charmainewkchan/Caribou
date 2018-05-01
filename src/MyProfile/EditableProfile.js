@@ -13,7 +13,7 @@ const rescollege = ["Butler", "Wilson", "Mathey", "Rocky", "Whitman","Forbes"]
 var eatingClubAbr = {
   "CL":"Cloister",
   "TO":"Tower",
-  "NN":"none",
+  "NN":"None",
   "CO":"Colonial",
   "CN":"Cannon",
   "CA":"Cap",
@@ -26,22 +26,22 @@ var eatingClubAbr = {
 }
 
 var eatingClubAbrReverse = {
-  "Cloister":"CL",
-  "Tower":"TO",
-  "none":"NN",
-  "Colonial":"CO",
-  "Cannon":"CN",
-  "Cap":"CA",
-  "Ivy":"IV",
-  "TigerInn":"TI",
-  "Quad":"QD",
-  "Terrace":"TE",
-  "Cottage":"CT",
-  "Charter":"CH"
+  "Cloister": 'CL',
+  "Tower":'TO',
+  "None":'NN',
+  "Colonial":'CO',
+  "Cannon":'CN',
+  "Cap":'CA',
+  "Ivy":'IV',
+  "TigerInn":'TI',
+  "Quad":'QD',
+  "Terrace":'TE',
+  "Cottage":'CT',
+  "Charter":'CH'
 }
 
 var rescollegeAbr = {
-  'NN' : "none",
+  'NN' : "None",
   'MA' : "Mathey",
   'RO' : "Rocky",
   'BU' : "Butler",
@@ -52,7 +52,7 @@ var rescollegeAbr = {
 }
 
 var rescollegeAbrReverse = {
-  "none" : 'NN',
+  "None" : 'NN',
 	"Mathey" : 'MA',
 	"Rocky" : 'RO',
 	"Butler" : 'BU',
@@ -95,7 +95,8 @@ class EditableProfile extends Component {
     "last_name": this.state.last_name,
     "year": this.state.year,
     "res_college":rescollegeAbrReverse[this.state.res_college],
-    "eating_club": eatingClubAbrReverse[this.props.eating_club]}]
+    "eating_club": eatingClubAbrReverse[this.state.eating_club]}]
+
 
     console.log(data)
     axios.post('https://bixr.herokuapp.com/api/post_user', data)
