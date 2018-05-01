@@ -103,7 +103,7 @@ class EditableProfile extends Component {
     }
     else if (!this.state.eating_club) {
       alert('Please enter your eating club.')
-    }
+    } else {
 
     //* post data to url *//
     var data = [{
@@ -124,7 +124,7 @@ class EditableProfile extends Component {
 
     this.props.updateData();
     this.props.toggleEditMode();
-
+    }
   }
 
   componentDidMount(){
