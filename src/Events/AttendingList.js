@@ -8,7 +8,7 @@ class AttendingList extends Component {
     super(props)
 
     this.state={
-      eventsHosting: []
+      eventsAttending: []
     };
 
     this.updateData = this.updateData.bind(this);
@@ -34,7 +34,7 @@ class AttendingList extends Component {
 
   render() {
     return (
-       <EventsCompactList events={this.state.eventsHosting}/>
+       <EventsCompactList events={this.state.eventsAttending}/>
     );
   }
 }

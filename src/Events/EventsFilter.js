@@ -32,9 +32,6 @@ class EventsFilter extends Component {
   }
 
   handleChange(event) {
-    this.props.onClubFilterChange(event);
-    console.log(event.target.name);
-
     this.setState({
         [event.target.name]: event.target.checked
     });
@@ -59,7 +56,7 @@ class EventsFilter extends Component {
     
                 Object.keys(this.state).map(function(key, index) {
                   return (
-                    <div className="form-check col-6">
+                    <div className="form-check col-6" key={index}>
                       <input className="form-check-input d-inline" type="checkbox" checked={this.state[key]} name={key} id={key} value={this.state[key]} onChange={this.handleChange}/>
                        <label className="form-check-label d-inline" htmlFor={key}>
                           {eating_club_map[key]}

@@ -70,7 +70,7 @@ class EditableProfile extends Component {
       first_name: this.props.first_name,
       last_name: this.props.last_name,
       year: this.props.year,
-      res_college:rescollegeAbr[this.props.res_college],
+      res_college: rescollegeAbr[this.props.res_college],
       eating_club: eatingClubAbr[this.props.eating_club],
       edit_mode:this.props.edit_mode,
       toggleEditMode: this.props.toggleEditMode,
@@ -104,26 +104,25 @@ class EditableProfile extends Component {
     else if (!this.state.eating_club) {
       alert('Please enter your eating club.')
     } else {
+      //* post data to url *//
+      var data = [{
+      "first_name": this.state.first_name,
+      "last_name": this.state.last_name,
+      "year": this.state.year,
+      "res_college":rescollegeAbrReverse[this.state.res_college],
+      "eating_club": eatingClubAbrReverse[this.state.eating_club]}]
 
-    //* post data to url *//
-    var data = [{
-    "first_name": this.state.first_name,
-    "last_name": this.state.last_name,
-    "year": this.state.year,
-    "res_college":rescollegeAbrReverse[this.state.res_college],
-    "eating_club": eatingClubAbrReverse[this.state.eating_club]}]
 
+      console.log(data)
+      axios.post('https://bixr.herokuapp.com/api/post_user', data)
+      .then(res => {
+          console.log(res);
+          console.log(res.data);
+        })
+      .catch(err => alert(err));
 
-    console.log(data)
-    axios.post('https://bixr.herokuapp.com/api/post_user', data)
-    .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-    .catch(err => alert(err));
-
-    this.props.updateData();
-    this.props.toggleEditMode();
+      this.props.updateData();
+      this.props.toggleEditMode();
     }
   }
 

@@ -19,11 +19,11 @@ class Pagination extends Component {
   render() {
     return (
       <div>
-        <button onClick={()=> this.props.changePage(0) }>first</button>
-        <button onClick={()=> this.props.changePage(this.props.currentPage-1) }>previous</button>
-        <p>Page {this.props.currentPage} of {this.props.numPages}</p>
-        <button onClick={()=> this.props.changePage(this.props.currentPage+1) }>next</button>
-        <button onClick={()=> this.props.changePage(this.props.numPages-1) }>last</button>
+        <button className="d-inline" onClick={()=> this.props.changePage(0) }>first</button>
+        <button  className="d-inline" onClick={()=> this.props.changePage(this.props.currentPage-1) }>previous</button>
+        <p  className="d-inline" >Page {this.props.currentPage} of {this.props.numPages}</p>
+        <button  className="d-inline" onClick={()=> this.props.changePage(this.props.currentPage+1) }>next</button>
+        <button  className="d-inline" onClick={()=> this.props.changePage(this.props.numPages-1) }>last</button>
       </div>
     );
   }

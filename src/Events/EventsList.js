@@ -21,6 +21,10 @@ class EventsPanel extends Component {
     this.onPostEvent = this.onPostEvent.bind(this);
   }
 
+  componentDidMount() {
+    console.log("events list mounted");
+  }
+
   onJoinEvent(event_id) {
     var data = [{
       event: event_id,
@@ -80,6 +84,7 @@ class EventsPanel extends Component {
                               description={event.fields.description}
                               location={event.fields.location}
                               pk={event.pk}
+                              key={event.pk}
                               start={event.fields.start}
                               end={event.fields.end}
                               date={event.fields.date}

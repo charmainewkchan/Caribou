@@ -30,9 +30,11 @@ class EventsCompactList extends Component {
                               loc={event.fields.location}
                               pk={event.pk}
                               start={event.fields.start}
+                              key={event.pk}
                               location={this.props.location}
                               setEventPage={this.props.setEventPage}
                               date={event.fields.date}/>);
+
               },this)
             )
         	 

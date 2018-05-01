@@ -31,7 +31,6 @@ class Events extends Component {
   			clubs: filter_data.clubs
   		},
   		events: [],
-      events_data: [],
       showNewCard: false,
       sort: {
         ascending: true,
@@ -39,7 +38,7 @@ class Events extends Component {
       },
       currentPage: 0,
       numPages:0,
-      eating_club_filter: []
+      eating_club_filter: Object.keys(eating_club_map)
   	}
     this.onClubFilterChange = this.onClubFilterChange.bind(this);
 
@@ -83,9 +82,10 @@ class Events extends Component {
   }
 
   applyFilter(filter){
-      var filterAsList = Object.values(filter).filter(val=>val==true);
+      var filterAsList = Object.keys(filter).filter(val=>filter[val]==true);
+
       this.setState({
-        eating_club_filter: filterAsList
+        eating_club_filter:  (filterAsList.length == 0 ? Object.keys(eating_club_map) : filterAsList)
       }, ()=>this.updateData())
   }
 
@@ -135,6 +135,8 @@ class Events extends Component {
     // reload the data
     const url = "https://bixr.herokuapp.com/api/get_events";
 
+
+
     var data = [{
       page_num: this.state.currentPage,
       page_size: 10,
@@ -145,7 +147,7 @@ class Events extends Component {
     axios.post(url, data).then(res => {
       console.log(res.data);
       this.setState({
-        events_data: res.data,
+        events: res.data,
       });
     });
   }
