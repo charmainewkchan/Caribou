@@ -71,7 +71,7 @@ class EventsPanel extends Component {
 
   render() {
     return (
-           <div className="container-fluid events-list m-scene scene_element scene-element--fadein">
+           <div className="container-fluid events-list m-scene scene_element  anim-fadeinup">
             {this.props.events.map(function(event){
               return (
 

@@ -180,7 +180,7 @@ class Events extends Component {
             <div className="row events-wrapper">
                 <h2>Attending</h2>
                 <hr/>
-                <AttendingList/>
+                <AttendingList setEventPage={this.setEventPage}/>
 
             </div>
 
@@ -206,7 +206,7 @@ class Events extends Component {
              <Switch>
                 <Route path='/events/manage/:event_id(\d+)?' render={({ match }) => <ManageEvent event_id={match.params.event_id} onPostEvent={this.onPostEvent}/>}/>
                 <Route exact path='/events/(list/)?' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.events} updateData={this.updateData}/>}/>
-                <Route exact path='/events/:event_id(\d+)/' component={EventPage}/>
+                <Route exact path='/events/:event_id(\d+)/' component={()=><EventPage />}/>
               </Switch>
 	         </div>
         </div>

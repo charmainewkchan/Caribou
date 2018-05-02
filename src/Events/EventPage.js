@@ -77,7 +77,7 @@ class EventPage extends Component {
 
   render() {
     return(
-    <div className="event-page">
+    <div className="event-page anim-fadeinright">
         <div className="event-page-header">
           <Link to="/events/">All events</Link>
           <h3>{moment(this.state.date).format("ddd, hA") }</h3>

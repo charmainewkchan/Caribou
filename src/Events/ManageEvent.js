@@ -136,7 +136,7 @@ class ManageEvent extends Component {
 
   render() {
     return (
-      <div className="card Events-event">
+      <div className="card Events-event anim-fadeinright">
        <div className="card-header event-header">
           <input className = "form-control" type = "text" id = "title" placeholder = "Event Name" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
           <p>{this.state.eating_club} &bull; </p>

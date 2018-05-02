@@ -375,6 +375,7 @@ body {
 .event-page{
   background: white;
   border-radius: 5px;
+  border: 1px solid #ced6d9;
 }
 
 .event-page-header {
@@ -580,10 +581,10 @@ body {
 }
 
 .Home h2 {
-    font-size: 4em;
+    font-size: 2.5em;
+    padding: 1em;
     font-weight: bold;
     color: white;
-      display:none;
     font-family: 'Fjalla One', sans-serif;
 }
 
@@ -631,6 +632,24 @@ body {
 }
 
 
+.events-wrapper {
+  background: white;
+  border-radius: 5px;
+  border: 1px solid #ced6d9;
+  height: auto;
+  margin-bottom: 1em;
+  padding: .5em;
+}
+
+.events-wrapper h2{
+    font-size: 1em;
+  text-align: left;
+  font-weight:bold;
+  color: #333;
+  font-family: roboto;
+}
+
+
 /*
  * Keyframes
  */
@@ -645,6 +664,28 @@ body {
   }
 }
 
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
 @keyframes fadeInUp {
   0% {
     opacity: 0;
@@ -657,22 +698,30 @@ body {
   }
 }
 
-.events-wrapper {
-  background: white;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  height: auto;
-  margin-bottom: 1em;
-  padding: .5em;
+@-moz-keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-.events-wrapper h2{
-    font-size: 1em;
-  text-align: left;
-  font-weight:bold;
-  color: #333;
-  font-family: roboto;
+@-webkit-keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
 }
+
 
 @keyframes fadeInRight {
   0% {
@@ -686,6 +735,29 @@ body {
   }
 }
 
+@-moz-keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@-webkit-keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
 /*
  * CSS Page Transitions
  * Don't forget to add vendor prefixes!
@@ -695,21 +767,39 @@ body {
     transition-timing-function: ease-in;
     animation-fill-mode: both;
 
+    -moz-animation-duration: 0.25s;
+    transition-timing-function: ease-in;
+    -moz-animation-fill-mode: both;
 }
   /** Basic styles for an animated element */
   
 
   /** An element that fades in */
-.scene_element--fadein {
+.anim-fadein {
     animation-name: fadeIn;
+    animation-duration: 2s;
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-duration: 2s;
+    -moz-animation-name: fadeIn;
+    -moz-animation-duration: 2s;
   }
 
   /** An element that fades in and slides up */
-.scene_element--fadeinup {
-    animation-name: fadeInUp;
+.anim-fadeinright {
+    animation-name: fadeInRight;
+    -moz-animation-name: fadeInRight;
+    -moz-animation-duration: 0.25s;
+    -webkit-animation-name: fadeInRight;
+    -webkit-animation-duration: 0.25s;
+    transition-timing-function: ease-out;
   }
 
   /** An element that fades in and slides from the right */
-.scene_element--fadeinright {
-    animation-name: fadeInRight;
+.anim-fadeinup {
+    animation-name: fadeInUp;
+    -moz-animation-name: fadeInUp;
+    -moz-animation-duration: 0.25s;
+    -webkit-animation-name: fadeInUp;
+    -webkit-animation-duration: 0.25s;
+    transition-timing-function: ease-out;
   }

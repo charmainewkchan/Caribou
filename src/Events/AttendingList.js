@@ -34,7 +34,7 @@ class AttendingList extends Component {
 
   render() {
     return (
-       <EventsCompactList events={this.state.eventsAttending}/>
+       <EventsCompactList setEventPage={this.props.setEventPage} events={this.state.eventsAttending}/>
     );
   }
 }

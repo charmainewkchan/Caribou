@@ -16,8 +16,9 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-      	<h2>Welcome to Bixr!</h2>
-        <p>Here to mix up the people you meet.</p>
+        <div className="anim-fadein">
+      	  <h2>Here to mix up the people you meet.</h2>
+        </div>
         <div className="Home container">
           <div className = "homeButton row">
 
