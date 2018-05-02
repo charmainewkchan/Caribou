@@ -195,6 +195,7 @@ def get_events(request):
 
 	dataq = PersonalEvent.objects.all().order_by('pk').filter(eating_club__in=eating_club_filter)
 	num_pages = len(dataq) / page_size
+	offset = page_size * page_num
 	dataq = dataq[offset:(offset+page_size)]
 	data_json = serializers.serialize('json', dataq)
 
