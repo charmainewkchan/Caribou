@@ -181,6 +181,7 @@ class ManageEvent extends Component {
               <div className = "row Events-addEvent">
                   <label for = "date" className = "btn"> Date: </label>
                    <SingleDatePicker
+                   numberOfMonths={1}
                    date={this.state.date}
                    name = "date"
                    placeholder= "Select"
@@ -218,7 +219,7 @@ class ManageEvent extends Component {
                 <input className = "form-control" type = "text" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = "Location"/>
              </div>
 
-             <div className = "row">
+             <div className = "row Events-addEvent">
               <div className = "col">
                 <button className="btn btn-success" style ={{width:150}} onClick = {this.handleCreateEvent}>Save Changes</button>
               </div>
