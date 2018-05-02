@@ -47,7 +47,7 @@ def joined_events_list(netid):
 def append_data_to_events(data_json, netid):
 	events_joined = joined_events_list(netid)
 
-	data = json.loads(data_json)
+	data = json.loads(data_json) #json string to dict
 	# manipulate data to add owner field, 0 is not owner, 1 is owner
 	for e in data: # e is the outer dictionary for the event
 		userpk = int(e["fields"]["author"]) # get user pkid
@@ -57,10 +57,13 @@ def append_data_to_events(data_json, netid):
 		e["isAttending"] = 1 if e["pk"] in events_joined else 0
 		e["author"] = author
 
+	return json.dumps(data) # dict to json string
 
-	return json.dumps(data)
-
-	return HttpResponse(datxa_json, content_type='application/json')
+def append_num_pages(data_json, page_size):
+	data = json.loads(data_json)
+	num_pages = ceil(len(data) / page_size)
+	data.append({'num_pages': num_pages})
+	return json.dumps(data) 
 
 # sends an email with given specs
 def notify(subject, message, tolist):
@@ -189,12 +192,14 @@ def get_events(request):
 	page_num  = request_data['page_num']
 	eating_club_filter = request_data['eating_club_filter']
 
-	offset = page_num*page_size
 
-	dataq = PersonalEvent.objects.all().order_by('pk').filter(eating_club__in=eating_club_filter)[offset:(offset+page_size)]
+	dataq = PersonalEvent.objects.all().order_by('pk').filter(eating_club__in=eating_club_filter)
+	num_pages = len(dataq) / page_size
+	dataq = dataq[offset:(offset+page_size)]
 	data_json = serializers.serialize('json', dataq)
 
 	data_json = append_data_to_events(data_json, netid)
+	data_json = append_num_pages(data_json, page_size)
 
 	return HttpResponse(data_json, content_type='application/json')
 
