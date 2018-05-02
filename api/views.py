@@ -15,6 +15,8 @@ import json
 from . import CASClient
 from api.decorators import casauth
 
+import math
+
 WEBSITE = "https://bixr.herokuapp.com/events/"
 
 @casauth
@@ -61,7 +63,7 @@ def append_data_to_events(data_json, netid):
 
 def append_num_pages(data_json, page_size):
 	data = json.loads(data_json)
-	num_pages = ceil(len(data) / page_size)
+	num_pages = math.ceil(len(data) / page_size)
 	data.append({'num_pages': num_pages})
 	return json.dumps(data) 
 
