@@ -100,7 +100,7 @@ class ManageEvent extends Component {
           });
         });
 
-        const url2 = "https://bixer.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
+        const url2 = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
         axios.get(url2).then(res => {
           console.log(res.data);
           this.setState({
@@ -109,7 +109,7 @@ class ManageEvent extends Component {
         });
 
       } else {
-        const url2 = "https://bixer.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
+        const url2 = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
         axios.get(url2).then(res => {
           console.log(res.data);
           this.setState({
