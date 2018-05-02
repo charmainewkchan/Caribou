@@ -175,16 +175,11 @@ class ManageEvent extends Component {
           <p>{this.state.eating_club} &bull; </p>
        </div>
 
-        <div className="card-body event-body">
+        <div className=" col-12 card-body event-body">
              <textarea className="form-control" type="text" id="description" placeholder = "Description" name = "eventDes" value= {this.state.eventDes} onChange={this.handleChange}/>
 
-             <div className = "container">
-              <div className = "row">
-                <div className = "col">
+              <div className = "row Events-addEvent">
                   <label for = "date" className = "btn"> Date: </label>
-                </div>
-
-                <div className = "col">
                    <SingleDatePicker
                    date={this.state.date}
                    name = "date"
@@ -194,42 +189,29 @@ class ManageEvent extends Component {
                    focused={this.state.focused} // PropTypes.bool
                    onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
                    />
-                </div>
 
               </div>
-             </div>
 
-             <div className = "container">
-              <div className = "row">
-                <div className = "col">
+              <div className = "row Events-addEvent">
+                <div className = "col-6">
+                  <div className = "row">
                   <label for = "start" className = "btn">Start Time:</label>
+                  <Dropdown options={options} label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" />
+                  </div>
                 </div>
 
-                <div className = "col">
-                    <Dropdown options={options} label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" />
-                </div>
-
-                <div className = "col">
+                <div className = "col-6">
+                  <div className = "row">
                   <label for = "end" className = "col btn"> End Time:</label>
+                  <Dropdown options={options} label = "end" onChange={this._onSelectEnd} value={this.state.end} placeholder="00:00" />
+                  </div>
                 </div>
-
-                <div className = "col">
-                    <Dropdown options={options} label = "end" onChange={this._onSelectEnd} value={this.state.end} placeholder="00:00" />
-                </div>
-
-              </div>
              </div>
 
-             <div className= "container">
-              <div className = "row">
-                <div className = "col">
-                  <label className = "btn">{this.state.attendance+"/"}</label>
-                </div>
-                <div className = "col">
-                  <input className = "form-control" type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = "Capacity"/>
-                </div>
+              <div className = "row Events-addEvent">
+                  <label className = "btn">Capacity: </label>
+                  <input type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = "Capacity"/>
               </div>
-            </div>
 
             <div className = "container">
              <div className = "row">

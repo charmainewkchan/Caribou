@@ -10,7 +10,7 @@
   text-align: center;
 }
 
-.navbar-custom { 
+.navbar-custom {
   background: #FF5B32;
  }
 
@@ -60,7 +60,7 @@
   border-bottom: 1px solid #00374D;
 }
 
-.btn-success { 
+.btn-success {
  }
 .navbar-nav > li{
   margin-left:30px;
@@ -193,7 +193,7 @@ body {
 
 
 @media (min-width: 1200px) {
-    
+
 
 }
 
@@ -502,7 +502,7 @@ body {
 }
 
 .event-header {
-  
+
 }
 
 .event-header h2 {
@@ -562,7 +562,7 @@ body {
 }
 
 .leave-button {
-  margin: .5em; 
+  margin: .5em;
     border: 0;
   padding: 0;
   text-align: left;
@@ -631,7 +631,7 @@ body {
 
 .event-header:hover{
   cursor: pointer;
-} 
+}
 
 /* For mobile */
 @media screen and (max-width: 540px) {
@@ -781,7 +781,7 @@ body {
     -moz-animation-fill-mode: both;
 }
   /** Basic styles for an animated element */
-  
+
 
   /** An element that fades in */
 .anim-fadein {
