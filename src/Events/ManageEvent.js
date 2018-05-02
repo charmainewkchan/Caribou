@@ -38,6 +38,21 @@ const options = [
   '24:00'
 ]
 
+var eatingClubAbr = {
+  "CL":"Cloister",
+  "TO":"Tower",
+  "NN":"None",
+  "CO":"Colonial",
+  "CN":"Cannon",
+  "CA":"Cap",
+  "IV":"Ivy",
+  "TI":"TigerInn",
+  "QD":"Quad",
+  "TE":"Terrace",
+  "CT":"Cottage",
+  "CH":"Charter"
+}
+
 class ManageEvent extends Component {
   constructor(props){
     super(props)
@@ -46,7 +61,7 @@ class ManageEvent extends Component {
       eventName: '',
       eventDes: '',
       eventLoc: '',
-      eating_club: 'NN',
+      eating_club: '',
       start:"00:00",
       end: "00:00",
       date:moment('2017-01-01'),
@@ -84,6 +99,24 @@ class ManageEvent extends Component {
               author:res.data[0].author
           });
         });
+
+        const url2 = "https://bixer.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
+        axios.get(url2).then(res => {
+          console.log(res.data);
+          this.setState({
+              eating_club: eatingClubAbr[res.data[0].fields.eating_club]
+          });
+        });
+
+      } else {
+        const url2 = "https://bixer.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
+        axios.get(url2).then(res => {
+          console.log(res.data);
+          this.setState({
+              eating_club: eatingClubAbr[res.data[0].fields.eating_club]
+          });
+        });
+
       }
   }
 
