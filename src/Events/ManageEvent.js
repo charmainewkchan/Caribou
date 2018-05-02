@@ -64,7 +64,7 @@ class ManageEvent extends Component {
       eating_club: '',
       start:"00:00",
       end: "00:00",
-      date:moment('2017-01-01'),
+      date:"",
       eventCap:0,
       attendance: 0,
       pk: ''
@@ -182,6 +182,7 @@ class ManageEvent extends Component {
                   <label for = "date" className = "btn"> Date: </label>
                    <SingleDatePicker
                    numberOfMonths={1}
+                   initialDate={null}
                    date={this.state.date}
                    name = "date"
                    placeholder= "Select"
