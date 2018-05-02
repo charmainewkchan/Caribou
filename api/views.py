@@ -61,9 +61,8 @@ def append_data_to_events(data_json, netid):
 
 	return json.dumps(data) # dict to json string
 
-def append_num_pages(data_json, page_size):
+def append_num_pages(data_json, num_pages):
 	data = json.loads(data_json)
-	num_pages = math.ceil(len(data) / page_size)
 	data.append({'num_pages': num_pages})
 	return json.dumps(data) 
 
@@ -196,13 +195,13 @@ def get_events(request):
 
 
 	dataq = PersonalEvent.objects.all().order_by('pk').filter(eating_club__in=eating_club_filter)
-	num_pages = len(dataq) / page_size
+	num_pages = math.ceil(len(dataq) / page_size)
 	offset = page_size * page_num
 	dataq = dataq[offset:(offset+page_size)]
 	data_json = serializers.serialize('json', dataq)
 
 	data_json = append_data_to_events(data_json, netid)
-	data_json = append_num_pages(data_json, page_size)
+	data_json = append_num_pages(data_json, num_pages)
 
 	return HttpResponse(data_json, content_type='application/json')
 

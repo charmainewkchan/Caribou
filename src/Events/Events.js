@@ -149,8 +149,8 @@ class Events extends Component {
     axios.post(url, data).then(res => {
       console.log(res.data);
       this.setState({
-        numPages: res.data[0],
-        events: res.data.slice(1)
+        numPages: res.data.slice(-1)[0]['num_pages'],
+        events: res.data.slice(0,-1)
       });
     });
   }
