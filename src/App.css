@@ -22,10 +22,19 @@
 }
 
 
+.btn {
+  border-radius: 20px;
+}
+
 .btn-primary {
   background-color: #14B7A4;
   border-color: #14B7A4 ;
   border-bottom: 1px solid #049784;
+  border-radius: 20px;
+}
+
+.btn-outline-light{
+  border-radius: 20px;
 }
 
 .btn-primary:disabled{

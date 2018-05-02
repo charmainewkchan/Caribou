@@ -23,12 +23,12 @@ class Home extends Component {
           <div className = "homeButton row">
 
         		  <div className="col">
-                 <Link to='/events' className = "btn btn-primary">Student Events</Link>
+                 <Link to='/events' className = "btn btn-outline-light">Student Events</Link>
         	     </div>
                <div className="col-2" >
                </div>
                <div className="col">
-                  <a href="#" className = "btn btn-primary">Official Club Events</a>
+                  <a href="#" className = "btn btn-outline-light">Official Club Events</a>
          	     </div>
 
           </div>
