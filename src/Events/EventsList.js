@@ -7,6 +7,8 @@ import EventCard from './EventCard';
 
 import Pagination from '../Pagination';
 
+import {withRouter } from 'react-router-dom';
+
 import '../App.css';
 
 class EventsPanel extends Component {
@@ -31,7 +33,15 @@ class EventsPanel extends Component {
     }]
     axios.post("https://bixr.herokuapp.com/api/join_event/",  data)
     .then(res => this.props.updateData())
-    .catch(err => alert(err));
+    .catch(err => {
+          if(err.response.status == 401) {
+            // redirect
+            if(window.confirm("You must complete your profile before joining an event. Press OK to go to Profile page.")) {
+              this.props.history.push('/myprofile/');
+            }
+          }
+    });
+
   }
 
     onPostEvent(event) {
@@ -43,7 +53,14 @@ class EventsPanel extends Component {
 
           this.props.updateData()
         })
-      .catch(err => alert(err));
+        .catch(err => {
+              if(err.response.status == 401) {
+                // redirect
+                if(window.confirm("You must complete your profile before joining an event. Press OK to go to Profile page.")) {
+                  this.props.history.push('/myprofile/');
+                }
+              }
+        });
     }
 
     onRemoveEvent(event, event_id) {
@@ -104,4 +121,4 @@ class EventsPanel extends Component {
     }
 }
 
-export default EventsPanel;
+export default withRouter(EventsPanel);
