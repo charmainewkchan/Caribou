@@ -98,7 +98,7 @@ class EventsPanel extends Component {
                 </div>);
               },this)
             }
-          <Pagination changePage={this.props.changePage} currentPage={this.props.currentPage} numPages={0}/>
+          <Pagination changePage={this.props.changePage} currentPage={this.props.currentPage} numPages={this.props.numPages}/>
           </div>
           )
     }

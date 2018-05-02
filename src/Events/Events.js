@@ -37,7 +37,7 @@ class Events extends Component {
         field: "date"
       },
       currentPage: 0,
-      numPages:0,
+      numPages:2,
       eating_club_filter: Object.keys(eating_club_map)
   	}
     this.onClubFilterChange = this.onClubFilterChange.bind(this);
@@ -62,9 +62,11 @@ class Events extends Component {
 
 
   changePage(pageNum){
-    this.setState({
-      currentPage: pageNum
-    }, ()=>{this.updateData()});
+    if (pageNum != this.state.currentPage){
+      this.setState({
+        currentPage: pageNum
+      }, ()=>{this.updateData()});
+    }
   }
 
   onPostEvent(event){

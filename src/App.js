@@ -20,7 +20,14 @@ import faBars from '@fortawesome/fontawesome-free-solid/faBars'
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus'
 import faCaretDown from '@fortawesome/fontawesome-free-solid/faCaretDown'
 
-fontawesome.library.add(faUser, faPencilAlt, faTrashAlt, faAddressBook, faCog, faCalendarAlt, faBars,faCaretDown,faPlus)
+import faAngleRight from '@fortawesome/fontawesome-free-solid/faAngleRight'
+import faAngleDoubleRight from '@fortawesome/fontawesome-free-solid/faAngleDoubleRight'
+import faAngleLeft from '@fortawesome/fontawesome-free-solid/faAngleLeft'
+import faAngleDoubleLeft from '@fortawesome/fontawesome-free-solid/faAngleDoubleLeft'
+
+fontawesome.library.add(faAngleDoubleLeft, faAngleLeft, faAngleDoubleRight, faAngleRight, 
+						faUser, faPencilAlt, faTrashAlt, faAddressBook, faCog, faCalendarAlt, 
+						faBars,faCaretDown,faPlus)
 
 class App extends Component {
   render() {
