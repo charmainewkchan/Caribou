@@ -51,6 +51,11 @@
   border-radius: 20px;
 }
 
+.btn-primary:hover{
+  background-color: #89D6CD;
+    border-color: #14B7A4 ;
+}
+
 .btn-outline-light{
   border-radius: 20px;
 }
@@ -76,6 +81,10 @@
   background-color: #20576D;
   border-color: #20576D;
   border-bottom: 1px solid #00374D;
+}
+
+.btn-secondary:hover {
+  background-color: #407A91;
 }
 
 .btn-success {
@@ -305,6 +314,32 @@ body {
   margin: 0;
   text-align: left;
   line-height: 1.1em
+}
+.events-content {
+  padding: 1em;
+}
+
+.events-date{
+  font-family: 'roboto';
+  padding:0;
+  margin:0;
+  padding-top:1em;
+  background: #FFFCFA;
+  border-right: 1px solid #ced6d9;
+}
+.events-date h3{
+  font-size:1em;
+  padding:0;
+  margin:0;
+  font-family:  'Merriweather';
+  text-transform: uppercase;
+}
+.events-date h4{
+  font-size:2.2em;
+  padding: 0;
+  margin: 0;
+  color: #FF5B32;
+  font-family:  'Merriweather';
 }
 
 .event-compact-list {
@@ -546,10 +581,9 @@ body {
 
 .Events-event {
   height: 100%;
-  padding: 1em;
   width: 100%;
-  border: 1px solid #ddd;
 }
+
 
 .Events-descriptionBox {
   font-size: 14px;
@@ -572,6 +606,7 @@ body {
   text-align: left;
 }
 
+
 .btn-host {
   margin-top: 1em;
   width: 3em;
@@ -587,24 +622,24 @@ body {
 }
 
 .event-body {
-    font-size: .8em;
-    padding: .5em;
+    font-size: .9em;
     margin: 0;
-    margin-top: 1em;
-    color: #555;
-    font-family:;
+    margin-top: .5em;
+    padding: 0;
+    margin-bottom: .5em;
+    color: black;
     height: auto;
     text-align: left;
-    font-family: Roboto;
+    font-family: roboto;
 }
 .event-body p {
   padding: 0;
   margin: 0;
+  color: #555;
 }
 
 .event-footer{
   padding: 0;
-  background: white;
   text-align: left;
 }
 
@@ -704,6 +739,13 @@ body {
   height: auto;
   margin-bottom: 1em;
   padding: .5em;
+}
+
+.event-wrapper {
+  background: white;
+  border-radius: 5px;
+  border: 1px solid #ced6d9;
+  height: auto;
 }
 
 .events-wrapper h2{
