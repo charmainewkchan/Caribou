@@ -110,7 +110,7 @@ class ClubEvent(models.Model):
 	event_type = models.CharField(max_length=40)
 	date_posted = models.DateTimeField(auto_now=True)
 	author = models.ForeignKey('User', on_delete=models.CASCADE,)
-	description = models.CharField(max_length = 300)
+	description = models.CharField(max_length = 500)
 	title = models.CharField(max_length=100)
 	location = models.CharField(max_length=40)
 	date = models.CharField(max_length=10, default="yyyy-mm-dd")
@@ -136,3 +136,24 @@ class JoinedEvents(models.Model):
 
 class DoNotMail(models.Model):
 	user = models.ForeignKey('User', on_delete=models.CASCADE,)
+
+class PastEvent(models.Model):
+	author = models.ForeignKey('User', on_delete=models.CASCADE,)
+	title = models.CharField(max_length=100)
+	description = models.CharField(max_length = 500)
+	location = models.CharField(max_length=40)
+	start = models.CharField(max_length=5, default="hh:mm")
+	end = models.CharField(max_length=5, default="hh:mm")
+	eating_club = models.CharField(
+		max_length = 2,
+		choices = EATING_CLUB_CHOICES,
+		default = NONE,
+		)
+	def __str__(self):
+		return self.title
+class PastJoinedEvents(models.Model):
+	participant = models.ForeignKey('User', on_delete=models.CASCADE)
+	event = models.ForeignKey('PastEvent', on_delete=models.CASCADE)
+	def __str__(self):
+		s = self.participant.netid + ": " + str(self.event.id) + " " + self.event.title
+		return s
