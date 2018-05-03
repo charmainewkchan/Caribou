@@ -186,14 +186,14 @@ class Events extends Component {
                 <hr/>
                 <button className="btn btn-secondary w-100" onClick={(e) => {this.props.history.push('/events/manage/')}}><FontAwesomeIcon icon="plus" className="mr-3"/>Create an Event</button>
                 
-                <EventsCompactList setEventPage={this.state.setEventPage} location={this.props.location} events={this.state.eventsHosting}/>
+                <EventsCompactList setEventPage={this.setEventPage} location={this.props.location} events={this.state.eventsHosting}/>
 
             </div>
 
             <div className="row events-wrapper">
                 <h2>Attending</h2>
                 <hr/>
-               <EventsCompactList setEventPage={this.state.setEventPage} location={this.props.location} events={this.state.eventsAttending}/>
+               <EventsCompactList setEventPage={this.setEventPage} location={this.props.location} events={this.state.eventsAttending}/>
 
             </div>
 
