@@ -6,6 +6,7 @@ import princeton_img from '../Resources/princeton1.jpg'
 import {Link} from 'react-router-dom';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 
 class EventPage extends Component {
   constructor(props) {
@@ -81,7 +82,9 @@ class EventPage extends Component {
 		if (this.state.isAttending == "1") {
 			return <button className="btn btn-danger" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Leave </button>
 		} else if (this.state.isOwner == "1") {
-      return <button className="btn btn-danger" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Edit </button>
+      return <button className="btn btn-outline-secondary owner-btn " onClick={(e) => {this.props.history.push('/events/manage/'+this.props.pk + "/"); e.stopPropagation();
+}}><FontAwesomeIcon icon="pencil-alt" /></button>
+
     }
     else {
       console.log(this.state.attendance)
