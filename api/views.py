@@ -423,10 +423,10 @@ def login(request):
 	auth_attempt = C.Authenticate()
 	if "netid" in auth_attempt:  # Successfully authenticated.
 
-		if (!User.objects.filter(netid=auth_attempt['netid']).exists()) {
+		if not User.objects.filter(netid=auth_attempt['netid']).exists():
 			u = User(netid=auth_attempt['netid'])
 			u.save()
-		}
+		
 
 		print("successfully authenticted")
 		request.session['netid'] = auth_attempt['netid']
