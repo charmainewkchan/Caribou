@@ -84,7 +84,8 @@ class EventPage extends Component {
       return <button className="btn btn-danger" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Edit </button>
     }
     else {
-			return <button disabled={this.props.attendance==this.props.capacity || this.props.isOwner} className="btn btn-primary" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
+      console.log(this.state.attendance)
+			return <button disabled={this.state.attendance==this.state.eventCap} className="btn btn-primary" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
 		}
 	}
 
