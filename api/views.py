@@ -26,11 +26,11 @@ def react(request):
 def test(request):
 	return HttpResponse("test", status=400)
 
-g_netid = ""
-def set_netid(request, netID):
-	global g_netid
-	g_netid = netID
-	return HttpResponse("good", status=200)
+#g_netid = ""
+#def set_netid(request, netID):
+#	global g_netid#
+#	g_netid = netID
+#	return HttpResponse("good", status=200)
 
 #------------------------------------------------------------------------------#
 # HELPER FUNCTIONS #
@@ -78,12 +78,12 @@ def notify(subject, message, tolist):
 		mail.send()
 
 def get_netid(request):
-	global g_netid
+	#global g_netid
 	if 'netid' in request.session:
 		return request.session['netid']
-	if g_netid:
-		return g_netid
-	return "dsawicki"
+	#if g_netid:
+		#return g_netid
+	return "error"
 
 
 def is_profile_complete(request):
@@ -422,6 +422,12 @@ def login(request):
 
 	auth_attempt = C.Authenticate()
 	if "netid" in auth_attempt:  # Successfully authenticated.
+
+		if (!User.objects.filter(netid=auth_attempt['netid']).exists()) {
+			u = User(netid=auth_attempt['netid'])
+			u.save()
+		}
+
 		print("successfully authenticted")
 		request.session['netid'] = auth_attempt['netid']
 		return redirect("https://bixr.herokuapp.com")
