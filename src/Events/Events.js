@@ -14,8 +14,6 @@ import EditableEvent from './EditableEvent';
 
 import EventPage from './EventPage';
 import ManageEvent from './ManageEvent';
-import HostingList from './HostingList';
-import AttendingList from './AttendingList';
 import DropDownBar from '../DropDownBar';
 import EventsCompactList from './EventsCompactList'
 
@@ -31,33 +29,38 @@ class Events extends Component {
   			clubs: filter_data.clubs
   		},
   		events: [],
+      eventsHosting: [],
+      eventsAttending: [],
       showNewCard: false,
       sort: {
         ascending: true,
         field: "date"
       },
       currentPage: 0,
+      listSelected: 0,
       numPages:2,
       eating_club_filter: Object.keys(eating_club_map)
   	}
-    this.onClubFilterChange = this.onClubFilterChange.bind(this);
 
     this.onPostEvent = this.onPostEvent.bind(this);
-    this.onHostEvent = this.onHostEvent.bind(this);
-    this.updateData = this.updateData.bind(this);
+
+    this.updateAll = this.updateAll.bind(this);
+    this.updateHosting = this.updateHosting.bind(this);
+    this.updateAttending = this.updateAttending.bind(this);
+    //this.updateEvents = this.updateEvents.bind(this);
+
+
+
     this.setSort = this.setSort.bind(this);
-    this.toggleEditMode = this.toggleEditMode.bind(this);
     this.eventsPanel = this.eventsPanel.bind(this);
     this.setEventPage = this.setEventPage.bind(this);
     this.changePage = this.changePage.bind(this);
-    this.applyFilter = this.applyFilter.bind(this);
+    this.changeList = this.changeList.bind(this);
   }
 
   componentDidMount() {
-    this.updateData();
-    this.setState({
-      currentPage:0
-    })
+    this.updateAll();
+    this.setState({"listSelected": 0});
   }
 
 
@@ -65,8 +68,24 @@ class Events extends Component {
     if (pageNum != this.state.currentPage){
       this.setState({
         currentPage: pageNum
-      }, ()=>{this.updateData()});
+      }, ()=>{this.updateAll()});
     }
+  }
+
+  changeList(list){
+    this.currentPage = 0;
+    switch(list) {
+      case "list":
+        this.setState({"listSelected":0});
+        break;
+      case "hosting":
+        this.setState({"listSelected":1});
+        break;
+     case "attending":
+        this.setState({"listSelected":2});
+        break;
+    }
+    this.props.history.push("/events/"+list+"/")
   }
 
   onPostEvent(event){
@@ -91,35 +110,6 @@ class Events extends Component {
       }, ()=>this.updateData())
   }
 
-  toggleEditMode(){
-    this.setState({
-      showNewCard: false
-    })
-  }
-
-  onClubFilterChange(event){
-    /* mod = new clubs in filter, deep copy */
-  	var mod = this.state.filter.clubs.slice();
-
-  	if (event.target.checked) { // add to filter
-  		if (mod.length == filter_data.clubs.length) // full
-  			mod = [];
-  		mod.push(event.target.name);
-  	} else { // remove from filter
-  		// if filter empty, filter should be full..?
-  		mod.splice(mod.indexOf(event.target.name), 1)
-      console.log(mod.length)
-  		if (mod.length == 0) {
-  			mod = filter_data.clubs;
-  		}
-  	}
-
-  	this.setState({
-  		filter: {
-  			clubs: mod
-  		}
-  	}, function() {this.filterEvents()});
-  }
 
   setSort(ascending, field) {
     console.log("SET SORT");
@@ -133,12 +123,13 @@ class Events extends Component {
     }, ()=>{this.updateData()})
   }
 
-  updateData(){
+  updateAll(){
     // reload the data
+
+    this.updateHosting();
+    this.updateAttending();
+
     const url = "https://bixr.herokuapp.com/api/get_events";
-
-
-
     var data = [{
       page_num: this.state.currentPage,
       page_size: 10,
@@ -155,11 +146,31 @@ class Events extends Component {
     });
   }
 
-  onHostEvent() {
-    this.setState({
-      showNewCard: true
+  updateHosting(){
+    const netid = localStorage.getItem('netid');
+    const url = "https://bixr.herokuapp.com/api/hosted_events/" + netid + "/";
+    axios.get(url).then(res => {
+      console.log(res.data);
+      this.setState({
+        eventsHosting: res.data,
+      });
     })
+    .catch(err=>alert(err));
   }
+
+  updateAttending(){
+    // reload the data
+    const netid = localStorage.getItem('netid');
+    const url = "https://bixr.herokuapp.com/api/get_events_for_user/" + netid + "/";
+    axios.get(url).then(res => {
+      console.log(res.data);
+      this.setState({
+        eventsAttending: res.data,
+      });
+    })
+    .catch(err=>alert(err));
+  }
+
 
 
   setEventPage(pk) {
@@ -175,15 +186,14 @@ class Events extends Component {
                 <hr/>
                 <button className="btn btn-secondary w-100" onClick={(e) => {this.props.history.push('/events/manage/')}}><FontAwesomeIcon icon="plus" className="mr-3"/>Create an Event</button>
                 
-                  <HostingList setEventPage={this.setEventPage}/>
-
+                <EventsCompactList setEventPage={this.state.setEventPage} location={this.props.location} events={this.state.eventsHosting}/>
 
             </div>
 
             <div className="row events-wrapper">
                 <h2>Attending</h2>
                 <hr/>
-                <AttendingList setEventPage={this.setEventPage}/>
+               <EventsCompactList setEventPage={this.state.setEventPage} location={this.props.location} events={this.state.eventsAttending}/>
 
             </div>
 
@@ -193,25 +203,59 @@ class Events extends Component {
         </div>)
   }
 
+  eventsPanelMobile() {
+    return (
+      <div className="row d-md-none eventsPanel-mobile" >
+        <div className="col-4 cursor-hover">
+          <p onClick={()=>this.changeList("list")}>Events</p>
+        </div>
+        <div className="col-4 cursor-hover">
+          <p onClick={()=>this.changeList("hosting")}>Hosting</p>
+        </div>
+        <div className="col-4 cursor-hover">
+          <p onClick={()=>this.changeList("attending")}>Attending</p>
+        </div>
+
+      </div>
+      )
+  }
+
 
    //<AddEvent onCreateEvent={this.onCreateEvent}/>
 
 
   render() {
     return (
-    	<div className="Events container-fluid">
-        <div className="row">
-          <div className="col-md-3 eventsPanel">
-            {this.eventsPanel()}
+    	<div>
 
+        {this.eventsPanelMobile()}
+
+        <div className="d-md-none mb-2">
+          <DropDownBar id="filter_dropdown"><EventsFilter applyFilter={this.applyFilter} setSort={this.setSort} sort_by={this.state.sort.field+"-"+(this.state.sort.ascending?"1":"0")}  onClubFilterChange={this.onClubFilterChange}/></DropDownBar>
+        </div>
+
+        <div className="Events container-fluid">
+
+          {this.state.listSelected==1 && 
+              <div className="row mb-2 d-md-none">
+                <button className="btn btn-secondary w-100" onClick={(e) => {this.props.history.push('/events/manage/')}}><FontAwesomeIcon icon="plus" className="mr-3"/>Create an Event</button>
+              </div>
+            }
+          
+          <div className="row">
+            <div className="col-md-3 d-none d-md-block eventsPanel">
+              {this.eventsPanel()}
+            </div>
+  	        <div className="col m-scene">
+               <Switch>
+                  <Route path='/events/manage/:event_id(\d+)?' render={({ match }) => <ManageEvent event_id={match.params.event_id} onPostEvent={this.onPostEvent}/>}/>
+                  <Route exact path='/events/(list/)?' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.events} updateData={this.updateAll}/>}/>
+                  <Route exact path='/events/hosting/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsHosting} updateData={this.updateHosting}/>}/> 
+                  <Route exact path='/events/attending/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsAttending} updateData={this.updateAttending}/>}/> 
+                  <Route exact path='/events/:event_id(\d+)/' component={()=><EventPage />}/> 
+                </Switch>
+  	         </div>
           </div>
-	        <div className="col m-scene">
-             <Switch>
-                <Route path='/events/manage/:event_id(\d+)?' render={({ match }) => <ManageEvent event_id={match.params.event_id} onPostEvent={this.onPostEvent}/>}/>
-                <Route exact path='/events/(list/)?' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.events} updateData={this.updateData}/>}/>
-                <Route exact path='/events/:event_id(\d+)/' component={()=><EventPage />}/>
-              </Switch>
-	         </div>
         </div>
 	    </div>
     );

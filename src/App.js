@@ -19,7 +19,6 @@ import faCalendarAlt from '@fortawesome/fontawesome-free-solid/faCalendarAlt'
 import faBars from '@fortawesome/fontawesome-free-solid/faBars'
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus'
 import faCaretDown from '@fortawesome/fontawesome-free-solid/faCaretDown'
-
 import faAngleRight from '@fortawesome/fontawesome-free-solid/faAngleRight'
 import faAngleDoubleRight from '@fortawesome/fontawesome-free-solid/faAngleDoubleRight'
 import faAngleLeft from '@fortawesome/fontawesome-free-solid/faAngleLeft'

@@ -47,7 +47,7 @@ class EventsFilter extends Component {
 
   render() {
          return( 
-          <div className="Events-filter">
+          <div className="Events-filter ontop">
             <h2>Eating Club Filter</h2>
             <hr/>
             <div className="container-fluid">
