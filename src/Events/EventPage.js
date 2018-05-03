@@ -82,7 +82,7 @@ class EventPage extends Component {
 		if (this.state.isAttending == "1") {
 			return <button className="btn btn-danger" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Leave </button>
 		} else if (this.state.isOwner == "1") {
-      return <button className="btn btn-outline-secondary owner-btn " onClick={(e) => {this.props.history.push('/events/manage/'+this.props.pk + "/"); e.stopPropagation();
+      return <button className="btn btn-outline-secondary owner-btn " onClick={(e) => {this.props.history.push('/events/manage/'+ this.state.pk + "/"); e.stopPropagation();
 }}><FontAwesomeIcon icon="pencil-alt" /></button>
 
     }
