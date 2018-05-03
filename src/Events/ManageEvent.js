@@ -155,7 +155,7 @@ class ManageEvent extends Component {
     else if (this.state.capacity == '') {
       alert('Please enter a maximum capacity.')
     } else {
-      alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventCap + " " + this.state.eventLoc + " " + this.state.date.format().substring(0,10) + " " + this.state.start + " " + this.state.end);
+      alert('Congrats on submitting your event!');
 
       var data = [{"capacity": this.state.eventCap, "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "start": this.state.start,
       "end": this.state.end, "date" : this.state.date.format().substring(0,10), "pk": this.state.pk}]
@@ -176,48 +176,51 @@ class ManageEvent extends Component {
        </div>
 
         <div className=" col-12 card-body event-body">
-             <textarea className="form-control" type="text" id="description" placeholder = "Description" name = "eventDes" value= {this.state.eventDes} onChange={this.handleChange}/>
+             <textarea className="form-control " type="text" id="description" placeholder = "Description" name = "eventDes" value= {this.state.eventDes} onChange={this.handleChange}/>
 
-              <div className = "row Events-addEvent">
-                  <label for = "date" className = "btn"> Date: </label>
-                   <SingleDatePicker
-                   numberOfMonths={1}
-                   initialDate={null}
-                   date={this.state.date}
-                   name = "date"
-                   placeholder= "Select"
-                   small = {true}// momentPropTypes.momentObj or null
-                   onDateChange={date => this.setState({date})} // PropTypes.func.isRequired
-                   focused={this.state.focused} // PropTypes.bool
-                   onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-                   />
-
+             <div className="input-group Events-addEvent">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Date</span>
               </div>
 
-              <div className = "row Events-addEvent">
-                <div className = "col-6">
-                  <div className = "row">
-                  <label for = "start" className = "btn">Start Time:</label>
-                  <Dropdown options={options} label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" />
-                  </div>
-                </div>
-
-                <div className = "col-6">
-                  <div className = "row">
-                  <label for = "end" className = "col btn"> End Time:</label>
-                  <Dropdown options={options} label = "end" onChange={this._onSelectEnd} value={this.state.end} placeholder="00:00" />
-                  </div>
-                </div>
+               <SingleDatePicker
+               numberOfMonths={1}
+               initialDate={null}
+               date={this.state.date}
+               name = "date"
+               placeholder= "Select"
+               small = {false}// momentPropTypes.momentObj or null
+               onDateChange={date => this.setState({date})} // PropTypes.func.isRequired
+               focused={this.state.focused} // PropTypes.bool
+               onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+               />
              </div>
 
-              <div className = "row Events-addEvent">
-                  <label className = "btn">Capacity: </label>
-                  <input type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = "Capacity"/>
+
+             <div className="input-group Events-addEvent">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Start Time</span>
               </div>
 
-            <div className = "container">
-             <div className = "row">
-                <input className = "form-control" type = "text" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = "Location"/>
+              <Dropdown options={options} label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" />
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">End Time</span>
+              </div>
+              <Dropdown options={options} label = "end" onChange={this._onSelectEnd} value={this.state.end} placeholder="00:00" />
+             </div>
+
+             <div className="input-group Events-addEvent">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Capacity</span>
+              </div>
+              <input type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = ""/>
+             </div>
+
+             <div className="input-group Events-addEvent">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Location</span>
+              </div>
+              <input type = "text" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = ""/>
              </div>
 
              <div className = "row Events-addEvent">
@@ -225,7 +228,6 @@ class ManageEvent extends Component {
                 <button className="btn btn-success" style ={{width:150}} onClick = {this.handleCreateEvent}>Save Changes</button>
               </div>
              </div>
-            </div>
           </div>
       </div>
     );

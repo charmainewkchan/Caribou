@@ -185,7 +185,7 @@ class Events extends Component {
                 <h2>Hosting</h2>
                 <hr/>
                 <button className="btn btn-secondary w-100" onClick={(e) => {this.props.history.push('/events/manage/')}}><FontAwesomeIcon icon="plus" className="mr-3"/>Create an Event</button>
-                
+
                 <EventsCompactList setEventPage={this.setEventPage} location={this.props.location} events={this.state.eventsHosting}/>
 
             </div>
@@ -236,12 +236,12 @@ class Events extends Component {
 
         <div className="Events container-fluid">
 
-          {this.state.listSelected==1 && 
+          {this.state.listSelected==1 &&
               <div className="row mb-2 d-md-none">
                 <button className="btn btn-secondary w-100" onClick={(e) => {this.props.history.push('/events/manage/')}}><FontAwesomeIcon icon="plus" className="mr-3"/>Create an Event</button>
               </div>
             }
-          
+
           <div className="row">
             <div className="col-md-3 d-none d-md-block eventsPanel">
               {this.eventsPanel()}
@@ -250,9 +250,9 @@ class Events extends Component {
                <Switch>
                   <Route path='/events/manage/:event_id(\d+)?' render={({ match }) => <ManageEvent event_id={match.params.event_id} onPostEvent={this.onPostEvent}/>}/>
                   <Route exact path='/events/(list/)?' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.events} updateData={this.updateAll}/>}/>
-                  <Route exact path='/events/hosting/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsHosting} updateData={this.updateHosting}/>}/> 
-                  <Route exact path='/events/attending/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsAttending} updateData={this.updateAttending}/>}/> 
-                  <Route exact path='/events/:event_id(\d+)/' component={()=><EventPage />}/> 
+                  <Route exact path='/events/hosting/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsHosting} updateData={this.updateHosting}/>}/>
+                  <Route exact path='/events/attending/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsAttending} updateData={this.updateAttending}/>}/>
+                  <Route exact path='/events/:event_id(\d+)/' component={()=><EventPage />}/>
                 </Switch>
   	         </div>
           </div>
