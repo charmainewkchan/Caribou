@@ -167,7 +167,7 @@ class EditableProfile extends Component {
 
   render() {
     return (
-      <div>
+      <div className="EditableProfile">
             <h2>Profile Details</h2>
             <hr/>
 

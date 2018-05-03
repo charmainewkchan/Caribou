@@ -162,10 +162,13 @@ body {
 
 
 .MyProfile {
-  margin-top: 2em;
   padding: 2em;
   padding-bottom: 4em;
   font-size:.9em;
+  text-align: left;
+  min-height: 20em;
+  margin-top: 1em;
+  font-family: roboto;
 }
 
 .MyProfile-width{
@@ -180,24 +183,16 @@ body {
   }
 }
 
-.MyProfile h2 {
-  font-size: 1.4em;
-  font-weight: bold;
-}
-
-.MyProfile h3 {
+.EditableProfile h3{
   font-size: 1em;
-  font-weight: bold;
-  color: #333;
+}
+
+.profile-header {
 }
 
 
-.MyProfile {
-  text-align: left;
-  min-height: 20em;
-  margin-top: 1em;
-  font-family: roboto;
-
+.MyProfile h2 {
+  color: red;
 }
 
 .active-settings {
