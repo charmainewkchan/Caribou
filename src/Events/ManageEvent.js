@@ -155,7 +155,7 @@ class ManageEvent extends Component {
     else if (this.state.capacity == '') {
       alert('Please enter a maximum capacity.')
     } else {
-      alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventCap + " " + this.state.eventLoc + " " + this.state.date.format().substring(0,10) + " " + this.state.start + " " + this.state.end);
+      alert('Congrats on submitting your event!');
 
       var data = [{"capacity": this.state.eventCap, "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "start": this.state.start,
       "end": this.state.end, "date" : this.state.date.format().substring(0,10), "pk": this.state.pk}]
