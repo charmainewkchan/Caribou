@@ -175,10 +175,13 @@ class ManageEvent extends Component {
           <p>{this.state.eating_club} &bull; </p>
        </div>
 
-        <div className=" col-12 card-body event-body">
-             <textarea className="form-control " type="text" id="description" placeholder = "Description" name = "eventDes" value= {this.state.eventDes} onChange={this.handleChange}/>
+        <div className= "col-12 card-body event-body">
+             <div className = " Events-addEvent">
+              <textarea className="form-control " type="text" id="description" placeholder = "Description" name = "eventDes" value= {this.state.eventDes} onChange={this.handleChange}/>
+             </div>
 
              <div className="input-group Events-addEvent">
+
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Date</span>
               </div>
@@ -203,6 +206,7 @@ class ManageEvent extends Component {
               </div>
 
               <Dropdown options={options} label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" />
+
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">End Time</span>
               </div>
@@ -213,14 +217,14 @@ class ManageEvent extends Component {
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Capacity</span>
               </div>
-              <input type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = ""/>
+              <input className = "form-control" type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = ""/>
              </div>
 
              <div className="input-group Events-addEvent">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Location</span>
               </div>
-              <input type = "text" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = ""/>
+              <input className = "form-control" type = "text" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = ""/>
              </div>
 
              <div className = "row Events-addEvent">
