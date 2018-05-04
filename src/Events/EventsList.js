@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Event from './Event'
 import eating_club_map from './eating_club_map.json';
+import moment from 'moment';
 
 import axios from 'axios';
 import EventCard from './EventCard';
@@ -87,6 +88,11 @@ class EventsPanel extends Component {
           <div className="events-list">
            <div className="container-fluid">
             {this.state.sortedEvents.map(function(event){
+              console.log(moment().format("YYYY-MM-DD"))
+              console.log(event.fields.date)
+
+
+              if (event.fields.date > moment().format("YYYY-MM-DD")) {
               return (
 
                 <div key={event.pk} className="row event-row-buffer">
@@ -109,6 +115,7 @@ class EventsPanel extends Component {
                               onLeaveEvent={this.onLeaveEvent}
                               isEditable={this.props.isEditable}/>
                 </div>);
+              }
               },this)
             }
           </div>
