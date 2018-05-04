@@ -31,7 +31,6 @@ class Events extends Component {
   		events: [],
       eventsHosting: [],
       eventsAttending: [],
-      showNewCard: false,
       sort: {
         ascending: true,
         field: "date"
@@ -43,6 +42,10 @@ class Events extends Component {
   	}
 
     this.onPostEvent = this.onPostEvent.bind(this);
+    this.onRemoveEvent = this.onRemoveEvent.bind(this);
+    this.onJoinEvent = this.onJoinEvent.bind(this);
+    this.onLeaveEvent = this.onLeaveEvent.bind(this);
+
 
     this.updateAll = this.updateAll.bind(this);
     this.updateHosting = this.updateHosting.bind(this);
@@ -51,11 +54,15 @@ class Events extends Component {
 
 
 
+
+
     this.setSort = this.setSort.bind(this);
     this.eventsPanel = this.eventsPanel.bind(this);
     this.setEventPage = this.setEventPage.bind(this);
     this.changePage = this.changePage.bind(this);
     this.changeList = this.changeList.bind(this);
+    this.applyFilter = this.applyFilter.bind(this);
+    this.clearFilter = this.clearFilter.bind(this);
   }
 
   componentDidMount() {
@@ -63,6 +70,20 @@ class Events extends Component {
     this.setState({"listSelected": 0});
   }
 
+
+
+  onRemoveEvent(event, event_id) {
+      event.stopPropagation();
+
+      if(window.confirm("Are you sure you want to delete this event?")) {
+        const url = "https://bixr.herokuapp.com/api/delete_event/" + event_id + "/";
+        axios.get(url)
+        .then(res =>  this.updateAll())
+        .catch(err => alert(err));
+
+        this.props.history.push('/events/list/')
+      }
+  }
 
   changePage(pageNum){
     if (pageNum != this.state.currentPage){
@@ -94,12 +115,35 @@ class Events extends Component {
     .then(res => {
         //console.log(res);
         //console.log(res.data);
-        this.updateData();
-        this.setState({
-          showNewCard: false
-        })
+        this.updateAll();
+
+        this.props.history.push('/events/list/')
       })
     .catch(err => alert(err));
+  }
+
+  onJoinEvent(event_id) {
+    var data = [{
+      event: event_id,
+    }]
+    console.log(("join" + event_id))
+    axios.post("https://bixr.herokuapp.com/api/join_event/",  data)
+    .then(res => this.updateAll())
+    .catch(err => {
+          if(err.response.status == 401) {
+            // redirect
+            if(window.confirm("You must complete your profile before joining an event. Press OK to go to Profile page.")) {
+              this.props.history.push('/myprofile/');
+            }
+          }
+    });
+  }
+
+  clearFilter(){
+
+      this.setState({
+        eating_club_filter: Object.keys(eating_club_map)
+      }, ()=>this.updateAll())
   }
 
   applyFilter(filter){
@@ -107,7 +151,7 @@ class Events extends Component {
 
       this.setState({
         eating_club_filter:  (filterAsList.length == 0 ? Object.keys(eating_club_map) : filterAsList)
-      }, ()=>this.updateData())
+      }, ()=>this.updateAll())
   }
 
 
@@ -120,7 +164,7 @@ class Events extends Component {
         ascending: (ascending==1?true:false),
         field: field
       }
-    }, ()=>{this.updateData()})
+    }, ()=>{this.updateAll()})
   }
 
   updateAll(){
@@ -172,6 +216,18 @@ class Events extends Component {
   }
 
 
+  onLeaveEvent(event_id) {
+    var data = [{
+      event: event_id,
+    }]
+    //alert(JSON.stringify(data));
+    if (window.confirm('Are you sure you want to leave this event?')) {
+      axios.post("https://bixr.herokuapp.com/api/unjoin_event/",  data)
+      .then(res => this.updateAll())
+      .catch(err => alert(err));
+    }
+  }
+
 
   setEventPage(pk) {
     this.props.history.push('/events/'+pk + "/");
@@ -185,7 +241,7 @@ class Events extends Component {
                 <h2>Hosting</h2>
                 <hr/>
                 <button className="btn btn-secondary w-100" onClick={(e) => {this.props.history.push('/events/manage/')}}><FontAwesomeIcon icon="plus" className="mr-3"/>Create an Event</button>
-                
+
                 <EventsCompactList setEventPage={this.setEventPage} location={this.props.location} events={this.state.eventsHosting}/>
 
             </div>
@@ -198,7 +254,7 @@ class Events extends Component {
             </div>
 
             <div className="row events-wrapper">
-              <EventsFilter applyFilter={this.applyFilter} setSort={this.setSort} sort_by={this.state.sort.field+"-"+(this.state.sort.ascending?"1":"0")}  onClubFilterChange={this.onClubFilterChange}/>
+              <EventsFilter clearFilter={this.clearFilter} applyFilter={this.applyFilter} setSort={this.setSort} sort_by={this.state.sort.field+"-"+(this.state.sort.ascending?"1":"0")}  onClubFilterChange={this.onClubFilterChange}/>
             </div>
         </div>)
   }
@@ -231,28 +287,28 @@ class Events extends Component {
         {this.eventsPanelMobile()}
 
         <div className="d-md-none mb-2">
-          <DropDownBar id="filter_dropdown"><EventsFilter applyFilter={this.applyFilter} setSort={this.setSort} sort_by={this.state.sort.field+"-"+(this.state.sort.ascending?"1":"0")}  onClubFilterChange={this.onClubFilterChange}/></DropDownBar>
+          <DropDownBar id="filter_dropdown"><EventsFilter clearFilter={this.clearFilter} applyFilter={this.applyFilter} setSort={this.setSort} sort_by={this.state.sort.field+"-"+(this.state.sort.ascending?"1":"0")}  onClubFilterChange={this.onClubFilterChange}/></DropDownBar>
         </div>
 
         <div className="Events container-fluid">
 
-          {this.state.listSelected==1 && 
+          {this.state.listSelected==1 &&
               <div className="row mb-2 d-md-none">
                 <button className="btn btn-secondary w-100" onClick={(e) => {this.props.history.push('/events/manage/')}}><FontAwesomeIcon icon="plus" className="mr-3"/>Create an Event</button>
               </div>
             }
-          
+
           <div className="row">
             <div className="col-md-3 d-none d-md-block eventsPanel">
               {this.eventsPanel()}
             </div>
   	        <div className="col m-scene">
                <Switch>
-                  <Route path='/events/manage/:event_id(\d+)?' render={({ match }) => <ManageEvent event_id={match.params.event_id} onPostEvent={this.onPostEvent}/>}/>
+                  <Route path='/events/manage/:event_id(\d+)?' render={({ match }) => <ManageEvent event_id={match.params.event_id} onRemoveEvent={this.onRemoveEvent} onPostEvent={this.onPostEvent}/>}/>
                   <Route exact path='/events/(list/)?' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.events} updateData={this.updateAll}/>}/>
-                  <Route exact path='/events/hosting/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsHosting} updateData={this.updateHosting}/>}/> 
-                  <Route exact path='/events/attending/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsAttending} updateData={this.updateAttending}/>}/> 
-                  <Route exact path='/events/:event_id(\d+)/' component={()=><EventPage />}/> 
+                  <Route exact path='/events/hosting/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsHosting} updateData={this.updateHosting}/>}/>
+                  <Route exact path='/events/attending/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsAttending} updateData={this.updateAttending}/>}/>
+                  <Route exact path='/events/:event_id(\d+)/' component={()=><EventPage onLeaveEvent={this.onLeaveEvent} onJoinEvent={this.onJoinEvent} />}/>
                 </Switch>
   	         </div>
           </div>

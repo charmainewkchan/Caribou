@@ -36,9 +36,9 @@ class Event extends Component {
 
 	buttons() {
 		if (this.props.isAttending) {
-			return <button className="btn btn-danger" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Leave </button>
+			return <button className="btn btn-danger" onClick={(e) => {e.stopPropagation(); this.props.onLeaveEvent(this.props.pk)}}> Leave </button>
 		} else {
-			return <button disabled={this.props.attendance==this.props.capacity || this.props.isOwner} className="btn btn-primary" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
+			return <button disabled={this.props.attendance==this.props.capacity || this.props.isOwner} className="btn btn-primary" onClick={(e) => {e.stopPropagation(); this.props.onJoinEvent(this.props.pk)}}> Join </button>
 		}
 	}
 
@@ -55,37 +55,49 @@ class Event extends Component {
   render() {
 
   	return(
-    <div className="card Events-event" >
+    <div className="Events-event event-wrapper" >
 
 		 <div onClick={()=> this.props.history.push('/events/'+this.props.pk + "/")}>
-		 		<div className="event-header Events-panel" disabled = {true}>
-			 		<div className="row">
-			 			<div className="col">
-				  		<h2>{this.props.title}</h2>
-				  	</div>
-				  	{!!this.props.isOwner &&
-				  		<div className="col">
-				  		  {this.owner_buttons()}
-				  	 </div>
-				     }
+		 		<div className="event-header container-fluid" disabled = {true}>
 
-				  </div>
+		 			<div className="row">
+		 				<div className="col-3 d-none d-md-block events-date">
+		 					<h3>{moment(this.props.date, "YYYY-MM-DD").format('MMM')}</h3>
+		 					<h4>{moment(this.props.date, "YYYY-MM-DD").format('D')}</h4>
+		 				</div>
 
-				  <div className="row"><div className="col">
-			    	<p>{eating_club_map[this.props.eating_club]} &bull; {moment(this.props.date, "YYYY-MM-DD").format('MMM D')}, {this.props.start} - {this.props.end}</p>
-			    </div></div>
+		 				<div className="col events-content">
+					 		<div className="row">
+					 			<div className="col">
+						  		<h2>{this.props.title}</h2>
+						  	</div>
+						  	{!!this.props.isOwner &&
+						  		<div className="col">
+						  		  {this.owner_buttons()}
+						  	 </div>
+						     }
+
+						  </div>
+
+						  <div className="row"><div className="col">
+					    	<p>{eating_club_map[this.props.eating_club]} &bull; {moment(this.props.date, "YYYY-MM-DD").format('MMM D')}, {this.props.start} - {this.props.end}</p>
+					    	</div>
+					    </div>
+
+					    <div className="event-body">
+					         <p>{this.descriptionString()}</p>
+					         <p style={{fontStyle:'italic'}}>{"Location: "+ this.props.loc}</p>
+					         <p>{this.props.attendance == 0 ? "Be the first to join!" : ""+this.props.attendance+"/"+this.props.capacity+" going!"}</p>
+					    </div>
+
+					    <div className="event-footer">
+					    	{this.buttons()}
+					    </div>
+		 				</div>
+		 			</div>
 				</div>
 		 </div>
 
-	    <div className="card-body event-body">
-	         <p>{this.descriptionString()}</p>
-	         <p style={{fontStyle:'italic'}}>{"Location: "+ this.props.loc}</p>
-	         <p>{this.props.attendance == 0 ? "Be the first to join!" : ""+this.props.attendance+"/"+this.props.capacity+" going!"}</p>
-	    </div>
-
-	    <div className="event-footer">
-	    	{this.buttons()}
-	    </div>
     </div>
     );
   }

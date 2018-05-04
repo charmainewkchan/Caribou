@@ -10,6 +10,24 @@
   text-align: center;
 }
 
+.footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+   height:30px;   /* Height of the footer */
+   color: #bbb;
+   background:#20576D;
+   font-family: roboto;
+   font-size: .9em;
+   padding-top:.2em;
+}
+
+
+
 .navbar-custom {
   background: #FF5B32;
  }
@@ -18,13 +36,17 @@
   font-size: 0.73em;
   background: #FF5B32;
   font-family: roboto;
-
 }
+
+
 
 .eventsPanel-mobile{
   background: #20576D;
+  margin:0;
+  padding:0;
   padding-top:.5em;
   padding-bottom:.5em;
+
 }
 
 .eventsPanel-mobile p{
@@ -32,7 +54,7 @@
   color: #FFF4EC;
   padding: 0;
   margin:0;
-  font-size: .9em;
+  font-size: .8em;
   font-family: roboto;
 }
 
@@ -49,6 +71,11 @@
   border-color: #14B7A4 ;
   border-bottom: 1px solid #049784;
   border-radius: 20px;
+}
+
+.btn-primary:hover{
+  background-color: #89D6CD;
+    border-color: #14B7A4 ;
 }
 
 .btn-outline-light{
@@ -78,6 +105,10 @@
   border-bottom: 1px solid #00374D;
 }
 
+.btn-secondary:hover {
+  background-color: #407A91;
+}
+
 .btn-success {
  }
 .navbar-nav > li{
@@ -102,15 +133,15 @@
   }
 }
 
-
 .navbar-brand{
   color: #fff;
   font-family: 'Fjalla One', sans-serif;
 }
 
 
-body {
+html, body {
   background: #FFF4EC;
+  height: 100%;
 }
 
 .App-logo {
@@ -162,10 +193,13 @@ body {
 
 
 .MyProfile {
-  margin-top: 2em;
   padding: 2em;
   padding-bottom: 4em;
   font-size:.9em;
+  text-align: left;
+  min-height: 20em;
+  margin-top: 1em;
+  font-family: roboto;
 }
 
 .MyProfile-width{
@@ -180,24 +214,16 @@ body {
   }
 }
 
-.MyProfile h2 {
-  font-size: 1.4em;
-  font-weight: bold;
-}
-
-.MyProfile h3 {
+.EditableProfile h3{
   font-size: 1em;
-  font-weight: bold;
-  color: #333;
+}
+
+.profile-header {
 }
 
 
-.MyProfile {
-  text-align: left;
-  min-height: 20em;
-  margin-top: 1em;
-  font-family: roboto;
-
+.MyProfile h2 {
+  color: red;
 }
 
 .active-settings {
@@ -247,6 +273,12 @@ body {
   min-width:300px;
 }
 
+.eventsInput{
+  width: 100%;
+  height: 100%;
+
+}
+
 
 @media (max-width: 767px) {
   .eventsPanel{
@@ -274,7 +306,6 @@ body {
   height:1.3em;
   margin:0em .2em;
   margin-top: -.2em;
-  padding: 0;
   border: none;
 }
 
@@ -284,6 +315,11 @@ body {
   top: 0;
   display:inline-block;
 }
+
+.splash{ 
+  padding-top: 6em;
+  padding-bottom: 1em;
+ }
 
 
 @media (min-width: 900px) {
@@ -310,6 +346,43 @@ body {
   margin: 0;
   text-align: left;
   line-height: 1.1em
+}
+.events-content {
+  padding: 1em;
+}
+
+.nav-link-header {
+  color: white;
+}
+
+.nav-link-header:hover {
+  color: #20576D;
+  text-decoration: none
+}
+
+.events-date{
+  font-family: 'roboto';
+  padding:0;
+  margin:0;
+  padding-top:1em;
+  background: #FFFCFA;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  border-right: 1px solid #ced6d9;
+}
+.events-date h3{
+  font-size:1em;
+  padding:0;
+  margin:0;
+  font-family:  'Merriweather';
+  text-transform: uppercase;
+}
+.events-date h4{
+  font-size:2.2em;
+  padding: 0;
+  margin: 0;
+  color: #FF5B32;
+  font-family:  'Merriweather';
 }
 
 .event-compact-list {
@@ -410,6 +483,17 @@ body {
   .compact-date{
     font-size:.8em;
   }
+}
+
+.pagination {
+  text-align: center;
+  font-size: .8em;
+  white-space: nowrap;
+}
+
+.pagination p {
+  margin-top:.5em;
+  margin-bottom: 0;
 }
 
 /* SINGLE EVENT PAGE */
@@ -520,11 +604,6 @@ body {
 
 /* END USER PAGE */
 
-.Events-list {
-  list-style-type: none;
-  padding: 0;
-  margin:0;
-}
 
 .events-Panel-links {
   text-align: left;
@@ -535,12 +614,24 @@ body {
 @media (min-width: 960px) {
   .events-list {
     width: 75%;
+    margin-left: 6em;
   }
 }
 
 @media (min-width: 1200px) {
 .events-list {
     width: 60%;
+  }
+}
+
+@media(max-width:567px) {
+  .events-list .container-fluid {
+    width: 100%;
+    margin:0;
+  }
+  .events-list{
+    width:100%;
+    margin:0;
   }
 }
 
@@ -551,10 +642,9 @@ body {
 
 .Events-event {
   height: 100%;
-  padding: 1em;
   width: 100%;
-  border: 1px solid #ddd;
 }
+
 
 .Events-descriptionBox {
   font-size: 14px;
@@ -577,6 +667,7 @@ body {
   text-align: left;
 }
 
+
 .btn-host {
   margin-top: 1em;
   width: 3em;
@@ -592,24 +683,25 @@ body {
 }
 
 .event-body {
-    font-size: .8em;
-    padding: .5em;
+    font-size: 1em;
     margin: 0;
-    margin-top: 1em;
-    color: #555;
-    font-family:;
+    margin-top: .5em;
+    padding: 0;
+    margin-bottom: .5em;
+    color: black;
     height: auto;
     text-align: left;
-    font-family: Roboto;
+    font-family: roboto;
 }
 .event-body p {
   padding: 0;
   margin: 0;
+  color: #555;
+  font-weight:normal;
 }
 
 .event-footer{
   padding: 0;
-  background: white;
   text-align: left;
 }
 
@@ -639,8 +731,16 @@ body {
 
 .Home{
   background: #FF5B32;
-  padding-top: 8em;
+  min-height: 90vh;
+}
 
+.Home .container-fluid{
+  width:100%;
+  
+}
+
+.splash-btn{
+  margin:auto;
 }
 
 .Home p {
@@ -709,6 +809,13 @@ body {
   height: auto;
   margin-bottom: 1em;
   padding: .5em;
+}
+
+.event-wrapper {
+  background: white;
+  border-radius: 5px;
+  border: 1px solid #ced6d9;
+  height: auto;
 }
 
 .events-wrapper h2{

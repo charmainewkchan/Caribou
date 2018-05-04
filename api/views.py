@@ -194,7 +194,7 @@ def get_events(request):
 	eating_club_filter = request_data['eating_club_filter']
 
 
-	dataq = PersonalEvent.objects.all().order_by('pk').filter(eating_club__in=eating_club_filter)
+	dataq = PersonalEvent.objects.all().order_by('-pk').filter(eating_club__in=eating_club_filter)
 	num_pages = math.ceil(len(dataq) / page_size)
 	offset = page_size * page_num
 	dataq = dataq[offset:(offset+page_size)]
@@ -298,7 +298,7 @@ def post_event(request):
 		for netid in attendees_id:
 			tolist.append(netid)
 		subject = 'An event you joined was updated'
-		message = "The event \"" + title + "\" was updated. See the updates at " + WEBSITE + str(event_id) +"/"
+		message = "The event \"" + e.title + "\" was updated. See the updates at " + WEBSITE + str(data['pk']) +"/"
 		notify(subject, message, tolist)
 		return HttpResponse("event " + str(pk) + " updated")
 

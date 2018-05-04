@@ -81,17 +81,47 @@ class Profile extends Component {
       <div>
         <div className = 'row'>
           <div className = 'col-6'>
-            <h2>My Profile</h2>
+            <h2 className="profile-header">My Profile</h2>
+
           </div>
 
           <div className = 'col-6'>
-            <button onClick={this.toggleEditMode}> Edit Profile </button>
+           <button className="btn btn-outline-secondary" onClick={this.toggleEditMode}><FontAwesomeIcon icon="pencil-alt" className="mr-1" />Edit</button>
           </div>
         </div>
-        <h3>Name: </h3><p>{this.state.profile_info.first_name} {this.state.profile_info.last_name}</p>
-        <h3>Year: </h3><p>{this.state.profile_info.year}</p>
-        <h3>College: </h3><p>{rescollegeAbr[this.state.profile_info.res_college]}</p>
-        <h3>Eating Club: </h3><p>{eatingClubAbr[this.state.profile_info.eating_club]}</p>
+        <hr/>
+
+        <form>
+        <div className="form-group row">
+          <label htmlFor="name" className="col-sm-2 col-form-label font-weight-bold">Name</label>
+          <div className="col-sm-10">
+            <input type="text" readonly className="form-control-plaintext" id="name" value={ this.state.profile_info.first_name +" " + this.state.profile_info.last_name}/>
+           </div>
+        </div>
+
+        <div className="form-group row">
+          <label htmlFor="year" className="col-sm-2 col-form-label font-weight-bold">Year</label>
+          <div className="col-sm-10">
+            <input type="text" readonly className="form-control-plaintext" id="year" value={ this.state.profile_info.year }/>
+           </div>
+        </div>
+
+        <div className="form-group row">
+          <label htmlFor="res_college" className="col-sm-2 col-form-label font-weight-bold">College</label>
+          <div className="col-sm-10">
+            <input type="text" readonly className="form-control-plaintext" id="res_college" value={rescollegeAbr[this.state.profile_info.res_college]}/>
+           </div>
+        </div>
+
+          <div className="form-group row">
+          <label htmlFor="eating_club" className="col-sm-2 col-form-label font-weight-bold">Eating Club</label>
+          <div className="col-sm-10">
+            <input type="text" readonly className="form-control-plaintext" id="eating_club" value={eatingClubAbr[this.state.profile_info.eating_club]}/>
+           </div>
+        </div>
+
+        </form>
+
       </div>
     );
   } else {

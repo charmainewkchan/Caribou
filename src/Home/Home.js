@@ -16,26 +16,18 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <div className="anim-fadein">
-      	  <h2>Here to mix up the people you meet.</h2>
+        <div className="container-fluid">
+          <div className="row splash">
+            <div className="col">
+              <div className="anim-fadein">
+                <h2>Here to mix up the people you meet.</h2>
+              </div>
+              <div className = "row ">
+                     <Link to='/events' className = "btn splash-btn btn-outline-light">Student Events</Link>
+            	 </div>
+             </div>
+            </div>
         </div>
-        <div className="Home container">
-          <div className = "homeButton row">
-
-        		  <div className="col">
-                 <Link to='/events' className = "btn btn-outline-light">Student Events</Link>
-        	     </div>
-               <div className="col-2" >
-               </div>
-               <div className="col">
-                  <a href="#" className = "btn btn-outline-light">Official Club Events</a>
-         	     </div>
-
-          </div>
-        </div>
-
-      <h2> Official Club Events</h2>
-      <EventCal/>
       </div>
     );
   }

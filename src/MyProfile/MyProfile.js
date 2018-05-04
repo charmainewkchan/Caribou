@@ -23,9 +23,11 @@ class MyProfile extends Component {
     return (
 
       <div className="container events-wrapper MyProfile-width">
-              <div className="MyProfile">
+          <div className="MyProfile">
           <Profile/>
           <br/>
+
+          
           <Account/>
         </div>
       </div>

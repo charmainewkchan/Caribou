@@ -37,7 +37,7 @@ class EventsCompactList extends Component {
 
               },this)
             )
-        	 
+
         }
      }
 

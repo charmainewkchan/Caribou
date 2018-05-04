@@ -34,6 +34,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <Main />
+        <div className="footer">Bixr 2018</div>
       </div>
     );
   }

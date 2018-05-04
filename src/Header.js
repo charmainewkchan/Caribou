@@ -32,10 +32,10 @@ class Header extends Component {
               <FontAwesomeIcon icon="bars"/>
             </button>
          <div className="collapse navbar-collapse navbar-collapse-custom"  id="navbarSupportedContent">
-            <ul className="navbar-nav ml-auto navbar-collapse">
-              <li className="nav-item"><Link to='/' className="nav-link">HOME</Link></li>
-              <li className="nav-item"><Link to='/events' className="nav-link">EVENTS</Link></li>
-              <li className="nav-item"><Link to='/myprofile' className="nav-link">PROFILE</Link></li>
+            <ul className="navbar-nav ml-auto navbar-collapse borderXwidth">
+              <li className="nav-item"><Link to='/' className="nav-link-header ">HOME</Link></li>
+              <li className="nav-item"><Link to='/events' className="nav-link-header">EVENTS</Link></li>
+              <li className="nav-item"><Link to='/myprofile' className="nav-link-header">PROFILE</Link></li>
             </ul>
           </div>
       </nav>

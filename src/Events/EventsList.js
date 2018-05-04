@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Event from './Event'
 import eating_club_map from './eating_club_map.json';
+import moment from 'moment';
 
 import axios from 'axios';
 import EventCard from './EventCard';
@@ -15,11 +16,16 @@ class EventsPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      events : this.props.events,
+      sortedEvents : []
     };
+
+    this.state.sortedEvents = [].concat(this.state.events).sort((a, b) => a.fields.date > b.fields.date);
+    console.log("***");
+    console.log(this.state.sortedEvents);
 
     this.onJoinEvent = this.onJoinEvent.bind(this);
     this.onLeaveEvent = this.onLeaveEvent.bind(this);
-    this.onRemoveEvent = this.onRemoveEvent.bind(this);
     this.onPostEvent = this.onPostEvent.bind(this);
   }
 
@@ -63,14 +69,6 @@ class EventsPanel extends Component {
         });
     }
 
-    onRemoveEvent(event, event_id) {
-      event.stopPropagation();
-
-      const url = "https://bixr.herokuapp.com/api/delete_event/" + event_id + "/";
-      axios.get(url)
-      .then(res =>  this.props.updateData())
-      .catch(err => alert(err));
-    }
 
   onLeaveEvent(event_id) {
     var data = [{
@@ -78,44 +76,48 @@ class EventsPanel extends Component {
     }]
     //alert(JSON.stringify(data));
     if (window.confirm('Are you sure you want to leave this event?')) {
-
-    axios.post("https://bixr.herokuapp.com/api/unjoin_event/",  data)
-    .then(res => this.props.updateData())
-    .catch(err => alert(err));
-  }
+      axios.post("https://bixr.herokuapp.com/api/unjoin_event/",  data)
+      .then(res => this.props.updateData())
+      .catch(err => alert(err));
+    }
 
   }
 
   render() {
     return (
-           <div className="container-fluid events-list anim-fadeinup">
-            {this.props.events.map(function(event){
-              return (
+          <div className="events-list">
+           <div className="container-fluid">
+            {this.state.sortedEvents.map(function(event){
+              if (event.fields.date > moment().format("YYYY-MM-DD")) {
+                return (
 
-                <div className="row event-row-buffer">
-                  <EventCard title={event.fields.title}
-                              eating_club={event.fields.eating_club}
-                              time={event.fields.time}
-                              attendance={event.fields.attendance}
-                              capacity={event.fields.capacity}
-                              description={event.fields.description}
-                              location={event.fields.location}
-                              pk={event.pk}
-                              key={event.pk}
-                              start={event.fields.start}
-                              end={event.fields.end}
-                              date={event.fields.date}
-                              isAttending={event.isAttending}
-                              isOwner={event.isOwner}
-                              onJoinEvent={this.onJoinEvent}
-                              onPostEvent={this.onPostEvent}
-                              onRemoveEvent={this.onRemoveEvent}
-                              onLeaveEvent={this.onLeaveEvent}
-                              isEditable={this.props.isEditable}/>
-                </div>);
+
+
+                  <div key={event.pk} className="row event-row-buffer">
+                    <EventCard title={event.fields.title}
+                                eating_club={event.fields.eating_club}
+                                time={event.fields.time}
+                                attendance={event.fields.attendance}
+                                capacity={event.fields.capacity}
+                                description={event.fields.description}
+                                location={event.fields.location}
+                                pk={event.pk}
+   
+                                start={event.fields.start}
+                                end={event.fields.end}
+                                date={event.fields.date}
+                                isAttending={event.isAttending}
+                                isOwner={event.isOwner}
+                                onJoinEvent={this.onJoinEvent}
+                                onPostEvent={this.onPostEvent}
+                                onLeaveEvent={this.onLeaveEvent}
+                                isEditable={this.props.isEditable}/>
+                  </div>);
+              }
               },this)
             }
-          <Pagination changePage={this.props.changePage} currentPage={this.props.currentPage} numPages={this.props.numPages}/>
+            </div>
+            <Pagination changePage={this.props.changePage} currentPage={this.props.currentPage} numPages={this.props.numPages}/>
           </div>
           )
     }

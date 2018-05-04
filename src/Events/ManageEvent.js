@@ -8,6 +8,10 @@ import 'react-dropdown/style.css'
 import eating_club_map from './eating_club_map.json';
 import '../App.css';
 import axios from 'axios'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { withRouter } from 'react-router-dom';
+
+
 
 // Constants for time
 const format = 'HH:mm';
@@ -74,6 +78,7 @@ class ManageEvent extends Component {
     this.handleCreateEvent = this.handleCreateEvent.bind(this);
     this._onSelectStart = this._onSelectStart.bind(this);
     this._onSelectEnd = this._onSelectEnd.bind(this);
+    this.cancel = this.cancel.bind(this);
 
   }
 
@@ -139,6 +144,10 @@ class ManageEvent extends Component {
     });
   }
 
+  cancel(){
+    this.props.history.push('/events/list/')
+  }
+
   handleCreateEvent(event) {
     if(!this.state.eventName){
       alert('Please enter an event name.')
@@ -155,7 +164,7 @@ class ManageEvent extends Component {
     else if (this.state.capacity == '') {
       alert('Please enter a maximum capacity.')
     } else {
-      alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventCap + " " + this.state.eventLoc + " " + this.state.date.format().substring(0,10) + " " + this.state.start + " " + this.state.end);
+      alert('Congrats on submitting your event!');
 
       var data = [{"capacity": this.state.eventCap, "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "start": this.state.start,
       "end": this.state.end, "date" : this.state.date.format().substring(0,10), "pk": this.state.pk}]
@@ -170,63 +179,76 @@ class ManageEvent extends Component {
   render() {
     return (
       <div className="card Events-event anim-fadeinright">
-       <div className="card-header event-header">
-          <input className = "form-control" type = "text" id = "title" placeholder = "Event Name" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
-          <p>{this.state.eating_club} &bull; </p>
-       </div>
+             <div className="input-group Events-addEvent">
+                <input className = "form-control" type = "text" id = "title" placeholder = "Event Name" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
+             </div>
 
-        <div className=" col-12 card-body event-body">
-             <textarea className="form-control" type="text" id="description" placeholder = "Description" name = "eventDes" value= {this.state.eventDes} onChange={this.handleChange}/>
+             <div className = "input-group Events-addEvent">
+              <textarea className="form-control " type="text" id="description" placeholder = "Description" name = "eventDes" value= {this.state.eventDes} onChange={this.handleChange}/>
+             </div>
 
-              <div className = "row Events-addEvent">
-                  <label for = "date" className = "btn"> Date: </label>
-                   <SingleDatePicker
-                   numberOfMonths={1}
-                   initialDate={null}
-                   date={this.state.date}
-                   name = "date"
-                   placeholder= "Select"
-                   small = {true}// momentPropTypes.momentObj or null
-                   onDateChange={date => this.setState({date})} // PropTypes.func.isRequired
-                   focused={this.state.focused} // PropTypes.bool
-                   onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-                   />
+             <div className="input-group Events-addEvent">
 
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Date</span>
               </div>
 
-              <div className = "row Events-addEvent">
-                <div className = "col-6">
-                  <div className = "row">
-                  <label for = "start" className = "btn">Start Time:</label>
-                  <Dropdown options={options} label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" />
-                  </div>
+               <SingleDatePicker
+               numberOfMonths={1}
+               initialDate={null}
+               date={this.state.date}
+               name = "date"
+               placeholder= "Select"
+               small = {false}// momentPropTypes.momentObj or null
+               onDateChange={date => this.setState({date})} // PropTypes.func.isRequired
+               focused={this.state.focused} // PropTypes.bool
+               onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+               />
+             </div>
+
+
+             <div className="input-group Events-addEvent">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Start Time</span>
+              </div>
+
+              <Dropdown options={options} label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" />
+
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">End Time</span>
+              </div>
+              <Dropdown options={options} label = "end" onChange={this._onSelectEnd} value={this.state.end} placeholder="00:00" />
+             </div>
+
+             <div className="input-group Events-addEvent">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Capacity</span>
+              </div>
+              <input className = "form-control" type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = ""/>
+             </div>
+
+             <div className="input-group Events-addEvent">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Location</span>
+              </div>
+              <input className = "form-control" type = "text" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = ""/>
+             </div>
+
+             <div className="row float-right">
+               <div className = "col float-right">
+                  <button className="btn btn-danger" onClick = {(e)=>this.props.onRemoveEvent(e, this.state.pk)} style ={{width:150}} ><FontAwesomeIcon className="mr-1" icon="trash-alt"/>Delete Event</button>
+               </div>
+
+
+                <div className = "col float-right">
+                  <button className="btn" style ={{width:150}} onClick = {this.cancel}>Cancel</button>
                 </div>
 
-                <div className = "col-6">
-                  <div className = "row">
-                  <label for = "end" className = "col btn"> End Time:</label>
-                  <Dropdown options={options} label = "end" onChange={this._onSelectEnd} value={this.state.end} placeholder="00:00" />
-                  </div>
+                <div className = "col float-right">
+                  <button className="btn btn-success" style ={{width:150}} onClick = {this.handleCreateEvent}>Save Changes</button>
                 </div>
-             </div>
-
-              <div className = "row Events-addEvent">
-                  <label className = "btn">Capacity: </label>
-                  <input type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = "Capacity"/>
               </div>
 
-            <div className = "container">
-             <div className = "row">
-                <input className = "form-control" type = "text" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = "Location"/>
-             </div>
-
-             <div className = "row Events-addEvent">
-              <div className = "col">
-                <button className="btn btn-success" style ={{width:150}} onClick = {this.handleCreateEvent}>Save Changes</button>
-              </div>
-             </div>
-            </div>
-          </div>
       </div>
     );
   }
@@ -234,4 +256,4 @@ class ManageEvent extends Component {
 
 //
 
-export default ManageEvent;
+export default withRouter(ManageEvent);
