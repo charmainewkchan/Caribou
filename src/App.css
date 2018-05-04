@@ -10,6 +10,24 @@
   text-align: center;
 }
 
+.footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+   height:30px;   /* Height of the footer */
+   color: #bbb;
+   background:#20576D;
+   font-family: roboto;
+   font-size: .9em;
+   padding-top:.2em;
+}
+
+
+
 .navbar-custom {
   background: #FF5B32;
  }
@@ -18,13 +36,17 @@
   font-size: 0.73em;
   background: #FF5B32;
   font-family: roboto;
-
 }
+
+
 
 .eventsPanel-mobile{
   background: #20576D;
+  margin:0;
+  padding:0;
   padding-top:.5em;
   padding-bottom:.5em;
+
 }
 
 .eventsPanel-mobile p{
@@ -32,7 +54,7 @@
   color: #FFF4EC;
   padding: 0;
   margin:0;
-  font-size: .9em;
+  font-size: .8em;
   font-family: roboto;
 }
 
@@ -117,8 +139,9 @@
 }
 
 
-body {
+html, body {
   background: #FFF4EC;
+  height: 100%;
 }
 
 .App-logo {
@@ -283,7 +306,6 @@ body {
   height:1.3em;
   margin:0em .2em;
   margin-top: -.2em;
-  padding: 0;
   border: none;
 }
 
@@ -293,6 +315,11 @@ body {
   top: 0;
   display:inline-block;
 }
+
+.splash{ 
+  padding-top: 6em;
+  padding-bottom: 1em;
+ }
 
 
 @media (min-width: 900px) {
@@ -458,6 +485,17 @@ body {
   }
 }
 
+.pagination {
+  text-align: center;
+  font-size: .8em;
+  white-space: nowrap;
+}
+
+.pagination p {
+  margin-top:.5em;
+  margin-bottom: 0;
+}
+
 /* SINGLE EVENT PAGE */
 
 .event-page{
@@ -590,12 +628,10 @@ body {
   .events-list .container-fluid {
     width: 100%;
     margin:0;
-    padding:.2em;
   }
   .events-list{
     width:100%;
     margin:0;
-    padding:0;
   }
 }
 
@@ -695,8 +731,16 @@ body {
 
 .Home{
   background: #FF5B32;
-  padding-top: 8em;
+  min-height: 90vh;
+}
 
+.Home .container-fluid{
+  width:100%;
+  
+}
+
+.splash-btn{
+  margin:auto;
 }
 
 .Home p {
