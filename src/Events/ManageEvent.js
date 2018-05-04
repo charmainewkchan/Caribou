@@ -8,6 +8,10 @@ import 'react-dropdown/style.css'
 import eating_club_map from './eating_club_map.json';
 import '../App.css';
 import axios from 'axios'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { withRouter } from 'react-router-dom';
+
+
 
 // Constants for time
 const format = 'HH:mm';
@@ -74,6 +78,7 @@ class ManageEvent extends Component {
     this.handleCreateEvent = this.handleCreateEvent.bind(this);
     this._onSelectStart = this._onSelectStart.bind(this);
     this._onSelectEnd = this._onSelectEnd.bind(this);
+    this.cancel = this.cancel.bind(this);
 
   }
 
@@ -139,6 +144,10 @@ class ManageEvent extends Component {
     });
   }
 
+  cancel(){
+    this.props.history.push('/events/list/')
+  }
+
   handleCreateEvent(event) {
     if(!this.state.eventName){
       alert('Please enter an event name.')
@@ -170,13 +179,11 @@ class ManageEvent extends Component {
   render() {
     return (
       <div className="card Events-event anim-fadeinright">
-       <div className="card-header event-header">
-          <input className = "form-control" type = "text" id = "title" placeholder = "Event Name" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
-          <p>{this.state.eating_club} &bull; </p>
-       </div>
+             <div className="input-group Events-addEvent">
+                <input className = "form-control" type = "text" id = "title" placeholder = "Event Name" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
+             </div>
 
-        <div className= "col-12 card-body event-body">
-             <div className = " Events-addEvent">
+             <div className = "input-group Events-addEvent">
               <textarea className="form-control " type="text" id="description" placeholder = "Description" name = "eventDes" value= {this.state.eventDes} onChange={this.handleChange}/>
              </div>
 
@@ -227,15 +234,21 @@ class ManageEvent extends Component {
               <input className = "form-control" type = "text" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = ""/>
              </div>
 
-             <div className = "col  Events-addEvent">
-                <button className="btn btn-danger" onClick = {this.props.onRemoveEvent} style ={{width:150}} onClick = {this.handleCreateEvent}>Delete Event</button>
-             </div>
+             <div className="row float-right">
+               <div className = "col float-right">
+                  <button className="btn btn-danger" onClick = {this.props.onRemoveEvent} style ={{width:150}} onClick = {this.handleCreateEvent}><FontAwesomeIcon className="mr-1" icon="trash-alt"/>Delete Event</button>
+               </div>
 
-              <div className = "col ">
-                <button className="btn btn-success" style ={{width:150}} onClick = {this.handleCreateEvent}>Save Changes</button>
+
+                <div className = "col float-right">
+                  <button className="btn" style ={{width:150}} onClick = {this.cancel}>Cancel</button>
+                </div>
+
+                <div className = "col float-right">
+                  <button className="btn btn-success" style ={{width:150}} onClick = {this.handleCreateEvent}>Save Changes</button>
+                </div>
               </div>
 
-          </div>
       </div>
     );
   }
@@ -243,4 +256,4 @@ class ManageEvent extends Component {
 
 //
 
-export default ManageEvent;
+export default withRouter(ManageEvent);
