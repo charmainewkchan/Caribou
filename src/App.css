@@ -316,7 +316,7 @@ html, body {
   display:inline-block;
 }
 
-.splash{ 
+.splash{
   padding-top: 6em;
   padding-bottom: 1em;
  }
@@ -736,7 +736,7 @@ html, body {
 
 .Home .container-fluid{
   width:100%;
-  
+
 }
 
 .splash-btn{
@@ -744,8 +744,8 @@ html, body {
 }
 
 .Home p {
-    font-size: 2.5em;
-    margin: 0em auto 0em auto;
+    font-size: 1.2em;
+    margin: 3em auto 0em auto;
     width: 60%;
     color: white;
     font-family: 'Fjalla One', sans-serif;
