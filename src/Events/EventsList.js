@@ -73,6 +73,8 @@ class EventsPanel extends Component {
     }
 
   onLeaveEvent(event_id) {
+
+
     var data = [{
       event: event_id,
     }]
@@ -88,7 +90,7 @@ class EventsPanel extends Component {
 
   render() {
     return (
-           <div className="container-fluid events-list anim-fadeinup">
+           <div className="container-fluid events-list">
             {this.props.events.map(function(event){
               return (
 
