@@ -151,7 +151,9 @@ class EditableProfile extends Component {
   }
 
   onSelectYear(event) {
-      year: event.value
+      this.setState({
+        year: event.value 
+      })
   }
 
   onSelectEatingClub(event) {
