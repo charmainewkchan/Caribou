@@ -227,11 +227,14 @@ class ManageEvent extends Component {
               <input className = "form-control" type = "text" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = ""/>
              </div>
 
-             <div className = "row Events-addEvent">
-              <div className = "col">
+             <div className = "col  Events-addEvent">
+                <button className="btn btn-danger" onClick = {this.props.onRemoveEvent} style ={{width:150}} onClick = {this.handleCreateEvent}>Delete Event</button>
+             </div>
+
+              <div className = "col ">
                 <button className="btn btn-success" style ={{width:150}} onClick = {this.handleCreateEvent}>Save Changes</button>
               </div>
-             </div>
+
           </div>
       </div>
     );
