@@ -25,18 +25,11 @@ class Home extends Component {
         		  <div className="col">
                  <Link to='/events' className = "btn btn-outline-light">Student Events</Link>
         	     </div>
-               <div className="col-2" >
+
                </div>
-               <div className="col">
-                  <a href="#" className = "btn btn-outline-light">Official Club Events</a>
-         	     </div>
 
           </div>
         </div>
-
-      <h2> Official Club Events</h2>
-      <EventCal/>
-      </div>
     );
   }
 }
