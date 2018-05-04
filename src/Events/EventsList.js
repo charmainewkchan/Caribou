@@ -15,7 +15,13 @@ class EventsPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      events : this.props.events,
+      sortedEvents : []
     };
+
+    this.state.sortedEvents = [].concat(this.state.events).sort((a, b) => a.fields.date > b.fields.date);
+    console.log("***");
+    console.log(this.state.sortedEvents);
 
     this.onJoinEvent = this.onJoinEvent.bind(this);
     this.onLeaveEvent = this.onLeaveEvent.bind(this);
@@ -80,7 +86,7 @@ class EventsPanel extends Component {
     return (
           <div className="events-list">
            <div className="container-fluid">
-            {this.props.events.map(function(event){
+            {this.state.sortedEvents.map(function(event){
               return (
 
                 <div key={event.pk} className="row event-row-buffer">
@@ -92,7 +98,7 @@ class EventsPanel extends Component {
                               description={event.fields.description}
                               location={event.fields.location}
                               pk={event.pk}
- 
+
                               start={event.fields.start}
                               end={event.fields.end}
                               date={event.fields.date}
