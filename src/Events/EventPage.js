@@ -80,15 +80,15 @@ class EventPage extends Component {
 
   buttons() {
 		if (this.state.isAttending == "1") {
-			return <button className="btn btn-danger" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Leave </button>
+			return <button className="btn btn-danger" onClick={() => this.props.onLeaveEvent(this.state.pk)}> Leave </button>
 		} else if (this.state.isOwner == "1") {
-      return <button className="btn btn-outline-secondary owner-btn " onClick={(e) => {this.props.history.push('/events/manage/'+ this.state.pk + "/"); e.stopPropagation();
-}}><FontAwesomeIcon icon="pencil-alt" /></button>
+      return <button className="btn btn-outline-secondary" onClick={(e) => {this.props.history.push('/events/manage/'+ this.state.pk + "/"); e.stopPropagation();
+}}><FontAwesomeIcon icon="pencil-alt" className="mr-1" />Edit</button>
 
     }
     else {
       console.log(this.state.attendance)
-			return <button disabled={this.state.attendance==this.state.eventCap} className="btn btn-primary" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
+			return <button disabled={this.state.attendance==this.state.eventCap} className="btn btn-primary" onClick={() => this.props.onJoinEvent(this.state.pk)}> Join </button>
 		}
 	}
 

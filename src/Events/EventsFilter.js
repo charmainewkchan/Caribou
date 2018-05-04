@@ -23,6 +23,7 @@ class EventsFilter extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSort = this.handleSort.bind(this);
+    this.clearFilter = this.clearFilter.bind(this);
   }
 
   componentDidMount() {
@@ -44,6 +45,24 @@ class EventsFilter extends Component {
     this.props.setSort(asc, field)
   }
 
+
+  clearFilter(){
+    this.setState({
+        TO: false,
+        CA: false,
+        TI: false,
+        CN: false,
+        IV: false,
+        CT: false,
+        QD: false,
+        CO: false,
+        CL: false,
+        TE: false,
+        CH: false,
+        NN: false
+    });
+    this.props.clearFilter();
+  }
 
   render() {
          return( 
@@ -67,8 +86,10 @@ class EventsFilter extends Component {
               }
               </div>
               <div className="form-group row">
-                <button onClick={()=>this.props.applyFilter(this.state)}className="btn">Apply</button>
+                <button onClick={()=>this.props.applyFilter(this.state)}className="btn btn-sm mr-3" style={{width:'4em'}}>Apply</button>
+                <button onClick={()=>this.clearFilter()}className="btn btn-sm float-right" style={{width:'4em'}}>Clear</button>
               </div>
+
             </div>
           </div>)
   }

@@ -86,7 +86,7 @@ class Profile extends Component {
           </div>
 
           <div className = 'col-6'>
-            <button onClick={this.toggleEditMode}> Edit Profile </button>
+           <button className="btn btn-outline-secondary" onClick={this.toggleEditMode}><FontAwesomeIcon icon="pencil-alt" className="mr-1" />Edit</button>
           </div>
         </div>
         <hr/>
@@ -107,16 +107,16 @@ class Profile extends Component {
         </div>
 
         <div className="form-group row">
-          <label htmlFor="staticEmail" className="col-sm-2 col-form-label font-weight-bold">College</label>
+          <label htmlFor="res_college" className="col-sm-2 col-form-label font-weight-bold">College</label>
           <div className="col-sm-10">
-            <input type="text" readonly className="form-control-plaintext" id="staticEmail" value={rescollegeAbr[this.state.profile_info.res_college]}/>
+            <input type="text" readonly className="form-control-plaintext" id="res_college" value={rescollegeAbr[this.state.profile_info.res_college]}/>
            </div>
         </div>
 
-                <div className="form-group row">
-          <label htmlFor="staticEmail" className="col-sm-2 col-form-label font-weight-bold">Eating Club</label>
+          <div className="form-group row">
+          <label htmlFor="eating_club" className="col-sm-2 col-form-label font-weight-bold">Eating Club</label>
           <div className="col-sm-10">
-            <input type="text" readonly className="form-control-plaintext" id="staticEmail" value={eatingClubAbr[this.state.profile_info.eating_club]}/>
+            <input type="text" readonly className="form-control-plaintext" id="eating_club" value={eatingClubAbr[this.state.profile_info.eating_club]}/>
            </div>
         </div>
 
