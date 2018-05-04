@@ -25,6 +25,8 @@ class EventPage extends Component {
     }
 
     this.buttons = this.buttons.bind(this)
+    this.onJoinEvent = this.onJoinEvent.bind(this);
+    this.onLeaveEvent = this.onLeaveEvent.bind(this);
 }
 
   componentDidMount(){
@@ -51,8 +53,9 @@ class EventPage extends Component {
           isAttending: res.data[0].isAttending
       });
 
-      console.log(this.state.isAttending);
     });
+
+
   }
 
   componentDidUpdate(){
@@ -80,7 +83,7 @@ class EventPage extends Component {
 
   buttons() {
 		if (this.state.isAttending == "1") {
-			return <button className="btn btn-danger" onClick={() => this.props.onLeaveEvent(this.props.pk)}> Leave </button>
+			return <button className="btn btn-danger" onClick={this.onLeaveEvent(this.state.pk)}> Leave </button>
 		} else if (this.state.isOwner == "1") {
       return <button className="btn btn-outline-secondary owner-btn " onClick={(e) => {this.props.history.push('/events/manage/'+ this.state.pk + "/"); e.stopPropagation();
 }}><FontAwesomeIcon icon="pencil-alt" /></button>
@@ -88,9 +91,42 @@ class EventPage extends Component {
     }
     else {
       console.log(this.state.attendance)
-			return <button disabled={this.state.attendance==this.state.eventCap} className="btn btn-primary" onClick={() => this.props.onJoinEvent(this.props.pk)}> Join </button>
+			return <button disabled={this.state.attendance==this.state.eventCap} className="btn btn-primary" onClick={() => this.onJoinEvent(this.props.pk)}> Join </button>
 		}
 	}
+
+  onJoinEvent(event_id) {
+    var data = [{
+      event: event_id,
+    }]
+    axios.post("https://bixr.herokuapp.com/api/join_event/",  data)
+    .then(res => this.props.updateData())
+    .catch(err => {
+          if(err.response.status == 401) {
+            // redirect
+            if(window.confirm("You must complete your profile before joining an event. Press OK to go to Profile page.")) {
+              this.props.history.push('/myprofile/');
+            }
+          }
+    });
+
+  }
+
+  onLeaveEvent(event_id) {
+    var data = [{
+      event: event_id,
+    }]
+    //alert(JSON.stringify(data));
+    if (window.confirm('Are you sure you want to leave this event?')) {
+
+    axios.post("https://bixr.herokuapp.com/api/unjoin_event/",  data)
+    .then(res => this.props.updateData())
+    .catch(err => alert(err));
+  }
+
+  }
+
+
 
   shouldComponentUpdate(props, state) {
     console.log(this.props.match.params.event_id)
