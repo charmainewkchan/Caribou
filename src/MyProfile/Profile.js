@@ -81,7 +81,7 @@ class Profile extends Component {
       <div>
         <div className = 'row'>
           <div className = 'col-6'>
-            <h2 className="profile-header">My Profile</h2>
+            <h2 className="profile-header">My Profile ({localStorage.getItem('netid')})</h2>
 
           </div>
 
