@@ -19,7 +19,6 @@ class EventsPanel extends Component {
 
     this.onJoinEvent = this.onJoinEvent.bind(this);
     this.onLeaveEvent = this.onLeaveEvent.bind(this);
-    this.onRemoveEvent = this.onRemoveEvent.bind(this);
     this.onPostEvent = this.onPostEvent.bind(this);
   }
 
@@ -63,38 +62,28 @@ class EventsPanel extends Component {
         });
     }
 
-    onRemoveEvent(event, event_id) {
-      event.stopPropagation();
-
-      const url = "https://bixr.herokuapp.com/api/delete_event/" + event_id + "/";
-      axios.get(url)
-      .then(res =>  this.props.updateData())
-      .catch(err => alert(err));
-    }
 
   onLeaveEvent(event_id) {
-
-
     var data = [{
       event: event_id,
     }]
     //alert(JSON.stringify(data));
     if (window.confirm('Are you sure you want to leave this event?')) {
-
-    axios.post("https://bixr.herokuapp.com/api/unjoin_event/",  data)
-    .then(res => this.props.updateData())
-    .catch(err => alert(err));
-  }
+      axios.post("https://bixr.herokuapp.com/api/unjoin_event/",  data)
+      .then(res => this.props.updateData())
+      .catch(err => alert(err));
+    }
 
   }
 
   render() {
     return (
-           <div className="container-fluid events-list">
+          <div className="events-list">
+           <div className="container-fluid">
             {this.props.events.map(function(event){
               return (
 
-                <div className="row event-row-buffer">
+                <div key={event.pk} className="row event-row-buffer">
                   <EventCard title={event.fields.title}
                               eating_club={event.fields.eating_club}
                               time={event.fields.time}
@@ -103,7 +92,7 @@ class EventsPanel extends Component {
                               description={event.fields.description}
                               location={event.fields.location}
                               pk={event.pk}
-                              key={event.pk}
+ 
                               start={event.fields.start}
                               end={event.fields.end}
                               date={event.fields.date}
@@ -111,12 +100,12 @@ class EventsPanel extends Component {
                               isOwner={event.isOwner}
                               onJoinEvent={this.onJoinEvent}
                               onPostEvent={this.onPostEvent}
-                              onRemoveEvent={this.onRemoveEvent}
                               onLeaveEvent={this.onLeaveEvent}
                               isEditable={this.props.isEditable}/>
                 </div>);
               },this)
             }
+          </div>
           </div>
           )
     }

@@ -10,7 +10,7 @@ const years = [2019,2020,2021,2022];
 const eatingclubs = ["Cloister","Tower","None","Colonial","Cannon","Cap","Ivy","TigerInn","Quad","Terrace","Cottage","Charter"]
 const rescollege = ["Butler", "Wilson", "Mathey", "Rocky", "Whitman","Forbes"]
 
-var eatingClubAbr = {
+const eatingClubAbr = {
   "CL":"Cloister",
   "TO":"Tower",
   "NN":"None",
@@ -25,7 +25,7 @@ var eatingClubAbr = {
   "CH":"Charter"
 }
 
-var eatingClubAbrReverse = {
+const eatingClubAbrReverse = {
   "Cloister": 'CL',
   "Tower":'TO',
   "None":'NN',
@@ -40,7 +40,7 @@ var eatingClubAbrReverse = {
   "Charter":'CH'
 }
 
-var rescollegeAbr = {
+const rescollegeAbr = {
   'NN' : "None",
   'MA' : "Mathey",
   'RO' : "Rocky",
@@ -50,7 +50,7 @@ var rescollegeAbr = {
   'FO' : "Forbes"
 }
 
-var rescollegeAbrReverse = {
+const rescollegeAbrReverse = {
   "None" : 'NN',
 	"Mathey" : 'MA',
 	"Rocky" : 'RO',
@@ -116,17 +116,18 @@ class EditableProfile extends Component {
       console.log(data)
       axios.post('https://bixr.herokuapp.com/api/post_user', data)
       .then(res => {
-          console.log(res);
-          console.log(res.data);
+         this.props.updateData();
+         this.props.toggleEditMode();
         })
       .catch(err => alert(err));
 
-      this.props.updateData();
-      this.props.toggleEditMode();
+
     }
   }
 
   componentDidMount(){
+    console.log(rescollegeAbr[this.props.res_college])
+
        const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
     axios.get(url)
     .then(res => {
@@ -135,8 +136,8 @@ class EditableProfile extends Component {
            "first_name": res.data[0].fields.first_name,
             "last_name": res.data[0].fields.last_name,
             "year": res.data[0].fields.year,
-            "res_college":rescollegeAbrReverse[res.data[0].fields.res_college],
-            "eating_club": eatingClubAbrReverse[res.data[0].fields.eating_club]
+            "res_college":rescollegeAbr[res.data[0].fields.res_college],
+            "eating_club": eatingClubAbr[res.data[0].fields.eating_club]
         })
       })
     .catch(err => alert(err.response));
@@ -173,9 +174,9 @@ class EditableProfile extends Component {
 
 
         <h3>First name: </h3>
-        <input className = "form-control" type = "text" id = "first_name" name = "first_name" value = {this.state.first_name} onChange = {this.handleChange}/>
+        <input className = "form-control" type = "text" id = "first_name" name = "first_name" value={this.state.first_name} onChange = {this.handleChange}/>
         <h3>Last name: </h3>
-        <input className = "form-control" type = "text" id = "last name" name = "last_name"  value = {this.state.last_name} onChange = {this.handleChange}/>
+        <input className = "form-control" type = "text" id = "last name" name = "last_name"  value={this.state.last_name} onChange = {this.handleChange}/>
 
         <div>
         <h3>Year: </h3>
@@ -186,8 +187,12 @@ class EditableProfile extends Component {
         <Dropdown options = {rescollege} label = "rescollege" name = "res_college" onChange = {this.onSelectResCollege} value = {this.state.res_college} defaultValue = {this.state.res_college}/>
 
         <h3>Eating Club: </h3>
-          <Dropdown options = {eatingclubs} label = "eatingclubs" onChange = {this.onSelectEatingClub} value = {this.state.eating_club} defaultValue = {this.state.eating_club}/>
-        <button className="btn btn-success mt-2" onClick={this.save}> Save</button>
+          <Dropdown options = {eatingclubs} label="eatingclubs" onChange = {this.onSelectEatingClub} value={this.state.eating_club} defaultValue={this.state.eating_club}/>
+        
+        <div className="row float-right">  
+        <button className="btn mt-2 mr-2" onClick={this.props.toggleEditMode}>Cancel</button>
+        <button className="btn btn-success mt-2" onClick={this.save}>Save</button>
+        </div>
       </div>
     );
   }

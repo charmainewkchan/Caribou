@@ -66,7 +66,7 @@ class Event extends Component {
 		 					<h4>{moment(this.props.date, "YYYY-MM-DD").format('D')}</h4>
 		 				</div>
 
-		 				<div className="col-9 events-content">
+		 				<div className="col events-content">
 					 		<div className="row">
 					 			<div className="col">
 						  		<h2>{this.props.title}</h2>
