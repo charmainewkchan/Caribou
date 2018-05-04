@@ -81,12 +81,28 @@ class EventPage extends Component {
 
   }
 
+  displayAttendees(event, event_pk) {
+    event.stopPropagation();
+    console.log(event);
+    const url = "https://bixr.herokuapp.com/api/get_users_for_event/" + event_pk + "/";
+    axios.get(url).then(res => {
+        var netids = res.data.map(user => user.fields.netid);
+        alert(netids);
+    })
+    .catch(err => alert("err:" + err))
+  }
+
   buttons() {
 		if (this.state.isAttending == "1") {
 			return <button className="btn btn-danger" onClick={() => this.props.onLeaveEvent(this.state.pk)}> Leave </button>
 		} else if (this.state.isOwner == "1") {
-      return <button className="btn btn-outline-secondary" onClick={(e) => {this.props.history.push('/events/manage/'+ this.state.pk + "/"); e.stopPropagation();
+      return (
+      <div>
+      <button className="btn btn-outline-secondary" onClick={(e) => {this.props.history.push('/events/manage/'+ this.state.pk + "/"); e.stopPropagation();
 }}><FontAwesomeIcon icon="pencil-alt" className="mr-1" />Edit</button>
+      <button className="btn btn-outline-secondary" onClick={(e) => this.displayAttendees(e,this.state.pk)}><FontAwesomeIcon icon="user" className="mr-1"/> Attendees</button>
+      </div>
+    )
 
     }
     else {
