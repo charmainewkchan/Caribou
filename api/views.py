@@ -298,7 +298,7 @@ def post_event(request):
 		for netid in attendees_id:
 			tolist.append(netid)
 		subject = 'An event you joined was updated'
-		message = "The event \"" + e.title + "\" was updated. See the updates at " + WEBSITE + str(event_id) +"/"
+		message = "The event \"" + e.title + "\" was updated. See the updates at " + WEBSITE + str(data['pk']) +"/"
 		notify(subject, message, tolist)
 		return HttpResponse("event " + str(pk) + " updated")
 
