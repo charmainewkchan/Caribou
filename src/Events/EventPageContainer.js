@@ -38,7 +38,8 @@ class EventPageContainer extends Component {
               loaded:true
           }, () => {
             if(force) {
-              this.forceUpdate();
+              this.props.updateEvents();
+              //this.forceUpdate();
             }
 
           });

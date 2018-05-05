@@ -171,6 +171,11 @@ class Events extends Component {
     });
   }
 
+
+  isUpdateRequired(a, b){
+    return a.length != b.length;
+  }
+
   updateHosting(){
     const netid = localStorage.getItem('netid');
     const url = "https://bixr.herokuapp.com/api/hosted_events/" + netid + "/";
@@ -189,9 +194,10 @@ class Events extends Component {
     const url = "https://bixr.herokuapp.com/api/get_events_for_user/" + netid + "/";
     axios.get(url).then(res => {
       console.log(res.data);
-      this.setState({
-        eventsAttending: res.data,
-      });
+
+        this.setState({
+          eventsAttending: res.data,
+        });
     })
     .catch(err=>alert(err));
   }
@@ -276,7 +282,7 @@ class Events extends Component {
                   <Route exact path='/events/(list/)?' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.events} updateData={this.updateAll}/>}/>
                   <Route exact path='/events/hosting/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsHosting} updateData={this.updateHosting}/>}/>
                   <Route exact path='/events/attending/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsAttending} updateData={this.updateAttending}/>}/>
-                  <Route exact path='/events/:event_id(\d+)/' component={()=><EventPageContainer/>}/>
+                  <Route exact path='/events/:event_id(\d+)/' component={()=><EventPageContainer updateEvents={this.updateAll}/>}/>
                 </Switch>
   	         </div>
           </div>

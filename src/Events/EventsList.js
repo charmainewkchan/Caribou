@@ -31,6 +31,7 @@ class EventsPanel extends Component {
 
   componentDidMount() {
     console.log("events list mounted");
+    //this.props.updateData();
   }
 
   onJoinEvent(event_id) {
