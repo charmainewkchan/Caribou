@@ -78,7 +78,7 @@ class Profile extends Component {
   render() {
         if (!this.state.edit_mode) {
     return (
-      <div>
+      <div className="MyProfile">
         <div className = 'row'>
           <div className = 'col-6'>
             <h2 className="profile-header">My Profile ({localStorage.getItem('netid')})</h2>

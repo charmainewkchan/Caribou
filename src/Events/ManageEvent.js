@@ -235,10 +235,12 @@ class ManageEvent extends Component {
              </div>
 
              <div className="row float-right">
+
+                {this.state.pk != '' && 
                <div className = "col float-right">
                   <button className="btn btn-danger" onClick = {(e)=>this.props.onRemoveEvent(e, this.state.pk)} style ={{width:150}} ><FontAwesomeIcon className="mr-1" icon="trash-alt"/>Delete Event</button>
                </div>
-
+                }
 
                 <div className = "col float-right">
                   <button className="btn" style ={{width:150}} onClick = {this.cancel}>Cancel</button>

@@ -193,7 +193,6 @@ html, body {
 
 
 .MyProfile {
-  padding: 2em;
   padding-bottom: 4em;
   font-size:.9em;
   text-align: left;
@@ -203,8 +202,10 @@ html, body {
 }
 
 .MyProfile-width{
-  width: 40%;
-  height: 100vh;
+  width: 45%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 85vh;
   margin-top:2em;
 }
 
@@ -356,8 +357,16 @@ html, body {
   color: white;
 }
 
+.nav-item-custom{
+  height: 100%;
+}
+
+.nav-link-header-active{
+  text-decoration: underline;
+}
+
 .nav-link-header:hover {
-  color: #20576D;
+  color: #ccc;
   text-decoration: none
 }
 
@@ -579,13 +588,18 @@ html, body {
 
 /* USER PAGE */
 .user-page{
+
+  height: 85vh;
+
+}
+
+.user-page .container{
   background: white;
-  margin-top: 2em;
+    margin-top: 2em;
   border-radius: 5px;
   border: 1px solid #ced6d9;
   padding: 0;
-  height: 100%;
-  font-family: roboto;
+    font-family: roboto;
 }
 
 .user-page-header{
@@ -601,6 +615,8 @@ html, body {
 
 .user-page-body{
   padding: 1em;
+  height: auto;
+  margin-bottom: 2em;
 }
 
 

@@ -31,7 +31,8 @@ class User extends Component {
 
   render() {
     return (
-      <div className="container user-page">
+      <div className="user-page">
+        <div className="container">
         <div className="user-page-header">
           <h2>{this.state.fields.first_name} {this.state.fields.last_name}</h2>
 
@@ -41,6 +42,7 @@ class User extends Component {
           <p>Class of {this.state.fields.year}</p>
           <p>{res_college_map[this.state.fields.res_college]}</p>
         </div>
+      </div>
       </div>
 
     )

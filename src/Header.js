@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import './App.css';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
@@ -36,9 +36,9 @@ class Header extends Component {
             </button>
          <div className="collapse navbar-collapse navbar-collapse-custom"  id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto navbar-collapse borderXwidth">
-              <li className="nav-item"><Link to='/' className="nav-link-header ">HOME</Link></li>
-              <li className="nav-item"><Link to='/events' className="nav-link-header">EVENTS</Link></li>
-              <li className="nav-item"><Link to='/myprofile' className="nav-link-header">PROFILE</Link></li>
+              <li className="nav-item"><NavLink to='/' exact activeClassName="nav-link-header-active" className="nav-link-header ">HOME</NavLink></li>
+              <li className="nav-item"><NavLink to='/events' activeClassName="nav-link-header-active" className="nav-link-header">EVENTS</NavLink></li>
+              <li className="nav-item"><NavLink to='/myprofile' activeClassName="nav-link-header-active" className="nav-link-header">PROFILE</NavLink></li>
             </ul>
           </div>
       </nav>

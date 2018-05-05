@@ -17,11 +17,9 @@ class MyProfile extends Component {
     return (
 
       <div className="MyProfile-width">
-          <div className="MyProfile events-wrapper ">
+        <div className="MyProfile events-wrapper" style={{'padding':'2em'}}>
           <Profile/>
-          <br/>
-
-          
+           <br/>  
           <Account/>
         </div>
       </div>
