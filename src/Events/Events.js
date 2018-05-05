@@ -12,7 +12,7 @@ import eating_club_map from './eating_club_map.json';
 import EventCard from './EventCard';
 import EditableEvent from './EditableEvent';
 
-import EventPage from './EventPage';
+import EventPageContainer from './EventPageContainer';
 import ManageEvent from './ManageEvent';
 import DropDownBar from '../DropDownBar';
 import EventsCompactList from './EventsCompactList'
@@ -43,9 +43,6 @@ class Events extends Component {
 
     this.onPostEvent = this.onPostEvent.bind(this);
     this.onRemoveEvent = this.onRemoveEvent.bind(this);
-    this.onJoinEvent = this.onJoinEvent.bind(this);
-    this.onLeaveEvent = this.onLeaveEvent.bind(this);
-
 
     this.updateAll = this.updateAll.bind(this);
     this.updateHosting = this.updateHosting.bind(this);
@@ -69,6 +66,7 @@ class Events extends Component {
     this.updateAll();
     this.setState({"listSelected": 0});
   }
+
 
 
 
@@ -120,23 +118,6 @@ class Events extends Component {
         this.props.history.push('/events/list/')
       })
     .catch(err => alert(err));
-  }
-
-  onJoinEvent(event_id) {
-    var data = [{
-      event: event_id,
-    }]
-    console.log(("join" + event_id))
-    axios.post("https://bixr.herokuapp.com/api/join_event/",  data)
-    .then(res => this.updateAll())
-    .catch(err => {
-          if(err.response.status == 401) {
-            // redirect
-            if(window.confirm("You must complete your profile before joining an event. Press OK to go to Profile page.")) {
-              this.props.history.push('/myprofile/');
-            }
-          }
-    });
   }
 
   clearFilter(){
@@ -213,19 +194,6 @@ class Events extends Component {
       });
     })
     .catch(err=>alert(err));
-  }
-
-
-  onLeaveEvent(event_id) {
-    var data = [{
-      event: event_id,
-    }]
-    //alert(JSON.stringify(data));
-    if (window.confirm('Are you sure you want to leave this event?')) {
-      axios.post("https://bixr.herokuapp.com/api/unjoin_event/",  data)
-      .then(res => this.updateAll())
-      .catch(err => alert(err));
-    }
   }
 
 
@@ -308,7 +276,7 @@ class Events extends Component {
                   <Route exact path='/events/(list/)?' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.events} updateData={this.updateAll}/>}/>
                   <Route exact path='/events/hosting/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsHosting} updateData={this.updateHosting}/>}/>
                   <Route exact path='/events/attending/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsAttending} updateData={this.updateAttending}/>}/>
-                  <Route exact path='/events/:event_id(\d+)/' component={()=><EventPage onLeaveEvent={this.onLeaveEvent} onJoinEvent={this.onJoinEvent} />}/>
+                  <Route exact path='/events/:event_id(\d+)/' component={()=><EventPageContainer/>}/>
                 </Switch>
   	         </div>
           </div>

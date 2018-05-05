@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Link, withRouter } from 'react-router-dom';
 import moment from 'moment';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import JoinLeaveButton from '../JoinLeaveButton';
 
 
 
@@ -21,7 +22,6 @@ class Event extends Component {
 	}
 
 	componentDidMount(){
-		console.log(this.props.loc)
 	}
 
 	owner_buttons() {
@@ -35,10 +35,8 @@ class Event extends Component {
 	}
 
 	buttons() {
-		if (this.props.isAttending) {
-			return <button className="btn btn-danger" onClick={(e) => {e.stopPropagation(); this.props.onLeaveEvent(this.props.pk)}}> Leave </button>
-		} else {
-			return <button disabled={this.props.attendance==this.props.capacity || this.props.isOwner} className="btn btn-primary" onClick={(e) => {e.stopPropagation(); this.props.onJoinEvent(this.props.pk)}}> Join </button>
+		if(!this.props.isOwner) {
+			return <JoinLeaveButton pk={this.props.pk} disabled={this.props.attendance==this.props.capacity} join={this.props.onJoinEvent} leave={this.props.onLeaveEvent} isAttending={this.props.isAttending}/>
 		}
 	}
 

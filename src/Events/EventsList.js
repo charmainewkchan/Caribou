@@ -75,11 +75,10 @@ class EventsPanel extends Component {
       event: event_id,
     }]
     //alert(JSON.stringify(data));
-    if (window.confirm('Are you sure you want to leave this event?')) {
+
       axios.post("https://bixr.herokuapp.com/api/unjoin_event/",  data)
       .then(res => this.props.updateData())
       .catch(err => alert(err));
-    }
 
   }
 
