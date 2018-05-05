@@ -20,7 +20,7 @@
     text-align: center;
    height:30px;   /* Height of the footer */
    color: #bbb;
-   background:#20576D;
+   background:#00373f;
    font-family: roboto;
    font-size: .9em;
    padding-top:.2em;
@@ -355,6 +355,18 @@ html, body {
 
 .nav-link-header {
   color: white;
+      letter-spacing: 2.2px;
+  font-size: 1.1em;
+  font-family: 'Roboto';
+
+}
+
+.nav-link-header:hover {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding-bottom: .2em;
+  border-bottom: 2px solid #20576D;
 }
 
 .nav-item-custom{
@@ -362,13 +374,15 @@ html, body {
 }
 
 .nav-link-header-active{
-  text-decoration: underline;
+  color: #20576D;
+  font-weight:bold;
 }
 
-.nav-link-header:hover {
-  color: #ccc;
-  text-decoration: none
+.nav-link-header-active:hover{
+  color: #20576D;
 }
+
+
 
 .events-date{
   font-family: 'roboto';
