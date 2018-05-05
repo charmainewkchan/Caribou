@@ -25,6 +25,7 @@ class Home extends Component {
               <div className = "row ">
                      <Link to='/events' className = "btn splash-btn btn-outline-light">Student Events</Link>
             	 </div>
+               <p> Make events, join events, and get to know other Tigers! </p>
              </div>
             </div>
         </div>
