@@ -533,6 +533,7 @@ body {
   border-radius: 5px;
   border: 1px solid #ffffff;
   width: 100%;
+  padding: 1em;
 }
 
 .event-page-header {
@@ -551,11 +552,17 @@ body {
   margin-bottom: 1em;
 }
 
+.event-text {
+  font-size: 2em;
+  margin : 0.2em;
+  font-family: 'Fjalla One', sans-serif;
+
+}
 .event-page-header h2 {
   font-weight: bold;
   font-family: roboto;
-
 }
+
 
 .event-page-header h3 {
   color: #bbb;
@@ -578,7 +585,7 @@ body {
 
 .event-page-details {
   text-align: center;
-  margin-bottom: 4em;
+  margin-bottom: 1em;
 }
 
 .event-page-info {
@@ -592,6 +599,12 @@ body {
 
 .event-page-info p {
   margin: 0;
+}
+
+.event-date {
+  font-size: 1.5em;
+  font-family: 'Fjalla One', sans-serif;
+
 }
 
 @media (max-width: 767px) {
@@ -859,6 +872,17 @@ body {
   height: auto;
 }
 
+.event-time {
+  font-size: 1.5em;
+  font-family: 'Fjalla One', sans-serif;
+  margin: 0;
+}
+.event-time-small {
+  font-size: 1em;
+  font-family: 'Fjalla One', sans-serif;
+  margin: 0;
+}
+
 .events-wrapper h2{
     font-size: 1em;
   text-align: left;
@@ -868,7 +892,7 @@ body {
 }
 
 .vl {
-    border-right: 3px solid black;
+    border-right: 1px solid grey;
     height: 100px;
 }
 

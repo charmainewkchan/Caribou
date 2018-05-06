@@ -98,8 +98,9 @@ class Event extends Component {
 						  </div>
 
 						  <div className="row"><div className="col">
-					    	<p>{eating_club_map[this.props.eating_club]} &bull; {moment(this.props.date, "YYYY-MM-DD").format('MMM D')}, {this.props.start} - {this.props.end}</p>
-					    	</div>
+					    	<p>{eating_club_map[this.props.eating_club]} &bull; {moment(this.props.date, "YYYY-MM-DD").format('MMM D')}, {moment((this.props.date + " " + this.props.start), 'YYYY-MM-DD HH:mm').format('h:mmA')} -  {moment((this.props.date + " " + this.props.end), 'YYYY-MM-DD HH:mm').format('h:mmA')}</p>
+
+								</div>
 					    </div>
 
 					    <div className="event-body">

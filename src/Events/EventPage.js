@@ -119,30 +119,30 @@ class EventPage extends Component {
 
         <div className="container event-page-body">
           <div className="row">
-
               <div className="col order-xs-2 order-sm-2  order-md-1 event-page-details">
               <p>{this.props.fields.description}</p>
-                <hr/>
               </div>
           </div>
 
+              <div>
+                  <p className= "event-date">{moment(this.props.fields.date).format("dddd, MMMM DD, YYYY")}</p>
 
-              <div className="order-xs-1 order-sm-1  order-md-2 event-page-info">
-                  <p>{moment(this.props.fields.date).format("dddd MMMM DD YYYY")}</p>
                   <hr/>
 
                 <div className = "row">
-                <div className= "col-5">
-                 <p>{this.props.fields.location}</p>
+                <div className= "col-3">
+                <p className = "event-time">{moment((this.props.fields.date + " " + this.props.fields.start), 'YYYY-MM-DD HH:mm').format('h:mmA')}</p>
+                <p className = "event-time-small"> to </p>
+                <p className = "event-time">{moment((this.props.fields.date + " " + this.props.fields.end), 'YYYY-MM-DD HH:mm').format('h:mmA')}</p>
                 </div>
 
                 <div className = "col-1">
                  <div class="vl"></div>
                 </div>
 
-                <div className = "col-5">
-                 <p>{this.props.fields.start} - {this.props.fields.end}</p>
-                 <p>{this.state.attendance+"/"+this.props.fields.capacity+" going!"}</p>
+                <div className = "col-8">
+                <p className = "event-text">{this.props.fields.location}</p>
+                 <p className = "event-time-small">{this.state.attendance+"/"+this.props.fields.capacity+" going!"}</p>
                  </div>
                  </div>
 
