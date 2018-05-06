@@ -21,6 +21,7 @@ class EventPage extends Component {
     }
     this.buttons = this.buttons.bind(this);
     this.getAttendees = this.getAttendees.bind(this);
+    this.Item = this.Item.bind(this);
 }
 
   buttons() {
@@ -39,6 +40,10 @@ class EventPage extends Component {
         );
     }
 	}
+
+  Item(props) {
+    return <li style={{"list-style-type":"none"}}> {props.message}</li>;
+  }
 
   getAttendees() {
     const url = "https://bixr.herokuapp.com/api/get_users_for_event/" + this.state.pk + "/";
@@ -85,7 +90,7 @@ class EventPage extends Component {
         })
 
         for (var i = 0; i < this.state.firstNames.length; i++) {
-          this.state.attendees.push(this.state.firstNames[i] + " " + this.state.lastNames[i]);
+          this.state.attendees.push(this.state.firstNames[i] + " " + this.state.lastNames[i] + "   ");
         }
         console.log(this.state.attendees)
 
@@ -142,7 +147,9 @@ class EventPage extends Component {
         </button>
       </div>
       <div class="modal-body">
-        {this.state.attendees}
+        <ul>
+        {this.state.attendees.map((name) => <this.Item key = {name} message = {name}/>)}
+        </ul>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
