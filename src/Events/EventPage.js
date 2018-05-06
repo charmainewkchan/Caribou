@@ -110,53 +110,64 @@ class EventPage extends Component {
     return(
     <div className="event-page">
         <div className="event-page-header">
-          <Link to="/events/">All events</Link>
-          <h3>{moment(this.props.fields.date).format("ddd, hA") }</h3>
+          <Link to="/events/"><FontAwesomeIcon icon="angle-left" className="angle-left"/> All events</Link>
           <h2>{this.props.fields.title}</h2>
           <div className="event-page-author">
-            <p>Hosted by <Link className="mr-1"to={"/user/"+this.props.author+"/"}>{this.props.author}</Link>({eating_club_map[this.props.fields.eating_club]})</p>
+            <p>By <Link className="mr-1"to={"/user/"+this.props.author+"/"}>{this.props.author}</Link>({eating_club_map[this.props.fields.eating_club]})</p>
           </div>
         </div>
 
         <div className="container event-page-body">
           <div className="row">
 
-              <div className="col-md-9 order-xs-2 order-sm-2  order-md-1 event-page-details">
-                <img className="event-img" src={princeton_img} alt="img"/>
-                <h3> Details </h3>
+              <div className="col order-xs-2 order-sm-2  order-md-1 event-page-details">
+              <p>{this.props.fields.description}</p>
                 <hr/>
-                <p>{this.props.fields.description}</p>
               </div>
+          </div>
 
 
-              <div className="col-md-3 order-xs-1 order-sm-1  order-md-2 event-page-info">
-                  <p>{moment(this.props.fields.date).format("ddd MMM d")}</p>
+              <div className="order-xs-1 order-sm-1  order-md-2 event-page-info">
+                  <p>{moment(this.props.fields.date).format("dddd MMMM DD YYYY")}</p>
+                  <hr/>
+
+                <div className = "row">
+                <div className= "col-5">
                  <p>{this.props.fields.location}</p>
+                </div>
+
+                <div className = "col-1">
+                 <div class="vl"></div>
+                </div>
+
+                <div className = "col-5">
                  <p>{this.props.fields.start} - {this.props.fields.end}</p>
                  <p>{this.state.attendance+"/"+this.props.fields.capacity+" going!"}</p>
+                 </div>
+                 </div>
+
                  <hr/>
                  <div>
                   {this.buttons()}
 
 
 
-                  <div class="modal" id="attendee" tabindex="-1" role="dialog" aria-labelledby="attendeeTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="attendeeTitle">Attendees</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <ul>
-                          {this.state.attendees.map((name) => <this.Item key = {name} message = {name}/>)}
-                          </ul>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
+                <div class="modal" id="attendee" tabindex="-1" role="dialog" aria-labelledby="attendeeTitle" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="attendeeTitle">Attendees</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <ul>
+                        {this.state.attendees.map((name) => <this.Item key = {name} message = {name}/>)}
+                        </ul>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                     </div>
                   </div>
