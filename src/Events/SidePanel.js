@@ -66,8 +66,6 @@ class SidePanel extends Component {
             <div className="row events-wrapper">
                 <h2>Hosting</h2>
                 <hr/>
-                <button className="btn btn-secondary w-100" onClick={(e) => {this.props.history.push('/events/manage/')}}><FontAwesomeIcon icon="plus" className="mr-3"/>Create an Event</button>
-
                 <EventsCompactList setEventPage={this.props.setEventPage} location={this.props.location} events={this.state.eventsHosting}/>
 
             </div>

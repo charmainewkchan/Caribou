@@ -16,6 +16,7 @@ from . import CASClient
 from api.decorators import casauth
 
 import math
+from datetime import datetime
 
 WEBSITE = "https://bixr.herokuapp.com/events/"
 
@@ -65,7 +66,10 @@ def process_events_list(data, request):
 
 	request_data = (json.loads(request.body)) # python array 
 
-	data = data.order_by('-pk') # order. queryset
+	data = data.order_by('date', 'start') # order. queryset
+	# remove events that have already passed
+	today = datetime.now().strftime("%Y-%m-%d")
+	data = data.exclude(date__lt=today)
 
 	if request_data:
 		request_data = request_data[0]; # python dict
@@ -162,7 +166,7 @@ def delete_user(request):
 	dependencies_j = JoinedEvents.objects.filter(participant=user)
 	if len(dependencies_j) > 0:
 		# access the events they've joined
-		event_ids = [j.event.id for j in joined_events]
+		event_ids = [j.event.id for j in dependencies_j]
 		events = PersonalEvent.objects.filter(id__in=event_ids)
 		for e in events: # decrement attendance
 			att = e.attendance - 1
@@ -173,9 +177,15 @@ def delete_user(request):
 	dependencies_e = PersonalEvent.objects.filter(author=user)
 	if len(dependencies_e) > 0:
 		dependencies_e.delete()
+	# check DoNotMail for dependencies
+	entry = DoNotMail.objects.filter(user=user)
+	if len(entry) > 0:
+		entry.delete()
 	# delete the user
 	user.delete()
-	return HttpResponse("deleted user " + netid)
+	if 'netid' in request.session:
+		del request.session['netid']
+	return redirect("https://bixr.herokuapp.com")
 
 @csrf_exempt
 @casauth
