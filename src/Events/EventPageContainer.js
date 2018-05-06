@@ -40,7 +40,7 @@ class EventPageContainer extends Component {
               attendance: res.data[0].fields.attendance
           }, () => {
             if(force) {
-              this.props.updateEvents();
+              this.props.updateSidePanel();
               //this.forceUpdate();
             }
 
@@ -123,6 +123,7 @@ class EventPageContainer extends Component {
                    onLeaveEvent={this.onLeaveEvent}
                    onJoinEvent={this.onJoinEvent}
                    displayAttendees={this.displayAttendees}
+                   attendance={this.state.attendance}
          />
          </div>
       );

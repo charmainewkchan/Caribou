@@ -647,14 +647,14 @@ body {
 
 @media (min-width: 960px) {
   .events-list {
-    width: 75%;
+    width: 100%;
     margin-left: 6em;
   }
 }
 
 @media (min-width: 1200px) {
 .events-list {
-    width: 60%;
+    width: 100%;
   }
 }
 

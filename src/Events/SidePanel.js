@@ -17,9 +17,14 @@ class SidePanel extends Component {
 
     this.updateHosting = this.updateHosting.bind(this)
     this.updateAttending = this.updateAttending.bind(this)
+    this.updateData = this.updateData.bind(this);
   }
 
   componentDidMount() {
+    this.updateData();
+  }
+
+  updateData(){
     this.updateHosting();
     this.updateAttending();
   }
@@ -48,6 +53,10 @@ class SidePanel extends Component {
         });
     })
     .catch(err=>alert(err));
+  }
+
+  showAlert() {
+    alert('Hello World');
   }
 
 

@@ -57,6 +57,11 @@ class Events extends Component {
 
     this.applyFilter = this.applyFilter.bind(this);
     this.clearFilter = this.clearFilter.bind(this);
+    this.updateSidePanel = this.updateSidePanel.bind(this)
+  }
+
+  updateSidePanel() {
+    this.refs.child.updateData();
   }
 
   componentDidMount() {
@@ -162,6 +167,8 @@ class Events extends Component {
     }]
     console.log(data)
 
+    this.updateSidePanel()
+
     axios.post(url, data).then(res => {
       console.log(res.data);
       this.setState({
@@ -169,11 +176,6 @@ class Events extends Component {
         events: res.data.slice(0,-1)
       });
     });
-  }
-
-
-  updateSidePanel() {
-
   }
 
 
@@ -188,7 +190,7 @@ class Events extends Component {
     	<div>
 
 
-        <SidePanel mobile={true} changeList={this.changeList} setEventPage={this.setEventPage}/>
+        <SidePanel ref="child" mobile={true} changeList={this.changeList} setEventPage={this.setEventPage}/>
 
         <div className="d-md-none mb-2">
           <DropDownBar id="filter_dropdown"><EventsFilter clearFilter={this.clearFilter} applyFilter={this.applyFilter} setSort={this.setSort} sort_by={this.state.sort.field+"-"+(this.state.sort.ascending?"1":"0")}  onClubFilterChange={this.onClubFilterChange}/></DropDownBar>
@@ -205,7 +207,7 @@ class Events extends Component {
           <div className="row">
             <div className="col-md-3 d-none d-md-block eventsPanel">
               <div className="container-fluid">
-                <SidePanel mobile={false} changeList={this.changeList} setEventPage={this.setEventPage}/>
+                <SidePanel ref="child" mobile={false} changeList={this.changeList} setEventPage={this.setEventPage}/>
 
                 <div className="row events-wrapper">
                   <EventsFilter clearFilter={this.clearFilter} applyFilter={this.applyFilter} />
@@ -213,13 +215,13 @@ class Events extends Component {
               </div>
             </div>
 
-  	        <div className="col m-scene">
+  	        <div className="col-md-6">
                <Switch>
                   <Route path='/events/manage/:event_id(\d+)?' render={({ match }) => <ManageEvent event_id={match.params.event_id} onRemoveEvent={this.onRemoveEvent} onPostEvent={this.onPostEvent}/>}/>
                   <Route exact path='/events/(list/)?' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.events} updateData={this.updateAll}/>}/>
                   <Route exact path='/events/hosting/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsHosting} updateData={this.updateHosting}/>}/>
                   <Route exact path='/events/attending/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsAttending} updateData={this.updateAttending}/>}/>
-                  <Route exact path='/events/:event_id(\d+)/' component={()=><EventPageContainer updateEvents={this.updateAll}/>}/>
+                  <Route exact path='/events/:event_id(\d+)/' component={()=><EventPageContainer updateSidePanel={this.updateSidePanel}/>}/>
                 </Switch>
   	         </div>
           </div>

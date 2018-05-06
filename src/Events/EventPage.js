@@ -18,14 +18,19 @@ class EventPage extends Component {
 
     this.buttons = this.buttons.bind(this);
     this.onJoin = this.onJoin.bind(this);
+    this.onLeave = this.onLeave.bind(this);
 }
 
   onJoin(pk){
     this.setState({
       attendance: this.state.attendance+1
     }, () => { this.props.onJoinEvent(pk)})
+  }
 
-
+  onLeave(pk) {
+      this.setState({
+        attendance: this.state.attendance-1
+      }, () => this.props.onLeaveEvent(pk))
   }
 
 
@@ -41,7 +46,7 @@ class EventPage extends Component {
         );
     } else {
       return(
-        <JoinLeaveButton disabled={this.props.fields.attendance==this.props.fields.capacity} isAttending={this.props.isAttending} pk={this.props.pk} join={this.onJoin} leave={this.props.onLeaveEvent}/>
+        <JoinLeaveButton disabled={this.props.fields.attendance==this.props.fields.capacity} isAttending={this.props.isAttending} pk={this.props.pk} join={this.onJoin} leave={this.onLeave}/>
         );
     }
 	}
@@ -52,6 +57,7 @@ class EventPage extends Component {
   }
 
   shouldComponentUpdate(props, state) {
+    return true;
     console.log(this.props.fields.attendance)
     console.log(this.state.attendance)
     return false;
