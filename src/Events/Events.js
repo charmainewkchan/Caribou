@@ -220,6 +220,11 @@ class Events extends Component {
           <div className="row">
             <div className="col-md-3 d-none d-md-block eventsPanel">
               <div className="container-fluid">
+
+                <div className="row mb-3">
+                  <button className="btn btn-secondary w-100" onClick={(e) => {this.props.history.push('/events/manage/')}}><FontAwesomeIcon icon="plus" className="mr-3"/>Create an Event</button>
+                </div>
+
                 <SidePanel ref="child" mobile={false} changeList={this.changeList} setEventPage={this.setEventPage}/>
 
                 <div className="row events-wrapper">
