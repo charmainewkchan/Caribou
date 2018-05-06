@@ -73,6 +73,10 @@ def process_events_list(data, request):
 		data = serializers.serialize('json', data) #json string
 		data = json.loads(data_json) #python array
 
+	    # add isowner, isattending fields
+	    netid = get_netid(request);
+		data = data.append_data_to_events(data, netid)
+
 		# Pagination
 		page_size = request_data['page_size']
 		page_num  = request_data['page_num']
@@ -82,13 +86,8 @@ def process_events_list(data, request):
 		data = data[offset:(offset+page_size)] # page slice
 
 		data.append({'num_pages': num_pages})
-	else:
+	
 		data = serializers.serialize('json', data) #json string
-		data = json.loads(data_json) #python array
-
-    # add isowner, isattending fields
-    netid = get_netid(request);
-	data = data.append_data_to_events(data, netid)
 
 	return json.dumps(data) # returns json string
 

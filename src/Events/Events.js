@@ -224,8 +224,6 @@ class Events extends Component {
                <Switch>
                   <Route path='/events/manage/:event_id(\d+)?' render={({ match }) => <ManageEvent event_id={match.params.event_id} onRemoveEvent={this.onRemoveEvent} onPostEvent={this.onPostEvent}/>}/>
                   <Route exact path='/events/(list/)?' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.events} updateData={this.updateAll}/>}/>
-                  <Route exact path='/events/hosting/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsHosting} updateData={this.updateHosting}/>}/>
-                  <Route exact path='/events/attending/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsAttending} updateData={this.updateAttending}/>}/>
                   <Route exact path='/events/:event_id(\d+)/' component={()=><EventPageContainer updateSidePanel={this.updateSidePanel}/>}/>
                 </Switch>
   	         </div>
