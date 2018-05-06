@@ -183,7 +183,9 @@ def delete_user(request):
 		entry.delete()
 	# delete the user
 	user.delete()
-	return HttpResponse("deleted user " + netid)
+	if 'netid' in request.session:
+		del request.session['netid']
+	return redirect("https://bixr.herokuapp.com")
 
 @csrf_exempt
 @casauth
