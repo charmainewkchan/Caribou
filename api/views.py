@@ -63,11 +63,12 @@ def append_data_to_events(data, netid):
 
 def process_events_list(data, request):
 
-	request_data = (json.loads(request.body)) # python dict
+	request_data = (json.loads(request.body)) # python array 
 
 	data = data.order_by('-pk') # order 
 
 	if request_data:
+		request_data = request_data[0]; # python dict
 		eating_club_filter = request_data['eating_club_filter']
 		data = data.filter(eating_club__in=eating_club_filter) #filter
 		data = serializers.serialize('json', data) #json string
