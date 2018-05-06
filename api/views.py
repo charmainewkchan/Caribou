@@ -61,29 +61,36 @@ def append_data_to_events(data, netid):
 	return data # python dict
 
 
-def process_events_list(events, request):
-	request_data = (json.loads(request.body))[0]
-	netid = get_netid(request);
+def process_events_list(data, request):
 
-	eating_club_filter = request_data['eating_club_filter']
-	dataq = events.order_by('-pk').filter(eating_club__in=eating_club_filter) # order and filter
+	request_data = (json.loads(request.body)) # python dict
 
-	# Pagination
-	page_size = request_data['page_size']
-	page_num  = request_data['page_num']
+	data = data.order_by('-pk') # order 
 
-	num_pages = math.ceil(len(dataq) / page_size)
-	offset = page_size * page_num
-	dataq = dataq[offset:(offset+page_size)]
-	data_json = serializers.serialize('json', dataq) #json string
-	data_json = json.loads(data_json) #python dict
+	if request_data:
+		eating_club_filter = request_data['eating_club_filter']
+		data = data.filter(eating_club__in=eating_club_filter) #filter
+		data = serializers.serialize('json', data) #json string
+		data = json.loads(data_json) #python array
 
-	data_json.append({'num_pages': num_pages})
+		# Pagination
+		page_size = request_data['page_size']
+		page_num  = request_data['page_num']
+
+		num_pages = math.ceil(len(data) / page_size)
+		offset = page_size * page_num
+		data = data[offset:(offset+page_size)] # page slice
+
+		data.append({'num_pages': num_pages})
+	else:
+		data = serializers.serialize('json', data) #json string
+		data = json.loads(data_json) #python array
 
     # add isowner, isattending fields
-	data_json = data_json.append_data_to_events(data, netid)
+    netid = get_netid(request);
+	data = data.append_data_to_events(data, netid)
 
-	return json.dumps(data_json) # returns json string
+	return json.dumps(data) # returns json string
 
 
 def append_num_pages(data, num_pages):
