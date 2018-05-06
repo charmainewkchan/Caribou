@@ -73,8 +73,8 @@ def process_events_list(data, request):
 		data = serializers.serialize('json', data) #json string
 		data = json.loads(data_json) #python array
 
-	    # add isowner, isattending fields
-	    netid = get_netid(request);
+		# add isowner, isattending fields
+		netid = get_netid(request)
 		data = data.append_data_to_events(data, netid)
 
 		# Pagination
