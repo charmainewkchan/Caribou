@@ -46,10 +46,9 @@ def joined_events_list(netid):
 
 
 # appends isOwner and isAttending fields to list of events
-def append_data_to_events(data_json, netid):
+def append_data_to_events(data, netid):
 	events_joined = joined_events_list(netid)
 
-	data = json.loads(data_json) #json string to dict
 	# manipulate data to add owner field, 0 is not owner, 1 is owner
 	for e in data: # e is the outer dictionary for the event
 		userpk = int(e["fields"]["author"]) # get user pkid
@@ -59,12 +58,38 @@ def append_data_to_events(data_json, netid):
 		e["isAttending"] = 1 if e["pk"] in events_joined else 0
 		e["author"] = author
 
-	return json.dumps(data) # dict to json string
+	return data # python dict
 
-def append_num_pages(data_json, num_pages):
-	data = json.loads(data_json)
+
+def process_events_list(events, request):
+	request_data = (json.loads(request.body))[0]
+	netid = get_netid(request);
+
+	eating_club_filter = request_data['eating_club_filter']
+	dataq = events.order_by('-pk').filter(eating_club__in=eating_club_filter) # order and filter
+
+	# Pagination
+	page_size = request_data['page_size']
+	page_num  = request_data['page_num']
+
+	num_pages = math.ceil(len(dataq) / page_size)
+	offset = page_size * page_num
+	dataq = dataq[offset:(offset+page_size)]
+	data_json = serializers.serialize('json', dataq) #json string
+	data_json = json.loads(data_json) #python dict
+
+	data_json.append({'num_pages': num_pages})
+
+    # add isowner, isattending fields
+	data_json = data_json.append_data_to_events(data, netid)
+
+	return json.dumps(data_json) # returns json string
+
+
+def append_num_pages(data, num_pages):
 	data.append({'num_pages': num_pages})
-	return json.dumps(data) 
+	return json.dumps(data) # returns json string
+
 
 # sends an email with given specs
 def notify(subject, message, tolist):
@@ -175,11 +200,10 @@ def post_user(request):
 def get_events_for_user(request, netid):
 	event_ids = joined_events_list(netid)
 	events = PersonalEvent.objects.filter(id__in=event_ids)
-	events_json = serializers.serialize('json', events)
 
-	data_json = append_data_to_events(events_json, netid)
+	data_json_string = process_events_list(events, request)
 
-	return HttpResponse(data_json, content_type='application/json')
+	return HttpResponse(data_json_string, content_type='application/json')
 
 #------------------------------------------------------------------------------#
 @csrf_exempt
@@ -188,22 +212,12 @@ def get_events(request):
 	#netid = request.session['netid']
 	netid = get_netid(request)
 
-	request_data = (json.loads(request.body))[0]
-	page_size = request_data['page_size']
-	page_num  = request_data['page_num']
-	eating_club_filter = request_data['eating_club_filter']
+	# filter and sort
+	dataq = PersonalEvent.objects.all()
 
+	data_json_string = process_events_list(dataq, request)
 
-	dataq = PersonalEvent.objects.all().order_by('-pk').filter(eating_club__in=eating_club_filter)
-	num_pages = math.ceil(len(dataq) / page_size)
-	offset = page_size * page_num
-	dataq = dataq[offset:(offset+page_size)]
-	data_json = serializers.serialize('json', dataq)
-
-	data_json = append_data_to_events(data_json, netid)
-	data_json = append_num_pages(data_json, num_pages)
-
-	return HttpResponse(data_json, content_type='application/json')
+	return HttpResponse(data_json_string, content_type='application/json')
 
 @casauth
 def get_event(request, event_id):
@@ -224,11 +238,10 @@ def hosted_events(request, netid):
 	netid1 = netid
 	user = User.objects.get(netid=netid1)
 	events = PersonalEvent.objects.filter(author=user)
-	events_json = serializers.serialize('json', events)
 
-	data_json = append_data_to_events(events_json, netid)
+	data_json_string = process_events_list(events, request)
 
-	return HttpResponse(data_json, content_type='application/json')
+	return HttpResponse(data_json_string, content_type='application/json')
 
 @casauth
 def get_users_for_event(request, event_id):
