@@ -114,6 +114,7 @@ def notify(subject, message, tolist):
 		mail = EmailMultiAlternatives(subject,message,"bixrnoreply@gmail.com", tomail, connection=connection)
 		mail.send()
 
+
 def get_netid(request):
 	global g_netid
 	if 'netid' in request.session:
@@ -138,7 +139,18 @@ def get_user(request, netid):
 	user = User.objects.filter(netid=netid)
 	if (len(user) != 1):
 		return HttpResponse("User Not Found", status=404)
-	user_json = serializers.serialize('json', user)
+
+	user_json = serializers.serialize('json', user) # json string
+	user = json.loads(user_json) #python array
+
+	user_set = DoNotMail.objects.filter(netid=netid)
+	if len(user_set) == 1:
+		user[0].fields['isDoNotMail'] = True
+	else:
+		user[0].fields['isDoNotMail'] = False
+
+	user_json = json.dumps(user)
+
 	return HttpResponse(user_json, content_type='application/json')
 
 @csrf_exempt

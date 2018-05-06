@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import Profile from './Profile';
-import Account from './Account';
 
 import '../App.css';
 class MyProfile extends Component {
@@ -19,8 +18,6 @@ class MyProfile extends Component {
       <div className="MyProfile-width">
         <div className="MyProfile events-wrapper" style={{'padding':'2em'}}>
           <Profile/>
-           <br/>  
-          <Account/>
         </div>
       </div>
     );

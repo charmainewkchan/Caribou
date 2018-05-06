@@ -37,7 +37,8 @@ class Profile extends Component {
     super(props);
     this.state = {
       profile_info: {},
-      edit_mode: false
+      edit_mode: false,
+      doNotMail: false
     }
     this.updateData = this.updateData.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
@@ -50,27 +51,35 @@ class Profile extends Component {
     }
 
   componentDidMount() {
+    this.updateData()
+  }
+
+  updateData() {
        const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
     axios.get(url)
     .then(res => {
       console.log(res.data[0].fields)
         this.setState({
-          profile_info: res.data[0].fields
+          profile_info: res.data[0].fields,
+          doNotMail: res.data[0].fields.isDoNotMail
         })
       })
     .catch(err => alert(err.response));
   }
 
-  updateData() {
-    const url = "https://bixr.herokuapp.com/api/user/" + localStorage.getItem('netid') + "/";
-    axios.get(url)
-    .then(res => {
-      console.log(res.data[0].fields)
-        this.setState({
-          profile_info: res.data[0].fields
-        })
-      })
-    .catch(err => alert(err.response));
+
+
+  deleteAccount() {
+    if (window.confirm("Are you sure you want to delete your account?")) {
+      axios.get("https://bixr.herokuapp.com/api/delete_user/")
+      .then(res => console.log(res))
+      .catch( err => console.log(err))
+    }
+  }
+
+
+  handleMailListChange(){
+    console.log("hi")
   }
 
 
@@ -95,32 +104,51 @@ class Profile extends Component {
         <div className="form-group row">
           <label htmlFor="name" className="col-sm-2 col-form-label font-weight-bold">Name</label>
           <div className="col-sm-10">
-            <input type="text" readonly className="form-control-plaintext" id="name" value={ this.state.profile_info.first_name +" " + this.state.profile_info.last_name}/>
+            <input type="text" disabled={true} readonly className="form-control-plaintext" id="name" value={ this.state.profile_info.first_name +" " + this.state.profile_info.last_name}/>
            </div>
         </div>
 
         <div className="form-group row">
           <label htmlFor="year" className="col-sm-2 col-form-label font-weight-bold">Year</label>
           <div className="col-sm-10">
-            <input type="text" readonly className="form-control-plaintext" id="year" value={ this.state.profile_info.year }/>
+            <input type="text" disabled={true}  readonly className="form-control-plaintext" id="year" value={ this.state.profile_info.year }/>
            </div>
         </div>
 
         <div className="form-group row">
           <label htmlFor="res_college" className="col-sm-2 col-form-label font-weight-bold">College</label>
           <div className="col-sm-10">
-            <input type="text" readonly className="form-control-plaintext" id="res_college" value={rescollegeAbr[this.state.profile_info.res_college]}/>
+            <input type="text" disabled={true}  readonly className="form-control-plaintext" id="res_college" value={rescollegeAbr[this.state.profile_info.res_college]}/>
            </div>
         </div>
 
           <div className="form-group row">
           <label htmlFor="eating_club" className="col-sm-2 col-form-label font-weight-bold">Eating Club</label>
           <div className="col-sm-10">
-            <input type="text" readonly className="form-control-plaintext" id="eating_club" value={eatingClubAbr[this.state.profile_info.eating_club]}/>
+            <input type="text" disabled={true} readonly className="form-control-plaintext" id="eating_club" value={eatingClubAbr[this.state.profile_info.eating_club]}/>
            </div>
         </div>
 
         </form>
+
+
+        <br/>
+        <div className="mt-4">
+          <h2 className="profile-header"> Account </h2>
+          <hr/>
+
+
+          <div className="form-check">
+                <input className="form-check-input" type="checkbox" name="date_asc" id="date_asc" checked={this.state.doNotMail} onChange={this.handleMailListChange}/>
+                <label className="form-check-label" for="date_asc">
+                  Receive Emails
+                </label>
+           </div>
+           <br/>
+
+
+          <button className="btn" onClick={()=>this.deleteAccount()}> Delete Account </button>
+         </div>
 
       </div>
     );
