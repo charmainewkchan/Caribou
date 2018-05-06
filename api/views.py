@@ -66,10 +66,10 @@ def process_events_list(data, request):
 
 	request_data = (json.loads(request.body)) # python array 
 
-	#data = data.order_by('-date') # order. queryset
+	data = data.order_by('-date') # order. queryset
 	# remove events that have already passed
-	#today = datetime.now().strftime("%Y-%m-%d")
-	#data = data.exclude(date__lt=today)
+	today = datetime.now().strftime("%Y-%m-%d")
+	data = data.exclude(date__lt=today)
 
 	if request_data:
 		request_data = request_data[0]; # python dict
@@ -177,6 +177,10 @@ def delete_user(request):
 	dependencies_e = PersonalEvent.objects.filter(author=user)
 	if len(dependencies_e) > 0:
 		dependencies_e.delete()
+	# check DoNotMail for dependencies
+	entry = DoNotMail.objects.filter(user=user)
+	if len(entry) > 0:
+		entry.delete()
 	# delete the user
 	user.delete()
 	return HttpResponse("deleted user " + netid)
