@@ -72,7 +72,7 @@ def process_events_list(data, request):
 		eating_club_filter = request_data['eating_club_filter']
 		data = data.filter(eating_club__in=eating_club_filter) #filter
 		data = serializers.serialize('json', data) #json string
-		data = json.loads(data_json) #python array
+		data = json.loads(data) #python array
 
 		# add isowner, isattending fields
 		netid = get_netid(request)
