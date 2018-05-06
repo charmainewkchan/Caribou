@@ -100,16 +100,6 @@ class EventPageContainer extends Component {
 
   }
 
-  componentDidUpdate(){
-    console.log("eventpagecontainer updated");
-  }
-
-  shouldComponentUpdate(props, state) {
-    //var isNewPage = (this.props.match.params.event_id != props.match.params.event_id)
-    return true//(isNewPage)
-  }
-
-
 
   render() {
     if(this.state.loaded) {

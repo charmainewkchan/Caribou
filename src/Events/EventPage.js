@@ -13,12 +13,21 @@ class EventPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      attendance: this.props.fields.attendance
+      attendance: this.props.fields.attendance,
+      pk: this.props.pk,
+      attendees: [],
+      firstNames : [],
+      lastNames: [],
+      netids: []
     }
+
+    this.Item = this.Item.bind(this);
+
 
     this.buttons = this.buttons.bind(this);
     this.onJoin = this.onJoin.bind(this);
     this.onLeave = this.onLeave.bind(this);
+
 }
 
   onJoin(pk){
@@ -40,8 +49,9 @@ class EventPage extends Component {
     if (this.props.isOwner) {
       return(<div>
         <button className="btn btn-outline-secondary" onClick={(e) => {this.props.history.push('/events/manage/'+ this.props.pk + "/"); e.stopPropagation();
-}}><FontAwesomeIcon icon="pencil-alt" className="mr-1 mb-1" />Edit</button>
-        <button className="btn btn-outline-secondary" onClick={(e) => this.props.displayAttendees(e,this.props.pk)}><FontAwesomeIcon icon="user" className="mr-1 mt-1"/>Attendees</button>
+        }}><FontAwesomeIcon icon="pencil-alt" className="mr-1 mb-1" />Edit</button>
+
+        <button type="button" className="btn btn-outline-secondary" data-toggle="modal" data-target="#attendee"><FontAwesomeIcon icon="user" className="mr-1 mt-1"/>Attendees</button>
         </div>
         );
     } else {
@@ -51,9 +61,41 @@ class EventPage extends Component {
     }
 	}
 
+  Item(props) {
+    return <li style={{"list-style-type":"none"}}> {props.message} </li>;
+  }
+
+
 
   componentDidMount(){
     console.log("attending:" + this.props.isAttending+ " " + this.props.pk);
+    const url = "https://bixr.herokuapp.com/api/get_users_for_event/" + this.state.pk + "/";
+    var netids;
+    var tfirstNames;
+    var tlastNames;
+    axios.get(url).then(res => {
+        netids = res.data.map(user => user.fields.netid);
+        tfirstNames = res.data.map(user => user.fields.first_name);
+        tlastNames = res.data.map(user => user.fields.last_name);
+
+        this.setState({
+          firstNames : tfirstNames,
+          lastNames : tlastNames,
+          netids : netids
+        })
+
+        for (var i = 0; i < this.state.firstNames.length; i++) {
+          this.state.attendees.push(this.state.firstNames[i] + " " + this.state.lastNames[i] + "   ");
+        }
+        console.log(this.state.attendees)
+
+        this.setState({
+          attendees: this.state.attendees
+        })
+
+    })
+    .catch(err => alert("err:" + err))
+
   }
 
   shouldComponentUpdate(props, state) {
@@ -95,6 +137,30 @@ class EventPage extends Component {
                  <hr/>
                  <div>
                   {this.buttons()}
+
+
+
+                  <div class="modal" id="attendee" tabindex="-1" role="dialog" aria-labelledby="attendeeTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="attendeeTitle">Attendees</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <ul>
+                          {this.state.attendees.map((name) => <this.Item key = {name} message = {name}/>)}
+                          </ul>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                  </div>
               </div>
 
