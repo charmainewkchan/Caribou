@@ -16,8 +16,19 @@ class EventPage extends Component {
       attendance: this.props.fields.attendance
     }
 
-    this.buttons = this.buttons.bind(this)
+    this.buttons = this.buttons.bind(this);
+    this.onJoin = this.onJoin.bind(this);
 }
+
+  onJoin(pk){
+    this.setState({
+      attendance: this.state.attendance+1
+    }, () => { this.props.onJoinEvent(pk)})
+
+
+  }
+
+
 
   buttons() {
 
@@ -30,7 +41,7 @@ class EventPage extends Component {
         );
     } else {
       return(
-        <JoinLeaveButton disabled={this.props.fields.attendance==this.props.fields.capacity} isAttending={this.props.isAttending} pk={this.props.pk} join={this.props.onJoinEvent} leave={this.props.onLeaveEvent}/>
+        <JoinLeaveButton disabled={this.props.fields.attendance==this.props.fields.capacity} isAttending={this.props.isAttending} pk={this.props.pk} join={this.onJoin} leave={this.props.onLeaveEvent}/>
         );
     }
 	}
@@ -40,13 +51,20 @@ class EventPage extends Component {
     console.log("attending:" + this.props.isAttending+ " " + this.props.pk);
   }
 
+  shouldComponentUpdate(props, state) {
+    console.log(this.props.fields.attendance)
+    console.log(this.state.attendance)
+    return false;
+    return (this.props.fields.attendance != this.state.attendance)
+  }
+
   render() {
     return(
-    <div className="event-page anim-fadeinright">
+    <div className="event-page">
         <div className="event-page-header">
           <Link to="/events/">All events</Link>
           <h3>{moment(this.props.fields.date).format("ddd, hA") }</h3>
-          <h2>{this.props.fields.eventName}</h2>
+          <h2>{this.props.fields.title}</h2>
           <div className="event-page-author">
             <p>Hosted by <Link className="mr-1"to={"/user/"+this.props.author+"/"}>{this.props.author}</Link>({eating_club_map[this.props.fields.eating_club]})</p>
           </div>
@@ -59,15 +77,15 @@ class EventPage extends Component {
                 <img className="event-img" src={princeton_img} alt="img"/>
                 <h3> Details </h3>
                 <hr/>
-                <p>{this.props.fields.eventDes}</p>
+                <p>{this.props.fields.description}</p>
               </div>
 
 
               <div className="col-md-3 order-xs-1 order-sm-1  order-md-2 event-page-info">
-                  <p>{this.props.fields.date}</p>
-                 <p>{this.props.fields.eventLoc}</p>
+                  <p>{moment(this.props.fields.date).format("ddd MMM d")}</p>
+                 <p>{this.props.fields.location}</p>
                  <p>{this.props.fields.start} - {this.props.fields.end}</p>
-                 <p>{this.props.fields.attendance+"/"+this.props.fields.capacity+" going!"}</p>
+                 <p>{this.state.attendance+"/"+this.props.fields.capacity+" going!"}</p>
                  <hr/>
                  <div>
                   {this.buttons()}
