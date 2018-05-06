@@ -145,9 +145,9 @@ def get_user(request, netid):
 	user_json = serializers.serialize('json', user) # json string
 	user = json.loads(user_json) #python array
 	if len(user_set) == 1:
-		user[0].fields['isDoNotMail'] = True
+		user[0]['fields']['isDoNotMail'] = True
 	else:
-		user[0].fields['isDoNotMail'] = False
+		user[0]['fields']['isDoNotMail'] = False
 
 	user_json = json.dumps(user)
 
