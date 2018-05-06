@@ -34,7 +34,6 @@ class Event extends Component {
 	owner_buttons() {
 			return (
 				<div className="owner-buttons">
-						<button className="btn btn-outline-secondary owner-btn " onClick={(e) => this.props.displayAttendees(e,this.props.pk)}><FontAwesomeIcon icon="user" /></button>
 						<button className="btn btn-outline-secondary owner-btn " onClick={(e) => {this.props.history.push('/events/manage/'+this.props.pk + "/"); e.stopPropagation();
 }}><FontAwesomeIcon icon="pencil-alt" /></button>
 				</div>

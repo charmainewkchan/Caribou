@@ -83,43 +83,49 @@ class EventsPanel extends Component {
   }
 
   render() {
-    return (
-          <div className="events-list">
-           <div className="container-fluid">
-            {this.state.sortedEvents.map(function(event){
-              if (event.fields.date > moment().format("YYYY-MM-DD")) {
-                return (
+     if (Object.keys(this.props.events).length == 0) {
+            return (
+              <p style={{fontStyle:'italic', fontSize:'.8em', padding:'0',fontFamily:'roboto'}}>No events to display</p>
+              )
+     } else {
+      return (
+            <div className="events-list">
+             <div className="container-fluid">
+              {this.state.sortedEvents.map(function(event){
+                if (event.fields.date > moment().format("YYYY-MM-DD")) {
+                  return (
 
 
 
-                  <div key={event.pk} className="row event-row-buffer">
-                    <EventCard title={event.fields.title}
-                                eating_club={event.fields.eating_club}
-                                time={event.fields.time}
-                                attendance={event.fields.attendance}
-                                capacity={event.fields.capacity}
-                                description={event.fields.description}
-                                location={event.fields.location}
-                                pk={event.pk}
-   
-                                start={event.fields.start}
-                                end={event.fields.end}
-                                date={event.fields.date}
-                                isAttending={event.isAttending}
-                                isOwner={event.isOwner}
-                                onJoinEvent={this.onJoinEvent}
-                                onPostEvent={this.onPostEvent}
-                                onLeaveEvent={this.onLeaveEvent}
-                                isEditable={this.props.isEditable}/>
-                  </div>);
+                    <div key={event.pk} className="row event-row-buffer">
+                      <EventCard title={event.fields.title}
+                                  eating_club={event.fields.eating_club}
+                                  time={event.fields.time}
+                                  attendance={event.fields.attendance}
+                                  capacity={event.fields.capacity}
+                                  description={event.fields.description}
+                                  location={event.fields.location}
+                                  pk={event.pk}
+     
+                                  start={event.fields.start}
+                                  end={event.fields.end}
+                                  date={event.fields.date}
+                                  isAttending={event.isAttending}
+                                  isOwner={event.isOwner}
+                                  onJoinEvent={this.onJoinEvent}
+                                  onPostEvent={this.onPostEvent}
+                                  onLeaveEvent={this.onLeaveEvent}
+                                  isEditable={this.props.isEditable}/>
+                    </div>);
+                }
+                },this)
               }
-              },this)
-            }
+              </div>
+              <Pagination changePage={this.props.changePage} currentPage={this.props.currentPage} numPages={this.props.numPages}/>
             </div>
-            <Pagination changePage={this.props.changePage} currentPage={this.props.currentPage} numPages={this.props.numPages}/>
-          </div>
-          )
-    }
+            )
+        }
+      }
 }
 
 export default withRouter(EventsPanel);
