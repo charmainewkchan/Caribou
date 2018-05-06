@@ -53,9 +53,6 @@ class EventPageContainer extends Component {
     console.log("eventpagecontainer mounting");
   }
 
-  componentDidUpdate(){
-    this.updateData();
-  }
 
   displayAttendees(event, event_pk) {
     event.stopPropagation();
