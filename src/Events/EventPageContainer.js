@@ -11,10 +11,11 @@ class EventPageContainer extends Component {
     this.state = {
       fields: {},
       author: '',
-      pk: 0,
+      pk: this.props.match.params.event_id,
       isOwner: false,
       isAttending: false,
-      loaded: false
+      loaded: false,
+      attendance: 0
     }
 
     this.onJoinEvent = this.onJoinEvent.bind(this);
@@ -35,10 +36,11 @@ class EventPageContainer extends Component {
               author:res.data[0].author,
               isOwner: res.data[0].isOwner,
               isAttending: res.data[0].isAttending,
-              loaded:true
+              loaded:true,
+              attendance: res.data[0].fields.attendance
           }, () => {
             if(force) {
-              this.props.updateEvents();
+              this.props.updateSidePanel();
               //this.forceUpdate();
             }
 
@@ -48,6 +50,7 @@ class EventPageContainer extends Component {
 
   componentDidMount(){
     this.updateData();
+    console.log("eventpagecontainer mounting");
   }
 
   componentDidUpdate(){
@@ -71,7 +74,11 @@ class EventPageContainer extends Component {
       event: event_id,
     }]
     axios.post("https://bixr.herokuapp.com/api/join_event/",  data)
-    .then(res => this.updateData(true))
+    .then(res => {
+        this.setState({
+          attendance: this.state.attendance+1
+        }, ()=>{this.updateData(true)})
+      })
     .catch(err => {
           if(err.response.status == 401) {
             // redirect
@@ -93,16 +100,12 @@ class EventPageContainer extends Component {
 
   }
 
-  shouldComponentUpdate(props, state) {
-    return (this.props.match.params.event_id != this.state.pk);
-  }
-
-
 
   render() {
     if(this.state.loaded) {
       return(
-        <EventPage fields={this.state.fields} 
+        <div className="anim-fadeinright">
+        <EventPage  fields={this.state.fields} 
                    pk={this.state.pk} 
                    author={this.state.author}   
                    isOwner={this.state.isOwner}
@@ -110,7 +113,9 @@ class EventPageContainer extends Component {
                    onLeaveEvent={this.onLeaveEvent}
                    onJoinEvent={this.onJoinEvent}
                    displayAttendees={this.displayAttendees}
+                   attendance={this.state.attendance}
          />
+         </div>
       );
     } else {
       return <div></div>
