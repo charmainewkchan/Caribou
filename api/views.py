@@ -16,6 +16,7 @@ from . import CASClient
 from api.decorators import casauth
 
 import math
+from datetime import datetime
 
 WEBSITE = "https://bixr.herokuapp.com/events/"
 
@@ -65,7 +66,10 @@ def process_events_list(data, request):
 
 	request_data = (json.loads(request.body)) # python array 
 
-	data = data.order_by('-pk') # order. queryset
+	#data = data.order_by('-date') # order. queryset
+	# remove events that have already passed
+	#today = datetime.now().strftime("%Y-%m-%d")
+	#data = data.exclude(date__lt=today)
 
 	if request_data:
 		request_data = request_data[0]; # python dict
