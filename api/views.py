@@ -143,7 +143,7 @@ def get_user(request, netid):
 	user_json = serializers.serialize('json', user) # json string
 	user = json.loads(user_json) #python array
 
-	user_set = DoNotMail.objects.filter(netid=netid)
+	user_set = DoNotMail.objects.filter(user=user)
 	if len(user_set) == 1:
 		user[0].fields['isDoNotMail'] = True
 	else:
