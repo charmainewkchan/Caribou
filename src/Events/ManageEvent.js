@@ -234,21 +234,23 @@ class ManageEvent extends Component {
               <input className = "form-control" type = "text" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = ""/>
              </div>
 
-             <div className="row float-right">
+             <div className="row input-group float-right">
 
-                {this.state.pk != '' && 
-               <div className = "col float-right">
-                  <button className="btn btn-danger" onClick = {(e)=>this.props.onRemoveEvent(e, this.state.pk)} style ={{width:150}} ><FontAwesomeIcon className="mr-1" icon="trash-alt"/>Delete Event</button>
+                {this.state.pk != '' &&
+               <div className = "col float-center">
+                  <button className="btn btn-danger" onClick = {(e)=>this.props.onRemoveEvent(e, this.state.pk)} style ={{width:100}} ><FontAwesomeIcon className="mr-1" icon="trash-alt"/>Delete</button>
                </div>
                 }
 
                 <div className = "col float-right">
-                  <button className="btn" style ={{width:150}} onClick = {this.cancel}>Cancel</button>
+                  <button className="btn btn-success" style ={{width:100}} onClick = {this.handleCreateEvent}><FontAwesomeIcon className="mr-1" icon="save"/>Save</button>
                 </div>
 
                 <div className = "col float-right">
-                  <button className="btn btn-success" style ={{width:150}} onClick = {this.handleCreateEvent}>Save Changes</button>
+                  <button className="btn" style ={{width:100}} onClick = {this.cancel}>Cancel</button>
                 </div>
+
+
               </div>
 
       </div>
