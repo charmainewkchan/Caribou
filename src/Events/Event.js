@@ -16,8 +16,15 @@ class Event extends Component {
 	constructor(props){
 		super(props)
 
+		this.state = {
+			attendance: this.props.attendance
+		}
+
 		this.buttons = this.buttons.bind(this)
 		this.descriptionString = this.descriptionString.bind(this)
+
+		this.onJoin = this.onJoin.bind(this)
+		this.onLeave = this.onLeave.bind(this)
 	/*	this.getAllEventInfo = this.getAllEventInfo.bind(this)*/
 	}
 
@@ -36,7 +43,7 @@ class Event extends Component {
 
 	buttons() {
 		if(!this.props.isOwner) {
-			return <JoinLeaveButton pk={this.props.pk} disabled={this.props.attendance==this.props.capacity} join={this.props.onJoinEvent} leave={this.props.onLeaveEvent} isAttending={this.props.isAttending}/>
+			return <JoinLeaveButton pk={this.props.pk} disabled={this.props.attendance==this.props.capacity} join={this.onJoin} leave={this.onLeave} isAttending={this.props.isAttending}/>
 		}
 	}
 
@@ -47,6 +54,20 @@ class Event extends Component {
 		}
 		return this.props.description;
 	}
+
+
+
+  onJoin(pk){
+    this.setState({
+      attendance: this.state.attendance+1
+    }, () => { this.props.onJoinEvent(pk)})
+  }
+
+  onLeave(pk) {
+      this.setState({
+        attendance: this.state.attendance-1
+      }, () => this.props.onLeaveEvent(pk))
+  }
 
 
 
@@ -85,7 +106,7 @@ class Event extends Component {
 					    <div className="event-body">
 					         <p>{this.descriptionString()}</p>
 					         <p style={{fontStyle:'italic'}}>{"Location: "+ this.props.loc}</p>
-					         <p>{this.props.attendance == 0 ? "Be the first to join!" : ""+this.props.attendance+"/"+this.props.capacity+" going!"}</p>
+					         <p>{this.state.attendance == 0 ? "Be the first to join!" : ""+this.state.attendance+"/"+this.props.capacity+" going!"}</p>
 					    </div>
 
 					    <div className="event-footer">

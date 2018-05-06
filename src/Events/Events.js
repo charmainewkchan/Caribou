@@ -36,6 +36,7 @@ class Events extends Component {
       },
       currentPage: 0,
       listSelected: 0,
+      currentListUrl: "https://bixr.herokuapp.com/api/get_events/",
       numPages:2,
       eating_club_filter: Object.keys(eating_club_map)
   	}
@@ -94,30 +95,34 @@ class Events extends Component {
     this.currentPage = 0;
     var netid = localStorage.getItem('netid')
     console.log("switch to " + list)
+
+    var newUrl = this.state.currentListUrl;
     switch(list) {
       case "list":
-        this.setList("https://bixr.herokuapp.com/api/get_events/");
+        newUrl = "https://bixr.herokuapp.com/api/get_events/";
         break;
       case "hosting":
-        this.setList("https://bixr.herokuapp.com/api/hosted_events/" + netid + "/");
+        newUrl = "https://bixr.herokuapp.com/api/hosted_events/" + netid + "/";
         break;
      case "attending":
-        const url = "https://bixr.herokuapp.com/api/get_events_for_user/" + netid + "/"
-        this.setList(url);
-        break;
-    }
+        newUrl = "https://bixr.herokuapp.com/api/get_events_for_user/" + netid + "/";
+       break;
+     }
+      this.setState({
+        currentListUrl: newUrl
+      }, () => this.setList());
+        
   }
 
-  setList(url) {
+  setList() {
     var data = [{
       page_num: this.state.currentPage,
       page_size: 10,
       eating_club_filter: this.state.eating_club_filter
     }]
     console.log(data)
-    console.log(url)
 
-    axios.post(url, data)
+    axios.post(this.state.currentListUrl, data)
       .then(res => {
         console.log(res.data);
         this.setState({
@@ -159,7 +164,7 @@ class Events extends Component {
 
   updateAll(){
     // reload the data
-    const url = "https://bixr.herokuapp.com/api/get_events";
+    const url = this.state.currentListUrl;
     var data = [{
       page_num: this.state.currentPage,
       page_size: 10,
