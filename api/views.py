@@ -140,10 +140,10 @@ def get_user(request, netid):
 	if (len(user) != 1):
 		return HttpResponse("User Not Found", status=404)
 
+	user_set = DoNotMail.objects.filter(user=user)
+
 	user_json = serializers.serialize('json', user) # json string
 	user = json.loads(user_json) #python array
-
-	user_set = DoNotMail.objects.filter(user=user)
 	if len(user_set) == 1:
 		user[0].fields['isDoNotMail'] = True
 	else:
