@@ -111,8 +111,8 @@ class EventPage extends Component {
     <div className="event-page">
         <div className="event-page-header">
           <Link to="/events/">All events</Link>
-          <h3>{moment(this.props.fields.date).format("ddd, hA") }</h3>
           <h2>{this.props.fields.title}</h2>
+          <h3>{moment(this.props.fields.date).format("ddd, hA") }</h3>
           <div className="event-page-author">
             <p>Hosted by <Link className="mr-1"to={"/user/"+this.props.author+"/"}>{this.props.author}</Link>({eating_club_map[this.props.fields.eating_club]})</p>
           </div>
@@ -122,7 +122,6 @@ class EventPage extends Component {
           <div className="row">
 
               <div className="col-md-9 order-xs-2 order-sm-2  order-md-1 event-page-details">
-                <img className="event-img" src={princeton_img} alt="img"/>
                 <h3> Details </h3>
                 <hr/>
                 <p>{this.props.fields.description}</p>
