@@ -99,19 +99,25 @@ class Events extends Component {
     this.props.history.push('/events/')
 
     var newUrl = this.state.currentListUrl;
+    var listSelection = 0;
+
     switch(list) {
       case "list":
+        listSelection = 0;
         newUrl = "https://bixr.herokuapp.com/api/get_events/";
         break;
       case "hosting":
+              listSelection = 1;
         newUrl = "https://bixr.herokuapp.com/api/hosted_events/" + netid + "/";
         break;
      case "attending":
+             listSelection = 2;
         newUrl = "https://bixr.herokuapp.com/api/get_events_for_user/" + netid + "/";
        break;
      }
       this.setState({
-        currentListUrl: newUrl
+        currentListUrl: newUrl,
+        listSelected:listSelection
       }, () => this.setList());
         
   }
