@@ -166,7 +166,7 @@ def delete_user(request):
 	dependencies_j = JoinedEvents.objects.filter(participant=user)
 	if len(dependencies_j) > 0:
 		# access the events they've joined
-		event_ids = [j.event.id for j in joined_events]
+		event_ids = [j.event.id for j in dependencies_j]
 		events = PersonalEvent.objects.filter(id__in=event_ids)
 		for e in events: # decrement attendance
 			att = e.attendance - 1
