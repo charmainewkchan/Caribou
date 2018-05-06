@@ -170,7 +170,7 @@ def post_user(request):
 		notify(subject, message, tolist)
 		return HttpResponse("User created " + netid)
 
-
+@csrf_exempt
 @casauth
 def get_events_for_user(request, netid):
 	event_ids = joined_events_list(netid)
@@ -218,6 +218,7 @@ def get_event(request, event_id):
 
 	return HttpResponse(event_json, content_type='application/json')
 
+@csrf_exempt
 @casauth
 def hosted_events(request, netid):
 	netid1 = netid
