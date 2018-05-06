@@ -66,7 +66,7 @@ def process_events_list(data, request):
 
 	request_data = (json.loads(request.body)) # python array 
 
-	data = data.order_by('-date') # order. queryset
+	data = data.order_by('date', 'start') # order. queryset
 	# remove events that have already passed
 	today = datetime.now().strftime("%Y-%m-%d")
 	data = data.exclude(date__lt=today)
