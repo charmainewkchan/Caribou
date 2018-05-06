@@ -96,6 +96,8 @@ class Events extends Component {
     var netid = localStorage.getItem('netid')
     console.log("switch to " + list)
 
+    this.props.history.push('/events/')
+
     var newUrl = this.state.currentListUrl;
     switch(list) {
       case "list":

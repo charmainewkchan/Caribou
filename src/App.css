@@ -764,7 +764,8 @@ body {
 
 
 .Home{
-  background: #FF5B32;
+  background: -webkit-linear-gradient(-45deg, #FF5B32, #FFCC4C);
+  background: -moz-linear-gradient(-45deg, #FF5B32, #FFCC4C);
   height: 90vh;
 }
 
