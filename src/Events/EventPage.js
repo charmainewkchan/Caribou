@@ -110,29 +110,42 @@ class EventPage extends Component {
     return(
     <div className="event-page">
         <div className="event-page-header">
-          <Link to="/events/"><FontAwesomeIcon icon="angle-left" className="angle-left"/>All events</Link>
+          <Link to="/events/"><FontAwesomeIcon icon="angle-left" className="angle-left"/> All events</Link>
           <h2>{this.props.fields.title}</h2>
-          <h3>{moment(this.props.fields.date).format("ddd, hA") }</h3>
           <div className="event-page-author">
-            <p>Hosted by <Link className="mr-1"to={"/user/"+this.props.author+"/"}>{this.props.author}</Link>({eating_club_map[this.props.fields.eating_club]})</p>
+            <p>By <Link className="mr-1"to={"/user/"+this.props.author+"/"}>{this.props.author}</Link>({eating_club_map[this.props.fields.eating_club]})</p>
           </div>
         </div>
 
         <div className="container event-page-body">
           <div className="row">
 
-              <div className="col-md-9 order-xs-2 order-sm-2  order-md-1 event-page-details">
-                <h3> Details </h3>
+              <div className="col order-xs-2 order-sm-2  order-md-1 event-page-details">
+              <p>{this.props.fields.description}</p>
                 <hr/>
-                <p>{this.props.fields.description}</p>
               </div>
+          </div>
 
 
-              <div className="col-md-3 order-xs-1 order-sm-1  order-md-2 event-page-info">
-                  <p>{moment(this.props.fields.date).format("ddd MMM d")}</p>
+              <div className="order-xs-1 order-sm-1  order-md-2 event-page-info">
+                  <p>{moment(this.props.fields.date).format("dddd MMMM DD YYYY")}</p>
+                  <hr/>
+
+                <div className = "row">
+                <div className= "col-5">
                  <p>{this.props.fields.location}</p>
+                </div>
+
+                <div className = "col-1">
+                 <div class="vl"></div>
+                </div>
+
+                <div className = "col-5">
                  <p>{this.props.fields.start} - {this.props.fields.end}</p>
                  <p>{this.state.attendance+"/"+this.props.fields.capacity+" going!"}</p>
+                 </div>
+                 </div>
+
                  <hr/>
                  <div>
                   {this.buttons()}
@@ -158,7 +171,6 @@ class EventPage extends Component {
                       </div>
                     </div>
                   </div>
-                </div>
 
                  </div>
               </div>
