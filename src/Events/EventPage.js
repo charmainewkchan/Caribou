@@ -17,10 +17,10 @@ class EventPage extends Component {
       pk: this.props.pk,
       attendees: [],
       firstNames : [],
-      lastNames: []
+      lastNames: [],
+      netids: []
     }
     this.buttons = this.buttons.bind(this);
-    this.getAttendees = this.getAttendees.bind(this);
     this.Item = this.Item.bind(this);
 }
 
@@ -42,33 +42,7 @@ class EventPage extends Component {
 	}
 
   Item(props) {
-    return <li style={{"list-style-type":"none"}}> {props.message}</li>;
-  }
-
-  getAttendees() {
-    const url = "https://bixr.herokuapp.com/api/get_users_for_event/" + this.state.pk + "/";
-    var netids;
-    var tfirstNames;
-    var tlastNames;
-    axios.get(url).then(res => {
-        netids = res.data.map(user => user.fields.netid);
-        tfirstNames = res.data.map(user => user.fields.first_name);
-        tlastNames = res.data.map(user => user.fields.last_name);
-
-        this.setState({
-          firstNames : tfirstNames,
-          lastNames : tlastNames
-        })
-
-        for (var i = 0; i < this.state.firstNames.length; i++) {
-          this.state.attendees.push(this.state.firstNames[i] + " " + this.state.lastNames[i]);
-        }
-        console.log(this.state.attendees)
-        return(this.state.attendees)
-
-    })
-    .catch(err => alert("err:" + err))
-
+    return <li style={{"list-style-type":"none"}}> {props.message} </li>;
   }
 
 
@@ -86,7 +60,8 @@ class EventPage extends Component {
 
         this.setState({
           firstNames : tfirstNames,
-          lastNames : tlastNames
+          lastNames : tlastNames,
+          netids : netids
         })
 
         for (var i = 0; i < this.state.firstNames.length; i++) {
