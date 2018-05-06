@@ -26,7 +26,7 @@ import faAngleLeft from '@fortawesome/fontawesome-free-solid/faAngleLeft'
 import faAngleDoubleLeft from '@fortawesome/fontawesome-free-solid/faAngleDoubleLeft'
 
 fontawesome.library.add(faAngleDoubleLeft, faAngleLeft, faAngleDoubleRight, faAngleRight,
-						faUser, faPencilAlt, faTrashAlt, faSave, faAddressBook, faCog, faCalendarAlt,
+						faUser, faPencilAlt, faTrashAlt,faSave, faAddressBook, faCog, faCalendarAlt,
 						faBars,faCaretDown,faPlus)
 
 class App extends Component {
