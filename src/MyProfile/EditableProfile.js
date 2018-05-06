@@ -151,7 +151,9 @@ class EditableProfile extends Component {
   }
 
   onSelectYear(event) {
+    this.setState({
       year: event.value
+    });
   }
 
   onSelectEatingClub(event) {
@@ -180,7 +182,7 @@ class EditableProfile extends Component {
 
         <div>
         <h3>Year: </h3>
-        <Dropdown options = {years} label = "years" onChange = {this.onSelectYear} value = {this.state.year}/>
+        <Dropdown options = {years} label = "year" name = "year" onChange = {this.onSelectYear} value = {this.state.year}/>
         </div>
 
         <h3>College: </h3>
@@ -188,8 +190,8 @@ class EditableProfile extends Component {
 
         <h3>Eating Club: </h3>
           <Dropdown options = {eatingclubs} label="eatingclubs" onChange = {this.onSelectEatingClub} value={this.state.eating_club} defaultValue={this.state.eating_club}/>
-        
-        <div className="row float-right">  
+
+        <div className="row float-right">
         <button className="btn mt-2 mr-2" onClick={this.props.toggleEditMode}>Cancel</button>
         <button className="btn btn-success mt-2" onClick={this.save}>Save</button>
         </div>
