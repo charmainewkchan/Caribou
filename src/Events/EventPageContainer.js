@@ -62,6 +62,7 @@ class EventPageContainer extends Component {
     console.log(event);
     const url = "https://bixr.herokuapp.com/api/get_users_for_event/" + event_pk + "/";
     axios.get(url).then(res => {
+        console.log(res.data);
         var netids = res.data.map(user => user.fields.netid);
         alert(netids);
     })

@@ -234,9 +234,13 @@ def get_event(request, event_id):
 		return HttpResponse("Event Not Found", status=404)
 	event_json = serializers.serialize('json', event)
 
+	event_json = json.loads(event_json) #python dict
+
 	netid = get_netid(request)
 
-	event_json = append_data_to_events(event_json, netid)
+	event_json = append_data_to_events(event_json, netid) # pytohn dict
+
+	event_json = json.dumps(event_json) # json string
 
 	return HttpResponse(event_json, content_type='application/json')
 
