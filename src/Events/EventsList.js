@@ -17,12 +17,11 @@ class EventsPanel extends Component {
     super(props);
     this.state = {
       events : this.props.events,
-      sortedEvents : []
+      sortedEvents : [].concat(this.props.events).sort((a, b) => a.fields.date > b.fields.date)
     };
 
-    this.state.sortedEvents = [].concat(this.state.events).sort((a, b) => a.fields.date > b.fields.date);
     console.log("***");
-    console.log(this.state.sortedEvents);
+    console.log(this.props.events);
 
     this.onJoinEvent = this.onJoinEvent.bind(this);
     this.onLeaveEvent = this.onLeaveEvent.bind(this);

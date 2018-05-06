@@ -110,7 +110,7 @@ class EventPage extends Component {
     return(
     <div className="event-page">
         <div className="event-page-header">
-          <Link to="/events/">All events</Link>
+          <Link to="/events/"><FontAwesomeIcon icon="angle-left" className="angle-left"/>All events</Link>
           <h2>{this.props.fields.title}</h2>
           <h3>{moment(this.props.fields.date).format("ddd, hA") }</h3>
           <div className="event-page-author">

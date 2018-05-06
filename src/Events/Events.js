@@ -36,6 +36,7 @@ class Events extends Component {
       },
       currentPage: 0,
       listSelected: 0,
+      currentListUrl: "https://bixr.herokuapp.com/api/get_events/",
       numPages:2,
       eating_club_filter: Object.keys(eating_club_map)
   	}
@@ -94,30 +95,36 @@ class Events extends Component {
     this.currentPage = 0;
     var netid = localStorage.getItem('netid')
     console.log("switch to " + list)
+
+    this.props.history.push('/events/')
+
+    var newUrl = this.state.currentListUrl;
     switch(list) {
       case "list":
-        this.setList("https://bixr.herokuapp.com/api/get_events/");
+        newUrl = "https://bixr.herokuapp.com/api/get_events/";
         break;
       case "hosting":
-        this.setList("https://bixr.herokuapp.com/api/hosted_events/" + netid + "/");
+        newUrl = "https://bixr.herokuapp.com/api/hosted_events/" + netid + "/";
         break;
      case "attending":
-        const url = "https://bixr.herokuapp.com/api/get_events_for_user/" + netid + "/"
-        this.setList(url);
-        break;
-    }
+        newUrl = "https://bixr.herokuapp.com/api/get_events_for_user/" + netid + "/";
+       break;
+     }
+      this.setState({
+        currentListUrl: newUrl
+      }, () => this.setList());
+        
   }
 
-  setList(url) {
+  setList() {
     var data = [{
       page_num: this.state.currentPage,
       page_size: 10,
       eating_club_filter: this.state.eating_club_filter
     }]
     console.log(data)
-    console.log(url)
 
-    axios.post(url, data)
+    axios.post(this.state.currentListUrl, data)
       .then(res => {
         console.log(res.data);
         this.setState({
@@ -159,7 +166,7 @@ class Events extends Component {
 
   updateAll(){
     // reload the data
-    const url = "https://bixr.herokuapp.com/api/get_events";
+    const url = this.state.currentListUrl;
     var data = [{
       page_num: this.state.currentPage,
       page_size: 10,
@@ -219,8 +226,6 @@ class Events extends Component {
                <Switch>
                   <Route path='/events/manage/:event_id(\d+)?' render={({ match }) => <ManageEvent event_id={match.params.event_id} onRemoveEvent={this.onRemoveEvent} onPostEvent={this.onPostEvent}/>}/>
                   <Route exact path='/events/(list/)?' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.events} updateData={this.updateAll}/>}/>
-                  <Route exact path='/events/hosting/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsHosting} updateData={this.updateHosting}/>}/>
-                  <Route exact path='/events/attending/' component={()=><EventsList changePage={this.changePage} currentPage={this.state.currentPage} numPages={this.state.numPages} events={this.state.eventsAttending} updateData={this.updateAttending}/>}/>
                   <Route exact path='/events/:event_id(\d+)/' component={()=><EventPageContainer updateSidePanel={this.updateSidePanel}/>}/>
                 </Switch>
   	         </div>

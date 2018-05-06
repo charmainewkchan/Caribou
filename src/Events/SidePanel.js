@@ -32,7 +32,7 @@ class SidePanel extends Component {
   updateHosting(){
     const netid = localStorage.getItem('netid');
     const url = "https://bixr.herokuapp.com/api/hosted_events/" + netid + "/";
-    axios.get(url).then(res => {
+    axios.post(url, []).then(res => {
       console.log(res.data);
       this.setState({
         eventsHosting: res.data,
@@ -45,7 +45,7 @@ class SidePanel extends Component {
     // reload the data
     const netid = localStorage.getItem('netid');
     const url = "https://bixr.herokuapp.com/api/get_events_for_user/" + netid + "/";
-    axios.get(url).then(res => {
+    axios.post(url, []).then(res => {
       console.log(res.data);
 
         this.setState({
