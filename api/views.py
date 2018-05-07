@@ -157,9 +157,10 @@ def get_user(request, netid):
 @casauth
 def toggle_mail(request):
 	netid = get_netid(request)
-	user = User.objects.get(netid=netid)
-	user_set = DoNotMail.objects.filter(user=user)
-	if len(user_set) == 1:
+	u = User.objects.get(netid=netid)
+	user_set = DoNotMail.objects.filter(user=u)
+	dnm_json = serializers.serialize('json', user_set)
+	if len(user_set) > 0:
 		user_set.delete()
 		return HttpResponse(netid + " turned on email notifications")
 	else:
