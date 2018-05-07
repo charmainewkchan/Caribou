@@ -148,56 +148,10 @@ class Home extends Component {
 
         <div className="row">
 
-              <div className="col-md-6 ">
+              <h4> Acknoledgements </h4>
+              <p3> Ashley Kling, COS 333 TA </p3>
+              <p3> Brian Kernighan, COS 333 Professor </p3>
 
-                      <div className="card hovercard">
-                          <div className="cardheader">
-
-                          </div>
-                          <div className="avatar">
-                            <img src="https://image.ibb.co/meE2Jn/Screen_Shot_2018_05_07_at_8_15_24_am.png" alt="Screen_Shot_2018_05_07_at_8_15_24_am" border="0"/>                         </div>
-                          <div className="info">
-                              <div className="title">
-                                <p2 className= "card-name">Ashley Kling</p2>
-                              </div>
-                              <div className="desc">COS 333 TA</div>
-                              <div className="desc">New York, USA</div>
-                          </div>
-                          <div className="bottom">
-
-                              <a className="btn2 btn-dark btn-sm" rel="publisher" href="https://www.linkedin.com/in/ashleykling/">
-                                  <i className="fab fa-linkedin-in"> </i>
-                              </a>
-                          </div>
-                      </div>
-
-                  </div>
-
-                  <div className="col-md-6">
-
-                          <div className="card hovercard">
-                              <div className="cardheader">
-
-                              </div>
-                              <div className="avatar">
-                                <img src="https://image.ibb.co/cuZSJn/Screen_Shot_2018_05_07_at_8_21_08_am.png" alt="Screen_Shot_2018_05_07_at_8_21_08_am" border="0"/>
-                              </div>
-                              <div className="info">
-                                  <div className="title">
-                                    <p2 className= "card-name">Brian Kernighan</p2>
-                                  </div>
-                                  <div className="desc">Professor</div>
-                                  <div className="desc">Toronto, Canada</div>
-                              </div>
-                              <div className="bottom">
-                              <a className="btn2 btn-dark btn-sm" rel="publisher" href="https://en.wikipedia.org/wiki/Brian_Kernighan">
-                                  <i class="fab fa-wikipedia-w"></i>
-
-                              </a>
-                              </div>
-                          </div>
-
-                      </div>
 
         </div>
 
