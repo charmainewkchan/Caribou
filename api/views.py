@@ -166,7 +166,7 @@ def toggle_mail(request):
 		u = User.objects.get(netid=netid)
 		entry = DoNotMail(user=u)
 		entry.save()
-		return HttpResponse(netod + " removed from mailing list")
+		return HttpResponse(netid + " removed from mailing list")
 
 @casauth
 def delete_user(request):

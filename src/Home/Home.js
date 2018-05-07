@@ -35,11 +35,9 @@ class Home extends Component {
             </div>
         </div>
 
-
-
         <div className="container">
         	<div className="row">
-        		<div className="col-4 ">
+        		<div className="col-md-4 ">
 
                     <div className="card hovercard">
                         <div className="cardheader">
@@ -66,7 +64,7 @@ class Home extends Component {
 
                 </div>
 
-                <div className="col-4 ">
+                <div className="col-md-4 ">
 
                         <div className="card hovercard">
                             <div className="cardheader">
@@ -93,7 +91,7 @@ class Home extends Component {
 
                     </div>
 
-                    <div className="col-4">
+                    <div className="col-md-4">
 
                             <div className="card hovercard">
                                 <div className="cardheader">
