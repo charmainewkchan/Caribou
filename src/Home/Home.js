@@ -35,8 +35,6 @@ class Home extends Component {
             </div>
         </div>
 
-
-
         <div className="container">
         	<div className="row">
         		<div className="col-4 ">
