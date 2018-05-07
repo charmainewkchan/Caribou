@@ -148,7 +148,7 @@ class Home extends Component {
 
         <div className="row">
 
-              <h4> Acknoledgements </h4>
+              <h4> Acknowledgements </h4>
               <p3> Ashley Kling, COS 333 TA </p3>
               <p3> Brian Kernighan, COS 333 Professor </p3>
 
