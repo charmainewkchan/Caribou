@@ -17,7 +17,6 @@ class EventsPanel extends Component {
     super(props);
     this.state = {
       events : this.props.events,
-      sortedEvents : [].concat(this.props.events).sort((a, b) => a.fields.date > b.fields.date)
     };
 
     console.log("***");
@@ -91,7 +90,7 @@ class EventsPanel extends Component {
       return (
             <div className="events-list">
              <div className="container-fluid">
-              {this.state.sortedEvents.map(function(event){
+              {this.state.events.map(function(event){
                   return (
 
                     <div key={event.pk} className="row event-row-buffer">
