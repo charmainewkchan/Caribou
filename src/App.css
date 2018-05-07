@@ -841,6 +841,12 @@ body {
   min-height: 90vh;
 }
 
+.splash2{
+  background: -webkit-linear-gradient(-45deg, #FF5B32, #FFCC4C);
+  background: -moz-linear-gradient(-45deg, #FF5B32, #FFCC4C);
+}
+
+
 .splash-btn{
   margin:auto;
   width: 10em;
@@ -848,10 +854,10 @@ body {
 
 .Home p {
     font-size: 1.2em;
-    margin: 2em auto 2em auto;
+    margin: 1em auto 2em auto;
     width: 60%;
     color: white;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .Home p2 {
@@ -863,9 +869,19 @@ body {
 }
 .Home h2 {
     font-size: 2.5em;
-    padding: 1em;
+    padding: 1em 1em 0em 1em;
     font-weight: bold;
     color: white;
+    font-family: 'Fjalla One', sans-serif;
+}
+.Home-aboutUsButton {
+  margin:3em 0em 0em 0em;
+}
+.Home h3 {
+    font-size: 2.5em;
+    padding: 1em;
+    font-weight: bold;
+    color: black;
     font-family: 'Fjalla One', sans-serif;
 }
 

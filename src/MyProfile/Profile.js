@@ -95,14 +95,16 @@ class Profile extends Component {
         if (!this.state.edit_mode) {
     return (
       <div className="MyProfile">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous"/>
+
         <div className = 'row'>
-          <div className = 'col-6'>
+          <div className = 'col-9'>
             <h2 className="profile-header">My Profile ({localStorage.getItem('netid')})</h2>
 
           </div>
 
-          <div className = 'col-6'>
-           <button className="btn btn-outline-secondary" onClick={this.toggleEditMode}><FontAwesomeIcon icon="pencil-alt" className="mr-1" />Edit</button>
+          <div className = 'col-3'>
+           <button className="btn btn-outline-secondary" onClick={this.toggleEditMode}><i class="fas fa-user-edit"></i></button>
           </div>
         </div>
         <hr/>

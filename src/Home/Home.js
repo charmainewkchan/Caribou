@@ -31,7 +31,12 @@ class Home extends Component {
 
 
         <div className="container-fluid">
+
+
           <div className="row splash">
+
+
+
             <div className="col">
               <div className="anim-fadein">
                 <h2>Here to mix up the people you meet.</h2>
@@ -40,98 +45,163 @@ class Home extends Component {
               <div className = "row m-auto mt-5" >
                      <Link to='/events' className = "btn splash-btn btn-outline-light">Student Events</Link>
               </div>
-                 
-              <div className="row mt-2">
-                <button className="btn splash-btn btn-outline-light" onClick={()=>this.scrollTo("#about")}>About</button>
+
+              <div className="row mt-2 Home-aboutUsButton">
+                <div className = "col-1">
+                <button className="btn btn-outline-light" onClick={()=>this.scrollTo("#about")}><i class="fas fa-users"></i></button>
+                </div>
               </div>
-              
+
+
              </div>
+
+
             </div>
+
         </div>
 
         <div className="container" id="about">
-        	<div className="row">
-        		<div className="col-md-4 ">
+          <h3> About Us </h3>
+        <div className="row">
+          <div className="col-md-4 ">
 
-                    <div className="card hovercard">
-                        <div className="cardheader">
+                  <div className="card hovercard">
+                      <div className="cardheader">
 
-                        </div>
-                        <div className="avatar">
-                          <img src="https://image.ibb.co/cMDfKS/077_A1053_copy.jpg" alt="077_A1053_copy" border="0"/>
-                        </div>
-                        <div className="info">
-                            <div className="title">
-                              <p2 className= "card-name">Charmaine Chan</p2>
-                            </div>
-                            <div className="desc">Class of 2020</div>
-                            <div className="desc">Hong Kong</div>
-                            <div className="desc">Computer Science A.B.</div>
-                        </div>
-                        <div className="bottom">
+                      </div>
+                      <div className="avatar">
+                        <img src="https://image.ibb.co/cMDfKS/077_A1053_copy.jpg" alt="077_A1053_copy" border="0"/>
+                      </div>
+                      <div className="info">
+                          <div className="title">
+                            <p2 className= "card-name">Charmaine Chan</p2>
+                          </div>
+                          <div className="desc">Class of 2020</div>
+                          <div className="desc">Hong Kong</div>
+                          <div className="desc">Computer Science A.B.</div>
+                      </div>
+                      <div className="bottom">
 
-                            <a className="btn2 btn-dark btn-sm" rel="publisher" href="https://www.linkedin.com/in/charmainechan98/">
-                                <i className="fab fa-linkedin-in"> </i>
-                            </a>
-                        </div>
-                    </div>
+                          <a className="btn2 btn-dark btn-sm" rel="publisher" href="https://www.linkedin.com/in/charmainechan98/">
+                              <i className="fab fa-linkedin-in"> </i>
+                          </a>
+                      </div>
+                  </div>
 
-                </div>
 
-                <div className="col-md-4 ">
+              </div>
 
-                        <div className="card hovercard">
-                            <div className="cardheader">
+              <div className="col-md-4 ">
 
-                            </div>
-                            <div className="avatar">
-                            <img src="https://i.pinimg.com/originals/ce/a3/fd/cea3fdb66b63e2c4996ad69575742e6a.png" border="0"/>
-                           </div>
-                            <div className="info">
-                                <div className="title">
-                                  <p2 className= "card-name">Lucy Jing</p2>
-                                </div>
-                                <div className="desc">Class of 2020</div>
-                                <div className="desc">Toronto, Canada</div>
-                                <div className="desc">Computer Science A.B.</div>
-                            </div>
-                            <div className="bottom">
+                      <div className="card hovercard">
+                          <div className="cardheader">
 
-                                <a className="btn2 btn-dark btn-sm" rel="publisher" href="https://www.linkedin.com/in/jinglucy/">
-                                    <i className="fab fa-linkedin-in"> </i>
-                                </a>
-                            </div>
-                        </div>
+                          </div>
+                          <div className="avatar">
+                          <img src="https://i.pinimg.com/originals/ce/a3/fd/cea3fdb66b63e2c4996ad69575742e6a.png" border="0"/>
+                         </div>
+                          <div className="info">
+                              <div className="title">
+                                <p2 className= "card-name">Lucy Jing</p2>
+                              </div>
+                              <div className="desc">Class of 2020</div>
+                              <div className="desc">Toronto, Canada</div>
+                              <div className="desc">Computer Science A.B.</div>
+                          </div>
+                          <div className="bottom">
 
-                    </div>
+                              <a className="btn2 btn-dark btn-sm" rel="publisher" href="https://www.linkedin.com/in/jinglucy/">
+                                  <i className="fab fa-linkedin-in"> </i>
+                              </a>
+                          </div>
+                      </div>
 
-                    <div className="col-md-4">
+                  </div>
 
-                            <div className="card hovercard">
-                                <div className="cardheader">
+                  <div className="col-md-4">
 
-                                </div>
-                                <div className="avatar">
-                                <img src="https://image.ibb.co/gHnMtn/31959182_1848636945198865_1110419706541506560_n.jpg" alt="31959182_1848636945198865_1110419706541506560_n" border="0"/>
-                               </div>
-                                <div className="info">
-                                    <div className="title">
-                                      <p2 className= "card-name">Derek Sawicki</p2>
-                                    </div>
-                                    <div className="desc">Class of 2020</div>
-                                    <div className="desc">Connecticut, USA</div>
-                                    <div className="desc">Computer Science B.S.E</div>
-                                </div>
-                                <div className="bottom">
-                                <a className="btn2 btn-dark btn-sm" rel="publisher" href="https://www.linkedin.com/in/derek-sawicki/">
-                                    <i className="fab fa-linkedin-in"> </i>
-                                </a>
-                                </div>
-                            </div>
+                          <div className="card hovercard">
+                              <div className="cardheader">
 
-                        </div>
+                              </div>
+                              <div className="avatar">
+                              <img src="https://image.ibb.co/gHnMtn/31959182_1848636945198865_1110419706541506560_n.jpg" alt="31959182_1848636945198865_1110419706541506560_n" border="0"/>
+                             </div>
+                              <div className="info">
+                                  <div className="title">
+                                    <p2 className= "card-name">Derek Sawicki</p2>
+                                  </div>
+                                  <div className="desc">Class of 2020</div>
+                                  <div className="desc">Connecticut, USA</div>
+                                  <div className="desc">Computer Science B.S.E</div>
+                              </div>
+                              <div className="bottom">
+                              <a className="btn2 btn-dark btn-sm" rel="publisher" href="https://www.linkedin.com/in/derek-sawicki/">
+                                  <i className="fab fa-linkedin-in"> </i>
+                              </a>
+                              </div>
+                          </div>
 
-        	</div>
+                      </div>
+
+        </div>
+
+        <div className="row">
+
+              <div className="col-md-6 ">
+
+                      <div className="card hovercard">
+                          <div className="cardheader">
+
+                          </div>
+                          <div className="avatar">
+                            <img src="https://image.ibb.co/meE2Jn/Screen_Shot_2018_05_07_at_8_15_24_am.png" alt="Screen_Shot_2018_05_07_at_8_15_24_am" border="0"/>                         </div>
+                          <div className="info">
+                              <div className="title">
+                                <p2 className= "card-name">Ashley Kling</p2>
+                              </div>
+                              <div className="desc">COS 333 TA</div>
+                              <div className="desc">New York, USA</div>
+                          </div>
+                          <div className="bottom">
+
+                              <a className="btn2 btn-dark btn-sm" rel="publisher" href="https://www.linkedin.com/in/ashleykling/">
+                                  <i className="fab fa-linkedin-in"> </i>
+                              </a>
+                          </div>
+                      </div>
+
+                  </div>
+
+                  <div className="col-md-6">
+
+                          <div className="card hovercard">
+                              <div className="cardheader">
+
+                              </div>
+                              <div className="avatar">
+                                <img src="https://image.ibb.co/cuZSJn/Screen_Shot_2018_05_07_at_8_21_08_am.png" alt="Screen_Shot_2018_05_07_at_8_21_08_am" border="0"/>
+                              </div>
+                              <div className="info">
+                                  <div className="title">
+                                    <p2 className= "card-name">Brian Kernighan</p2>
+                                  </div>
+                                  <div className="desc">Professor</div>
+                                  <div className="desc">Toronto, Canada</div>
+                              </div>
+                              <div className="bottom">
+                              <a className="btn2 btn-dark btn-sm" rel="publisher" href="https://en.wikipedia.org/wiki/Brian_Kernighan">
+                                  <i class="fab fa-wikipedia-w"></i>
+
+                              </a>
+                              </div>
+                          </div>
+
+                      </div>
+
+        </div>
+
+
         </div>
 
 
