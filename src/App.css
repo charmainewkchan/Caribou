@@ -330,6 +330,10 @@ body {
   padding-bottom: 1em;
  }
 
+ .splash p {
+  margin-bottom: 2em;
+ }
+
 
 @media (min-width: 900px) {
   .Events{
@@ -839,11 +843,12 @@ body {
 
 .splash-btn{
   margin:auto;
+  width: 10em;
 }
 
 .Home p {
     font-size: 1.2em;
-    margin: 3em auto 0em auto;
+    margin: 2em auto 2em auto;
     width: 60%;
     color: white;
     font-family: 'Fjalla One', sans-serif;

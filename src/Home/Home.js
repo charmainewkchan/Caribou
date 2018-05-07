@@ -8,12 +8,21 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 
+import $ from 'jquery'
+
 import "react-big-calendar/lib/css/react-big-calendar.css";
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 
 
 class Home extends Component {
+
+
+  scrollTo(div_id) {
+    $('html, body').animate({
+        scrollTop: $(div_id).offset().top
+    }, 1000);
+  }
 
   render() {
     return (
@@ -27,15 +36,20 @@ class Home extends Component {
               <div className="anim-fadein">
                 <h2>Here to mix up the people you meet.</h2>
               </div>
-              <div className = "row ">
+             <p> Make events, join events, and get to know other Tigers! </p>
+              <div className = "row m-auto mt-5" >
                      <Link to='/events' className = "btn splash-btn btn-outline-light">Student Events</Link>
-            	 </div>
-               <p> Make events, join events, and get to know other Tigers! </p>
+              </div>
+                 
+              <div className="row mt-2">
+                <button className="btn splash-btn btn-outline-light" onClick={()=>this.scrollTo("#about")}>About</button>
+              </div>
+              
              </div>
             </div>
         </div>
 
-        <div className="container">
+        <div className="container" id="about">
         	<div className="row">
         		<div className="col-md-4 ">
 
