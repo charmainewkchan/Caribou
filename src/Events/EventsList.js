@@ -92,10 +92,7 @@ class EventsPanel extends Component {
             <div className="events-list">
              <div className="container-fluid">
               {this.state.sortedEvents.map(function(event){
-                if (event.fields.date > moment().format("YYYY-MM-DD")) {
                   return (
-
-
 
                     <div key={event.pk} className="row event-row-buffer">
                       <EventCard title={event.fields.title}
@@ -117,7 +114,6 @@ class EventsPanel extends Component {
                                   onLeaveEvent={this.onLeaveEvent}
                                   isEditable={this.props.isEditable}/>
                     </div>);
-                }
                 },this)
               }
               </div>
