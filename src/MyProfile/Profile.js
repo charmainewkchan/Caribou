@@ -79,7 +79,13 @@ class Profile extends Component {
 
 
   handleMailListChange(){
-    console.log("hi")
+      axios.get("https://bixr.herokuapp.com/api/toggle_email/")
+      .then(res => {
+        this.setState({
+          doNotMail: !this.state.doNotMail
+        })
+      })
+      .catch( err => console.log(err))
   }
 
 
