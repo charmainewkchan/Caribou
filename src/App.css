@@ -1023,7 +1023,7 @@ body {
 @keyframes fadeInRight {
   0% {
     opacity: 0;
-    transform: translate3d(100%, 0, 0);
+    transform: translate3d(70%, 0, 0);
   }
 
   100% {
@@ -1035,7 +1035,7 @@ body {
 @-moz-keyframes fadeInRight {
   0% {
     opacity: 0;
-    transform: translate3d(100%, 0, 0);
+    transform: translate3d(70%, 0, 0);
   }
 
   100% {
@@ -1047,7 +1047,7 @@ body {
 @-webkit-keyframes fadeInRight {
   0% {
     opacity: 0;
-    transform: translate3d(100%, 0, 0);
+    transform: translate3d(70%, 0, 0);
   }
 
   100% {
@@ -1088,7 +1088,7 @@ body {
     -moz-animation-duration: 0.25s;
     -webkit-animation-name: fadeInRight;
     -webkit-animation-duration: 0.25s;
-    transition-timing-function: ease-out;
+    transition-timing-function: ease-in-out;
   }
 
   /** An element that fades in and slides from the right */
