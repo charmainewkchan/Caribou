@@ -412,6 +412,11 @@ body {
   padding: 1em;
 }
 
+.events-content-title{
+    font-family: 'Fjalla One', sans-serif;
+    color: red;
+}
+
 .nav-link-header {
   color: #eee;
   font-weight: bold;
@@ -558,6 +563,7 @@ body {
 
 .Events-filter{
   text-align: left;
+  background:white !important;
   display:inline;
   height: auto;
   max-height: 500px;
@@ -616,17 +622,19 @@ body {
 /* SINGLE EVENT PAGE */
 
 .event-page{
-  background: #FFF4EC;
+  background: white;
   border-radius: 5px;
-  border: 1px solid #ffffff;
+  border: 1px solid #ced6d9;
   width: 100%;
-  padding: 1em;
 }
+
 
 .event-page-header {
   background: #f7f7f7;
   border-bottom: 1px solid #ccc;
   text-align: left;
+  border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
   padding: 1em;
   font-family: roboto;
   width: 100%;
@@ -640,7 +648,7 @@ body {
 }
 
 .event-text {
-  font-size: 2em;
+  font-size: 1.4em;
   margin : 0.2em;
   font-family: 'Fjalla One', sans-serif;
 
@@ -667,8 +675,25 @@ body {
 
 .event-page-body {
   margin-top: 3em;
+  padding: 1em;
+  text-align: center;
+  font-family: roboto;
 }
 
+.event-page-body h3{
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.event-page-body p{
+  color: #555;
+  margin: 0;
+  margin-bottom: 1em;
+  padding: 0;
+}
 
 .event-page-details {
   text-align: center;
@@ -1041,7 +1066,7 @@ m
 }
 .event-time-small {
   font-size: 1em;
-  font-family: 'Fjalla One', sans-serif;
+  font-family: roboto;
   margin: 0;
 }
 

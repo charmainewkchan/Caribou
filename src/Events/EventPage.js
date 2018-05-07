@@ -120,59 +120,50 @@ class EventPage extends Component {
         <div className="container event-page-body">
           <div className="row">
               <div className="col order-xs-2 order-sm-2  order-md-1 event-page-details">
-              <p>{this.props.fields.description}</p>
+                <p>{this.props.fields.description}</p>
               </div>
           </div>
 
-              <div>
-                  <p className= "event-date">{moment(this.props.fields.date).format("dddd, MMMM DD, YYYY")}</p>
 
-                  <hr/>
-
-                <div className = "row">
-                <div className= "col-3">
-                <p className = "event-time">{moment((this.props.fields.date + " " + this.props.fields.start), 'YYYY-MM-DD HH:mm').format('h:mmA')}</p>
-                <p className = "event-time-small"> to </p>
-                <p className = "event-time">{moment((this.props.fields.date + " " + this.props.fields.end), 'YYYY-MM-DD HH:mm').format('h:mmA')}</p>
-                </div>
-
-                <div className = "col-1">
-                 <div class="vl"></div>
-                </div>
-
-                <div className = "col-8">
-                <p className = "event-text">{this.props.fields.location}</p>
-                 <p className = "event-time-small">{this.state.attendance+"/"+this.props.fields.capacity+" going!"}</p>
-                 </div>
-                 </div>
-
-                 <hr/>
-                 <div>
-                  {this.buttons()}
+            <h3>DATE</h3>      
+            <p>{moment(this.props.fields.date).format("dddd, MMMM DD, YYYY")}</p>
 
 
+            <h3>TIME</h3>
+            <p>{moment((this.props.fields.date + " " + this.props.fields.start), 'YYYY-MM-DD HH:mm').format('h:mmA')} to {moment((this.props.fields.date + " " + this.props.fields.end), 'YYYY-MM-DD HH:mm').format('h:mmA')}</p>
 
-                <div class="modal" id="attendee" tabindex="-1" role="dialog" aria-labelledby="attendeeTitle" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="attendeeTitle">Attendees</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <ul>
+
+            <h3>LOCATION</h3>
+            <p>{this.props.fields.location}</p>
+
+            <p className = "event-time-small">{this.state.attendance+"/"+this.props.fields.capacity+" going!"}</p>
+
+            <hr/>
+
+            <div className="row">
+              <div className="col">
+                {this.buttons()}
+              </div>
+
+              <div class="modal" id="attendee" tabindex="-1" role="dialog" aria-labelledby="attendeeTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="attendeeTitle">Attendees</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <ul>
                         {this.state.attendees.map((name) => <this.Item key = {name} message = {name}/>)}
-                        </ul>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      </div>
+                      </ul>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                     </div>
                   </div>
-
-                 </div>
               </div>
 
             </div>

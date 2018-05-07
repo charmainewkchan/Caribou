@@ -87,31 +87,30 @@ class Event extends Component {
 		 				<div className="col events-content">
 					 		<div className="row">
 					 			<div className="col">
-						  		<h2>{this.props.title}</h2>
-						  	</div>
-						  	{!!this.props.isOwner &&
+						  			<h2>{this.props.title}</h2>
+						  		</div>
+						  		{!!this.props.isOwner &&
 						  		<div className="col">
 						  		  {this.owner_buttons()}
-						  	 </div>
-						     }
+						  		 </div>
+						    	 }
+						    </div>
 
-						  </div>
-
-						  <div className="row"><div className="col">
+						  	<div className="row"><div className="col">
 					    	<p>{eating_club_map[this.props.eating_club]} &bull; {moment(this.props.date, "YYYY-MM-DD").format('MMM D')}, {moment((this.props.date + " " + this.props.start), 'YYYY-MM-DD HH:mm').format('h:mmA')} -  {moment((this.props.date + " " + this.props.end), 'YYYY-MM-DD HH:mm').format('h:mmA')}</p>
 
 								</div>
-					    </div>
+					     	 </div>
 
-					    <div className="event-body">
-					         <p>{this.descriptionString()}</p>
-					         <p style={{fontStyle:'italic'}}>{"Location: "+ this.props.loc}</p>
-					         <p>{this.state.attendance == 0 ? "Be the first to join!" : ""+this.state.attendance+"/"+this.props.capacity+" going!"}</p>
-					    </div>
+						    <div className="event-body">
+						         <p>{this.descriptionString()}</p>
+						         <p style={{fontStyle:'italic'}}>{"Location: "+ this.props.loc}</p>
+						         <p>{this.state.attendance == 0 ? "Be the first to join!" : ""+this.state.attendance+"/"+this.props.capacity+" going!"}</p>
+						    </div>
 
-					    <div className="event-footer">
-					    	{this.buttons()}
-					    </div>
+						    <div className="event-footer">
+						    	{this.buttons()}
+						    </div>
 		 				</div>
 		 			</div>
 				</div>
