@@ -155,7 +155,7 @@ def get_user(request, netid):
 
 @csrf_exempt
 @casauth
-def toggle_mail(request):
+def toggle_email(request):
 	netid = get_netid(request)
 	user_set = DoNotMail.objects.filter(netid=netid)
 	if len(user_set) == 1:
