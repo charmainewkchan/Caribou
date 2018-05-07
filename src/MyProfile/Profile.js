@@ -79,7 +79,7 @@ class Profile extends Component {
 
 
   handleMailListChange(e){
-      axios.get("https://bixr.herokuapp.com/api/toggle_email/")
+      axios.get("https://bixr.herokuapp.com/api/toggle_mail/")
       .then(res => {
         console.log(res);
         this.setState({
@@ -146,7 +146,7 @@ class Profile extends Component {
 
 
           <div className="form-check">
-                <input className="form-check-input" type="checkbox" name="date_asc" id="date_asc" checked={this.state.doNotMail} onChange={(e) => this.handleMailListChange(e)}/>
+                <input className="form-check-input" type="checkbox" name="date_asc" id="date_asc" checked={!this.state.doNotMail} onChange={(e) => this.handleMailListChange(e)}/>
                 <label className="form-check-label" for="date_asc">
                   Receive Emails
                 </label>

@@ -362,6 +362,7 @@ body {
 
 .nav-link-header {
   color: #eee;
+  font-weight: bold;
   letter-spacing: 2.2px;
   font-size: 1.1em;
   font-family: 'Roboto';
@@ -833,7 +834,7 @@ body {
 .splash{
   background: -webkit-linear-gradient(-45deg, #FF5B32, #FFCC4C);
   background: -moz-linear-gradient(-45deg, #FF5B32, #FFCC4C);
-  height: 90vh;
+  min-height: 90vh;
 }
 
 .splash-btn{
