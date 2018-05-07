@@ -18,6 +18,33 @@ BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 class Home extends Component {
 
 
+  aboutUsCard(name, year, location, degree, linkedIn, imgSrc ){
+    return(<div className="card hovercard about-us-card">
+        <div className="cardheader">
+
+        </div>
+        <div className="avatar">
+          <img src={imgSrc} alt="077_A1053_copy" border="0"/>
+        </div>
+        <div className="info">
+            <div className="title">
+              <p2 className= "card-name">{name}</p2>
+            </div>
+            <div className="desc">Class of {year}</div>
+            <div className="desc">{location}</div>
+            <div className="desc">{degree}</div>
+        </div>
+        <div className="bottom">
+
+            <a className="btn2 btn-dark btn-sm" rel="publisher" href={"https://www.linkedin.com/in/" + linkedIn+ "/"}>
+                <i className="fab fa-linkedin-in"> </i>
+            </a>
+        </div>
+    </div>)
+  }
+
+
+
   scrollTo(div_id) {
     $('html, body').animate({
         scrollTop: $(div_id).offset().top
@@ -38,7 +65,7 @@ class Home extends Component {
               </div>
              <p> Make events, join events, and get to know other Tigers! </p>
               <div className = "row m-auto mt-5" >
-                     <Link to='/events' className = "btn splash-btn btn-outline-light">Student Events</Link>
+                     <Link to='/events' className = "btn home-main-btn">Student Events <FontAwesomeIcon className="btn-icon" icon="angle-right"/></Link>
               </div>
                  
               <div className="row mt-2">
@@ -51,86 +78,15 @@ class Home extends Component {
 
         <div className="container" id="about">
         	<div className="row">
-        		<div className="col-md-4 ">
-
-                    <div className="card hovercard">
-                        <div className="cardheader">
-
-                        </div>
-                        <div className="avatar">
-                          <img src="https://image.ibb.co/cMDfKS/077_A1053_copy.jpg" alt="077_A1053_copy" border="0"/>
-                        </div>
-                        <div className="info">
-                            <div className="title">
-                              <p2 className= "card-name">Charmaine Chan</p2>
-                            </div>
-                            <div className="desc">Class of 2020</div>
-                            <div className="desc">Hong Kong</div>
-                            <div className="desc">Computer Science A.B.</div>
-                        </div>
-                        <div className="bottom">
-
-                            <a className="btn2 btn-dark btn-sm" rel="publisher" href="https://www.linkedin.com/in/charmainechan98/">
-                                <i className="fab fa-linkedin-in"> </i>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="col-md-4 ">
-
-                        <div className="card hovercard">
-                            <div className="cardheader">
-
-                            </div>
-                            <div className="avatar">
-                            <img src="https://i.pinimg.com/originals/ce/a3/fd/cea3fdb66b63e2c4996ad69575742e6a.png" border="0"/>
-                           </div>
-                            <div className="info">
-                                <div className="title">
-                                  <p2 className= "card-name">Lucy Jing</p2>
-                                </div>
-                                <div className="desc">Class of 2020</div>
-                                <div className="desc">Toronto, Canada</div>
-                                <div className="desc">Computer Science A.B.</div>
-                            </div>
-                            <div className="bottom">
-
-                                <a className="btn2 btn-dark btn-sm" rel="publisher" href="https://www.linkedin.com/in/jinglucy/">
-                                    <i className="fab fa-linkedin-in"> </i>
-                                </a>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div className="col-md-4">
-
-                            <div className="card hovercard">
-                                <div className="cardheader">
-
-                                </div>
-                                <div className="avatar">
-                                <img src="https://image.ibb.co/gHnMtn/31959182_1848636945198865_1110419706541506560_n.jpg" alt="31959182_1848636945198865_1110419706541506560_n" border="0"/>
-                               </div>
-                                <div className="info">
-                                    <div className="title">
-                                      <p2 className= "card-name">Derek Sawicki</p2>
-                                    </div>
-                                    <div className="desc">Class of 2020</div>
-                                    <div className="desc">Connecticut, USA</div>
-                                    <div className="desc">Computer Science B.S.E</div>
-                                </div>
-                                <div className="bottom">
-                                <a className="btn2 btn-dark btn-sm" rel="publisher" href="https://www.linkedin.com/in/derek-sawicki/">
-                                    <i className="fab fa-linkedin-in"> </i>
-                                </a>
-                                </div>
-                            </div>
-
-                        </div>
-
+        		<div className="col-md-4 anim-fadeinup">
+              {this.aboutUsCard("Charmaine Chan", "2020", "Hong Kong", "Computer Science A.B.", "charmainechan98", "https://image.ibb.co/cMDfKS/077_A1053_copy.jpg")}
+            </div>
+            <div className="col-md-4 anim-fadeinup">
+              {this.aboutUsCard("Lucy Jing", "2020", "Toronto, Canada", "Computer Science A.B.", "jinglucy", "https://i.pinimg.com/originals/ce/a3/fd/cea3fdb66b63e2c4996ad69575742e6a.png")}
+            </div>
+            <div className="col-md-4 anim-fadeinup">
+              {this.aboutUsCard("Derek Sawicki", "2020", "Connecticut, USA", "Computer Science B.S.E.", "derek-sawicki", "https://image.ibb.co/gHnMtn/31959182_1848636945198865_1110419706541506560_n.jpg")}
+            </div>
         	</div>
         </div>
 

@@ -17,7 +17,7 @@
     right:0;
     width: 100%;
     background-color: red;
-    color: white;
+    color: #FFF4EC;
     text-align: center;
    height:30px;   /* Height of the footer */
    color: #bbb;
@@ -28,6 +28,41 @@
 }
 
 
+.home-main-btn {
+  background: #00373f;
+  border: 1px solid #00373f;
+  font-size: 1.2em;
+  color: #FFF4EC;
+  margin: auto;
+  box-shadow: 0 1px 5px rgba(0,0,0,.5);
+  width: 11em;
+  border-radius: 0px !important;
+  font-family: 'Roboto';
+}
+
+.about-us-card{
+  height: 95%;
+  margin-bottom: 1em;
+}
+
+.home-main-btn:hover {
+  background: #30676f;
+  border: 1px solid #30676f;
+  font-size: 1.2em;
+  color: white;
+}
+
+.home-main-btn .btn-icon{
+    transition: transform 0.2s ease;
+    -webkit-transition: transform 0.2s ease;
+}
+
+.home-main-btn:hover .btn-icon{
+    -webkit-transform: translate(6px, 0px);
+    transform: translate(6px, 0px);
+    transition: transform 0.2s ease-in-out;
+    -webkit-transition: transform 0.2s ease-in-out;
+}
 
 .navbar-custom {
   background: #FF5B32;
@@ -135,7 +170,7 @@
 }
 
 .navbar-brand{
-  color: #fff;
+  color: #FFF4EC;
   font-family: 'Fjalla One', sans-serif;
 }
 
@@ -159,7 +194,7 @@ body {
   background-color: #222;
   height: 80px;
   padding: 20px;
-  color: white;
+  color: #FFF4EC;
 }
 
 .App-title {
@@ -263,12 +298,12 @@ body {
   min-width: 100%;
   min-height: 100%;
   background-color: #755688;
-  color: white;
+  color: #FFF4EC;
 }
 
 .host-btn:hover {
     background-color: #4CAF50; /* Green */
-    color: white;
+    color: #FFF4EC;
 }
 
 
@@ -305,7 +340,7 @@ body {
   font-size: 1em;
   width: 100%;
   text-align: left;
-  background: white;
+  background: #FFF4EC;
   border-radius: 5px;
 }
 
@@ -408,7 +443,7 @@ body {
 
 .nav-link-header:hover {
   text-decoration: none;
-  color: white;
+  color: #FFF4EC;
   font-weight: bold;
   padding-bottom: .2em;
   border-bottom: 2px solid #20576D;
@@ -493,13 +528,13 @@ body {
   font-size: 10px;
 }
 
-.Events-whiteBackground1{
-  background-color: white;
+.Events-#FFF4ECBackground1{
+  background-color: #FFF4EC;
   margin: auto;
   padding: auto;
 }
-.Events-whiteBackground2{
-  background-color: white;
+.Events-#FFF4ECBackground2{
+  background-color: #FFF4EC;
   margin: auto;
   padding: 1em;
 }
@@ -513,7 +548,7 @@ body {
   display:inline;
   height: auto;
   max-height: 500px;
-  text-shadow: 0px 0px 5px white;
+  text-shadow: 0px 0px 5px #FFF4EC;
 }
 
 .navbar-drop{
@@ -545,7 +580,7 @@ body {
     display: block;
     z-index:100;
     position: relative;
-    background:white;
+    background:#FFF4EC;
     padding: .5em;
     border: 1px solid #ccc;
   }
@@ -557,7 +592,7 @@ body {
 .pagination {
   text-align: center;
   font-size: .8em;
-  white-space: nowrap;
+  #FFF4EC-space: nowrap;
 }
 
 .pagination p {
@@ -568,7 +603,7 @@ body {
 /* SINGLE EVENT PAGE */
 
 .event-page{
-  background: white;
+  background: #FFF4EC;
   border-radius: 5px;
   border: 1px solid #ffffff;
   width: 100%;
@@ -664,7 +699,7 @@ body {
 }
 
 .user-page .container{
-  background: white;
+  background: #FFF4EC;
     margin-top: 2em;
   border-radius: 5px;
   border: 1px solid #ced6d9;
@@ -673,7 +708,7 @@ body {
 }
 
 .user-page-header{
-  background-color: white;
+  background-color: #FFF4EC;
   color: #333;
   border-radius: 5px;
   padding: 1em;
@@ -850,7 +885,7 @@ body {
     font-size: 1.2em;
     margin: 2em auto 2em auto;
     width: 60%;
-    color: white;
+    color: #FFF4EC;
     font-family: 'Fjalla One', sans-serif;
 }
 
@@ -865,7 +900,8 @@ body {
     font-size: 2.5em;
     padding: 1em;
     font-weight: bold;
-    color: white;
+    color: #FFF4EC;
+    text-shadow: 0px 0px 8px rgba(255, 150, 150, 1);
     font-family: 'Fjalla One', sans-serif;
 }
 
@@ -887,7 +923,7 @@ body {
 
 .Home-cal{
   margin: 4em;
-  background-color: white;
+  background-color: #FFF4EC;
 }
 
 .push {
@@ -913,7 +949,7 @@ body {
 
 
 .events-wrapper {
-  background: white;
+  background: #FFF4EC;
   border-radius: 5px;
   border: 1px solid #ced6d9;
   height: auto;
@@ -922,7 +958,7 @@ body {
 }
 
 .event-wrapper {
-  background: white;
+  background: #FFF4EC;
   border-radius: 5px;
   border: 1px solid #ced6d9;
   height: auto;
@@ -1003,7 +1039,7 @@ body {
 @-moz-keyframes fadeInUp {
   0% {
     opacity: 0;
-    transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 70%, 0);
   }
 
   100% {
@@ -1015,7 +1051,7 @@ body {
 @-webkit-keyframes fadeInUp {
   0% {
     opacity: 0;
-    transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 70%, 0);
   }
 
   100% {
@@ -1100,9 +1136,9 @@ body {
 .anim-fadeinup {
     animation-name: fadeInUp;
     -moz-animation-name: fadeInUp;
-    -moz-animation-duration: 0.25s;
+    -moz-animation-duration: 1s;
     -webkit-animation-name: fadeInUp;
-    -webkit-animation-duration: 0.25s;
+    -webkit-animation-duration: 1s;
     transition-timing-function: ease-out;
   }
 
@@ -1206,7 +1242,7 @@ body {
     font-size: 12px;
     color: #999;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    #FFF4EC-space: nowrap;
 }
 
 .card-comments .media-heading {
@@ -1346,6 +1382,7 @@ body {
     color: #262626;
     vertical-align: middle;
 }
+
 
 .card.hovercard .info .desc {
     overflow: hidden;
