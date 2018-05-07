@@ -373,8 +373,9 @@ body {
 }
 
 .splash{
-  padding-top: 6em;
+  padding-top: 4em;
   padding-bottom: 1em;
+  justify-content: center;
  }
 
  .splash p {
@@ -946,9 +947,16 @@ m
     text-shadow: 0px 0px 8px rgba(255, 150, 150, 1);
     font-family: 'Fjalla One', sans-serif;
 }
-.Home-aboutUsButton {
-  margin:3em 0em 0em 0em;
+
+
+.Home-aboutUsButton{
+  position: absolute;
+  display: block;
+  width: 2em;
+  right: calc(50vw - 1em);
+  bottom: 1em;
 }
+
 .Home h3 {
     font-size: 2.3em;
     padding: 1em;
@@ -1243,6 +1251,7 @@ m
     margin-right: 15px;
     vertical-align: top;
     border: 0;
+    position: absolute;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;

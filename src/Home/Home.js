@@ -59,7 +59,7 @@ class Home extends Component {
 
         <div className="container-fluid">
           <div className="row splash">
-            <div className="col">
+            <div className="col justify-content-center">
               <div className="anim-fadein">
                 <h2>Here to mix up the people you meet.</h2>
               </div>
@@ -68,24 +68,18 @@ class Home extends Component {
                      <Link to='/events' className = "btn home-main-btn">Student Events <FontAwesomeIcon className="btn-icon" icon="angle-right"/></Link>
               </div>
 
-              <div className="row mt-2 Home-aboutUsButton">
-                <div className = "col-1">
-                <button className="btn btn-outline-light" onClick={()=>this.scrollTo("#about")}><i class="fas fa-users"></i></button>
-                </div>
+             <div className="Home-aboutUsButton">
+                <button className="btn btn-outline-light" onClick={()=>this.scrollTo("#bixer")}><i class="fas fa-angle-down"></i></button>
               </div>
-
-
              </div>
-
-
             </div>
 
         </div>
 
-        <div className="bixer-section">
+        <div className="bixer-section" id="bixer">
           <div className="container">
-          <h3> BIXER </h3>
-          <p> what is it???</p>
+          <h3> BIXR </h3>
+          <p>[why? what it is, how it works]</p>
           </div>
         </div>
 
