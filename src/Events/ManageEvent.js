@@ -149,21 +149,28 @@ class ManageEvent extends Component {
   }
 
   handleCreateEvent(event) {
+    var numbers = /^[0-9]+$/;
+
     if(!this.state.eventName){
       alert('Please enter an event name.')
     }
-    else if(!this.state.eventLoc){
-      alert('Please enter a location.')
-    }
+
     else if (!this.state.date){
       alert('Please select a date.')
     }
     else if (this.state.startHour > this.state.endHour || (this.state.startHour == this.state.endHour) && (this.state.startMin > this.state.endMin)){
       alert('Invalid input for time. Please make sure the range is correct.')
     }
-    else if (this.state.capacity == '') {
+    else if (this.state.eventCap == '') {
       alert('Please enter a maximum capacity.')
-    } else {
+    }
+    else if (!(this.state.eventCap.match(numbers))) {
+      alert('Please event a valid number for capacity.');
+    }
+    else if(!this.state.eventLoc){
+      alert('Please enter a location.')
+    }
+    else {
       alert('Congrats on submitting your event!');
 
       var data = [{"capacity": this.state.eventCap, "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "start": this.state.start,
