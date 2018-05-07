@@ -668,7 +668,16 @@ body {
   margin-bottom: 2em;
 }
 
+.user-page-body h3{
+  font-family: roboto;
+  font-size: 1.2em;
+}
 
+.user-page-events {
+  background: #eee;
+  padding: .4em;
+  border-radius: 5px;
+}
 /* END USER PAGE */
 
 
