@@ -27,6 +27,7 @@ class EventPage extends Component {
     this.buttons = this.buttons.bind(this);
     this.onJoin = this.onJoin.bind(this);
     this.onLeave = this.onLeave.bind(this);
+    this.attendeesModalContent = this.attendeesModalContent.bind(this)
 
 }
 
@@ -106,12 +107,24 @@ class EventPage extends Component {
     return (this.props.fields.attendance != this.state.attendance)
   }
 
+
+  attendeesModalContent() {
+    if (this.state.attendees.length > 0){
+      return (        <ul>
+                        {this.state.attendees.map((name) => <this.Item key = {name} message = {name}/>)}
+                      </ul>)
+    } else {
+      return  (<p>No one has signed up for this event yet!</p>)
+    }
+
+  }
+
   render() {
     return(
     <div className="event-page">
         <div className="event-page-header">
           <Link to="/events/"><FontAwesomeIcon icon="angle-left" className="angle-left"/> All events</Link>
-          <h2>{this.props.fields.title}</h2>
+          <h2 className="capitalize">{this.props.fields.title}</h2>
           <div className="event-page-author">
             <p>By <Link className="mr-1"to={"/user/"+this.props.author+"/"}>{this.props.author}</Link>({eating_club_map[this.props.fields.eating_club]})</p>
           </div>
@@ -124,58 +137,47 @@ class EventPage extends Component {
               </div>
           </div>
 
-              <div>
-                  <p className= "event-date">{moment(this.props.fields.date).format("dddd, MMMM DD, YYYY")}</p>
-
-                  <hr/>
-
-                <div className = "row">
-                <div className= "col-3">
-                <p className = "event-time">{moment((this.props.fields.date + " " + this.props.fields.start), 'YYYY-MM-DD HH:mm').format('h:mmA')}</p>
-                <p className = "event-time-small"> to </p>
-                <p className = "event-time">{moment((this.props.fields.date + " " + this.props.fields.end), 'YYYY-MM-DD HH:mm').format('h:mmA')}</p>
-                </div>
-
-                <div className = "col-1">
-                 <div class="vl"></div>
-                </div>
-
-                <div className = "col-8">
-                <p className = "event-text">{this.props.fields.location}</p>
-                 <p className = "event-time-small">{this.state.attendance+"/"+this.props.fields.capacity+" going!"}</p>
-                 </div>
-                 </div>
-
-                 <hr/>
-                 <div>
-                  {this.buttons()}
+            <h3>DATE</h3>      
+            <p>{moment(this.props.fields.date).format("dddd, MMMM DD, YYYY")}</p>
 
 
+            <h3>TIME</h3>
+            <p>{moment((this.props.fields.date + " " + this.props.fields.start), 'YYYY-MM-DD HH:mm').format('h:mmA')} to {moment((this.props.fields.date + " " + this.props.fields.end), 'YYYY-MM-DD HH:mm').format('h:mmA')}</p>
 
-                <div class="modal" id="attendee" tabindex="-1" role="dialog" aria-labelledby="attendeeTitle" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="attendeeTitle">Attendees</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <ul>
-                        {this.state.attendees.map((name) => <this.Item key = {name} message = {name}/>)}
-                        </ul>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      </div>
+
+            <h3>LOCATION</h3>
+            <p>{this.props.fields.location}</p>
+
+            <p className = "event-time-small">{this.state.attendance+"/"+this.props.fields.capacity+" going!"}</p>
+
+            <hr/>
+
+            <div className="row">
+              <div className="col">
+                {this.buttons()}
+              </div>
+
+              <div class="modal" id="attendee" tabindex="-1" role="dialog" aria-labelledby="attendeeTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="attendeeTitle">Attendees</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      {this.attendeesModalContent()}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
                     </div>
                   </div>
 
                  </div>
               </div>
-
-            </div>
           </div>
       </div>);
   }
