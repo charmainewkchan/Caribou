@@ -87,7 +87,7 @@ class Event extends Component {
 		 				<div className="col events-content">
 					 		<div className="row">
 					 			<div className="col">
-						  			<h2>{this.props.title}</h2>
+						  			<h2 className="capitalize">{this.props.title}</h2>
 						  		</div>
 						  		{!!this.props.isOwner &&
 						  		<div className="col">

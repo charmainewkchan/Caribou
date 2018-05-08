@@ -28,7 +28,7 @@ class EventCompact extends Component {
 	    		<h2>{moment((this.props.date + " " + this.props.start), 'YYYY-MM-DD HH:mm').format('hA')}</h2>
 	    	</div>
 	    	<div className="col-9">
-		    	<p>{this.props.title}</p>
+		    	<p className="capitalize">{this.props.title}</p>
 		    	<p style={{color:'#777'}}>{this.props.loc}</p>
 	    	</div>
 	    </div>

@@ -27,6 +27,7 @@ class EventPage extends Component {
     this.buttons = this.buttons.bind(this);
     this.onJoin = this.onJoin.bind(this);
     this.onLeave = this.onLeave.bind(this);
+    this.attendeesModalContent = this.attendeesModalContent.bind(this)
 
 }
 
@@ -106,12 +107,24 @@ class EventPage extends Component {
     return (this.props.fields.attendance != this.state.attendance)
   }
 
+
+  attendeesModalContent() {
+    if (this.state.attendees.length > 0){
+      return (        <ul>
+                        {this.state.attendees.map((name) => <this.Item key = {name} message = {name}/>)}
+                      </ul>)
+    } else {
+      return  (<p>No one has signed up for this event yet!</p>)
+    }
+
+  }
+
   render() {
     return(
     <div className="event-page">
         <div className="event-page-header">
           <Link to="/events/"><FontAwesomeIcon icon="angle-left" className="angle-left"/> All events</Link>
-          <h2>{this.props.fields.title}</h2>
+          <h2 className="capitalize">{this.props.fields.title}</h2>
           <div className="event-page-author">
             <p>By <Link className="mr-1"to={"/user/"+this.props.author+"/"}>{this.props.author}</Link>({eating_club_map[this.props.fields.eating_club]})</p>
           </div>
@@ -155,9 +168,7 @@ class EventPage extends Component {
                       </button>
                     </div>
                     <div class="modal-body">
-                      <ul>
-                        {this.state.attendees.map((name) => <this.Item key = {name} message = {name}/>)}
-                      </ul>
+                      {this.attendeesModalContent()}
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

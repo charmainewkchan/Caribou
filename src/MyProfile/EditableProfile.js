@@ -171,7 +171,7 @@ class EditableProfile extends Component {
   render() {
     return (
       <div className="EditableProfile">
-            <h2>Profile Details</h2>
+        <h2>Profile Details</h2>
             <hr/>
 
 
@@ -191,9 +191,11 @@ class EditableProfile extends Component {
         <h3>Eating Club: </h3>
           <Dropdown options = {eatingclubs} label="eatingclubs" onChange = {this.onSelectEatingClub} value={this.state.eating_club} defaultValue={this.state.eating_club}/>
 
-        <div className="row float-right">
-        <button className="btn mt-2 mr-2" onClick={this.props.toggleEditMode}>Cancel</button>
-        <button className="btn btn-success mt-2" onClick={this.save}>Save</button>
+        <div className="row mb-2 editable-buttons">
+          <div className="col float-right">
+            <button className="btn mt-2 " onClick={this.props.toggleEditMode}>Cancel</button>
+            <button className="btn btn-success ml-2 mt-2" onClick={this.save}>Save</button>
+          </div>
         </div>
       </div>
     );
