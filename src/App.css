@@ -244,9 +244,12 @@ body {
 
 /* PROFILE DASHBOARD */
 
+.EditableProfile{
+  padding: 2em;
+}
 
 .MyProfile {
-  padding-bottom: 4em;
+  padding: 2em;
   font-size:.9em;
   text-align: left;
   min-height: 20em;
@@ -347,12 +350,10 @@ body {
 
 
 .Events-addEvent {
-  padding: 1em;
+  padding: 1em 0;
   margin-top: 1em;
   font-size: 1em;
-  width: 100%;
-  text-align: left;
-  background: #FFF4EC;
+  background: white;
   border-radius: 5px;
 }
 
@@ -373,7 +374,7 @@ body {
 }
 
 .splash{
-  padding-top: 4em;
+  padding-top: 9em;
   padding-bottom: 1em;
   justify-content: center;
  }
@@ -386,6 +387,12 @@ body {
 @media (min-width: 900px) {
   .Events{
     width: 80%;
+  }
+}
+
+@media (max-width: 767px) {
+    .splash {
+    padding-top: 4em;
   }
 }
 
@@ -402,6 +409,10 @@ body {
   background: #f3f3f3;
 }
 
+.capitalize{
+  text-transform: capitalize;
+}
+
 .event-compact p {
   padding: 0;
   margin: 0;
@@ -415,6 +426,7 @@ body {
 .events-content-title{
     font-family: 'Fjalla One', sans-serif;
     color: red;
+    text-transform: capitalize;
 }
 
 .nav-link-header {
@@ -737,7 +749,7 @@ body {
 }
 
 .user-page .container{
-  background: #FFF4EC;
+  background: white;
     margin-top: 2em;
   border-radius: 5px;
   height:100%;
@@ -814,6 +826,8 @@ body {
 .Events-event {
   height: 100%;
   width: 100%;
+  background: white;
+  padding-bottom: 2em;
 }
 
 
@@ -1051,6 +1065,7 @@ m
   height: auto;
   margin-bottom: 1em;
   padding: .5em;
+  height: 100%;
 }
 
 .event-wrapper {

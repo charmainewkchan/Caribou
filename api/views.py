@@ -199,7 +199,7 @@ def delete_user(request):
 	user.delete()
 	if 'netid' in request.session:
 		del request.session['netid']
-	return redirect("https://bixr.herokuapp.com")
+	return redirect("https://fed.princeton.edu/cas/logout")
 
 @csrf_exempt
 @casauth
@@ -474,7 +474,7 @@ def login(request):
 	if "netid" in auth_attempt:  # Successfully authenticated.
 
 		if not User.objects.filter(netid=auth_attempt['netid']).exists():
-			u = User(netid=auth_attempt['netid'])
+			u = User(netid=auth_attempt['netid'], first_name="", last_name="")
 			u.save()
 		
 

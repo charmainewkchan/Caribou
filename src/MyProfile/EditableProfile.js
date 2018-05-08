@@ -6,7 +6,7 @@ import eating_club_map from '../Events/eating_club_map.json';
 import 'react-dropdown/style.css'
 import axios from 'axios';
 
-const years = [2019,2020,2021,2022];
+const years = ["2019","2020","2021","2022"];
 const eatingclubs = ["Cloister","Tower","None","Colonial","Cannon","Cap","Ivy","TigerInn","Quad","Terrace","Cottage","Charter"]
 const rescollege = ["Butler", "Wilson", "Mathey", "Rocky", "Whitman","Forbes"]
 
@@ -171,7 +171,7 @@ class EditableProfile extends Component {
   render() {
     return (
       <div className="EditableProfile">
-            <h2>Profile Details</h2>
+        <h2>Profile Details</h2>
             <hr/>
 
 
@@ -180,10 +180,8 @@ class EditableProfile extends Component {
         <h3>Last name: </h3>
         <input className = "form-control" type = "text" id = "last name" name = "last_name"  value={this.state.last_name} onChange = {this.handleChange}/>
 
-        <div>
         <h3>Year: </h3>
-        <Dropdown options = {years} label = "year" name = "year" onChange = {this.onSelectYear} value = {this.state.year}/>
-        </div>
+        <Dropdown options = {years} label = "year" name = "year" onChange = {this.onSelectYear} value = {this.state.year} defaultValue = {this.state.year}/>
 
         <h3>College: </h3>
         <Dropdown options = {rescollege} label = "rescollege" name = "res_college" onChange = {this.onSelectResCollege} value = {this.state.res_college} defaultValue = {this.state.res_college}/>
@@ -191,9 +189,11 @@ class EditableProfile extends Component {
         <h3>Eating Club: </h3>
           <Dropdown options = {eatingclubs} label="eatingclubs" onChange = {this.onSelectEatingClub} value={this.state.eating_club} defaultValue={this.state.eating_club}/>
 
-        <div className="row float-right">
-        <button className="btn mt-2 mr-2" onClick={this.props.toggleEditMode}>Cancel</button>
-        <button className="btn btn-success mt-2" onClick={this.save}>Save</button>
+        <div className="row mb-2 editable-buttons">
+          <div className="col float-right">
+            <button className="btn mt-2 " onClick={this.props.toggleEditMode}>Cancel</button>
+            <button className="btn btn-success ml-2 mt-2" onClick={this.save}>Save</button>
+          </div>
         </div>
       </div>
     );

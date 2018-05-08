@@ -78,6 +78,8 @@ class ManageEvent extends Component {
     this.handleCreateEvent = this.handleCreateEvent.bind(this);
     this._onSelectStart = this._onSelectStart.bind(this);
     this._onSelectEnd = this._onSelectEnd.bind(this);
+    this.validTime = this.validTime.bind(this);
+
     this.cancel = this.cancel.bind(this);
 
   }
@@ -148,6 +150,20 @@ class ManageEvent extends Component {
     this.props.history.push('/events/list/')
   }
 
+  validTime(startTime, endTime) {
+    console.log("startime min = " + parseInt(startTime.substring(3,5)))
+    console.log("endtime min = " + parseInt(endTime.substring(3,5)))
+    console.log("bool = " + ((parseInt(startTime.substring(0,2)) > parseInt(endTime.substring(0,2))) && (parseInt(startTime.substring(3,5)) > parseInt(endTime.substring(3,5)))))
+    if ((parseInt(startTime.substring(0,2)) > parseInt(endTime.substring(0,2))) || ((parseInt(startTime.substring(0,2)) == parseInt(endTime.substring(0,2))) && (parseInt(startTime.substring(3,5)) > parseInt(endTime.substring(3,5))))) {
+
+
+      return false;
+    } else {
+      return true;
+    }
+
+  }
+
   handleCreateEvent(event) {
     var numbers = /^[0-9]+$/;
 
@@ -158,7 +174,7 @@ class ManageEvent extends Component {
     else if (!this.state.date){
       alert('Please select a date.')
     }
-    else if (this.state.startHour > this.state.endHour || (this.state.startHour == this.state.endHour) && (this.state.startMin > this.state.endMin)){
+    else if (!this.validTime(this.state.start, this.state.end)){
       alert('Invalid input for time. Please make sure the range is correct.')
     }
     else if (this.state.eventCap == '') {
@@ -185,18 +201,20 @@ class ManageEvent extends Component {
 
   render() {
     return (
-      <div className="card Events-event anim-fadeinright">
-             <div className="input-group Events-addEvent">
+      <div className="events-wrapper Events-event anim-fadeinright">
+        <div className="container-fluid">
+
+             <div className="input-group row Events-addEvent">
                 <input className = "form-control" type = "text" id = "title" placeholder = "Event Name" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
              </div>
 
-             <div className = "input-group Events-addEvent">
+             <div className = "input-group row Events-addEvent">
               <textarea className="form-control " type="text" id="description" placeholder = "Description" name = "eventDes" value= {this.state.eventDes} onChange={this.handleChange}/>
              </div>
 
-             <div className="input-group Events-addEvent">
+             <div className="input-group row Events-addEvent">
 
-              <div className="input-group-prepend">
+              <div className="input-group-prepend ">
                 <span className="input-group-text" id="basic-addon1">Date</span>
               </div>
 
@@ -213,53 +231,62 @@ class ManageEvent extends Component {
                />
              </div>
 
+             {/*START TIME AND END TIME */}
+             <div className="row">
 
-             <div className="input-group Events-addEvent">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">Start Time</span>
+              <div className="col-md-6">
+               <div className="input-group row Events-addEvent">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon1">Start</span>
+                </div>
+                <Dropdown options={options} className="form-control"label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" aria-describedby="basic-addon1"/>
+               </div>
+               </div>
+
+              <div className="col-md-6">
+               <div className="input-group row Events-addEvent">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon2">End</span>
+                </div>
+                <Dropdown options={options} label="end" className="form-control" onChange={this._onSelectEnd} value={this.state.end} placeholder="00:00" aria-describedby="basic-addon2"/>
+               </div>
               </div>
 
-              <Dropdown options={options} label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" />
+            </div>
 
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">End Time</span>
-              </div>
-              <Dropdown options={options} label = "end" onChange={this._onSelectEnd} value={this.state.end} placeholder="00:00" />
-             </div>
-
-             <div className="input-group Events-addEvent">
+             <div className="input-group row Events-addEvent">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Capacity</span>
               </div>
               <input className = "form-control" type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = ""/>
              </div>
 
-             <div className="input-group Events-addEvent">
+             <div className="input-group row Events-addEvent">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Location</span>
               </div>
               <input className = "form-control" type = "text" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = ""/>
              </div>
 
-             <div className="row input-group float-right">
+             <div className="row input-group">
 
                 {this.state.pk != '' &&
-               <div className = "col float-center">
-                  <button className="btn btn-danger" onClick = {(e)=>this.props.onRemoveEvent(e, this.state.pk)} style ={{width:100}} ><FontAwesomeIcon className="mr-1" icon="trash-alt"/>Delete</button>
+               <div className = "col-sm-4 mb-2">
+                  <button className="btn btn-sm btn-danger" onClick = {(e)=>this.props.onRemoveEvent(e, this.state.pk)} style ={{width:100}} ><FontAwesomeIcon className="mr-1" icon="trash-alt"/>Delete</button>
                </div>
                 }
 
-                <div className = "col float-right">
-                  <button className="btn btn-success" style ={{width:100}} onClick = {this.handleCreateEvent}><FontAwesomeIcon className="mr-1" icon="save"/>Save</button>
+                <div className = "col-sm-4  mb-2">
+                  <button className="btn btn-sm btn-success" style ={{width:100}} onClick = {this.handleCreateEvent}><FontAwesomeIcon className="mr-1" icon="save"/>Save</button>
                 </div>
 
-                <div className = "col float-right">
-                  <button className="btn" style ={{width:100}} onClick = {this.cancel}>Cancel</button>
+                <div className = "col-sm-4  mb-2">
+                  <button className="btn btn-sm" style ={{width:100}} onClick = {this.cancel}>Cancel</button>
                 </div>
 
 
               </div>
-
+          </div>
       </div>
     );
   }
