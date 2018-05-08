@@ -6,7 +6,7 @@ import eating_club_map from '../Events/eating_club_map.json';
 import 'react-dropdown/style.css'
 import axios from 'axios';
 
-const years = [2019,2020,2021,2022];
+const years = ["2019","2020","2021","2022"];
 const eatingclubs = ["Cloister","Tower","None","Colonial","Cannon","Cap","Ivy","TigerInn","Quad","Terrace","Cottage","Charter"]
 const rescollege = ["Butler", "Wilson", "Mathey", "Rocky", "Whitman","Forbes"]
 
@@ -180,10 +180,8 @@ class EditableProfile extends Component {
         <h3>Last name: </h3>
         <input className = "form-control" type = "text" id = "last name" name = "last_name"  value={this.state.last_name} onChange = {this.handleChange}/>
 
-        <div>
         <h3>Year: </h3>
-        <Dropdown options = {years} label = "year" name = "year" onChange = {this.onSelectYear} value = {this.state.year}/>
-        </div>
+        <Dropdown options = {years} label = "year" name = "year" onChange = {this.onSelectYear} value = {this.state.year} defaultValue = {this.state.year}/>
 
         <h3>College: </h3>
         <Dropdown options = {rescollege} label = "rescollege" name = "res_college" onChange = {this.onSelectResCollege} value = {this.state.res_college} defaultValue = {this.state.res_college}/>

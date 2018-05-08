@@ -133,10 +133,9 @@ class EventPage extends Component {
         <div className="container event-page-body">
           <div className="row">
               <div className="col order-xs-2 order-sm-2  order-md-1 event-page-details">
-                <p>{this.props.fields.description}</p>
+              <p>{this.props.fields.description}</p>
               </div>
           </div>
-
 
             <h3>DATE</h3>      
             <p>{moment(this.props.fields.date).format("dddd, MMMM DD, YYYY")}</p>
@@ -173,11 +172,12 @@ class EventPage extends Component {
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
+
                     </div>
                   </div>
-              </div>
 
-            </div>
+                 </div>
+              </div>
           </div>
       </div>);
   }
