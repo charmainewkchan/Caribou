@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Link, withRouter } from 'react-router-dom';
 import moment from 'moment';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import JoinLeaveButton from '../JoinLeaveButton';
 
 
 
@@ -15,19 +16,24 @@ class Event extends Component {
 	constructor(props){
 		super(props)
 
+		this.state = {
+			attendance: this.props.attendance
+		}
+
 		this.buttons = this.buttons.bind(this)
 		this.descriptionString = this.descriptionString.bind(this)
+
+		this.onJoin = this.onJoin.bind(this)
+		this.onLeave = this.onLeave.bind(this)
 	/*	this.getAllEventInfo = this.getAllEventInfo.bind(this)*/
 	}
 
 	componentDidMount(){
-		console.log(this.props.loc)
 	}
 
 	owner_buttons() {
 			return (
 				<div className="owner-buttons">
-						<button className="btn btn-outline-secondary owner-btn " onClick={(e) => this.props.displayAttendees(e,this.props.pk)}><FontAwesomeIcon icon="user" /></button>
 						<button className="btn btn-outline-secondary owner-btn " onClick={(e) => {this.props.history.push('/events/manage/'+this.props.pk + "/"); e.stopPropagation();
 }}><FontAwesomeIcon icon="pencil-alt" /></button>
 				</div>
@@ -35,10 +41,8 @@ class Event extends Component {
 	}
 
 	buttons() {
-		if (this.props.isAttending) {
-			return <button className="btn btn-danger" onClick={(e) => {e.stopPropagation(); this.props.onLeaveEvent(this.props.pk)}}> Leave </button>
-		} else {
-			return <button disabled={this.props.attendance==this.props.capacity || this.props.isOwner} className="btn btn-primary" onClick={(e) => {e.stopPropagation(); this.props.onJoinEvent(this.props.pk)}}> Join </button>
+		if(!this.props.isOwner) {
+			return <JoinLeaveButton pk={this.props.pk} disabled={this.props.attendance==this.props.capacity} join={this.onJoin} leave={this.onLeave} isAttending={this.props.isAttending}/>
 		}
 	}
 
@@ -49,6 +53,20 @@ class Event extends Component {
 		}
 		return this.props.description;
 	}
+
+
+
+  onJoin(pk){
+    this.setState({
+      attendance: this.state.attendance+1
+    }, () => { this.props.onJoinEvent(pk)})
+  }
+
+  onLeave(pk) {
+      this.setState({
+        attendance: this.state.attendance-1
+      }, () => this.props.onLeaveEvent(pk))
+  }
 
 
 
@@ -69,30 +87,30 @@ class Event extends Component {
 		 				<div className="col events-content">
 					 		<div className="row">
 					 			<div className="col">
-						  		<h2>{this.props.title}</h2>
-						  	</div>
-						  	{!!this.props.isOwner &&
+						  			<h2>{this.props.title}</h2>
+						  		</div>
+						  		{!!this.props.isOwner &&
 						  		<div className="col">
 						  		  {this.owner_buttons()}
-						  	 </div>
-						     }
+						  		 </div>
+						    	 }
+						    </div>
 
-						  </div>
+						  	<div className="row"><div className="col">
+					    	<p>{eating_club_map[this.props.eating_club]} &bull; {moment(this.props.date, "YYYY-MM-DD").format('MMM D')}, {moment((this.props.date + " " + this.props.start), 'YYYY-MM-DD HH:mm').format('h:mmA')} -  {moment((this.props.date + " " + this.props.end), 'YYYY-MM-DD HH:mm').format('h:mmA')}</p>
 
-						  <div className="row"><div className="col">
-					    	<p>{eating_club_map[this.props.eating_club]} &bull; {moment(this.props.date, "YYYY-MM-DD").format('MMM D')}, {this.props.start} - {this.props.end}</p>
-					    	</div>
-					    </div>
+								</div>
+					     	 </div>
 
-					    <div className="event-body">
-					         <p>{this.descriptionString()}</p>
-					         <p style={{fontStyle:'italic'}}>{"Location: "+ this.props.loc}</p>
-					         <p>{this.props.attendance == 0 ? "Be the first to join!" : ""+this.props.attendance+"/"+this.props.capacity+" going!"}</p>
-					    </div>
+						    <div className="event-body">
+						         <p>{this.descriptionString()}</p>
+						         <p style={{fontStyle:'italic'}}>{"Location: "+ this.props.loc}</p>
+						         <p>{this.state.attendance == 0 ? "Be the first to join!" : ""+this.state.attendance+"/"+this.props.capacity+" going!"}</p>
+						    </div>
 
-					    <div className="event-footer">
-					    	{this.buttons()}
-					    </div>
+						    <div className="event-footer">
+						    	{this.buttons()}
+						    </div>
 		 				</div>
 		 			</div>
 				</div>

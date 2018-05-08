@@ -18,4 +18,5 @@ urlpatterns = [
 	re_path(r'^unjoin_event', views.unjoin_event),
 	path('hosted_events/<netid>/', views.hosted_events),
 	path('delete_event/<event_id>/', views.delete_event),
+	re_path(r'^toggle_mail', views.toggle_mail),
 ]

@@ -7,183 +7,163 @@ import {Link} from 'react-router-dom';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import JoinLeaveButton from '../JoinLeaveButton';
 
 class EventPage extends Component {
   constructor(props) {
-        super(props)
+    super(props)
     this.state = {
-      eventName: "",
-      eventDes: "",
-      eventLoc: "",
-      eating_club: "",
-      start:"",
-      end:"",
-      date:"",
-      pk:0,
-      eventCap:"",
-      capacity:"",
+      attendance: this.props.fields.attendance,
+      pk: this.props.pk,
+      attendees: [],
+      firstNames : [],
+      lastNames: [],
+      netids: []
     }
 
-    this.buttons = this.buttons.bind(this)
-    this.onJoinEvent = this.onJoinEvent.bind(this);
-    this.onLeaveEvent = this.onLeaveEvent.bind(this);
+    this.Item = this.Item.bind(this);
+
+
+    this.buttons = this.buttons.bind(this);
+    this.onJoin = this.onJoin.bind(this);
+    this.onLeave = this.onLeave.bind(this);
+
 }
 
-  componentDidMount(){
-    // reload the data
-        const event_id = this.props.match.params.event_id;
-        const url = "https://bixr.herokuapp.com/api/event/" + event_id + "/";
-        console.log(url);
+  onJoin(pk){
+    this.setState({
+      attendance: this.state.attendance+1
+    }, () => { this.props.onJoinEvent(pk)})
+  }
 
-        axios.get(url).then(res => {
-      console.log(res.data);
+  onLeave(pk) {
       this.setState({
-          eventName: res.data[0].fields.title,
-          eventDes: res.data[0].fields.description,
-          eventLoc: res.data[0].fields.location,
-          eating_club: res.data[0].fields.eating_club,
-          start:res.data[0].fields.start,
-          end:res.data[0].fields.end,
-          date:res.data[0].fields.date,
-          pk:res.data[0].pk,
-          eventCap:res.data[0].fields.capacity,
-          attendance:res.data[0].fields.attendance,
-          author:res.data[0].author,
-          isOwner: res.data[0].isOwner,
-          isAttending: res.data[0].isAttending
-      });
-
-    });
-
-
+        attendance: this.state.attendance-1
+      }, () => this.props.onLeaveEvent(pk))
   }
 
-  componentDidUpdate(){
-        const event_id = this.props.match.params.event_id;
-        const url = "https://bixr.herokuapp.com/api/event/" + event_id + "/";
 
-        axios.get(url).then(res => {
-          this.setState({
-          eventName: res.data[0].fields.title,
-          eventDes: res.data[0].fields.description,
-          eventLoc: res.data[0].fields.location,
-          eating_club: res.data[0].fields.eating_club,
-          start:res.data[0].fields.start,
-          end:res.data[0].fields.end,
-          date:res.data[0].fields.date,
-          pk:res.data[0].pk,
-          eventCap:res.data[0].fields.capacity,
-          attendance:res.data[0].fields.attendance,
-          author:res.data[0].author,
-
-      });
-    });
-
-  }
-
-  displayAttendees(event, event_pk) {
-    event.stopPropagation();
-    console.log(event);
-    const url = "https://bixr.herokuapp.com/api/get_users_for_event/" + event_pk + "/";
-    axios.get(url).then(res => {
-        var netids = res.data.map(user => user.fields.netid);
-        alert(netids);
-    })
-    .catch(err => alert("err:" + err))
-  }
 
   buttons() {
-		if (this.state.isAttending == "1") {
-			return <button className="btn btn-danger" onClick={() => this.props.onLeaveEvent(this.state.pk)}> Leave </button>
-		} else if (this.state.isOwner == "1") {
-      return (
-      <div>
-      <button className="btn btn-outline-secondary" onClick={(e) => {this.props.history.push('/events/manage/'+ this.state.pk + "/"); e.stopPropagation();
-}}><FontAwesomeIcon icon="pencil-alt" className="mr-1" />Edit</button>
-      <button className="btn btn-outline-secondary" onClick={(e) => this.displayAttendees(e,this.state.pk)}><FontAwesomeIcon icon="user" className="mr-1"/> Attendees</button>
-      </div>
-    )
 
+    if (this.props.isOwner) {
+      return(<div>
+        <button className="btn btn-outline-secondary" onClick={(e) => {this.props.history.push('/events/manage/'+ this.props.pk + "/"); e.stopPropagation();
+        }}><FontAwesomeIcon icon="pencil-alt" className="mr-1 mb-1" />Edit</button>
+
+        <button type="button" className="btn btn-outline-secondary" data-toggle="modal" data-target="#attendee"><FontAwesomeIcon icon="user" className="mr-1 mt-1"/>Attendees</button>
+        </div>
+        );
+    } else {
+      return(
+        <JoinLeaveButton disabled={this.props.fields.attendance==this.props.fields.capacity} isAttending={this.props.isAttending} pk={this.props.pk} join={this.onJoin} leave={this.onLeave}/>
+        );
     }
-    else {
-      console.log(this.state.attendance)
-			return <button disabled={this.state.attendance==this.state.eventCap} className="btn btn-primary" onClick={() => this.props.onJoinEvent(this.state.pk)}> Join </button>
-		}
 	}
 
-  onJoinEvent(event_id) {
-    var data = [{
-      event: event_id,
-    }]
-    axios.post("https://bixr.herokuapp.com/api/join_event/",  data)
-    .then(res => this.props.updateData())
-    .catch(err => {
-          if(err.response.status == 401) {
-            // redirect
-            if(window.confirm("You must complete your profile before joining an event. Press OK to go to Profile page.")) {
-              this.props.history.push('/myprofile/');
-            }
-          }
-    });
-
-  }
-
-  onLeaveEvent(event_id) {
-    var data = [{
-      event: event_id,
-    }]
-    //alert(JSON.stringify(data));
-    if (window.confirm('Are you sure you want to leave this event?')) {
-
-    axios.post("https://bixr.herokuapp.com/api/unjoin_event/",  data)
-    .then(res => this.props.updateData())
-    .catch(err => alert(err));
-  }
-
+  Item(props) {
+    return <li style={{"list-style-type":"none"}}> {props.message} </li>;
   }
 
 
+
+  componentDidMount(){
+    console.log("attending:" + this.props.isAttending+ " " + this.props.pk);
+    const url = "https://bixr.herokuapp.com/api/get_users_for_event/" + this.state.pk + "/";
+    var netids;
+    var tfirstNames;
+    var tlastNames;
+    axios.get(url).then(res => {
+        netids = res.data.map(user => user.fields.netid);
+        tfirstNames = res.data.map(user => user.fields.first_name);
+        tlastNames = res.data.map(user => user.fields.last_name);
+
+        this.setState({
+          firstNames : tfirstNames,
+          lastNames : tlastNames,
+          netids : netids
+        })
+
+        for (var i = 0; i < this.state.firstNames.length; i++) {
+          this.state.attendees.push(this.state.firstNames[i] + " " + this.state.lastNames[i] + "   ");
+        }
+        console.log(this.state.attendees)
+
+        this.setState({
+          attendees: this.state.attendees
+        })
+
+    })
+    .catch(err => alert("err:" + err))
+
+  }
 
   shouldComponentUpdate(props, state) {
-    console.log(this.props.match.params.event_id)
-    console.log(this.state.pk)
-    return this.props.match.params.event_id != this.state.pk;
+    return true;
+    console.log(this.props.fields.attendance)
+    console.log(this.state.attendance)
+    return false;
+    return (this.props.fields.attendance != this.state.attendance)
   }
-
-
 
   render() {
     return(
-    <div className="event-page anim-fadeinright">
+    <div className="event-page">
         <div className="event-page-header">
-          <Link to="/events/">All events</Link>
-          <h3>{moment(this.state.date).format("ddd, hA") }</h3>
-          <h2>{this.state.eventName}</h2>
+          <Link to="/events/"><FontAwesomeIcon icon="angle-left" className="angle-left"/> All events</Link>
+          <h2>{this.props.fields.title}</h2>
           <div className="event-page-author">
-            <p>Hosted by <Link className="mr-1"to={"/user/"+this.state.author+"/"}>{this.state.author}</Link>({eating_club_map[this.state.eating_club]})</p>
+            <p>By <Link className="mr-1"to={"/user/"+this.props.author+"/"}>{this.props.author}</Link>({eating_club_map[this.props.fields.eating_club]})</p>
           </div>
         </div>
 
         <div className="container event-page-body">
           <div className="row">
+              <div className="col order-xs-2 order-sm-2  order-md-1 event-page-details">
+                <p>{this.props.fields.description}</p>
+              </div>
+          </div>
 
-              <div className="col-md-9 order-xs-2 order-sm-2  order-md-1 event-page-details">
-                <img className="event-img" src={princeton_img} alt="img"/>
-                <h3> Details </h3>
-                <hr/>
-                <p>{this.state.eventDes}</p>
+
+            <h3>DATE</h3>      
+            <p>{moment(this.props.fields.date).format("dddd, MMMM DD, YYYY")}</p>
+
+
+            <h3>TIME</h3>
+            <p>{moment((this.props.fields.date + " " + this.props.fields.start), 'YYYY-MM-DD HH:mm').format('h:mmA')} to {moment((this.props.fields.date + " " + this.props.fields.end), 'YYYY-MM-DD HH:mm').format('h:mmA')}</p>
+
+
+            <h3>LOCATION</h3>
+            <p>{this.props.fields.location}</p>
+
+            <p className = "event-time-small">{this.state.attendance+"/"+this.props.fields.capacity+" going!"}</p>
+
+            <hr/>
+
+            <div className="row">
+              <div className="col">
+                {this.buttons()}
               </div>
 
-
-              <div className="col-md-3 order-xs-1 order-sm-1  order-md-2 event-page-info">
-                  <p>{this.state.date}</p>
-                 <p>{this.state.eventLoc}</p>
-                 <p>{this.state.start} - {this.state.end}</p>
-                 <p>{this.state.attendance+"/"+this.state.eventCap+" going!"}</p>
-                 <hr/>
-                 <div>
-                  {this.buttons()}
-                 </div>
+              <div class="modal" id="attendee" tabindex="-1" role="dialog" aria-labelledby="attendeeTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="attendeeTitle">Attendees</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <ul>
+                        {this.state.attendees.map((name) => <this.Item key = {name} message = {name}/>)}
+                      </ul>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                  </div>
               </div>
 
             </div>

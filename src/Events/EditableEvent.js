@@ -82,6 +82,7 @@ class EditableEvent extends Component {
   }
 
   handleCreateEvent(event) {
+    var numbers = /^[0-9]+$/;
     if(!this.state.eventName){
       alert('Please enter an event name.')
     }
@@ -96,6 +97,9 @@ class EditableEvent extends Component {
     }
     else if (this.state.capacity == '') {
       alert('Please enter a maximum capacity.')
+    }
+    else if (!this.state.capacity.match(numbers)) {
+      alert('Please event a valid number for capacity.')
     } else {
       alert('An event was submitted: ' + this.state.eventName + " " + this.state.eventDes + " " + this.state.eventCap + " " + this.state.eventLoc + " " + this.state.date.format().substring(0,10) + " " + this.state.startHour + ":" +
       this.state.startMin +"-" + " " + this.state.endHour + ":" + this.state.endMin + " ");

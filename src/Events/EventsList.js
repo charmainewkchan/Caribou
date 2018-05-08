@@ -17,12 +17,10 @@ class EventsPanel extends Component {
     super(props);
     this.state = {
       events : this.props.events,
-      sortedEvents : []
     };
 
-    this.state.sortedEvents = [].concat(this.state.events).sort((a, b) => a.fields.date > b.fields.date);
     console.log("***");
-    console.log(this.state.sortedEvents);
+    console.log(this.props.events);
 
     this.onJoinEvent = this.onJoinEvent.bind(this);
     this.onLeaveEvent = this.onLeaveEvent.bind(this);
@@ -31,6 +29,7 @@ class EventsPanel extends Component {
 
   componentDidMount() {
     console.log("events list mounted");
+    //this.props.updateData();
   }
 
   onJoinEvent(event_id) {
@@ -75,52 +74,53 @@ class EventsPanel extends Component {
       event: event_id,
     }]
     //alert(JSON.stringify(data));
-    if (window.confirm('Are you sure you want to leave this event?')) {
+
       axios.post("https://bixr.herokuapp.com/api/unjoin_event/",  data)
       .then(res => this.props.updateData())
       .catch(err => alert(err));
-    }
 
   }
 
   render() {
-    return (
-          <div className="events-list">
-           <div className="container-fluid">
-            {this.state.sortedEvents.map(function(event){
-              if (event.fields.date > moment().format("YYYY-MM-DD")) {
-                return (
+     if (Object.keys(this.props.events).length == 0) {
+            return (
+              <p style={{fontStyle:'italic', fontSize:'.8em', padding:'0',fontFamily:'roboto'}}>No events to display</p>
+              )
+     } else {
+      return (
+            <div className="events-list">
+             <div className="container-fluid">
+              {this.state.events.map(function(event){
+                  return (
 
-
-
-                  <div key={event.pk} className="row event-row-buffer">
-                    <EventCard title={event.fields.title}
-                                eating_club={event.fields.eating_club}
-                                time={event.fields.time}
-                                attendance={event.fields.attendance}
-                                capacity={event.fields.capacity}
-                                description={event.fields.description}
-                                location={event.fields.location}
-                                pk={event.pk}
-   
-                                start={event.fields.start}
-                                end={event.fields.end}
-                                date={event.fields.date}
-                                isAttending={event.isAttending}
-                                isOwner={event.isOwner}
-                                onJoinEvent={this.onJoinEvent}
-                                onPostEvent={this.onPostEvent}
-                                onLeaveEvent={this.onLeaveEvent}
-                                isEditable={this.props.isEditable}/>
-                  </div>);
+                    <div key={event.pk} className="row event-row-buffer">
+                      <EventCard title={event.fields.title}
+                                  eating_club={event.fields.eating_club}
+                                  time={event.fields.time}
+                                  attendance={event.fields.attendance}
+                                  capacity={event.fields.capacity}
+                                  description={event.fields.description}
+                                  location={event.fields.location}
+                                  pk={event.pk}
+     
+                                  start={event.fields.start}
+                                  end={event.fields.end}
+                                  date={event.fields.date}
+                                  isAttending={event.isAttending}
+                                  isOwner={event.isOwner}
+                                  onJoinEvent={this.onJoinEvent}
+                                  onPostEvent={this.onPostEvent}
+                                  onLeaveEvent={this.onLeaveEvent}
+                                  isEditable={this.props.isEditable}/>
+                    </div>);
+                },this)
               }
-              },this)
-            }
+              </div>
+              <Pagination changePage={this.props.changePage} currentPage={this.props.currentPage} numPages={this.props.numPages}/>
             </div>
-            <Pagination changePage={this.props.changePage} currentPage={this.props.currentPage} numPages={this.props.numPages}/>
-          </div>
-          )
-    }
+            )
+        }
+      }
 }
 
 export default withRouter(EventsPanel);

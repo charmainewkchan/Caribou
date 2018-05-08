@@ -10,6 +10,7 @@ import './App.css';
 import fontawesome from '@fortawesome/fontawesome'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
+import faSave from '@fortawesome/fontawesome-free-solid/faSave'
 import faUser from '@fortawesome/fontawesome-free-solid/faUser'
 import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt'
 import faPencilAlt from '@fortawesome/fontawesome-free-solid/faPencilAlt'
@@ -24,8 +25,8 @@ import faAngleDoubleRight from '@fortawesome/fontawesome-free-solid/faAngleDoubl
 import faAngleLeft from '@fortawesome/fontawesome-free-solid/faAngleLeft'
 import faAngleDoubleLeft from '@fortawesome/fontawesome-free-solid/faAngleDoubleLeft'
 
-fontawesome.library.add(faAngleDoubleLeft, faAngleLeft, faAngleDoubleRight, faAngleRight, 
-						faUser, faPencilAlt, faTrashAlt, faAddressBook, faCog, faCalendarAlt, 
+fontawesome.library.add(faAngleDoubleLeft, faAngleLeft, faAngleDoubleRight, faAngleRight,
+						faUser, faPencilAlt, faTrashAlt,faSave, faAddressBook, faCog, faCalendarAlt,
 						faBars,faCaretDown,faPlus)
 
 class App extends Component {

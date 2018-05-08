@@ -16,6 +16,7 @@ from . import CASClient
 from api.decorators import casauth
 
 import math
+from datetime import datetime
 
 WEBSITE = "https://bixr.herokuapp.com/events/"
 
@@ -46,10 +47,9 @@ def joined_events_list(netid):
 
 
 # appends isOwner and isAttending fields to list of events
-def append_data_to_events(data_json, netid):
+def append_data_to_events(data, netid):
 	events_joined = joined_events_list(netid)
 
-	data = json.loads(data_json) #json string to dict
 	# manipulate data to add owner field, 0 is not owner, 1 is owner
 	for e in data: # e is the outer dictionary for the event
 		userpk = int(e["fields"]["author"]) # get user pkid
@@ -59,12 +59,49 @@ def append_data_to_events(data_json, netid):
 		e["isAttending"] = 1 if e["pk"] in events_joined else 0
 		e["author"] = author
 
-	return json.dumps(data) # dict to json string
+	return data # python dict
 
-def append_num_pages(data_json, num_pages):
-	data = json.loads(data_json)
+
+def process_events_list(data, request):
+
+	request_data = (json.loads(request.body)) # python array 
+
+	data = data.order_by('date', 'start') # order. queryset
+	# remove events that have already passed
+	today = datetime.now().strftime("%Y-%m-%d")
+	data = data.exclude(date__lt=today)
+
+	if request_data:
+		request_data = request_data[0]; # python dict
+		eating_club_filter = request_data['eating_club_filter']
+		data = data.filter(eating_club__in=eating_club_filter) #filter
+		data = serializers.serialize('json', data) #json string
+		data = json.loads(data) #python array
+
+		# add isowner, isattending fields
+		netid = get_netid(request)
+		data = append_data_to_events(data, netid)
+
+		# Pagination
+		page_size = request_data['page_size']
+		page_num  = request_data['page_num']
+
+		num_pages = math.ceil(len(data) / page_size)
+		offset = page_size * page_num
+		data = data[offset:(offset+page_size)] # page slice
+
+		data.append({'num_pages': num_pages})
+	else:
+		data = serializers.serialize('json', data) #json string
+		data = json.loads(data) #python array
+
+	return json.dumps(data) # returns json string
+
+
+def append_num_pages(data, num_pages):
 	data.append({'num_pages': num_pages})
-	return json.dumps(data) 
+	return json.dumps(data) # returns json string
+
 
 # sends an email with given specs
 def notify(subject, message, tolist):
@@ -76,6 +113,7 @@ def notify(subject, message, tolist):
 		tomail = [netid+"@princeton.edu"]
 		mail = EmailMultiAlternatives(subject,message,"bixrnoreply@gmail.com", tomail, connection=connection)
 		mail.send()
+
 
 def get_netid(request):
 	#global g_netid
@@ -101,22 +139,35 @@ def get_user(request, netid):
 	user = User.objects.filter(netid=netid)
 	if (len(user) != 1):
 		return HttpResponse("User Not Found", status=404)
-	user_json = serializers.serialize('json', user)
+
+	user_set = DoNotMail.objects.filter(user=user.first())
+
+	user_json = serializers.serialize('json', user) # json string
+	user = json.loads(user_json) #python array
+	if len(user_set) == 1:
+		user[0]['fields']['isDoNotMail'] = True
+	else:
+		user[0]['fields']['isDoNotMail'] = False
+
+	user_json = json.dumps(user)
+
 	return HttpResponse(user_json, content_type='application/json')
 
 @csrf_exempt
 @casauth
 def toggle_mail(request):
 	netid = get_netid(request)
-	user_set = User.objects.filter(netid=netid)
-	if len(user_set) == 1:
+	u = User.objects.get(netid=netid)
+	user_set = DoNotMail.objects.filter(user=u)
+	dnm_json = serializers.serialize('json', user_set)
+	if len(user_set) > 0:
 		user_set.delete()
 		return HttpResponse(netid + " turned on email notifications")
 	else:
 		u = User.objects.get(netid=netid)
 		entry = DoNotMail(user=u)
 		entry.save()
-		return HttpResponse(netod + " removed from mailing list")
+		return HttpResponse(netid + " removed from mailing list")
 
 @casauth
 def delete_user(request):
@@ -129,7 +180,7 @@ def delete_user(request):
 	dependencies_j = JoinedEvents.objects.filter(participant=user)
 	if len(dependencies_j) > 0:
 		# access the events they've joined
-		event_ids = [j.event.id for j in joined_events]
+		event_ids = [j.event.id for j in dependencies_j]
 		events = PersonalEvent.objects.filter(id__in=event_ids)
 		for e in events: # decrement attendance
 			att = e.attendance - 1
@@ -140,9 +191,15 @@ def delete_user(request):
 	dependencies_e = PersonalEvent.objects.filter(author=user)
 	if len(dependencies_e) > 0:
 		dependencies_e.delete()
+	# check DoNotMail for dependencies
+	entry = DoNotMail.objects.filter(user=user)
+	if len(entry) > 0:
+		entry.delete()
 	# delete the user
 	user.delete()
-	return HttpResponse("deleted user " + netid)
+	if 'netid' in request.session:
+		del request.session['netid']
+	return redirect("https://bixr.herokuapp.com")
 
 @csrf_exempt
 @casauth
@@ -170,16 +227,15 @@ def post_user(request):
 		notify(subject, message, tolist)
 		return HttpResponse("User created " + netid)
 
-
+@csrf_exempt
 @casauth
 def get_events_for_user(request, netid):
 	event_ids = joined_events_list(netid)
 	events = PersonalEvent.objects.filter(id__in=event_ids)
-	events_json = serializers.serialize('json', events)
 
-	data_json = append_data_to_events(events_json, netid)
+	data_json_string = process_events_list(events, request)
 
-	return HttpResponse(data_json, content_type='application/json')
+	return HttpResponse(data_json_string, content_type='application/json')
 
 #------------------------------------------------------------------------------#
 @csrf_exempt
@@ -188,22 +244,12 @@ def get_events(request):
 	#netid = request.session['netid']
 	netid = get_netid(request)
 
-	request_data = (json.loads(request.body))[0]
-	page_size = request_data['page_size']
-	page_num  = request_data['page_num']
-	eating_club_filter = request_data['eating_club_filter']
+	# filter and sort
+	dataq = PersonalEvent.objects.all()
 
+	data_json_string = process_events_list(dataq, request)
 
-	dataq = PersonalEvent.objects.all().order_by('-pk').filter(eating_club__in=eating_club_filter)
-	num_pages = math.ceil(len(dataq) / page_size)
-	offset = page_size * page_num
-	dataq = dataq[offset:(offset+page_size)]
-	data_json = serializers.serialize('json', dataq)
-
-	data_json = append_data_to_events(data_json, netid)
-	data_json = append_num_pages(data_json, num_pages)
-
-	return HttpResponse(data_json, content_type='application/json')
+	return HttpResponse(data_json_string, content_type='application/json')
 
 @casauth
 def get_event(request, event_id):
@@ -212,22 +258,26 @@ def get_event(request, event_id):
 		return HttpResponse("Event Not Found", status=404)
 	event_json = serializers.serialize('json', event)
 
+	event_json = json.loads(event_json) #python dict
+
 	netid = get_netid(request)
 
-	event_json = append_data_to_events(event_json, netid)
+	event_json = append_data_to_events(event_json, netid) # pytohn dict
+
+	event_json = json.dumps(event_json) # json string
 
 	return HttpResponse(event_json, content_type='application/json')
 
+@csrf_exempt
 @casauth
 def hosted_events(request, netid):
 	netid1 = netid
 	user = User.objects.get(netid=netid1)
 	events = PersonalEvent.objects.filter(author=user)
-	events_json = serializers.serialize('json', events)
 
-	data_json = append_data_to_events(events_json, netid)
+	data_json_string = process_events_list(events, request)
 
-	return HttpResponse(data_json, content_type='application/json')
+	return HttpResponse(data_json_string, content_type='application/json')
 
 @casauth
 def get_users_for_event(request, event_id):
