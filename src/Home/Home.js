@@ -18,7 +18,7 @@ BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 class Home extends Component {
 
 
-  aboutUsCard(name, year, location, degree, linkedIn, imgSrc ){
+  aboutUsCard(name, year, location, degree, email, linkedIn, imgSrc ){
     return(<div className="card hovercard about-us-card">
         <div className="cardheader">
 
@@ -33,6 +33,8 @@ class Home extends Component {
             <div className="desc">Class of {year}</div>
             <div className="desc">{location}</div>
             <div className="desc">{degree}</div>
+            <div className="desc">{email}</div>
+
         </div>
         <div className="bottom">
 
@@ -89,13 +91,13 @@ class Home extends Component {
           <h3> WHO WE ARE </h3>
           <div className="row">
               <div className="col-md-4">
-                {this.aboutUsCard("Charmaine Chan", "2020", "Hong Kong", "Computer Science A.B.", "charmainechan98", "https://image.ibb.co/cMDfKS/077_A1053_copy.jpg")}
+                {this.aboutUsCard("Charmaine Chan", "2020", "Hong Kong", "Computer Science A.B.", "cwkchan@princeton.edu", "charmainechan98", "https://image.ibb.co/cMDfKS/077_A1053_copy.jpg")}
               </div>
               <div className="col-md-4">
-                {this.aboutUsCard("Lucy Jing", "2020", "Toronto, Canada", "Computer Science A.B.", "jinglucy", "https://i.pinimg.com/originals/ce/a3/fd/cea3fdb66b63e2c4996ad69575742e6a.png")}
+                {this.aboutUsCard("Lucy Jing", "2020", "Toronto, Canada", "Computer Science A.B.","ljing@princeton.edu", "jinglucy", "https://i.pinimg.com/originals/ce/a3/fd/cea3fdb66b63e2c4996ad69575742e6a.png")}
               </div>
               <div className="col-md-4">
-                {this.aboutUsCard("Derek Sawicki", "2020", "Connecticut, USA", "Computer Science B.S.E.", "derek-sawicki", "https://image.ibb.co/gHnMtn/31959182_1848636945198865_1110419706541506560_n.jpg")}
+                {this.aboutUsCard("Derek Sawicki", "2020", "Connecticut, USA", "Computer Science B.S.E.","dsawicki@princeton.edu", "derek-sawicki", "https://image.ibb.co/gHnMtn/31959182_1848636945198865_1110419706541506560_n.jpg")}
               </div>
             </div>
           </div>
