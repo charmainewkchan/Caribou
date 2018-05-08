@@ -72,7 +72,10 @@ class Profile extends Component {
   deleteAccount() {
     if (window.confirm("Are you sure you want to delete your account?")) {
       axios.get("https://bixr.herokuapp.com/api/delete_user")
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res)
+        window.location.replace("https://fed.princeton.edu/cas/logout/")
+      })
       .catch( err => console.log(err))
     }
   }
