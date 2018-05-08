@@ -158,7 +158,7 @@ class ManageEvent extends Component {
     else if (!this.state.date){
       alert('Please select a date.')
     }
-    else if (this.state.startHour > this.state.endHour || (this.state.startHour == this.state.endHour) && (this.state.startMin > this.state.endMin)){
+    else if (this.state.start > this.state.end || (this.state.startHour == this.state.endHour) && (this.state.startMin > this.state.endMin)){
       alert('Invalid input for time. Please make sure the range is correct.')
     }
     else if (this.state.eventCap == '') {

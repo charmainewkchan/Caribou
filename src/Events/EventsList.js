@@ -102,7 +102,7 @@ class EventsPanel extends Component {
                                   description={event.fields.description}
                                   location={event.fields.location}
                                   pk={event.pk}
-     
+
                                   start={event.fields.start}
                                   end={event.fields.end}
                                   date={event.fields.date}
