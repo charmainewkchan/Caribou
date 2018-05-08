@@ -71,7 +71,7 @@ class Profile extends Component {
 
   deleteAccount() {
     if (window.confirm("Are you sure you want to delete your account?")) {
-      axios.get("https://bixr.herokuapp.com/api/delete_user/")
+      axios.get("https://bixr.herokuapp.com/api/delete_user")
       .then(res => console.log(res))
       .catch( err => console.log(err))
     }
