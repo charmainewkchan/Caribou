@@ -199,7 +199,7 @@ def delete_user(request):
 	user.delete()
 	if 'netid' in request.session:
 		del request.session['netid']
-	return redirect("https://fed.princeton.edu/cas/logout")
+	return redirect("https://fed.princeton.edu/cas/logout?service=https://bixr.herokuapp.com/")
 
 @csrf_exempt
 @casauth
