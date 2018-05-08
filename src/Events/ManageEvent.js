@@ -78,6 +78,8 @@ class ManageEvent extends Component {
     this.handleCreateEvent = this.handleCreateEvent.bind(this);
     this._onSelectStart = this._onSelectStart.bind(this);
     this._onSelectEnd = this._onSelectEnd.bind(this);
+    this.validTime = this.validTime.bind(this);
+
     this.cancel = this.cancel.bind(this);
 
   }
@@ -148,6 +150,20 @@ class ManageEvent extends Component {
     this.props.history.push('/events/list/')
   }
 
+  validTime(startTime, endTime) {
+    console.log("startime min = " + parseInt(startTime.substring(3,5)))
+    console.log("endtime min = " + parseInt(endTime.substring(3,5)))
+    console.log("bool = " + ((parseInt(startTime.substring(0,2)) > parseInt(endTime.substring(0,2))) && (parseInt(startTime.substring(3,5)) > parseInt(endTime.substring(3,5)))))
+    if ((parseInt(startTime.substring(0,2)) > parseInt(endTime.substring(0,2))) || ((parseInt(startTime.substring(0,2)) == parseInt(endTime.substring(0,2))) && (parseInt(startTime.substring(3,5)) > parseInt(endTime.substring(3,5))))) {
+
+
+      return false;
+    } else {
+      return true;
+    }
+
+  }
+
   handleCreateEvent(event) {
     var numbers = /^[0-9]+$/;
 
@@ -158,7 +174,7 @@ class ManageEvent extends Component {
     else if (!this.state.date){
       alert('Please select a date.')
     }
-    else if (this.state.start > this.state.end || (this.state.startHour == this.state.endHour) && (this.state.startMin > this.state.endMin)){
+    else if (!this.validTime(this.state.start, this.state.end)){
       alert('Invalid input for time. Please make sure the range is correct.')
     }
     else if (this.state.eventCap == '') {
