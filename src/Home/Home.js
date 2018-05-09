@@ -61,9 +61,9 @@ class Home extends Component {
 
         <div className="container-fluid">
           <div className="row splash">
-            <div className="col justify-content-center">
-              <div className="anim-fadein">
-                <h2>Here to mix up the people you meet.</h2>
+            <div className="col justify-content-center" >
+              <div className="anim-fadein" >
+                <h2 className="splashh2">Here to mix up the people you meet.</h2>
               </div>
              <p> Make events, join events, and get to know other Tigers! </p>
               <div className = "row m-auto mt-5" >
@@ -79,11 +79,16 @@ class Home extends Component {
         </div>
 
         <div className="bixer-section col-md" id="bixer">
-          <div className="container card col-md">
+          <div className="container w-50">
           <h3> BIXR </h3>
           <p4>We think getting to know members of a club should be done over a period of weeks not days. Bixr allows students to host and join events throughout the year
           so that you can get to know members the way you want to. </p4>
-          <p4> How do you use Bixr? Simply 1) Create a profile 2) Create/Join and event 3) Meet up when the event happens!</p4>
+          <p4> How do you use Bixr? </p4>
+            <ol>
+              <li>Complete your profile</li>
+              <li>Create/Join an Event</li>
+              <li>Meet up when the event happens!</li>
+            </ol>
 
           </div>
         </div>

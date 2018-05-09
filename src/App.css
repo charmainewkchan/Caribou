@@ -390,9 +390,15 @@ body {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 500px) {
     .splash {
-    padding-top: 4em;
+  }
+  .splash .container{
+    width: 90%;
+  }
+
+  .splashh2{
+    padding: 0 !important;
   }
 }
 
@@ -461,6 +467,15 @@ body {
 
 }
 
+
+.bixer-section {
+  padding-bottom: 3em;
+  text-align: left;
+}
+.bixer-section ol {
+  text-decoration: none;
+  padding: 1em;
+}
 
 .nav-link-header:hover:before {
   visibility: visible;
@@ -959,7 +974,9 @@ body {
     color: #FFF4EC;
     font-family: 'Fjalla One', sans-serif;
 }
-m
+
+
+
 .Home p2 {
     font-size: 1.2em;
     margin: auto;
