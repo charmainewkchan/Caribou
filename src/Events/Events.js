@@ -188,7 +188,7 @@ class Events extends Component {
         numPages: res.data.slice(-1)[0]['num_pages'],
         events: res.data.slice(0,-1)
       });
-    });
+    })
   }
 
 
