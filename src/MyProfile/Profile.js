@@ -77,7 +77,7 @@ class Profile extends Component {
       })
       .catch( err => {
         console.log(err)
-        window.location.replace("https://fed.princeton.edu/cas/logout/")
+        window.location.replace("https://fed.princeton.edu/cas/logout?service=https://bixr.herokuapps.com")
       })
     }
   }

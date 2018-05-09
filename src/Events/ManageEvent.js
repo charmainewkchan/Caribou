@@ -201,7 +201,7 @@ class ManageEvent extends Component {
 
   render() {
     return (
-      <div className="events-wrapper Events-event anim-fadeinright">
+      <div className="events-wrapper Events-event anim-fadeinright pb-2">
         <div className="container-fluid">
 
              <div className="input-group row Events-addEvent">
