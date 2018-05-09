@@ -390,9 +390,9 @@ body {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 590px) {
     .splash {
-    padding-top: 4em;
+    padding-top: 2em;
   }
 }
 
