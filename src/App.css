@@ -393,6 +393,7 @@ body {
 
 @media (max-width: 500px) {
     .splash {
+      padding-top:2em ;
   }
   .splash .container{
     width: 90%;
