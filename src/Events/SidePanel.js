@@ -38,7 +38,7 @@ class SidePanel extends Component {
         eventsHosting: res.data,
       });
     })
-    .catch(err=>alert(err));
+    .catch(err=>console.log(err));
   }
 
   updateAttending(){
@@ -52,7 +52,7 @@ class SidePanel extends Component {
           eventsAttending: res.data,
         });
     })
-    .catch(err=>alert(err));
+    .catch(err=>console.log(err));
   }
 
   showAlert() {

@@ -64,7 +64,7 @@ class Profile extends Component {
           doNotMail: res.data[0].fields.isDoNotMail
         })
       })
-    .catch(err => alert(err));
+    .catch(err => console.log(err));
   }
 
 

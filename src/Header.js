@@ -20,7 +20,7 @@ class Header extends Component {
       console.log(res.data);
       localStorage.setItem('netid', res.data.netid);
       this.setState({username: res.data.netid});
-    }).catch(err => alert(err));
+    }).catch(err => console.log(err));
   }
 
 

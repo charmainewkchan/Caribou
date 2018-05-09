@@ -77,7 +77,7 @@ class Events extends Component {
         const url = "https://bixr.herokuapp.com/api/delete_event/" + event_id + "/";
         axios.get(url)
         .then(res =>  this.updateAll())
-        .catch(err => alert(err));
+        .catch(err => console.log(err));
 
         this.props.history.push('/events/list/')
       }
