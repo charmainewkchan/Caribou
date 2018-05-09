@@ -977,6 +977,17 @@ m
     font-family: 'Roboto', sans-serif;
 }
 
+.Home p4 {
+  font-size: 1.2em;
+  color: #00373f;
+  font-family: 'Roboto', sans-serif;
+}
+
+.Home info {
+  padding: 3em;
+  margin: 3em;
+}
+
 
 .Home h2 {
     font-size: 2.5em;

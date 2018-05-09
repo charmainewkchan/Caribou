@@ -78,10 +78,13 @@ class Home extends Component {
 
         </div>
 
-        <div className="bixer-section" id="bixer">
-          <div className="container">
+        <div className="bixer-section col-md" id="bixer">
+          <div className="container card col-md">
           <h3> BIXR </h3>
-          <p>[why? what it is, how it works]</p>
+          <p4>We think getting to know members of a club should be done over a period of weeks not days. Bixr allows students to host and join events throughout the year
+          so that you can get to know members the way you want to. </p4>
+          <p4> How do you use Bixr? Simply 1) Create a profile 2) Create/Join and event 3) Meet up when the event happens!</p4>
+
           </div>
         </div>
 
