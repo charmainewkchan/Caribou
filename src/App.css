@@ -390,9 +390,16 @@ body {
   }
 }
 
-@media (max-width: 590px) {
+
+@media (max-width: 500px) {
     .splash {
-    padding-top: 2em;
+  }
+  .splash .container{
+    width: 90%;
+  }
+
+  .splashh2{
+    padding: 0 !important;
   }
 }
 
@@ -461,6 +468,15 @@ body {
 
 }
 
+
+.bixer-section {
+  padding-bottom: 3em;
+  text-align: left;
+}
+.bixer-section ol {
+  text-decoration: none;
+  padding: 1em;
+}
 
 .nav-link-header:hover:before {
   visibility: visible;
@@ -959,7 +975,9 @@ body {
     color: #FFF4EC;
     font-family: 'Fjalla One', sans-serif;
 }
-m
+
+
+
 .Home p2 {
     font-size: 1.2em;
     margin: auto;
@@ -975,6 +993,17 @@ m
     color: #333;
     font-style: italic;
     font-family: 'Roboto', sans-serif;
+}
+
+.Home p4 {
+  font-size: 1.2em;
+  color: #00373f;
+  font-family: 'Roboto', sans-serif;
+}
+
+.Home info {
+  padding: 3em;
+  margin: 3em;
 }
 
 
