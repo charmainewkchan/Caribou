@@ -21,7 +21,7 @@ Util.timeTo12Hour = function(time) {
     }
 
 
-    if (hours >= 12) {
+    if (hours > 12) {
       hours = hours - 12;
 
       if (hours < 10) {
