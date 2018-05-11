@@ -13,7 +13,7 @@ class EventPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      attendance: this.props.fields.attendance,
+     // attendance: this.props.fields.attendance,
       pk: this.props.pk,
       attendees: [],
       firstNames : [],
@@ -31,16 +31,12 @@ class EventPage extends Component {
 
 }
 
-  onJoin(pk){
-    this.setState({
-      attendance: this.state.attendance+1
-    }, () => { this.props.onJoinEvent(pk)})
+  onJoin(pk, buttonref){
+    this.props.onJoinEvent(pk, buttonref)
   }
 
-  onLeave(pk) {
-      this.setState({
-        attendance: this.state.attendance-1
-      }, () => this.props.onLeaveEvent(pk))
+  onLeave(pk, buttonref) {
+    this.props.onLeaveEvent(pk, buttonref)
   }
 
 
@@ -102,9 +98,9 @@ class EventPage extends Component {
   shouldComponentUpdate(props, state) {
     return true;
     console.log(this.props.fields.attendance)
-    console.log(this.state.attendance)
+    //console.log(this.state.attendance)
     return false;
-    return (this.props.fields.attendance != this.state.attendance)
+    //return (this.props.fields.attendance != this.state.attendance)
   }
 
 
@@ -148,7 +144,7 @@ class EventPage extends Component {
             <h3>LOCATION</h3>
             <p>{this.props.fields.location}</p>
 
-            <p className = "event-time-small">{this.state.attendance+"/"+this.props.fields.capacity+" going!"}</p>
+            <p className = "event-time-small">{this.props.attendance+"/"+this.props.fields.capacity+" going!"}</p>
 
             <hr/>
 

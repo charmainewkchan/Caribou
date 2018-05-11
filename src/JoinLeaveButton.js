@@ -13,10 +13,26 @@ class JoinLeaveButton extends Component {
     }
 
     this.onEngage = this.onEngage.bind(this)
+    this.join = this
   }
 
   componentDidMount(){
     console.log("is attending: " + this.props.isAttending + " " + this.props.pk)
+  }
+
+
+  join(){
+      console.log("undo leave");
+      this.setState({
+        isAttending: true
+      })
+  }
+
+  leave() {
+    console.log("undo join");
+    this.setState({
+      isAttending: false
+    })
   }
 
   onEngage(){
@@ -26,19 +42,14 @@ class JoinLeaveButton extends Component {
 
 
     if (!this.state.isAttending){
-      this.props.join(this.props.pk)
-
-      this.setState({
-        isAttending: !this.state.isAttending
-      })
+      this.props.join(this.props.pk, this)
+      this.join();
     } else {
 
       if (window.confirm('Are you sure you want to leave this event?')) {
-        this.props.leave(this.props.pk)
+        this.props.leave(this.props.pk, this)
 
-          this.setState({
-            isAttending: !this.state.isAttending
-          })
+
       }
     }
 

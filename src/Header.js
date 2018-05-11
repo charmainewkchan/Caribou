@@ -21,7 +21,7 @@ class Header extends Component {
       localStorage.setItem('netid', res.data.netid);
       this.setState({username: res.data.netid});
     }).catch(err => {
-      window.location.replace("https://bixr.herokuapp.com/login/")
+      //window.location.replace("https://bixr.herokuapp.com/login/")
       console.log(err)
     });
   }

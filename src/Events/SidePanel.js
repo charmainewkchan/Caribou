@@ -40,7 +40,7 @@ class SidePanel extends Component {
     })
     .catch(err=>{
       console.log(err);
-      window.location.replace("https://bixr.herokuapp.com/login/");
+      //window.location.replace("https://bixr.herokuapp.com/login/");
     });
   }
 
