@@ -10,37 +10,11 @@ import '../App.css';
 import axios from 'axios'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { withRouter } from 'react-router-dom';
-
-
+import hours from './hours.json'
+import Util from '../Util'
 
 // Constants for time
 const format = 'HH:mm';
-const options = [
-  '01:00','01:15','01:30','01:45',
-  '02:00','02:15','02:30','02:45',
-  '03:00','03:15','03:30','03:45',
-  '04:00','04:15','04:30','04:45',
-  '05:00','05:15','05:30','05:45',
-  '06:00','06:15','06:30','06:45',
-  '07:00','07:15','07:30','07:45',
-  '08:00','08:15','08:30','08:45',
-  '09:00','09:15','09:30','09:45',
-  '10:00','10:15','10:30','10:45',
-  '11:00','11:15','11:30','11:45',
-  '12:00','12:15','12:30','12:45',
-  '13:00','13:15','13:30','13:45',
-  '14:00','14:15','14:30','14:45',
-  '15:00','15:15','15:30','15:45',
-  '16:00','16:15','16:30','16:45',
-  '17:00','17:15','17:30','17:45',
-  '18:00','18:15','18:30','18:45',
-  '19:00','19:15','19:30','19:45',
-  '20:00','20:15','20:30','20:45',
-  '21:00','21:15','21:30','21:45',
-  '22:00','22:15','22:30','22:45',
-  '23:00','23:15','23:30','23:45',
-  '24:00'
-]
 
 var eatingClubAbr = {
   "CL":"Cloister",
@@ -78,8 +52,6 @@ class ManageEvent extends Component {
     this.handleCreateEvent = this.handleCreateEvent.bind(this);
     this._onSelectStart = this._onSelectStart.bind(this);
     this._onSelectEnd = this._onSelectEnd.bind(this);
-    this.validTime = this.validTime.bind(this);
-
     this.cancel = this.cancel.bind(this);
 
   }
@@ -97,8 +69,8 @@ class ManageEvent extends Component {
               eventDes: res.data[0].fields.description,
               eventLoc: res.data[0].fields.location,
               eating_club: res.data[0].fields.eating_club,
-              start:res.data[0].fields.start,
-              end:res.data[0].fields.end,
+              start: Util.timeTo12Hour(res.data[0].fields.start),
+              end: Util.timeTo12Hour(res.data[0].fields.end),
               date: moment(res.data[0].fields.date),
               pk:res.data[0].pk,
               eventCap:res.data[0].fields.capacity,
@@ -150,19 +122,7 @@ class ManageEvent extends Component {
     this.props.history.push('/events/list/')
   }
 
-  validTime(startTime, endTime) {
-    console.log("startime min = " + parseInt(startTime.substring(3,5)))
-    console.log("endtime min = " + parseInt(endTime.substring(3,5)))
-    console.log("bool = " + ((parseInt(startTime.substring(0,2)) > parseInt(endTime.substring(0,2))) && (parseInt(startTime.substring(3,5)) > parseInt(endTime.substring(3,5)))))
-    if ((parseInt(startTime.substring(0,2)) > parseInt(endTime.substring(0,2))) || ((parseInt(startTime.substring(0,2)) == parseInt(endTime.substring(0,2))) && (parseInt(startTime.substring(3,5)) > parseInt(endTime.substring(3,5))))) {
 
-
-      return false;
-    } else {
-      return true;
-    }
-
-  }
 
   handleCreateEvent(event) {
     var numbers = /^[0-9]+$/;
@@ -174,13 +134,13 @@ class ManageEvent extends Component {
     else if (!this.state.date){
       alert('Please select a date.')
     }
-    else if (!this.validTime(this.state.start, this.state.end)){
-      alert('Invalid input for time. Please make sure the range is correct.')
-    }
+    //else if (!Util.validTime(this.state.start, this.state.end)){
+    // alert('Invalid input for time. Please make sure the range is correct.')
+    //}
     else if (this.state.eventCap == '') {
       alert('Please enter a maximum capacity.')
     }
-    else if (!(this.state.eventCap.match(numbers))) {
+    else if (this.state.eventCap > 10000 ) {
       alert('Please event a valid number for capacity.');
     }
     else if(!this.state.eventLoc){
@@ -189,8 +149,16 @@ class ManageEvent extends Component {
     else {
       alert('Congrats on submitting your event!');
 
-      var data = [{"capacity": this.state.eventCap, "description" : this.state.eventDes, "title": this.state.eventName, "location": this.state.eventLoc, "start": this.state.start,
-      "end": this.state.end, "date" : this.state.date.format().substring(0,10), "pk": this.state.pk}]
+      var data = [{
+        "capacity": this.state.eventCap, 
+        "description" : this.state.eventDes, 
+        "title": this.state.eventName, 
+        "location": this.state.eventLoc, 
+        "start": Util.timeTo24Hour(this.state.start),
+        "end": Util.timeTo24Hour(this.state.end), 
+        "date" : this.state.date.format().substring(0,10), 
+        "pk": this.state.pk
+      }]
 
       console.log(data)
       this.props.onPostEvent(
@@ -239,7 +207,7 @@ class ManageEvent extends Component {
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="basic-addon1">Start</span>
                 </div>
-                <Dropdown options={options} className="form-control"label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" aria-describedby="basic-addon1"/>
+                <Dropdown options={hours} className="form-control"label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" aria-describedby="basic-addon1"/>
                </div>
                </div>
 
@@ -248,7 +216,7 @@ class ManageEvent extends Component {
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="basic-addon2">End</span>
                 </div>
-                <Dropdown options={options} label="end" className="form-control" onChange={this._onSelectEnd} value={this.state.end} placeholder="00:00" aria-describedby="basic-addon2"/>
+                <Dropdown options={hours} label="end" className="form-control" onChange={this._onSelectEnd} value={this.state.end} placeholder="00:00" aria-describedby="basic-addon2"/>
                </div>
               </div>
 
@@ -258,7 +226,7 @@ class ManageEvent extends Component {
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Capacity</span>
               </div>
-              <input className = "form-control" type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = ""/>
+              <input className = "form-control" type = "number" id = "eventCap" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = ""/>
              </div>
 
              <div className="input-group row Events-addEvent">
