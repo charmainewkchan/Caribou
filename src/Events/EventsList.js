@@ -114,7 +114,7 @@ class EventsPanel extends Component {
                                   attendance={event.fields.attendance}
                                   capacity={event.fields.capacity}
                                   description={event.fields.description}
-                                  location={event.fields.location}
+                                  loc={event.fields.location}
                                   pk={event.pk}
 
                                   start={event.fields.start}
