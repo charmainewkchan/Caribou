@@ -95,14 +95,6 @@ class EventPage extends Component {
 
   }
 
-  shouldComponentUpdate(props, state) {
-    return true;
-    console.log(this.props.fields.attendance)
-    //console.log(this.state.attendance)
-    return false;
-    //return (this.props.fields.attendance != this.state.attendance)
-  }
-
 
   attendeesModalContent() {
     if (this.state.attendees.length > 0){

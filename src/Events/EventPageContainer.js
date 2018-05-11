@@ -100,7 +100,10 @@ class EventPageContainer extends Component {
       .then(res => this.updateData(true))
       .catch(err => {
         console.log(err)
-        buttonref.join();
+        this.setState({
+          attendance: this.state.attendance+1
+        },  () => buttonref.join());
+
       });
 
   }
@@ -111,7 +114,6 @@ class EventPageContainer extends Component {
       return(
         <div className="anim-fadeinright">
         <EventPage  
-                   ref="child"
                    fields={this.state.fields} 
                    pk={this.state.pk} 
                    author={this.state.author}   

@@ -13,7 +13,8 @@ class JoinLeaveButton extends Component {
     }
 
     this.onEngage = this.onEngage.bind(this)
-    this.join = this
+    this.join = this.join.bind(this);
+    this.leave = this.leave.bind(this);
   }
 
   componentDidMount(){
@@ -39,8 +40,6 @@ class JoinLeaveButton extends Component {
 
     console.log("boop");
 
-
-
     if (!this.state.isAttending){
       this.props.join(this.props.pk, this)
       this.join();
@@ -48,8 +47,7 @@ class JoinLeaveButton extends Component {
 
       if (window.confirm('Are you sure you want to leave this event?')) {
         this.props.leave(this.props.pk, this)
-
-
+        this.leave();
       }
     }
 

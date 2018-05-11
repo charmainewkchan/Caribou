@@ -42,7 +42,7 @@ class Event extends Component {
 
 	buttons() {
 		if(!this.props.isOwner) {
-			return <JoinLeaveButton pk={this.props.pk} disabled={this.props.attendance==this.props.capacity} join={this.onJoin} leave={this.onLeave} isAttending={this.props.isAttending}/>
+			return <JoinLeaveButton ref="child" pk={this.props.pk} disabled={this.props.attendance==this.props.capacity} join={this.onJoin} leave={this.onLeave} isAttending={this.props.isAttending}/>
 		}
 	}
 
@@ -55,17 +55,31 @@ class Event extends Component {
 	}
 
 
-
-  onJoin(pk){
-    this.setState({
-      attendance: this.state.attendance+1
-    }, () => { this.props.onJoinEvent(pk)})
+  setAttendance(isAttending) {
+  	if (isAttending) { // true
+  		this.refs.child.join();
+  		this.setState({
+  			attendance:this.state.attendance+1
+  		})
+  	} else {
+  		this.refs.child.leave();
+  		this.setState({
+  			attendance:this.state.attendance-1
+  		})
+  	}
   }
 
-  onLeave(pk) {
+
+  onJoin(pk, eventref){
+    this.setState({
+      attendance: this.state.attendance+1
+    }, () => { this.props.onJoinEvent(pk, this)})
+  }
+
+  onLeave(pk, buttonref, eventref) {
       this.setState({
         attendance: this.state.attendance-1
-      }, () => this.props.onLeaveEvent(pk))
+      }, () => this.props.onLeaveEvent(pk, this))
   }
 
 
