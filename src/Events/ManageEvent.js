@@ -239,7 +239,7 @@ class ManageEvent extends Component {
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="basic-addon1">Start</span>
                 </div>
-                <Dropdown options={options} className="form-control"label = "start" onChange={this._onSelectStart} value={this.state.start} placeholder="00:00" aria-describedby="basic-addon1"/>
+                <Dropdown options={options} className="form-control"label = "start" onChange={this._onSelectStart} value={this.state.start} defaultValue = "12:00" placeholder="12:00" aria-describedby="basic-addon1"/>
                </div>
                </div>
 
@@ -248,7 +248,7 @@ class ManageEvent extends Component {
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="basic-addon2">End</span>
                 </div>
-                <Dropdown options={options} label="end" className="form-control" onChange={this._onSelectEnd} value={this.state.end} placeholder="00:00" aria-describedby="basic-addon2"/>
+                <Dropdown options={options} label="end" className="form-control" onChange={this._onSelectEnd} value={this.state.end} defaultValue = "12:00" placeholder="12:00" aria-describedby="basic-addon2"/>
                </div>
               </div>
 
@@ -258,7 +258,7 @@ class ManageEvent extends Component {
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Capacity</span>
               </div>
-              <input className = "form-control" type = "number" min = "1" max = "100" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = "1" />
+              <input className = "form-control" type = "number" min = "1" max = "100" defaultValue = "1" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = "1" />
              </div>
 
              <div className="input-group row Events-addEvent">
