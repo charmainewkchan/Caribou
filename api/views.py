@@ -27,11 +27,11 @@ def react(request):
 def test(request):
 	return HttpResponse("test", status=400)
 
-g_netid = ""
-def set_netid(request, netID):
-	global g_netid
-	g_netid = netID
-	return HttpResponse("good", status=200)
+#g_netid = ""
+#def set_netid(request, netID):
+#	global g_netid#
+#	g_netid = netID
+#	return HttpResponse("good", status=200)
 
 #------------------------------------------------------------------------------#
 # HELPER FUNCTIONS #
@@ -116,11 +116,11 @@ def notify(subject, message, tolist):
 
 
 def get_netid(request):
-	global g_netid
+	#global g_netid
 	if 'netid' in request.session:
 		return request.session['netid']
-	if g_netid:
-		return g_netid
+	#if g_netid:
+		#return g_netid
 	return "dsawicki"
 
 
@@ -199,7 +199,7 @@ def delete_user(request):
 	user.delete()
 	if 'netid' in request.session:
 		del request.session['netid']
-	return redirect("https://fed.princeton.edu/cas/logout")
+	return redirect("https://bixr.herokuapp.com")
 
 @csrf_exempt
 @casauth
@@ -472,6 +472,12 @@ def login(request):
 
 	auth_attempt = C.Authenticate()
 	if "netid" in auth_attempt:  # Successfully authenticated.
+
+		if not User.objects.filter(netid=auth_attempt['netid']).exists():
+			u = User(netid=auth_attempt['netid'], first_name="", last_name="")
+			u.save()
+		
+
 		print("successfully authenticted")
 		request.session['netid'] = auth_attempt['netid']
 		return redirect("https://bixr.herokuapp.com")

@@ -4,6 +4,21 @@ import axios from 'axios'
 import res_college_map from './res_college_map.json'
 import EventsCompactList from './Events/EventsCompactList'
 
+var eatingClubAbr = {
+	"CL":"Cloister",
+	"TO":"Tower",
+	"NN":"None",
+	"CO":"Colonial",
+	"CN":"Cannon",
+	"CA":"Cap",
+	"IV":"Ivy",
+	"TI":"TigerInn",
+	"QD":"Quad",
+	"TE":"Terrace",
+	"CT":"Cottage",
+	"CH":"Charter"
+}
+
 class User extends Component {
 
 	constructor(){
@@ -15,6 +30,7 @@ class User extends Component {
 
     this.setEventPage = this.setEventPage.bind(this);
 	}
+
 
   componentDidMount(){
     // reload the data
@@ -61,8 +77,9 @@ class User extends Component {
 
     	  <div className="user-page-body">
           <p>Class of {this.state.fields.year}</p>
+					<p>Eating Club: {eatingClubAbr[this.state.fields.eating_club]}</p>
           <p>{res_college_map[this.state.fields.res_college]}</p>
-          
+
           <hr/>
           <h3>Events {this.state.fields.first_name} is Hosting</h3>
           <div className="user-page-events">

@@ -38,7 +38,10 @@ class SidePanel extends Component {
         eventsHosting: res.data,
       });
     })
-    .catch(err=>alert(err));
+    .catch(err=>{
+      console.log(err);
+      //window.location.replace("https://bixr.herokuapp.com/login/");
+    });
   }
 
   updateAttending(){
@@ -52,7 +55,7 @@ class SidePanel extends Component {
           eventsAttending: res.data,
         });
     })
-    .catch(err=>alert(err));
+    .catch(err=>console.log(err));
   }
 
   showAlert() {

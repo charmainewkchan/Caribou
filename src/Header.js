@@ -14,16 +14,16 @@ class Header extends Component {
   }
 
   componentDidMount() {
-      localStorage.setItem('netid', 'dsawicki');
-      this.setState({username: 'dsawicki'});
-
-      const url = "https://bixr.herokuapp.com/api/netid/";
+    const url = "https://bixr.herokuapp.com/api/netid/";
 
     axios.get(url).then(res => {
       console.log(res.data);
       localStorage.setItem('netid', res.data.netid);
       this.setState({username: res.data.netid});
-    }).catch(err => alert(err));
+    }).catch(err => {
+      //window.location.replace("https://bixr.herokuapp.com/login/")
+      console.log(err)
+    });
   }
 
 

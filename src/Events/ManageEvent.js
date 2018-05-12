@@ -69,7 +69,7 @@ class ManageEvent extends Component {
       start:"00:00",
       end: "00:00",
       date:"",
-      eventCap:0,
+      eventCap:1,
       attendance: 0,
       pk: ''
     }
@@ -79,7 +79,6 @@ class ManageEvent extends Component {
     this._onSelectStart = this._onSelectStart.bind(this);
     this._onSelectEnd = this._onSelectEnd.bind(this);
     this.validTime = this.validTime.bind(this);
-
     this.cancel = this.cancel.bind(this);
 
   }
@@ -161,8 +160,9 @@ class ManageEvent extends Component {
     } else {
       return true;
     }
-
   }
+
+
 
   handleCreateEvent(event) {
     var numbers = /^[0-9]+$/;
@@ -205,7 +205,7 @@ class ManageEvent extends Component {
         <div className="container-fluid">
 
              <div className="input-group row Events-addEvent">
-                <input className = "form-control" type = "text" id = "title" placeholder = "Event Name" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
+                <input className = "form-control" type = "text" id = "title" maxLength="60" placeholder = "Event Name" name = "eventName" value = {this.state.eventName} onChange = {this.handleChange}/>
              </div>
 
              <div className = "input-group row Events-addEvent">
@@ -258,14 +258,14 @@ class ManageEvent extends Component {
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Capacity</span>
               </div>
-              <input className = "form-control" type = "text" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = ""/>
+              <input className = "form-control" type = "number" min = "1" max = "100" id = "capacity" name = "eventCap" value = {this.state.eventCap} onChange = {this.handleChange} placeholder = "1" />
              </div>
 
              <div className="input-group row Events-addEvent">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Location</span>
               </div>
-              <input className = "form-control" type = "text" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = ""/>
+              <input className = "form-control" type = "text" maxLength="60" id = "location" name = "eventLoc" value = {this.state.eventLoc} onChange = {this.handleChange} placeholder = ""/>
              </div>
 
              <div className="row input-group">

@@ -32,7 +32,7 @@ class EventsPanel extends Component {
     //this.props.updateData();
   }
 
-  onJoinEvent(event_id) {
+  onJoinEvent(event_id, eventref) {
     var data = [{
       event: event_id,
     }]
@@ -41,12 +41,26 @@ class EventsPanel extends Component {
     .catch(err => {
           if(err.response.status == 401) {
             // redirect
+
+            eventref.setAttendance(false);
+
             if(window.confirm("You must complete your profile before joining an event. Press OK to go to Profile page.")) {
               this.props.history.push('/myprofile/');
             }
           }
     });
 
+  }
+
+  displayAttendees(event, event_pk) {
+    event.stopPropagation();
+    console.log(event);
+    const url = "https://bixr.herokuapp.com/api/get_users_for_event/" + event_pk + "/";
+    axios.get(url).then(res => {
+        var netids = res.data.map(user => user.fields.netid);
+        alert(netids);
+    })
+    .catch(err => alert("err:" + err))
   }
 
     onPostEvent(event) {
@@ -69,7 +83,7 @@ class EventsPanel extends Component {
     }
 
 
-  onLeaveEvent(event_id) {
+  onLeaveEvent(event_id, eventref) {
     var data = [{
       event: event_id,
     }]
@@ -94,13 +108,13 @@ class EventsPanel extends Component {
                   return (
 
                     <div key={event.pk} className="row event-row-buffer">
-                      <EventCard title={event.fields.title}
+                      <Event title={event.fields.title}
                                   eating_club={event.fields.eating_club}
                                   time={event.fields.time}
                                   attendance={event.fields.attendance}
                                   capacity={event.fields.capacity}
                                   description={event.fields.description}
-                                  location={event.fields.location}
+                                  loc={event.fields.location}
                                   pk={event.pk}
 
                                   start={event.fields.start}

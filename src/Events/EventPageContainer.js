@@ -67,7 +67,7 @@ class EventPageContainer extends Component {
   }
 
 
-  onJoinEvent(event_id) {
+  onJoinEvent(event_id, buttonref) {
     var data = [{
       event: event_id,
     }]
@@ -80,6 +80,10 @@ class EventPageContainer extends Component {
     .catch(err => {
           if(err.response.status == 401) {
             // redirect
+
+            // undo
+            buttonref.leave();
+
             if(window.confirm("You must complete your profile before joining an event. Press OK to go to Profile page.")) {
               this.props.history.push('/myprofile/');
             }
@@ -87,14 +91,20 @@ class EventPageContainer extends Component {
     });
   }
 
-  onLeaveEvent(event_id) {
+  onLeaveEvent(event_id, buttonref) {
     var data = [{
       event: event_id,
     }]
     //alert(JSON.stringify(data));
       axios.post("https://bixr.herokuapp.com/api/unjoin_event/",  data)
       .then(res => this.updateData(true))
-      .catch(err => alert(err));
+      .catch(err => {
+        console.log(err)
+        this.setState({
+          attendance: this.state.attendance+1
+        },  () => buttonref.join());
+
+      });
 
   }
 
@@ -103,7 +113,8 @@ class EventPageContainer extends Component {
     if(this.state.loaded) {
       return(
         <div className="anim-fadeinright">
-        <EventPage  fields={this.state.fields} 
+        <EventPage  
+                   fields={this.state.fields} 
                    pk={this.state.pk} 
                    author={this.state.author}   
                    isOwner={this.state.isOwner}

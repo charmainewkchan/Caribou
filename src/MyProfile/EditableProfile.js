@@ -140,7 +140,7 @@ class EditableProfile extends Component {
             "eating_club": eatingClubAbr[res.data[0].fields.eating_club]
         })
       })
-    .catch(err => alert(err.response));
+    .catch(err => console.log(err.response));
   }
 
   handleChange(event) {

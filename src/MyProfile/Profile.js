@@ -64,16 +64,21 @@ class Profile extends Component {
           doNotMail: res.data[0].fields.isDoNotMail
         })
       })
-    .catch(err => alert(err));
+    .catch(err => console.log(err));
   }
 
 
 
   deleteAccount() {
     if (window.confirm("Are you sure you want to delete your account?")) {
-      axios.get("https://bixr.herokuapp.com/api/delete_user/")
-      .then(res => console.log(res))
-      .catch( err => console.log(err))
+      axios.get("https://bixr.herokuapp.com/api/delete_user")
+      .then(res => {
+        console.log(res)
+      })
+      .catch( err => {
+        console.log(err)
+        window.location.replace("https://fed.princeton.edu/cas/logout?service=https://bixr.herokuapp.com")
+      })
     }
   }
 
