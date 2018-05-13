@@ -121,7 +121,7 @@ def get_netid(request):
 		return request.session['netid']
 	#if g_netid:
 		#return g_netid
-	return "dsawicki"
+	return "error"
 
 
 def is_profile_complete(request):
