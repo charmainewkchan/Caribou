@@ -79,6 +79,7 @@ class User extends Component {
           <p>Class of {this.state.fields.year}</p>
 					<p>Eating Club: {eatingClubAbr[this.state.fields.eating_club]}</p>
           <p>{res_college_map[this.state.fields.res_college]}</p>
+          <a href={"https://tigerbook.herokuapp.com/student/"+this.state.fields.netid} target="_blank">TigerBook</a>
 
           <hr/>
           <h3>Events {this.state.fields.first_name} is Hosting</h3>

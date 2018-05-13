@@ -3,19 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome": "^1.1.5",
-    "@fortawesome/fontawesome-free-solid": "^5.0.10",
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/react-fontawesome": "0.0.18",
-    "antd": "^3.4.1",
+    "antd": "^3.5.2",
     "antd-init": "^2.0.6",
     "axios": "^0.18.0",
-    "bootstrap": "^4.0.0",
+    "bootstrap": "^4.1.1",
+    "hoek": "^4.2.1",
     "jquery": "^3.3.1",
     "rc-time-picker": "^3.3.1",
-    "react": "^16.3.1",
-    "react-dates": "^16.6.0",
-    "react-dom": "^16.3.1",
-    "react-dropdown": "^1.4.0",
+    "react": "^16.3.2",
+    "react-dates": "^16.6.1",
+    "react-dom": "^16.3.2",
+    "react-dropdown": "^1.5.0",
     "react-event-calendar": "^0.3.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17"
@@ -34,8 +35,8 @@
   "devDependencies": {
     "css-loader": "^0.28.11",
     "moment": "^2.22.1",
-    "react-big-calendar": "^0.19.0",
+    "react-big-calendar": "^0.19.1",
     "style-loader": "^0.21.0",
-    "superagent": "^3.8.2"
+    "superagent": "^3.8.3"
   }
 }

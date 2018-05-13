@@ -9,7 +9,6 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 //import events_data from './events.json';
 import filter_data from './filters.json';
 import eating_club_map from './eating_club_map.json';
-import EventCard from './EventCard';
 import EditableEvent from './EditableEvent';
 
 import EventPageContainer from './EventPageContainer';

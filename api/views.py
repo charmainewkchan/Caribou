@@ -457,13 +457,6 @@ def unjoin_event(request):
 
 #------------------------------------------------------------------------------#
 @casauth
-def get_club_events(request):
-	data = ClubEvent.objects.all()
-	data_json = serializers.serialize('json', data)
-	return HttpResponse(data_json, content_type='application/json')
-
-#------------------------------------------------------------------------------#
-@casauth
 def netid(request):
 	return JsonResponse({'netid': get_netid(request)})
 

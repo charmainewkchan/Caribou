@@ -91,8 +91,14 @@ class EditableProfile extends Component {
     if(!this.state.first_name) {
       alert('Please enter your first name.')
     }
+    else if(this.state.first_name.length>30) {
+      alert('Please limit first name to 30 characters');
+    }
     else if(!this.state.last_name) {
       alert('Please enter you last name.')
+    }
+    else if(this.state.last_name.length>30) {
+      alert('Please limit last name to 30 characters');
     }
     else if (!this.state.year) {
       alert('Please enter your year.')

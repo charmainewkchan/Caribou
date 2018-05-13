@@ -2,16 +2,12 @@ import '../App.css';
 
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import BigCalendar from "react-big-calendar";
-import EventCal from './EventCal';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 
 import $ from 'jquery'
 
-import "react-big-calendar/lib/css/react-big-calendar.css";
-BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 
 
@@ -56,7 +52,7 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous"/>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossOrigin="anonymous"/>
 
 
         <div className="container-fluid">

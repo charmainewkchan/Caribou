@@ -4,7 +4,6 @@ import eating_club_map from './eating_club_map.json';
 import moment from 'moment';
 
 import axios from 'axios';
-import EventCard from './EventCard';
 
 import Pagination from '../Pagination';
 

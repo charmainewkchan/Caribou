@@ -13,7 +13,6 @@ urlpatterns = [
 	path('event/<event_id>/', views.get_event),
 	path('get_events_for_user/<netid>/',views.get_events_for_user),
 	re_path(r'^get_events', views.get_events),
-	re_path(r'^get_club_events', views.get_club_events),
 	re_path(r'^join_event', views.join_event),
 	re_path(r'^unjoin_event', views.unjoin_event),
 	path('hosted_events/<netid>/', views.hosted_events),
